@@ -1,0 +1,52 @@
+# Publishes the public website to the gh-pages branch on every push to main.
+# GitHub Pages serves that branch at https://<owner>.github.io/<repo>/ once the repo owner sets
+#   Settings -> Pages -> Build and deployment -> Deploy from a branch -> gh-pages, / (root).
+# Static hosting only: the booking, contact and newsletter forms show their call / email fallback there, and the
+# staff CRM (admin.html) is left out because it needs server.cjs (README, Deploying).
+# Custom domain: set the repository variable SITE_ORIGIN (e.g. https://lattewithlata.com); a CNAME file is written from it.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build the public site
+        env:
+          SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
+        run: |
+          owner="$(printf '%s' "$GITHUB_REPOSITORY_OWNER" | tr '[:upper:]' '[:lower:]')"
+          export SITE_ORIGIN="${SITE_ORIGIN:-https://$owner.github.io/${GITHUB_REPOSITORY#*/}}"
+          node build-site.cjs                      # absolute og:image / og:url / canonical for SITE_ORIGIN
+          site="$RUNNER_TEMP/site"
+          mkdir -p "$site"
+          find . -maxdepth 1 -name '*.html' ! -name 'admin.html' -exec cp {} "$site/" \;
+          cp -r css js assets vendor "$site/"
+          rm -rf "$site/js/admin" "$site/css/admin.css"
+          touch "$site/.nojekyll"                  # Jekyll would drop css/pages/_shell.css (leading underscore)
+          host="${SITE_ORIGIN#*://}"; host="${host%%/*}"
+          case "$host" in *.github.io) ;; *) printf '%s\n' "$host" > "$site/CNAME" ;; esac
+
+      - name: Publish to gh-pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd "$RUNNER_TEMP/site"
+          git init -q -b gh-pages
+          git add -A
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -q -m "Deploy ${GITHUB_SHA::7} from main"
+          git push -q -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages

@@ -82,6 +82,8 @@ Do not hand-edit the generated `.html` files at the root. Edit the fragment, the
 
 The booking system needs a Node host (for example a small VPS, Render, Railway or Fly.io) with a persistent disk for `data/`. A static host such as GitHub Pages can serve the pages, but the booking, contact and newsletter forms will show a call-or-email notice instead of working.
 
+GitHub Pages: every push to `main` publishes the public pages to the `gh-pages` branch (`.github/workflows/pages.yml`, without the CRM). In the repo's Settings, Pages, choose "Deploy from a branch", `gh-pages`, `/ (root)`. Do not serve `main` directly: Jekyll would drop `css/pages/_shell.css`.
+
 When deploying behind a proxy, set `TRUST_PROXY` to the number of proxies in front of the server, and set a strong `ADMIN_TOKEN`.
 
 `data/` holds personal data (bookings, customer records, messages, subscribers). It is excluded from git. Back it up, restrict access to it, and follow the retention note in `API.md`.
