@@ -1,0 +1,172 @@
+/* ==========================================================================
+   01-hero - 100vh video hero: Paszkowski banner container + Iceberg intro reveal
+   Source keys: CS = PZ/source/css/scss-from-map/main/_custom_site.scss
+                IC = PZ/source/css/inline-critical.beautified.css
+                RH = PZ/source/rendered.html
+                SC = IC(eberg)/source/css/inline-scoped.beautified.css
+                DD = teardowns/BEST-PARTS-latte-with-lata.md
+   Scoped under #s-01-hero. Every ported value cites file:line; invented = INFERRED.
+   Z-order inside the section (BUILD-SPEC 01 (c)): media 0 > video 1, overlay (::before) 1, mark 2, wordmark 2, tagline 2.
+   PAGES UPDATE (2026-09-17): the play / pause disc and all of its rules were removed (PAGES-SPEC 1b - no visible video control).
+   BRAND EDITION (2026-09-17, BK = brand kit): colour tokens, Creato type roles (sizes unchanged), the white mark above the
+   wordmark, the kit tagline, a readability overlay under the white text (design-system "video-first hero, 40-60% dark overlay").
+   Geometry, clip-path slot, char roll and drift are untouched.
+   ========================================================================== */
+
+/* ---- section = the Paszkowski .banner (CS:234-243 background + 100vh; RH:155 style="overflow: hidden"); SC:934-939 (.intro 100vh relative) ---- */
+#s-01-hero {
+    position: relative;                                /* SC:937 */
+    height: 100vh;                                     /* CS:239-241 (.home .banner__slide { height: 100vh }); SC:936 */
+    background: var(--colNero);                        /* CS:235 (.banner { background: var(--colNero) }) = BK espresso */
+    color: var(--colOnBrand);                          /* SC:1037 / 1096 (logo + sentence: var(--color-white)) re-expressed as the token */
+    --colFocus: var(--colOnBrand);                     /* white focus ring over the dark media - INFERRED; base.css reads --colFocus directly */
+    overflow: hidden;                                  /* RH:155 (.banner style="overflow: hidden", set by _page-scroll.beautified.js:364 s.css({overflow:"hidden"})) */
+    z-index: var(--z-content);                         /* Z-INDEX PLAN: section content plane */
+}
+/* ---- readability overlay (BK / WIG "readable over video"): a uniform 50% --colBrand scrim (design-system "40-60% dark overlay"; brand
+        brown rather than --colBrandDeep so the clip-path reveal still opens on the exact espresso backdrop - brown over brown is a no-op -
+        and the footage takes an on-brand warm tint) plus a bottom-up --colBrandDeep gradient, 55% at the bottom edge -> transparent at
+        60% of the height, under the tagline and the lower wordmark row. Covers video AND poster alike (above .hero__media, below the
+        text), so the fallback frame reads the same. Measured (Playwright, white text vs the 95th-percentile pixel behind it): tagline
+        10.3-10.6:1, wordmark 5.2:1, header lockup 6.1-12.7:1 - INFERRED ---- */
+#s-01-hero::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 1;
+    background:
+        linear-gradient(to top, rgb(var(--colBrandDeep-rgb) / .55) 0%, rgb(var(--colBrandDeep-rgb) / 0) 60%),
+        rgb(var(--colBrand-rgb) / .5);
+    pointer-events: none;
+}
+
+/* ---- media wrapper = the drifting element (was #splide01.banner__slider.parallax: manifest 1440x900, transform y 0 -> 180) ---- */
+#s-01-hero .hero__media {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;              /* %abs-cover pattern - IC:470-476 */
+    z-index: var(--z-bg);                              /* backgrounds 0 (Z-INDEX PLAN) */
+    will-change: transform;                            /* INFERRED (scrubbed y tween, M5) */
+}
+
+/* ---- video: cover + the Iceberg clip slot - SC:941-951; object-position pin vars = PZ %coverImage IC:479-486 ---- */
+#s-01-hero .hero__video {
+    position: absolute;                                /* SC:948 */
+    top: 0; left: 0;                                   /* SC:949, 944 */
+    width: 100%; height: 100%;                         /* SC:950, 943 */
+    max-width: none;
+    -o-object-fit: cover; object-fit: cover;           /* SC:945-946 */
+    object-position: var(--pinX, 50%) var(--pinY, 50%);/* IC:484-486 (banner video pin) */
+    z-index: 1;                                        /* SC:951 */
+    -webkit-clip-path: polygon(47% 42%, 53% 42%, 53% 58%, 47% 58%);
+    clip-path: polygon(47% 42%, 53% 42%, 53% 58%, 47% 58%);   /* SC:942 (start slot 6% x 16%); tweened to the full polygon by the timeline (M6) */
+    /* DELIBERATE DEVIATION: no `filter: Grayscale()` (CS:262-264) - DD Pick 4 "Change" (colour footage) */
+}
+@media (max-width: 63.99em) {                          /* SC:954-958 (@media (max-width:1023px)) -> rebuild breakpoint 64em (BUILD-SPEC 01 (c)) */
+    #s-01-hero .hero__video {
+        -webkit-clip-path: polygon(39% 42%, 60% 42%, 60% 58%, 39% 58%);
+        clip-path: polygon(39% 42%, 60% 42%, 60% 58%, 39% 58%);
+    }
+}
+/* no-JS: nothing will open the slot, show the full frame - INFERRED */
+html:not(.js-ok) #s-01-hero .hero__video { -webkit-clip-path: none; clip-path: none; }
+
+/* ---- wordmark box - SC:1012-1022 (.intro__logo: abs, top 50%, translateY(-50%), width 100%, centred, overflow hidden, z 5 -> plan 2)
+        type: DD s5 "hero wordmark clamp(48px, 14vw, 232px) lh .9 ls -.03em" (Iceberg 325/2024vw = 231.2px, 600, ls -.04em, lh .852em: SC:1036-1042)
+        -> 201.6px @1440 (two rows of 181.4 = 362.9 block), 54.6px @390 (BUILD-SPEC 01 (e) design-system target) ---- */
+#s-01-hero .hero__wordmark {
+    position: absolute;                                /* SC:1017 */
+    left: 0;
+    top: 50%;                                          /* SC:1018 */
+    width: 100%;                                       /* SC:1020 */
+    transform: translateY(-50%);                       /* SC:1019 (mobile offset -50/393vw at SC:1024-1034 NOT kept: two rows are centred as a block - INFERRED) */
+    z-index: 2;                                        /* SC:1021 has 5; section content plane */
+    margin: 0;
+    display: flex;                                     /* SC:1014 */
+    flex-direction: column;                            /* two stacked lines - INFERRED (Iceberg has one) */
+    align-items: center;                               /* SC:1013 */
+    justify-content: center;                           /* SC:1015 */
+    overflow: hidden;                                  /* SC:1016 */
+    text-align: center;                                /* SC:1044 */
+    color: var(--colOnBrand);                          /* SC:1037 (var(--color-white)) */
+    font-weight: var(--wDisplay);                      /* BK hero wordmark: Creato Display ExtraBold 800 (family inherited; was Fraunces 500 opsz/SOFT) */
+    font-size: clamp(48px, 14vw, 232px);               /* DD s5 / BUILD-SPEC G2 (Iceberg calc(325/2024*100vw) - SC:1039) - size clamp unchanged */
+    line-height: var(--lhDisplay);                     /* .9 - DD s5 (Iceberg .8524590164em - SC:1042) */
+    letter-spacing: var(--trackDisplay);               /* BK -.02em (DD s5 had -.03em, Iceberg -.04em - SC:1041) */
+    text-transform: uppercase;
+    pointer-events: none;                              /* INFERRED (decorative type over the video) */
+}
+/* ---- brand mark ABOVE the wordmark (BK / LOGO-USAGE.md: white, 96-128px desktop, 72px phones). Positioned from the section so the
+        wordmark block keeps its measured centre: its top edge is 50% - .9em (two .9em rows centred), so bottom = 50% + .9em + gap.
+        The gap is 6px plus the ~.08em the caps sit below the row's top edge (22px @1440, 10px @390 - about one saucer height).
+        Fades in with the header at initial+=1.5 (01-hero.js: same gsap.from tween, no new trigger); z 2 = the wordmark plane. ---- */
+#s-01-hero .hero__mark {
+    position: absolute;
+    left: 50%;
+    bottom: calc(50% + .9em + 6px);
+    transform: translateX(-50%);
+    z-index: 2;
+    font-size: clamp(48px, 14vw, 232px);               /* = the wordmark size so .9em is the wordmark's half-height */
+    height: 72px;                                      /* BK phones */
+    width: auto;                                       /* 0.844 x height, never stretched */
+    max-width: none;
+    pointer-events: none;
+}
+@media screen and (min-width: 36em) { #s-01-hero .hero__mark { height: var(--markHero); } }   /* BK desktop: clamp(96px, 7.8vw, 120px) = 112px @1440 (review POLISH 7: 96 read a touch small under the 200px wordmark; 112 still clears the 78px header row at 900 tall) */
+@media screen and (min-width: 36em) and (max-height: 45em) { #s-01-hero .hero__mark { height: 72px; } }   /* short landscape viewports (<= 720px tall): keeps the mark clear of the 78px header row - INFERRED */
+/* one masked row per wordmark line: the Iceberg .intro__logo-inner stack lives INSIDE each line */
+#s-01-hero .hero__line {
+    display: block;
+    position: relative;                                /* rows 2-3 are absolute inside it - SC:1046-1047 */
+    width: 100%;
+    height: .9em;                                      /* = line-height (the mask the chars roll through) - SC:1042 (.852em) re-expressed at lh .9 */
+    line-height: .9;
+    overflow: hidden;                                  /* SC:1016 (.intro__logo overflow hidden) applied per line - INFERRED */
+    white-space: nowrap;                               /* one line per item, never re-wrap (copy.md brand.wordmarkLines) - INFERRED */
+}
+/* the three stacked rows - SC:1036-1050 (.intro__logo-inner: block, abs top 0 left 0 width 100%, centred, translate(-.5%)); SC:1063-1065 (:first-child static) */
+#s-01-hero .hero__row {
+    display: block;                                    /* SC:1038 */
+    position: absolute;                                /* SC:1045 */
+    top: 0; left: 0;                                   /* SC:1047, 1041 */
+    width: 100%;                                       /* SC:1050 */
+    text-align: center;                                /* SC:1044 */
+    transform: translate(-.5%);                        /* SC:1049 */
+}
+#s-01-hero .hero__row:first-child { position: static; }   /* SC:1063-1065 */
+/* chars (SplitText charsClass "char"): rows pre-offset by 100% / 200% / 300% of the char height - SC:1067-1077 */
+#s-01-hero .char {
+    display: inline-block;                             /* SplitText default; needed for the % translate - INFERRED */
+    position: relative;
+    will-change: transform;
+}
+/* once settled the visible row is un-split by 01-hero.js (SplitText revert) and the hidden rows drop their layers: the per-char compositing
+   layers left a hairline seam between the overlapping T crossbars of "LATTE" at -.02em tracking (review POLISH 1) */
+#s-01-hero.hero--settled .char, html.reduce-motion #s-01-hero .char { will-change: auto; }
+#s-01-hero .hero__row:nth-child(1) .char { transform: translateY(100%); }   /* SC:1067-1069 (:first-child .chars) */
+#s-01-hero .hero__row:nth-child(2) .char { transform: translateY(200%); }   /* SC:1071-1073 (:nth-child(2) .chars) */
+#s-01-hero .hero__row:nth-child(3) .char { transform: translateY(300%); }   /* SC:1075-1077 (:nth-child(3) .chars) */
+/* reduced motion / no-JS: single settled copy, nothing pre-offset - DD Pick 19 (the JS also gsap.sets the end state) */
+html.reduce-motion #s-01-hero .hero__row .char,
+html:not(.js-ok) #s-01-hero .hero__row .char { transform: none; }
+
+/* ---- tagline - Iceberg .intro__sentence geometry SC:1094-1104 (abs, left 50%, translate(-50%), z 5) as LIVE TEXT (DD Pick 4 "Change")
+        bottom: 2*--vpad (INFERRED; Iceberg 58/2024vw desktop, 25% mobile SC:1106-1118 not kept - BUILD-SPEC 01 (c));
+        type: Noto Sans 400 16/24 uppercase ls .08em (BUILD-SPEC 01 (f), INFERRED) ---- */
+#s-01-hero .hero__tagline {
+    position: absolute;                                /* SC:1099 */
+    left: 50%;                                         /* SC:1098 */
+    bottom: calc(var(--vpad) * 2);                     /* INFERRED (115.2px @1440, 51.2px @390) */
+    transform: translateX(-50%);                       /* SC:1100 */
+    z-index: 2;                                        /* SC:1102 has 5; section content plane */
+    width: max-content;
+    max-width: calc(100% - var(--vpad) * 2);           /* INFERRED (wraps on phones inside the container padding) */
+    margin: 0;
+    color: var(--colOnBrand);                          /* SC:1096 */
+    font-size: 1rem; font-weight: var(--wLead); line-height: 1.5;   /* BK tagline: Creato Medium 500 16px (the slot's original size), SENTENCE CASE with both full stops as the kit's
+                                                          lockup and the footer render it (copy.md contract; review SHOULD-FIX 4 - was uppercased 14px .14em) */
+    letter-spacing: .02em;                             /* light tracking for the small Medium face over video - INFERRED */
+    text-align: center;
+    text-wrap: balance;                                /* phones: "REAL CONVERSATIONS." / "BUILT ON PURPOSE." instead of an orphaned last word - INFERRED */
+    opacity: 0;                                        /* start state: the timeline fades it in at initial+=2 (M9, INFERRED substitution for DrawSVG) */
+}
+html:not(.js-ok) #s-01-hero .hero__tagline { opacity: 1; }   /* no-JS fallback - INFERRED */

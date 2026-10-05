@@ -1,0 +1,48 @@
+/* ==========================================================================
+   07-manifesto - Full-bleed accent interlude with the colour-scrub sentence (build-C; brand edition 2026-09-17, lane C)
+   Sources: IC   = teardowns/2026-09-14-icebergdoc-org/source/css/inline-scoped.beautified.css
+            DD   = teardowns/BEST-PARTS-latte-with-lata.md (Pick 11)
+            SPEC = rebuild/BUILD-SPEC.md section 07
+            BK   = the client's brand kit (BRAND.md): band --colAccent #81532e, text --colOnBrand, scrub START tint --colAccentTint,
+                   type = .text-decorated role (Creato Display Medium 500, lh 1.15, size clamp unchanged) in sentence case
+   Band colour comes from .bg-band-accent (tokens.css). NOTHING sets overflow on the root:
+   08's stamp overhangs 56px UP into this section (SPEC 08 (h)). Geometry (padding, width, inset) unchanged from build-C.
+   ========================================================================== */
+#s-07-manifesto {
+    position: relative;                                  /* IC:1717  .home-sentence { position: relative } */
+    width: 100%;                                         /* IC:1718 */
+    padding-top: calc(var(--vpad) * 3);                  /* IC:1715 padding-top 526/2024vw (374.2px @1440) -> DD Pick 11 "3*var(--vpad)" = 172.8 @1440 / 76.8 @390 (deliberate) */
+    padding-bottom: calc(var(--vpad) * 4);               /* IC:1714 padding-bottom 666/2024vw (473.9px)   -> DD Pick 11 "4*var(--vpad)" = 230.4 / 102.4 */
+    background: var(--bgStrip, var(--colAccent));        /* IC:1712 background var(--color-orange) -> BK --colAccent (belt and braces if .bg-band-accent is dropped) */
+    color: var(--strip-text-color, var(--colOnBrand));   /* BK: white on the accent band (6.54:1) */
+    z-index: var(--z-content);                           /* Z-INDEX PLAN: section content 1 (the overhanging stamp of 08 is z 10) */
+}
+
+#s-07-manifesto .manifesto__content {
+    position: relative;                                  /* IC:1740 */
+    width: min(44.4vw, 40rem);                           /* IC:1745 width 900/2024vw = 44.47vw (640.3px @1440); 40rem cap = SPEC 07 (c) (INFERRED cap) */
+    margin: 0 auto;                                      /* IC:1739 */
+    text-align: center;                                  /* IC:1741 */
+    color: var(--colAccentTint);                         /* IC:1735 color #ff8c6c (dim tint of the bg) -> BK --colAccentTint #c9a98f: the scrub START only (transient, 2.98:1); every char tweens to --colOnBrand */
+    text-wrap: pretty;                                   /* BK polish: no orphan word on the last line (Chrome 117+; no-op elsewhere) - INFERRED */
+    /* type: .text-decorated (base.css s3) = Creato Display Medium 500 clamp(37.5px, 5.5vw, 50px) / 1.15, ls -.01em;
+       `.text-decorated--sentence` (markup) lifts the uppercase - BK "manifesto / quotes = Medium 500, sentence case allowed" */
+}
+@media (max-width: 35.99em) {                            /* IC:1759-1765 (<=767px tier): width 100%, padding 0 25/393vw, max-width 100% */
+    #s-07-manifesto .manifesto__content {
+        width: calc(100% + var(--vpad) * 2);             /* the source box spans the full viewport (390) with the 25px inset INSIDE it (manifest mobile-06: x 0 w 390) */
+        margin-inline: calc(var(--vpad) * -1);           /* undo the container's --vpad padding so the rect matches the source (x 0, w 100vw) */
+        padding-inline: var(--vpad);                     /* 25/393vw -> --vpad = 25.6px @390 */
+    }
+}
+
+/* SplitText output: words keep their line-breaking, chars tween colour. IC .chars are inline-block (SplitText default). will-change INFERRED. */
+#s-07-manifesto .manifesto__content .word { display: inline-block; }
+#s-07-manifesto .manifesto__content .char { display: inline-block; will-change: color; }
+
+/* End state without motion: reduced motion (DD s7 Accessibility: "under reduced motion set it white immediately") and no-JS - INFERRED gates */
+.reduce-motion #s-07-manifesto .manifesto__content,
+html:not(.js-ok) #s-07-manifesto .manifesto__content { color: var(--colOnBrand); }
+@media (prefers-reduced-motion: reduce) {
+    #s-07-manifesto .manifesto__content { color: var(--colOnBrand); }
+}

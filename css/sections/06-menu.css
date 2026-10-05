@@ -1,0 +1,131 @@
+/* ==========================================================================
+   06-menu - cream-2 band: spacer row (+stamp), h2, 600px paragraph, food carousel, closing read-mores (section-scoped)
+   Band mechanism  .bg-band-cream2 { --bgStrip: var(--colGrigioLeggero) } + .strip { background: var(--bgStrip) }
+                   - tokens.css / base.css s4 (PZ main.1.beautified.css:7147-7178 .bg-np-grey, _strip.7.5.scss:6-10)
+   Spacer          .strip__data.pt-md (padding-top --vpad = 57.6 @1440, 25.6 @390) - PZ tailwind.beautified.css:4157
+   Intro           .strip--xnarrow (600 content at x 420) - _strip.7.5.scss:63-66; .md-text-center @43.75em - tailwind:12508-12510; .pb-md tailwind:3377
+   Carousel        identical to 03 (base.css s12, _strip_site.scss:163-211); .strip__data.pb-md -> 450 + 57.6 = 507.6 measured
+   CTAs            .strip--xnarrow.mb-md + .strip__data.pb-md.text-center - PZ rendered.html data-id 168/278 (88 = 30.4 + 57.6 measured)
+   ========================================================================== */
+
+/* band continuity: paint the root too (spec 06 (b)). The last strip's .mb-md collapses through the root (no padding/border,
+   no overflow) so the 57.6 gap before 07 stays PAGE cream, not band - spec 06 (h) / G7. Do not add overflow here. */
+#s-06-menu { background: var(--bgStrip, transparent); }
+
+/* stamp on the spacer is OFF by default (4-instance rule: 05, 04, 08, 14 - DD Pick 13, spec 06 (h));
+   the .strip--stamp class stays so `data-stamp="on"` switches it back on without JS changes. */
+#s-06-menu .menu__spacer .strip--stamp[data-stamp="off"]::after { content: none; }
+
+/* paragraph rhythm: source separates h2 / p with a <p>&nbsp;</p> line (PZ rendered.html data-id 276: h2, p&nbsp;, p, p&nbsp;,
+   p > read-more) -> 24px between blocks; h2 -> p = h2 margin-bottom vpad/4 (14.4) + the spacer line (24) = 38.4 measured
+   (adjacent block margins collapse, so the first paragraph carries the sum). INFERRED (same rule as 04). */
+#s-06-menu .menu__intro .strip__text > p { margin-top: 1.5em; }
+#s-06-menu .menu__intro .strip__text > h2 + p { margin-top: calc(1.5em + var(--vpad) / 4); }
+
+/* food rail: square 1:1 photos (assets-manifest food-01..06 = 1200x1200) - spec 06 (g) INFERRED `img { aspect-ratio: 1 }`
+   with a caption (copy.md: caption = name + price). The FIGURE keeps the source rail geometry so the band, the arrows
+   (bottom --vpad inside a 450-tall splide box) and the 507.6 strip height stay as measured:
+   figure aspect 2:3 = the portrait slide of the source (389.3 -> 584, capped at 50vh = 450 @>=50em exactly like the
+   source img cap _strip_site.scss:205-208; 161.4 -> 242.1 @390 = manifest 242.3). The 1:1 photo + caption sit at the
+   top of that box; the remainder is band-coloured breathing room. INFERRED (spec 06 (c) carousel "same", (g)). */
+#s-06-menu .strip__gallery__link {
+    flex-direction: column;            /* base.css makes the figure display:flex (main.1:5080-5082); stack media + caption - INFERRED */
+    overflow: visible;                 /* clipping moves to .menu__item-media so the 2% hover zoom never covers the caption - INFERRED */
+    width: 100%;
+    aspect-ratio: 2 / 3;               /* source slide ratio (1333x2000 photos): keeps slide h 450 @1440 / 242.1 @390 */
+}
+@media (min-width: 50em) {
+    #s-06-menu .strip__gallery__link { max-height: 50vh; }   /* = the >=50em img cap of _strip_site.scss:205-208, applied to the box */
+}
+#s-06-menu .menu__item-media {
+    overflow: hidden;                  /* = .strip__gallery__link { overflow:hidden } _strip_site.scss:182-183, moved one level down */
+    width: 100%;
+    flex: 0 0 auto;
+}
+#s-06-menu .strip__gallery__link img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    max-height: none;                  /* the 50vh cap now lives on the figure; the square photo is 389.3 tall @1440 */
+}
+#s-06-menu .menu__caption {            /* INFERRED (net-new: source captions were empty alt only) */
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1em;
+    padding-top: .75em;                /* 12px: caption sits one half-line under the photo */
+    text-align: left;
+    font-size: .875rem;                /* BK caption / meta role: Regular 400 14px (base.css s3 `.caption`; was .85em = 13.6px Noto Sans,
+                                          PZ _strip.7.5.scss:238-244) - tokens hand-off request 3. Still two lines max for the longest
+                                          name on a 161px mobile slide inside the 2:3 box (measured, brand pass 2026-09-17). */
+    font-weight: var(--wBody);
+    line-height: 1.5;
+    color: var(--colText);             /* 9.5:1 on --colBrandSoft (BRAND.md s1) */
+}
+#s-06-menu .menu__price {
+    color: var(--colBrand);            /* BK: prices Bold brand espresso (11.45:1 on --colBrandSoft); was --colNero Regular */
+    font-weight: var(--wTitle);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+/* closing CTA row: two read-mores side by side, centred - spec 06 (c) "ctas" INFERRED
+   (gap row vpad/2, column vpad; wraps to two lines when the container is narrower than both labels + gap) */
+#s-06-menu .menu__cta-row {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: calc(var(--vpad) / 2) var(--vpad);
+    margin: 0;
+}
+
+/* ---- Brand pass (BK, 2026-09-17): CTA pair as buttons - "Book a table" filled brand primary, "See the menu" outlined secondary.
+   The two anchors, their order and hrefs are the same slots (spec 06 (b)); only the class changed from .read-more to the shared
+   base.css .button (G6). Row height: 44px (--tapMin) instead of the 30.4 read-more line box -> .menu__ctas 101.6 @1440 (was 88).
+   Hover = the base .button sheet (::after slides up), recoloured so the label stays >= 4.5:1 for the whole transition:
+     primary   brand -> accent fill (white 6.5:1 on --colAccent) = the site-wide link-hover colour (single-accent rule)
+     secondary outlined brand -> brand fill, label flips to white (13.1:1)
+   Timing scoped to --aniUi .2s (WIG 150-300 ms) - --aniTime is read per element by base.css %animateBut, never set globally. ---- */
+#s-06-menu .menu__cta {
+    --aniTime: var(--aniUi);
+    gap: 0;                            /* the .button flex row has no icon here */
+}
+#s-06-menu .menu__cta-row .button + .button { margin: 0; }   /* base.css .button + .button adds 1em; the row's gap already spaces the pair */
+#s-06-menu .menu__cta--primary {
+    --colFondoBottoni: var(--colBrand);
+    --colTextBottoni: var(--colOnBrand);
+}
+#s-06-menu .menu__cta--primary::after { background: var(--colAccent); opacity: 1; }   /* hover sheet = accent (was --colBianco at .4: white on the blend fell to ~3.5:1) */
+#s-06-menu .menu__cta--secondary {
+    --colFondoBottoni: transparent;
+    --colBordoBottoni: var(--colBrand);
+    --colTextBottoni: var(--colBrand);  /* 11.45:1 on --colBrandSoft */
+}
+#s-06-menu .menu__cta--secondary::after { background: var(--colBrand); opacity: 1; }
+#s-06-menu .menu__cta--secondary:hover { color: var(--colOnBrand); border-color: var(--colBrand); }
+#s-06-menu .menu__cta:focus-visible { outline: 2px solid var(--colFocus); outline-offset: var(--focusOffset); }   /* explicit: the button's overflow:hidden never clips an outline, restated for clarity */
+@media (max-width: 35.99em) {
+    #s-06-menu .menu__cta-row { display: flex; }             /* phones: base .button is width 100% -> the pair stacks full-width inside the 600 strip (inline-flex would shrink-wrap) */
+}
+
+/* Brand pass: rail arrows hover feedback in the accent (the base .button sheet is a 40% white wash over brand; on the cream band
+   the icon stayed white on a light blend). Accent fill keeps the white glyph at 6.5:1 and matches the link-hover colour. */
+#s-06-menu .splide__arrow::after { background: var(--colAccent); opacity: 1; }
+#s-06-menu .splide__arrow { --aniTime: var(--aniUi); }       /* .3s -> .2s (WIG), same %animateBut mechanism */
+/* Touch devices: the always-visible arrows are now 44px (--tapMin, was 26px) and at `bottom: --vpad` the next-arrow disc covered the
+   price of the second visible caption on a 390 phone (measured: arrows 112-216 in the 242 box, caption 173-206). The photo is the top
+   2/3 of the 2:3 figure, so 33.333% of the rail height = the photo's bottom edge; +.5rem parks both discs over the photo like the 03
+   rail, clear of every caption. Desktop (is-mouse) keeps the measured bottom --vpad (hover-only, already clear of the caption line). */
+.is-touch #s-06-menu .splide__arrows { bottom: calc(33.333% + .5rem); }
+
+/* Brand pass: paragraph polish - balanced last lines (no orphan word) on the 600px intro; browsers without `pretty` ignore it. */
+#s-06-menu .menu__intro .strip__text > p { text-wrap: pretty; }
+
+/* arrow disc size: base.css s12 now carries calc(2.1em + 2px) (integrator adopted build-B "Requests"; measured 41.97 / 26.27
+   on this rail in verify/lane-B.md) - the duplicate scoped OVERRIDE was dropped by verify-B. */
+
+/* no-JS fallback (verify-B, same as 03-gallery.css): splide-core keeps .splide { visibility:hidden } until .is-initialized;
+   without scripts the food rail would be invisible. INFERRED, JS-off only (html.no-js -> .js-ok swap in index.html head). */
+/* (the `html:not(.js-ok) .splide { visibility: visible }` fallback now lives in base.css s12 - global verifier round 2) */

@@ -1,0 +1,243 @@
+/* ==========================================================================
+   13-newsletter - Black newsletter block + Listen-and-follow links
+   Source: IC = teardowns/2026-09-14-icebergdoc-org/source/css/inline-scoped.beautified.css
+           block #26 .footer-newsletter (:2836-3143), block #27 .form-input (:3145-3225), block #28 .form-checkbox (:3227-3300)
+   Iceberg sizes are calc(N/2024*100vw) -> px@1440 = N*0.7115; re-expressed in the Paszkowski token system per BUILD-SPEC 13 (c)
+   (DD Pick 12). Measured (IC layout-manifest desktop-11-footer-newsletter @1440x900): block 1440x308.3, left column x 249 w 480.2,
+   form 480.2x119.8, input row 66.9 tall (input 413x67 + submit 67x67), right column w 355.7 right-aligned; mobile @390: 698.4 tall,
+   right column first, form 340.4 wide, input/submit 75.4 tall.
+   Everything scoped under #s-13-newsletter. INFERRED values are marked.
+   Brand pass (2026-09-17): band = brand espresso (.bg-band-black -> --colNero = --colBrand), white text via --colOnBrand, translucent
+   rules via the rgb triplet tokens (no new hex), type from the base.css roles (no font-family here: eyebrow Medium .14em, lead Medium
+   500, links Bold 700), submit --colAccent -> --colContrastoScuro on hover, consent box 20px inside a 44px label hit box, the tokens
+   lane's s17 override for .newsletter__input folded in. Geometry (columns, 4.2rem input row, margins, breakpoints) and the M25 arrow
+   swap are unchanged.
+   ========================================================================== */
+
+/* ---- block - IC:2836-2843 `.footer-newsletter { color:#fff; display:flex; justify-content:space-between; padding-left/right: 350/2024vw }`
+        rebuild: the .container of .strip--normal (x 120..1320) replaces the 249px side padding; vertical padding --vpad INFERRED ---- */
+#s-13-newsletter { position: relative; }                   /* no overflow:hidden, no bottom margin - the footer stamp overhangs into this strip (spec 13 (h)) */
+#s-13-newsletter .newsletter {
+    display: flex;                                         /* :2838 */
+    justify-content: space-between;                        /* :2839 */
+    align-items: flex-start;
+    gap: var(--vpad);                                      /* INFERRED (columns never touch: 480 + 356 < 1200) */
+    padding-top: var(--vpad);                              /* INFERRED (spec 13 (c)) */
+    padding-bottom: var(--vpad);                           /* INFERRED (spec 13 (c)) */
+}
+@media (max-width: 63.99em) {                              /* IC:2845-2849 (max-width:1023px) */
+    #s-13-newsletter .newsletter { flex-direction: column; }   /* :2847 */
+}
+
+/* ---- columns - IC:2900 left width 675/2024vw = 480.2 -> 30rem; IC:3084-3088 right width 500/2024vw = 355.7 -> 22.25rem ---- */
+#s-13-newsletter .newsletter__left { width: 30rem; max-width: 100%; }                      /* :2900 */
+#s-13-newsletter .newsletter__right { width: 22.25rem; max-width: 100%; text-align: right; }   /* :3085-3087 */
+@media (max-width: 63.99em) {
+    #s-13-newsletter .newsletter__left { order: 2; width: 100%; margin-top: calc(var(--vpad) * 2); }   /* :2905-2917 order 2, margin-top 177/393vw = 175.6 -> 2*--vpad = 51.2 (INFERRED) */
+    #s-13-newsletter .newsletter__right { order: 1; width: 100%; text-align: left; }                  /* :3090-3093 order 1, width 100%; left-aligned INFERRED */
+}
+
+/* ---- eyebrow - IC:2857-2866 `.footer-newsletter__title { font-size: 14/2024vw; font-weight:600; letter-spacing:-.01em; line-height:100%;
+        margin-bottom: 14/2024vw; text-transform:uppercase }` -> spec G2 .eyebrow (13 titles): 12px 600 uppercase lh 1 ls -.01em
+        (base.css .eyebrow now carries the same role page-wide - global verifier round 2; kept scoped here for the margin) ---- */
+#s-13-newsletter .newsletter__eyebrow {
+    font-size: 12px;                                       /* 14/2024vw = 9.96 -> 12px (DD s5 Sizes "eyebrow 12px") */
+    font-weight: var(--wLead);                             /* :2859 600 -> BK eyebrow role Medium 500 */
+    letter-spacing: var(--trackEyebrow);                   /* :2860 -.01em -> BK .14em */
+    line-height: 1;                                        /* :2861 */
+    text-transform: uppercase;                             /* :2863 */
+    margin: 0 0 .75em;                                     /* :2862 margin-bottom 14/2024vw = 9.96 -> .75em = 9px */
+    color: var(--colTextOnBrandMuted);                     /* BK: secondary text on the brand band (10.7:1) - INFERRED */
+}
+
+/* ---- lead text - IC:2881-2887 `.footer-newsletter__text { font-size: 36/2024vw; font-weight:650; letter-spacing:-.01em; line-height:110% }`
+        + IC:2919-2921 `.__left .__text { padding-right: 55/2024vw }` -> spec G2 .lead (scoped copy - no global .lead exists) ---- */
+#s-13-newsletter .lead {
+    font-weight: var(--wLead);                             /* :2883 650 -> BK lead role Creato Display Medium 500 */
+    font-size: clamp(20px, 1.8vw, 26px);                   /* :2882 36/2024vw = 25.6 -> 25.92 @1440 / 20 @390 */
+    line-height: 1.25;                                     /* :2885 110% -> 1.25 INFERRED (spec G2 lead) */
+    letter-spacing: -.01em;                                /* :2884 */
+}
+#s-13-newsletter .newsletter__text { padding-right: calc(var(--vpad) * .7); margin: 0; text-wrap: pretty; color: var(--colOnBrand); }   /* :2920 55/2024vw = 39.1 -> .7*--vpad = 40.3 (INFERRED) */
+@media (max-width: 63.99em) { #s-13-newsletter .newsletter__text { padding-right: 0; } }   /* :2923-2926 */
+
+/* ---- input row - IC:2929-2937 `.__form-input { display:flex; margin-bottom: 36/2024vw; margin-left: -12/2024vw; margin-top: 39/2024vw; padding-right: 12/2024vw }`
+        rebuild: margin-block --vpad/2 = 28.8 (27.7 / 25.6 measured), no negative margin (INFERRED, spec 13 (c)) ---- */
+#s-13-newsletter .newsletter__form { margin: 0; }
+#s-13-newsletter .newsletter__row {
+    display: flex;                                         /* :2930 */
+    margin-top: calc(var(--vpad) / 2);                     /* :2933 39/2024vw = 27.7 */
+    margin-bottom: calc(var(--vpad) / 2);                  /* :2931 36/2024vw = 25.6 */
+}
+#s-13-newsletter .newsletter__field { position: relative; flex: 1 1 auto; z-index: 1; }   /* IC:3145-3148 .form-input { position:relative; z-index:1 } + :2951-2953 flex:1 */
+
+/* input - IC:3150-3165 `.form-input input { background:transparent; border:1px solid hsla(0,0%,100%,.2); color:#fff; font-size: 20/2024vw;
+   font-weight:400; height: 94/2024vw; line-height:102%; padding: 0 18/2024vw; padding-top: 10/2024vw; transition: all .2s ease-in-out; width:100% }`
+   (IC:2955-2957 `.__input input { border-left:0 }` NOT kept - border-left stays, INFERRED: cleaner inside a container) */
+#s-13-newsletter .newsletter__input {
+    display: block;
+    width: 100%;                                           /* :3164 */
+    height: 4.2rem;                                        /* :3158 94/2024vw = 66.9 -> 67.2 */
+    background: transparent;                               /* :3151 */
+    border: 1px solid rgb(var(--colOnBrand-rgb) / .35);    /* :3152 hsla(0,0%,100%,.2) -> BK brief: white .35 rule (rgb triplet token, no new hex) */
+    border-radius: 0;
+    color: var(--colOnBrand);                              /* :3153 white text on the brand band */
+    font-family: inherit;                                  /* :3154 var(--font-primary) -> Creato Display from body (UA resets input fonts; was the base.css s17 override) */
+    font-size: 1em;                                        /* :3155 20/2024vw = 14.2 -> 16px (spec G2 "newsletter input 16px") */
+    font-weight: 400;                                      /* :3156 */
+    line-height: 1.02;                                     /* :3159 */
+    padding: 0 .8em;                                       /* :3160 18/2024vw = 12.8 -> .8em */
+    padding-top: .45em;                                    /* :3161 10/2024vw = 7.1 -> .45em (text sits under the floated label) */
+    transition: border-color .2s ease-in-out;              /* :3162 all -> the one property that changes (WIG) */
+    outline-offset: -3px;                                  /* INFERRED (focus ring inside the box, keeps the row tidy; ring = base :focus-visible, white on the band via --colFocus) */
+    caret-color: var(--colOnBrand);
+}
+#s-13-newsletter .newsletter__input:hover, #s-13-newsletter .newsletter__input:focus { border-color: rgb(var(--colOnBrand-rgb) / .7); }   /* hover / focus feedback without layout shift - INFERRED */
+#s-13-newsletter .newsletter__input::placeholder { color: transparent; }   /* the floating label is the placeholder */
+@media (max-width: 63.99em) {
+    #s-13-newsletter .newsletter__input { height: 4.7rem; }   /* :3167-3174 76/393vw = 75.4 -> 75.2 (INFERRED rem) */
+}
+
+/* floating label - IC:3185-3195 `.form-input label { color: var(--color-gray-dark); font-size: 20/2024vw; left: 18/2024vw; pointer-events:none;
+   position:absolute; top: 35/2024vw; transition: all .2s ease-in-out }`; IC:3212-3218 `.is-focused label, .has-value label { font-size: 16/2024vw; top: 20/2024vw }` */
+#s-13-newsletter .newsletter__field label {
+    position: absolute;                                    /* :3190 */
+    left: .8em;                                            /* :3188 18/2024vw = 12.8 */
+    top: 1.55rem;                                          /* :3191 35/2024vw = 24.9 -> 24.8 */
+    font-size: 1em;                                        /* :3187 20/2024vw = 14.2 -> 16px (matches the input) */
+    line-height: 1.02;
+    color: var(--colTextOnBrandMuted);                     /* :3186 var(--color-gray-dark) #9a9a9a -> BK muted-on-brand (white .8, 10.7:1) */
+    pointer-events: none;                                  /* :3189 */
+    transition: top .2s ease-in-out, font-size .2s ease-in-out, color .2s ease-in-out;   /* :3192 `all` -> the three properties that change (WIG) */
+    white-space: nowrap;
+}
+#s-13-newsletter .newsletter__field.is-focused label,
+#s-13-newsletter .newsletter__field.has-value label {
+    font-size: .75rem;                                     /* :3214 16/2024vw = 11.4 -> 12px */
+    top: .9rem;                                            /* :3215 20/2024vw = 14.2 -> 14.4 */
+}
+@media (max-width: 63.99em) {
+    #s-13-newsletter .newsletter__field label { top: 1.9rem; }   /* :3199-3203 27/393vw = 26.8 -> 30.4 for the taller 75px box (INFERRED centring) */
+    #s-13-newsletter .newsletter__field.is-focused label, #s-13-newsletter .newsletter__field.has-value label { top: 1.05rem; }   /* :3220-3223 17/393vw = 16.9 */
+}
+#s-13-newsletter .newsletter__field.is-error label, #s-13-newsletter .newsletter__field.is-error .newsletter__input { color: var(--colAccentTint); }   /* IC:3225-3228 .is-error -> orange; rebuild: tint (5.7:1 on brand) + the visible error line below (colour is never the only cue) */
+#s-13-newsletter .newsletter__field.is-error .newsletter__input { border-color: var(--colAccentTint); }
+
+/* submit - IC:2959-2973 `.__form-input__button { align-items:center; background: var(--color-orange); color:#fff; cursor:pointer; display:flex;
+   height: 94/2024vw; justify-content:center; overflow:hidden; position:relative; width: 94/2024vw }`; IC:2981 hover -> --color-orange-hover */
+#s-13-newsletter .newsletter__submit {
+    flex: 0 0 auto;
+    display: flex; align-items: center; justify-content: center;   /* :2960, :2964, :2968 */
+    width: 4.2rem; height: 4.2rem;                         /* :2967, :2973 94/2024vw = 66.9 -> 67.2 (square) */
+    background: var(--colAccent);                          /* :2961 var(--color-orange) -> --colAccent (BK caramel, the single accent) */
+    color: var(--colOnBrand);                              /* :2962 */
+    cursor: pointer;                                       /* :2963 */
+    overflow: hidden;                                      /* :2969 */
+    position: relative;                                    /* :2970 */
+    border: 0; border-radius: 0; padding: 0;
+    transition: background .3s ease-in-out, opacity .3s ease-in-out;   /* :2971 (the source's transform: typo read as the intended transition) */
+}
+#s-13-newsletter .newsletter__submit:disabled { cursor: not-allowed; opacity: .5; pointer-events: none; }   /* :2975-2979 */
+@media (pointer: fine) { #s-13-newsletter .newsletter__submit:not(:disabled):hover { background: var(--colContrastoScuro); } }   /* :2981-2984 --color-orange-hover -> --colContrastoScuro #674225 (the brief's #6a4224 is the same tone; tokens.css owns hex values) */
+#s-13-newsletter .newsletter__submit:focus-visible { outline-offset: -3px; }   /* ring inside the square, like the input - INFERRED */
+@media (max-width: 63.99em) { #s-13-newsletter .newsletter__submit { width: 4.7rem; height: 4.7rem; } }   /* :2986-2998 76/393vw = 75.4 */
+#s-13-newsletter .newsletter__submit span {                /* IC:3024-3034 */
+    position: absolute; left: 0; top: 0;                   /* :3030-3032 */
+    width: 100%; height: 100%;                             /* :3033, :3027 */
+    display: flex; align-items: center; justify-content: center;   /* :3025-3026, :3029 */
+    will-change: transform, opacity;                       /* :3034 */
+}
+#s-13-newsletter .newsletter__submit span:nth-child(2) { opacity: 0; }   /* rest state of the second arrow (the GSAP fromTo sets xPercent -50 / opacity 0 too; CSS keeps it hidden under reduced motion) */
+#s-13-newsletter .newsletter__submit .icon { width: 1.1em; height: 1.1em; stroke-width: 2; transition: transform .3s ease-in-out, opacity .3s ease-in-out; }   /* :3036-3040 svg width 24/2024vw = 17.1 -> 1.1em = 17.6; `all` -> listed (WIG) */
+
+/* consent - IC:3227-3300 `.form-checkbox label { display:flex; font-size: 13/2024vw (16/2024vw <=2023px); gap: 19/2024vw; line-height:120% }`,
+   `label > div { align-items:center; border:1px solid hsla(0,0%,100%,.4); color:transparent; display:flex; height/width: 24/2024vw; justify-content:center; transition: all .3s ease }` */
+#s-13-newsletter .newsletter__consent { position: relative; z-index: 1; }   /* :3227-3230 */
+#s-13-newsletter .newsletter__consent input {              /* native box visually hidden, still focusable (INFERRED; IC hides it the same way via the custom div) */
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; white-space: nowrap;
+}
+#s-13-newsletter .newsletter__consent label {
+    display: flex;                                         /* :3233 */
+    align-items: flex-start;
+    gap: .75em;                                            /* :3235 19/2024vw = 13.5 -> .75em of 14px = 10.5 (INFERRED em) */
+    font-size: .875rem;                                    /* :3234 16/2024vw = 11.4 -> BK caption role 14px (was 12px; the line may wrap to two at 480px) */
+    line-height: 1.4;                                      /* :3236 120% -> 1.4 so the 20px box aligns with the first line (INFERRED) */
+    color: var(--colTextOnBrandMuted);                     /* copy colour #9a9a9a (build-analysis) -> BK muted-on-brand (10.7:1) */
+    cursor: pointer;
+    padding-block: .9em; margin-block: -.9em;              /* 44px hit box (brief) with zero layout change: 19.6px line + 2 x 12.6 = 44.8 - INFERRED */
+}
+#s-13-newsletter .newsletter__box {
+    flex: 0 0 auto;
+    display: flex; align-items: center; justify-content: center;   /* :3287, :3290, :3293 */
+    width: 20px; height: 20px;                             /* :3292, :3295 24/2024vw = 17.1 -> BK brief 20px */
+    margin-top: 0;                                         /* 20px box on a 19.6px first line - centred by the line-height above */
+    border: 1px solid rgb(var(--colOnBrand-rgb) / .5);     /* :3288 hsla(0,0%,100%,.4) -> white .5 (rgb triplet token) */
+    border-radius: 2px;                                    /* INFERRED (soft corner, matches the .5em pill radius family) */
+    color: transparent;                                    /* :3289 */
+    background: transparent;
+    transition: background-color var(--aniUi) ease, border-color var(--aniUi) ease, color var(--aniUi) ease;   /* :3294 all .3s -> .2s, listed props (WIG) */
+}
+#s-13-newsletter .newsletter__box .icon { width: 13px; height: 13px; stroke-width: 2.5; }   /* INFERRED glyph size inside the 20px box */
+#s-13-newsletter .newsletter__consent label:hover .newsletter__box { border-color: var(--colOnBrand); }   /* hover feedback - INFERRED */
+#s-13-newsletter .newsletter__consent input:checked + label .newsletter__box { color: var(--colBrand); background: var(--colOnBrand); border-color: var(--colOnBrand); }   /* checked = white box, brand check (IC: color transparent -> white) */
+#s-13-newsletter .newsletter__consent input:focus-visible + label .newsletter__box { outline: 2px solid var(--colOnBrand); outline-offset: var(--focusOffset); }   /* keyboard parity: the base ring geometry, white on the band (see the override below) */
+/* focus ring: white on this band via tokens.css --colFocus (base.css reads it directly since the brand pass finish) */
+#s-13-newsletter .newsletter__consent a { color: inherit; text-decoration: underline; text-underline-offset: .15em; }   /* IC:3062-3082 underline link (base label a already underlines) */
+#s-13-newsletter .newsletter__consent a:hover { color: var(--colOnBrand); }
+
+/* messages - visible text, not colour-only (copy.md / DD s7 Accessibility); INFERRED styling */
+#s-13-newsletter .newsletter__error, #s-13-newsletter .newsletter__success {
+    margin: .75em 0 0;
+    font-size: .875rem;                                    /* BK caption role 14px */
+    line-height: 1.4;
+    color: var(--colOnBrand);
+    display: flex; align-items: center; gap: .5em;
+}
+#s-13-newsletter .newsletter__error[hidden], #s-13-newsletter .newsletter__success[hidden] { display: none; }
+/* PAGES UPDATE (2026-09-17): the static-hosting notice (API unavailable - the form never pretends to work): same 14px line as the messages, a hairline
+   box so it reads as information rather than an error; the email link is underlined white (13.1:1). The honeypot row is clipped off-screen
+   (not display:none - naive bots skip those), aria-hidden + tabindex -1 keep it away from assistive tech and the tab order. */
+#s-13-newsletter .newsletter__notice {
+    margin: .9em 0 0; padding: .75em 1em;
+    font-size: .875rem; line-height: 1.4;
+    color: var(--colOnBrand);
+    border: 1px solid var(--colLineOnBrand);
+}
+#s-13-newsletter .newsletter__notice[hidden] { display: none; }
+#s-13-newsletter .newsletter__notice a { color: inherit; text-decoration: underline; text-underline-offset: .15em; overflow-wrap: anywhere; }
+#s-13-newsletter .newsletter__notice a:hover { color: var(--colOnBrand); opacity: .8; }
+#s-13-newsletter .newsletter__hp { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+#s-13-newsletter .newsletter__error::before { content: "!"; flex: 0 0 auto; display: grid; place-items: center; width: 1.25em; height: 1.25em; border: 1px solid currentColor; border-radius: 50%; font-weight: var(--wButton); font-size: .9em; }   /* redundant glyph cue */
+#s-13-newsletter .newsletter__success .icon { flex: 0 0 auto; width: 1.1em; height: 1.1em; }
+
+/* ---- right column links - IC:3096-3106 `.footer-newsletter__right ul { display:flex; flex-direction:column; font-size: 36/2024vw; font-weight:650;
+        gap: 9/2024vw; letter-spacing:-.01em; line-height:110% }`; IC:3112-3143 underline reveal ---- */
+#s-13-newsletter .newsletter__links {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column;                 /* :3097-3098 */
+    gap: .25em;                                            /* :3101 9/2024vw = 6.4 -> .25em of 25.9 */
+    font-weight: var(--wTitle);                            /* :3100 650 -> BK Bold 700 (Creato has no 600) */
+    font-size: clamp(20px, 1.8vw, 26px);                   /* :3099 36/2024vw = 25.6 -> .lead size */
+    line-height: 1.25;                                     /* :3103 110% -> 1.25 (as .lead, INFERRED) */
+    letter-spacing: -.01em;                                /* :3102 */
+}
+#s-13-newsletter .newsletter__links a {
+    display: inline-block;                                 /* :3113 */
+    position: relative;                                    /* :3114 */
+    color: var(--colOnBrand);                              /* IC white links; base a { color: --colLink } would be brown on brown */
+    padding-block: .125em; margin-block: -.125em;          /* hit boxes meet across the .25em gap (39px rows) without moving the list - INFERRED */
+}
+#s-13-newsletter .newsletter__links a:hover { color: var(--colOnBrand); }
+#s-13-newsletter .newsletter__links a::after {              /* :3117-3130 */
+    content: ""; display: block;
+    position: absolute; left: 0; top: 100%;                /* :3123, :3125, :3127 */
+    width: 100%; height: 1px;                              /* :3131, :3122 */
+    background-color: currentColor;                        /* :3118 var(--color-white) */
+    transform: scaleX(0);                                  /* :3128 */
+    transform-origin: right top;                           /* :3129 */
+    transition: transform .3s ease-in-out;                 /* :3130 */
+}
+#s-13-newsletter .newsletter__links a:hover::after, #s-13-newsletter .newsletter__links a:focus-visible::after {   /* :3140-3143 */
+    transform: scaleX(1);
+    transform-origin: left top;
+}

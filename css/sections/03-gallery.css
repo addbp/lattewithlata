@@ -1,0 +1,47 @@
+/* ==========================================================================
+   03-gallery - bleed-right cafe gallery carousel (section-scoped)
+   Everything geometric is already in base.css s12 (rail, track padding, item gap, img caps, hover zoom, arrows):
+     rail    .strip--wide .strip__gallery.splide  - PZ main/modules/_strip_site.scss:166-172 (compiled main.1.beautified.css:7845-7850)
+     track   padding-right max(50vw - 37.5rem, --container-pad) - _strip_site.scss:173-180 (main.1:7852-7854)
+     items   margin-right 1em (= Splide gap) - _strip_site.scss:193-197 (main.1:7864-7866)
+     images  max-height 70vh; >=50em max-width 80vw, max-height 50vh - _strip_site.scss:202-208 (main.1:7873-7883)
+     hover   scale3d(1.02,1.02,1) .6s cubic-bezier(.645,.045,.355,1) - _strip_site.scss:182-191 (main.1:7856-7862)
+     arrows  bottom --vpad, right --vpad/2, round discs, hidden until .splide:hover on is-mouse - plug-ins/_splide.scss:86-134 (main.1:291-355)
+   Measured (PZ layout-manifest #splide02 @1440x900): rail x120 w1320, slides 389.3x450 pitch 405.4, arrows 42x42 at x1369.2;
+   @390x844: rail x25.6 w364.4, slides 161.4x242.3 pitch 177.4, arrows 26.2x26.3 at x351.
+   This file only adds what the spec marks INFERRED for the rebuild (spec 03 (c) "images") plus one scoped override.
+   ========================================================================== */
+
+/* deterministic slide height before decode: the 2:3 portrait ratio of assets-manifest gallery-01..06 (1200x1800).
+   width 100% of the 389.3 slide -> 584 by ratio, capped by base.css max-height 50vh = 450 @900 (object-fit cover keeps the crop);
+   @390: 161.4 slide -> 242.1 (target 242.3, under the 70vh cap). INFERRED - spec 03 (c) images. */
+#s-03-gallery .strip__gallery__link img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    align-self: flex-start;            /* the figure is display:flex (main.1:5080-5082); keep the img at its own capped height - INFERRED */
+}
+
+/* the rail must never be clipped by the section (spec 03 (h)): the fan-in starts up to 1621px off-rail and the wrapper
+   bleeds off the right edge; base.css main{overflow:hidden} + the splide track's own overflow:hidden do the clipping. */
+#s-03-gallery { overflow: visible; }
+
+/* arrow disc size: base.css s12 now carries the padding-driven formula calc(2.1em + 2px) (adopted by the integrator from
+   build-B "Requests"; measured 41.97 @1440 / 26.27 @390 on this rail in verify/lane-B.md) - the scoped OVERRIDE that used to
+   live here was dropped by verify-B as a duplicate. */
+
+/* no-JS fallback (verify-B): vendor/splide-core.min.css hides every .splide until Splide adds .is-initialized; with scripts
+   off the class never arrives and the rail markup (which carries "splide" in the HTML) is invisible. Show it as a plain
+   clipped flex row (splide-core .splide__track { overflow:hidden } + .splide__list { display:flex }) - INFERRED, JS-off only;
+   index.html swaps html.no-js -> .js-ok in an inline head script (integrator.md), so this never applies with JS. */
+/* (the `html:not(.js-ok) .splide { visibility: visible }` fallback now lives in base.css s12 - global verifier round 2) */
+
+/* ---- Brand pass (BK, 2026-09-17) ----
+   Arrows: base.css s12 already renders them as 44px round brand-espresso discs with the white sprite glyph (--colPrimario =
+   --colBrand, --colTextBottoni = --colBianco), cursor pointer, Splide aria-labels ("Previous slide" / "Next slide"), and the
+   global :focus-visible ring (2px --colAccent, offset 2px; `.splide__arrow:focus-visible { opacity: 1 }` keeps a focused arrow
+   visible on is-mouse). Only the hover feedback is scoped here: the base .button sheet is a 40% white wash over brand (white
+   glyph on the blend ~3.5:1); the accent fill keeps the glyph at 6.5:1 and matches the site-wide link-hover colour
+   (single-accent rule). Timing --aniUi .2s (WIG 150-300 ms) via the per-element --aniTime read by %animateBut. */
+#s-03-gallery .splide__arrow::after { background: var(--colAccent); opacity: 1; }
+#s-03-gallery .splide__arrow { --aniTime: var(--aniUi); }

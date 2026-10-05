@@ -1,0 +1,67 @@
+/* ==========================================================================
+   Fonts - Creato Display ONLY (brand kit, 2026-09-17)
+   Licence: SIL Open Font License 1.1 (assets/brand/fonts/creato_display/SIL OPEN FONT LICENSE.txt) - free to self-host.
+   woff2 files were converted from the kit's OTFs with fontTools 4.65 (TTFont(otf).flavor = 'woff2'; ~19 KB each,
+   245 glyphs, latin) and sit next to the OTF, which stays as the fallback src. font-display: swap everywhere.
+   Preload (build-index.cjs FONTS): CreatoDisplay-Regular.woff2 + CreatoDisplay-Bold.woff2 - the two faces above the fold.
+   Weights shipped: 300 Light, 400 Regular, 500 Medium, 700 Bold, 800 ExtraBold, + 400/700 italic. Requests for 600 resolve
+   to 700 (CSS font matching goes up first above 500), so the old "600" rules in section CSS render Bold.
+   RETIRED: Fraunces + Noto Sans (the study-rebuild faces). Their files stay in assets/fonts/ unused; no @font-face, no
+   preload - see verify/handoff-brand/tokens.md "Requests for others" for the build-index.cjs preload swap.
+   ========================================================================== */
+@font-face {
+  font-family: "Creato Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/brand/fonts/creato_display/CreatoDisplay-Regular.woff2") format("woff2"),
+       url("../assets/brand/fonts/creato_display/CreatoDisplay-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: "Creato Display";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../assets/brand/fonts/creato_display/CreatoDisplay-Medium.woff2") format("woff2"),
+       url("../assets/brand/fonts/creato_display/CreatoDisplay-Medium.otf") format("opentype");
+}
+@font-face {
+  font-family: "Creato Display";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/brand/fonts/creato_display/CreatoDisplay-Bold.woff2") format("woff2"),
+       url("../assets/brand/fonts/creato_display/CreatoDisplay-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: "Creato Display";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../assets/brand/fonts/creato_display/CreatoDisplay-ExtraBold.woff2") format("woff2"),
+       url("../assets/brand/fonts/creato_display/CreatoDisplay-ExtraBold.otf") format("opentype");
+}
+@font-face {
+  font-family: "Creato Display";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../assets/brand/fonts/creato_display/CreatoDisplay-Light.woff2") format("woff2"),
+       url("../assets/brand/fonts/creato_display/CreatoDisplay-Light.otf") format("opentype");
+}
+@font-face {
+  font-family: "Creato Display";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/brand/fonts/creato_display/CreatoDisplay-RegularItalic.woff2") format("woff2"),
+       url("../assets/brand/fonts/creato_display/CreatoDisplay-RegularItalic.otf") format("opentype");
+}
+@font-face {
+  font-family: "Creato Display";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/brand/fonts/creato_display/CreatoDisplay-BoldItalic.woff2") format("woff2"),
+       url("../assets/brand/fonts/creato_display/CreatoDisplay-BoldItalic.otf") format("opentype");
+}

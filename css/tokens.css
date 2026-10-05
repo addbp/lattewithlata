@@ -1,0 +1,152 @@
+/* ==========================================================================
+   Latte with Lata - design tokens (brand-kit edition, 2026-09-17)
+   The client's brand kit (assets/brand/: brandkit.png, logo/, fonts/creato_display/, brand-position.txt) replaces the
+   study rebuild's Fraunces / Noto / cream / caramel system. The MECHANISM is unchanged (Paszkowski token engine: --vpad
+   ladder, band classes, derived role tokens, geometry, motion, z-index plan); only the VALUES are the brand.
+   Every old token name survives below as an alias so no section rule breaks. New names are the contract for every
+   lane (see BRAND.md for the sheet with contrast ratios and verify/handoff-brand/tokens.md for the hand-off).
+   Sources: BK = brand kit; PZ = teardowns/2026-09-14-caffepaszkowski-com/source (mechanism only); INFERRED = derived here.
+   ========================================================================== */
+
+/* ---- 1. Brand palette (BK) + type/spacing bases ---- */
+html {
+    /* core brand */
+    --colBrand: #502506;            /* espresso brown - primary: titles, strong, header plate, drawer, dark bands, buttons, footer wordmark (13.1:1 on white) */
+    --colAccent: #81532e;           /* caramel brown - the single accent: manifesto band, link hover, submit, card hover panel, focus ring (6.5:1 on white) */
+    --colBg: #ffffff;               /* page background (BK white) */
+    --colOnBrand: #ffffff;          /* text and marks on --colBrand / --colAccent / --colBrandDeep (13.1 / 6.5 / 17.0 : 1) */
+    --colNero: var(--colBrand);     /* every former "black": .bg-band-black, header plate, drawer, buttons, footer wordmark, read-more default */
+    --colBrandDeep: #2f1604;        /* brand at -40% light (INFERRED): hero overlay gradient stop, shadows, frosted-card base, ::selection */
+    --colBrandSoft: #f6efe7;        /* warm off-white tint of the brand: menu band (cream-2), soft panels (--colText on it 9.5:1) */
+    --colBrandLine: #e6d9cc;        /* hairlines / borders / input rules on white (non-text, 1.4:1 - decorative only) */
+    --colText: #4a3a30;             /* body copy on white 10.8:1 (>= 7:1 AAA), on --colBrandSoft 9.5:1 */
+    --colTextMuted: #7a6658;        /* captions, meta, consent lines: on white 5.4:1, on --colBrandSoft 4.8:1 (>= 4.5:1 AA) */
+    --colAccentTint: #c9a98f;       /* colour-scrub START tint on the accent band (07 manifesto; transient, tweens to --colOnBrand) */
+
+    /* role tokens read by base.css */
+    --colLink: var(--colBrand);
+    --colLinkHover: var(--colAccent);
+    --colFocus: var(--colAccent);   /* :focus-visible ring (2px, offset 2px); flips to --colOnBrand on brand bands */
+
+    /* rgb triplets + ready-made translucents for the overlays that sections hard-code today (INFERRED helpers) */
+    --colBrand-rgb: 80 37 6;
+    --colBrandDeep-rgb: 47 22 4;
+    --colOnBrand-rgb: 255 255 255;
+    --colOverlay: rgb(47 22 4 / .5);            /* hero video overlay: design-system "40-60% dark", white text on top */
+    --colOverlayStrong: rgb(47 22 4 / .6);      /* gradient stop / frosted twin card base (was rgba(26,20,17,.6)) */
+    --colLineOnBrand: rgb(255 255 255 / .25);   /* hairlines on brown bands (was rgba(250,246,240,.2-.4)) */
+    --colTextOnBrandMuted: rgb(255 255 255 / .8); /* secondary text on brown bands (eyebrows, consent) - 10.7:1 on brand */
+    --colShadow: rgb(47 22 4 / .18);            /* card / plate shadows */
+
+    /* type - Creato Display only (css/fonts.css); weights: 300 400 500 700 800 (+400/700 italic) */
+    --fontBrand: "Creato Display", "Helvetica Neue", Arial, sans-serif;
+    --fontDisplay: var(--fontBrand);            /* old name kept for readability of section comments */
+    --fontBody: var(--fontBrand);
+    --wDisplay: 800;                            /* hero + footer wordmark (ExtraBold, uppercase, ls -.02em, lh .9) */
+    --wTitle: 700;                              /* section / card / twin titles, drawer links, marquee (Bold, uppercase, ls -.01em, lh 1) */
+    --wLead: 500;                               /* manifesto, quotes, leads, eyebrows (Medium) */
+    --wBody: 400;                               /* body + captions (Regular) */
+    --wButton: 700;                             /* buttons / read-more (Bold, uppercase, .9em, ls .08em) */
+    --fontBold: 700;                            /* PZ $fontStrong -> strong, .strip__subtitle (was 600: Creato has no 600) */
+    --trackDisplay: -.02em;
+    --trackTitle: -.01em;
+    --trackEyebrow: .14em;
+    --trackButton: .08em;
+    --trackWordmark: .12em;                     /* header wordmark text "LATTE WITH LATA" 15px Bold */
+    --lhDisplay: .9;
+    --lhTitle: 1;
+    --lhLead: 1.15;
+    --lhBody: 1.6;
+    --vpad: 1.6rem;
+    --titleSize: 3.75rem;                       /* was 3.75em; rem keeps every title clamp() at the same px now that body is 17px at >= 60em */
+    --fontSize: 1;
+    --lineHeight: var(--lhBody);                /* BK body 16/1.6 (17/1.6 at >= 60em, base.css s2) */
+
+    /* logo (BK) - sizes for the mark lane; the mark itself lives in assets/brand/logo/ + assets/svg/mark.svg */
+    --markHeader: 44px;                         /* header: white mark, wordmark text beside it (mark only on phones) */
+    --markDrawer: 72px;                         /* drawer: white mark */
+    --markHero: clamp(96px, 7.8vw, 120px);      /* hero: white mark ABOVE the two-line wordmark - 112px @1440 (review POLISH 7), 96 at tablet, 120 on wide screens */
+    --markFooter: 120px;                        /* footer: brown mark + tagline */
+    --markClear: .25em;                         /* clear space = the saucer height (~1/4 of the mark) on every side */
+}
+/* --vpad ladder - PZ minimal/_variables.scss:13,20-30 (1.6rem <576px -> 2.7rem >=36em -> 3.3rem >=48em -> 3.6rem >=60em) - unchanged */
+@media (min-width: 36em) { html { --vpad: 2.7rem; } }
+@media (min-width: 48em) { html { --vpad: 3.3rem; } }
+@media (min-width: 60em) { html { --vpad: 3.6rem; --markHeader: 56px; } }
+
+/* ---- 2. Band classes - mechanism PZ main.1.beautified.css:7147-7178 (.bg-np-*), values BK ---- */
+.bg-band-cream2 { --bgStrip: var(--colBrandSoft); }                                          /* 06 menu band */
+.bg-band-accent { --bgStrip: var(--colAccent); --strip-text-color: var(--colOnBrand); }      /* 07 manifesto (white on caramel 6.5:1) */
+.bg-band-black, .bg-band-brand { --bgStrip: var(--colNero); --strip-text-color: var(--colOnBrand); }   /* 08-13 espresso bands (.bg-band-brand = new alias) */
+/* on brand bands every role that would otherwise be brown-on-brown flips to white: titles (PZ `--colTitle: ""` fall-through, main.1:7151),
+   the stamp mark (BK: white on brown bands), hairlines, strong, and the focus ring */
+.bg-band-black, .bg-band-brand, .bg-band-accent {
+    --colTitle: var(--strip-text-color);
+    --colStamp: var(--colOnBrand);
+    --colHr: var(--colLineOnBrand);
+    --colStrong: var(--colOnBrand);
+    --colFocus: var(--colOnBrand);
+}
+
+/* ---- 3. Aliases + derived tokens Paszkowski's base reads (names kept so every ported rule resolves) ---- */
+html {
+    --colBianco: var(--colBg);                  /* "white" everywhere: was the cream #faf6f0, now true white */
+    --colPrimario: var(--colBrand);             /* buttons bg, ::selection, hr fallback */
+    --colContrasto: var(--colAccent);           /* PZ alias of the accent - minimal/_colors.scss:17 */
+    --colContrastoScuro: #674225;               /* accent at -20% light: submit hover, pressed states (8.8:1 on white) - INFERRED */
+    --colContrastoLeggero: #f3e8de;             /* accent at +85% light: light tint panels - INFERRED */
+    --colContrastoChiaro: var(--colAccentTint); /* PZ scale(+50% light, -40% sat) of the accent = the tint */
+    --colGrigioLeggero: var(--colBrandSoft);    /* second cream for the menu band */
+    --colGrigio: #cdbfb2;                       /* warm grey (brand at +70% light, -50% sat): disabled button bg - INFERRED */
+    --colGrigioChiaro: #efe8e1;                 /* scale(--colGrigio, +80% light) */
+    --colGrigioMedio: #a08a78;                  /* scale(--colGrigio, -30% light) */
+    --colGrigioScuro: var(--colTextMuted);      /* scale(--colGrigio, -50% light) -> the muted text token */
+    --colPrimarioLeggero: var(--colBrandSoft);  /* scale(--colPrimario, +95% light) */
+    --colPrimarioChiaro: #d9c9bb;               /* scale(--colPrimario, +80% light, -40% sat) */
+    --colPrimarioScuro: var(--colBrandDeep);    /* scale(--colPrimario, -35% light) */
+    /* role tokens - PZ minimal/_colors.scss:28-35 */
+    --colBurger: var(--colBrand);               /* burger lines on white; the header flips it to white over the hero / plate */
+    --colTitle: var(--colBrand);
+    --colStrong: var(--colBrand);
+    --colError: #b3261e;                        /* 5.9:1 on white (was #c00) */
+    --colHr: var(--colBrandLine);               /* hairlines on white */
+    --colStamp: var(--colBrand);                /* BK: the cup mark brown on white bands (white on brand bands via section 2) */
+
+    /* geometry - PZ minimal/_variables.scss:3-16 (unchanged) */
+    --contWidth: 100%;
+    --container-maxWidth: 75rem;                /* $contWidth = 1200/16 rem - PZ main/_config.scss:26 */
+    --container-pad: var(--vpad);               /* $containerPad - PZ main/_config.scss:28 */
+    --inputH: 2.7rem;                           /* $lineHeight * 1.8 * 1rem - PZ minimal/_variables.scss:12 */
+    --hH: 76;                                   /* unitless header height, PZ minimal/_variables.scss:14 (JS overwrites with measured) */
+    --header-height: var(--hH, 80);             /* PZ minimal/_variables.scss:15 */
+    --theme-color: var(--colBrand);             /* <meta name="theme-color"> value: the plate colour (was the accent) */
+
+    /* motion - PZ main/_extend.scss:30-48 (unchanged)
+       --aniTime is deliberately NOT set at root: Paszkowski reads it per element with two different
+       fallbacks (.3s for links/header/menu, .6s for reveals/buttons/hover). Setting it globally
+       collapses both tiers. Use --aniTime only as a scoped override (e.g. .button--icon { --aniTime: .3s }). */
+    --aniFast: .3s;                                       /* animate()  fallback - _extend.scss:33 */
+    --aniSlow: .6s;                                       /* animate2() fallback - _extend.scss:40 */
+    --aniUi: .2s;                                         /* brand polish: hover / focus feedback tier (WIG 150-300 ms) - INFERRED */
+    --easeInOutCubic: cubic-bezier(.645, .045, .355, 1);  /* animate2 / animateBut - _extend.scss:40,46 */
+    --easeInOutSine: cubic-bezier(.445, .05, .55, .95);   /* animate - _extend.scss:33 */
+    --easeOut: cubic-bezier(.22, 1, .36, 1);              /* entering micro-interactions (WIG "ease-out for entering") - INFERRED */
+
+    /* focus ring (WIG: visible focus, :focus-visible only) */
+    --focusRing: 2px solid var(--colFocus);               /* NOTE: var() inside a custom property is substituted where it is declared (html), so this token
+                                                             always carries the ACCENT; base.css draws the ring as `2px solid var(--colFocus)` so the band flips work */
+    --focusOffset: 2px;
+    --tapMin: 2.75rem;                                    /* 44px minimum touch target (WIG / WCAG 2.5.5) */
+
+    /* Z-INDEX PLAN (fixed for every agent; brief) - unchanged */
+    --z-header: 100;
+    --z-drawer: 110;
+    --z-screen: 105;
+    --z-pill: 90;
+    --z-top: 80;
+    --z-stamp: 10;
+    --z-arrows: 5;
+    --z-content: 1;
+    --z-bg: 0;
+}
+@media (min-width: 36em) { html { --hH: 106; } }  /* PZ minimal/_variables.scss:20-23 */

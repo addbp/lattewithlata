@@ -1,0 +1,229 @@
+/* ==========================================================================
+   Latte with Lata - css/pages/episodes.css (lane PAGE podcast + episodes, PAGES-SPEC 2 / 6)
+   episodes.html = page hero -> .mark-row -> latest (white band, brand-brown feature card) -> all episodes (soft band: sticky filter chips + card grid
+   with native <details> show notes) -> audio note (white: platform links, NO player) -> next (accent CTA band) -> the shared newsletter + footer.
+   Scoped under body[data-page="episodes"] or the section ids; kit (css/pages/_shell.css) + base classes are used as they are. Brand tokens only,
+   Creato Display inherited, feedback transitions 200-300 ms, animations gated behind prefers-reduced-motion.
+   Contrast (WCAG 2.x): --colText on white 10.83; --colTextMuted on white 5.43 / on soft 4.76; --colAccent on white 6.54 / soft 5.74; white on brand
+   13.06; white .8 on brand 10.7; white on accent 6.54. Everything is visible and readable without JS (the filter row alone is script-only).
+   ========================================================================== */
+body[data-page="episodes"] {
+    --secPad: calc(var(--vpad) * 2);
+    --epsLineSoft: rgb(var(--colBrand-rgb) / .18);       /* hairline that still reads on --colBrandSoft (decorative) */
+}
+
+/* ---- hero: the shell's 96 / 40 px title like every landing page; below 384px the single long word ("CONVERSATIONS") scales with the viewport so it never
+   leaves its gutter (39px @375, 37px @360) ---- */
+@media (max-width: 24em) { #p-episodes-01-hero .page-hero__title { font-size: min(40px, 10.4vw); } }
+
+/* ---- shared furniture ---- */
+body[data-page="episodes"] .eps-head { max-width: 46rem; }
+body[data-page="episodes"] .eps-head--center { margin-inline: auto; }
+body[data-page="episodes"] .eps-eyebrow { margin: 0 0 1.4em; color: var(--colAccent); }
+body[data-page="episodes"] .eps-split { display: grid; gap: calc(var(--vpad) / 2); }
+body[data-page="episodes"] .eps-split__lead { color: var(--colTitle); max-width: 34rem; }
+@media (min-width: 60em) {
+    body[data-page="episodes"] .eps-split { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); column-gap: calc(var(--vpad) * 2); align-items: end; }
+    body[data-page="episodes"] .eps-split__lead { padding-bottom: .35em; }
+}
+/* episode furniture shared by the feature and the grid cards */
+body[data-page="episodes"] .eps-kicker { margin: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6em 1em; }
+body[data-page="episodes"] .eps-num { font-size: .75rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; line-height: 1; color: var(--colAccent); }
+body[data-page="episodes"] .kit-dark .eps-num { color: var(--colOnBrand); }
+body[data-page="episodes"] .eps-kicker .tag { color: var(--kitTitle); border-color: var(--kitFieldLine); }
+body[data-page="episodes"] .eps-guest { margin: 0; font-size: .9375rem; line-height: 1.4; color: var(--kitMuted); }
+body[data-page="episodes"] .eps-guest strong { display: block; font-weight: var(--fontBold); color: var(--kitTitle); }
+body[data-page="episodes"] .eps-meta { margin: 0; display: flex; flex-wrap: wrap; gap: .35em 1.75em; font-size: .875rem; line-height: 1.4; font-variant-numeric: tabular-nums; }
+body[data-page="episodes"] .eps-meta > div { display: flex; align-items: baseline; gap: .6em; }
+body[data-page="episodes"] .eps-meta dt { font-size: .6875rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; color: var(--kitMuted); }
+body[data-page="episodes"] .eps-meta dd { margin: 0; color: var(--kitTitle); font-weight: var(--wLead); white-space: nowrap; }
+body[data-page="episodes"] .eps-label { margin: 0 0 1em; font-size: .75rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; line-height: 1.2; color: var(--kitMuted); }
+body[data-page="episodes"] .eps-takeaways { list-style: none; margin: 0; padding: 0; counter-reset: eps-take; border-top: 1px solid var(--kitLine); }
+body[data-page="episodes"] .eps-takeaways li { counter-increment: eps-take; display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); padding: .8em 0; border-bottom: 1px solid var(--kitLine); font-size: .9375rem; line-height: 1.5; color: var(--kitText); }
+body[data-page="episodes"] .eps-takeaways li::before { content: counter(eps-take, decimal-leading-zero); font-size: .75rem; font-weight: var(--wLead); letter-spacing: .08em; line-height: 1.9; color: var(--kitMuted); font-variant-numeric: tabular-nums; }
+body[data-page="episodes"] .eps-quote__by { margin: .9em 0 0; font-size: .75rem; font-weight: var(--wButton); letter-spacing: var(--trackButton); text-transform: uppercase; line-height: 1.2; color: var(--kitTitle); display: flex; align-items: center; gap: .8em; }
+body[data-page="episodes"] .eps-quote__by::before { content: ""; flex: 0 0 1.75rem; height: 2px; background: var(--colAccent); }
+body[data-page="episodes"] .kit-dark .eps-quote__by::before { background: var(--colOnBrand); }
+
+/* ==========================================================================  02 latest (white band, brown feature card) */
+#p-episodes-02-latest { padding: var(--vpad) 0 var(--secPad); }             /* first strip after the hero: vpad top + the shell mark-row gap, as cafe / menu / events / contact */
+#p-episodes-02-latest .eps-feature {
+    margin-top: calc(var(--vpad) * 1.1);
+    display: grid; grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "media" "body" "notes" "quote";
+    --kitLine: var(--colLineOnBrand);
+}
+#p-episodes-02-latest .eps-feature__media { grid-area: media; position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: var(--colBrandDeep); }
+#p-episodes-02-latest .eps-feature__media img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+#p-episodes-02-latest .eps-feature__body { grid-area: body; display: flex; flex-direction: column; gap: 1.15rem; padding: calc(var(--vpad) / 1.2) calc(var(--vpad) / 1.2) var(--vpad); }
+#p-episodes-02-latest .eps-feature__title { margin: .1em 0 0; font-weight: var(--wTitle); font-size: clamp(30px, 3.5vw, 52px); line-height: 1; letter-spacing: var(--trackTitle); text-transform: uppercase; text-wrap: balance; color: var(--colOnBrand); }
+#p-episodes-02-latest .eps-guest { font-size: 1rem; }
+#p-episodes-02-latest .eps-feature__blurb { margin: 0; font-weight: var(--wLead); font-size: clamp(18px, 1.5vw, 22px); line-height: 1.35; letter-spacing: -.01em; color: var(--colOnBrand); text-wrap: pretty; }
+#p-episodes-02-latest .eps-feature__actions { margin: auto 0 0; padding-top: .6rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.1rem 1.75rem; }
+#p-episodes-02-latest .eps-feature__notes, #p-episodes-02-latest .eps-feature__quote { margin: 0; padding: calc(var(--vpad) / 1.2); border-top: 1px solid var(--colLineOnBrand); }
+#p-episodes-02-latest .eps-feature__notes { grid-area: notes; }
+#p-episodes-02-latest .eps-feature__quote { grid-area: quote; display: flex; flex-direction: column; }
+#p-episodes-02-latest .eps-feature__quote blockquote { margin: 0; }
+#p-episodes-02-latest .eps-feature__quote blockquote p { margin: 0; font-weight: var(--wLead); font-size: clamp(22px, 2.2vw, 32px); line-height: 1.18; letter-spacing: -.01em; color: var(--colOnBrand); text-wrap: pretty; }
+#p-episodes-02-latest .eps-feature__quote .eps-quote__by { margin-top: 1.4em; }
+@media (min-width: 60em) {
+    #p-episodes-02-latest .eps-feature { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); grid-template-areas: "media body" "notes quote"; }
+    #p-episodes-02-latest .eps-feature__media { aspect-ratio: auto; min-height: 30rem; }
+    #p-episodes-02-latest .eps-feature__quote { border-left: 1px solid var(--colLineOnBrand); }
+}
+@media (prefers-reduced-motion: no-preference) { #p-episodes-02-latest .eps-feature__media img { transition: transform 1.2s ease-in-out; } }
+.is-mouse #p-episodes-02-latest .eps-feature:hover .eps-feature__media img { transform: scale(1.04); }
+
+/* ==========================================================================  03 all episodes (soft band) */
+#p-episodes-03-all-episodes { padding: var(--secPad) 0; --kitLine: var(--epsLineSoft); }
+/* filter row: script-only (the chips need js/pages/episodes.js), sticks under the header inside #all-episodes; when the header slides away it takes the top */
+#p-episodes-03-all-episodes .eps-filter {
+    position: sticky; top: 0; z-index: 3;
+    margin-top: var(--vpad);
+    background: var(--colBrandSoft);
+    border-top: 1px solid var(--epsLineSoft); border-bottom: 1px solid var(--epsLineSoft);
+}
+html:not(.js-ok) #p-episodes-03-all-episodes .eps-filter { display: none; }
+body.opaque:not(.header-up) #p-episodes-03-all-episodes .eps-filter { top: calc(var(--hH, 78) * 1px); }
+@media (prefers-reduced-motion: no-preference) { #p-episodes-03-all-episodes .eps-filter { transition: top var(--aniFast) var(--easeInOutSine); } }
+#p-episodes-03-all-episodes .eps-filter__row { display: flex; align-items: center; gap: .5rem 1.25rem; padding-top: .75rem; padding-bottom: .75rem; }
+#p-episodes-03-all-episodes .eps-filter__label { flex: 0 0 auto; margin: 0; font-size: .75rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; line-height: 1; color: var(--colTextMuted); }
+#p-episodes-03-all-episodes .eps-filter__chips {
+    flex: 1 1 auto; min-width: 0;
+    display: flex; gap: .5rem;
+    margin: -4px; padding: 4px;                          /* room for the focus ring inside the scroller */
+    overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+#p-episodes-03-all-episodes .eps-filter__chips::-webkit-scrollbar { display: none; }
+#p-episodes-03-all-episodes .eps-filter__chips .chip { flex: 0 0 auto; cursor: pointer; }
+#p-episodes-03-all-episodes .chip[aria-pressed="true"] { background: var(--kitOn); border-color: var(--kitOn); color: var(--kitOnText); }
+.is-mouse #p-episodes-03-all-episodes .chip[aria-pressed="false"]:hover { background: var(--colBg); border-color: var(--kitFieldLineStrong); }
+#p-episodes-03-all-episodes .eps-filter__count { flex: 0 0 auto; margin: 0 0 0 auto; font-size: .875rem; line-height: 1.2; color: var(--colTextMuted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+@media (max-width: 47.99em) {
+    #p-episodes-03-all-episodes .eps-filter__label { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+    #p-episodes-03-all-episodes .eps-filter__chips { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2rem), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 2rem), transparent); padding-right: 2rem; }
+}
+
+/* the grid: cards share their row's tracks through subgrid (cover / head / blurb / meta / notes), so every part lines up across a row and an
+   opened "Show notes" only grows the notes track - the neighbours keep their shape. Fallback (no subgrid): flex columns, notes pinned to the bottom. */
+#p-episodes-03-all-episodes .eps-grid { list-style: none; margin: var(--vpad) 0 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; scroll-margin-top: calc(var(--epsFilterH, 4.5rem) + 1rem); }
+@media (min-width: 40em) { #p-episodes-03-all-episodes .eps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 64em) { #p-episodes-03-all-episodes .eps-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+#p-episodes-03-all-episodes .eps-item { display: flex; min-width: 0; }
+#p-episodes-03-all-episodes .eps-item[hidden] { display: none; }
+body[data-page="episodes"] .eps-card {
+    position: relative; width: 100%;
+    display: flex; flex-direction: column;
+    background: var(--colBg); color: var(--colText);
+    scroll-margin-top: calc(var(--epsFilterH, 4.5rem) + 1rem);      /* + html scroll-padding-top (the fixed header) */
+}
+html:not(.js-ok) body[data-page="episodes"] .eps-card { scroll-margin-top: 1rem; }
+@supports (grid-template-rows: subgrid) {
+    #p-episodes-03-all-episodes .eps-item { display: grid; grid-template-rows: subgrid; grid-row: span 5; row-gap: 0; }
+    #p-episodes-03-all-episodes .eps-item[hidden] { display: none; }
+    body[data-page="episodes"] .eps-card { display: grid; grid-template-rows: subgrid; grid-row: 1 / -1; row-gap: 0; }
+    body[data-page="episodes"] .eps-card .eps-notes { margin-top: 0; }     /* top of the shared notes track: a neighbour's open notes never push this summary down */
+    /* the white ground moves from the card to its parts, so a closed card ENDS under its summary while a neighbour's open notes stretch the row
+       (the 1px shadow closes any sub-pixel seam between two tracks) */
+    body[data-page="episodes"] .eps-card { background: transparent; }
+    body[data-page="episodes"] .eps-card > * { background-color: var(--colBg); }
+    body[data-page="episodes"] .eps-card > :not(:last-child) { box-shadow: 0 1px 0 var(--colBg); }
+    body[data-page="episodes"] .eps-card > .eps-card__cover { background-color: var(--colBrandSoft); }
+}
+body[data-page="episodes"] .eps-card:target .eps-card__cover::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--colAccent); }   /* the deep-linked episode: a caramel bar on its cover */
+body[data-page="episodes"] .eps-card__cover { position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: var(--colBrandSoft); }
+body[data-page="episodes"] .eps-card__cover img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+#ep-72 .eps-card__cover img { object-position: 50% 78%; }                         /* portrait source (gallery-01): show the banquette + tables its alt describes, not the bare wall */
+@media (prefers-reduced-motion: no-preference) { body[data-page="episodes"] .eps-card__cover img { transition: transform var(--aniSlow) var(--easeInOutCubic); } }
+.is-mouse body[data-page="episodes"] .eps-card:hover .eps-card__cover img { transform: scale3d(1.04, 1.04, 1); }
+body[data-page="episodes"] .eps-card__head { display: flex; flex-direction: column; gap: .85rem; padding: 1.35rem 1.35rem 0; }
+body[data-page="episodes"] .eps-card__title { margin: 0; font-weight: var(--wTitle); font-size: clamp(20px, 1.7vw, 25px); line-height: 1.03; letter-spacing: var(--trackTitle); text-transform: uppercase; text-wrap: balance; color: var(--colBrand); }
+body[data-page="episodes"] .eps-card__title:focus { outline: none; }
+body[data-page="episodes"] .eps-card__title:focus-visible { outline: none; text-decoration: underline; text-decoration-color: var(--colAccent); text-decoration-thickness: 2px; text-underline-offset: .16em; }   /* a script-focused heading (deep link), not a tab stop: an accent underline instead of a box */
+body[data-page="episodes"] .eps-card__blurb { margin: 0; padding: .9rem 1.35rem 0; font-size: .9375rem; line-height: 1.55; color: var(--colText); text-wrap: pretty; }
+body[data-page="episodes"] .eps-card .eps-meta { padding: 1rem 1.35rem 1.2rem; align-content: end; }
+/* show notes: a native disclosure (works without JS). 48px summary row, the label flips through [open], the glyph is a plus that closes to a minus */
+body[data-page="episodes"] .eps-notes { align-self: start; margin: auto 0 0; border-top: 1px solid var(--colBrandLine); }
+body[data-page="episodes"] .eps-notes__summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 1em;
+    min-height: 3rem; padding: 0 1.35rem;
+    font-size: .8125rem; font-weight: var(--wButton); letter-spacing: var(--trackButton); text-transform: uppercase; line-height: 1;
+    color: var(--colBrand);
+}
+body[data-page="episodes"] .eps-notes__summary::-webkit-details-marker { display: none; }
+body[data-page="episodes"] .eps-notes__summary:focus-visible { outline-offset: -3px; }
+.is-mouse body[data-page="episodes"] .eps-notes__summary:hover { background: var(--colBrandSoft); }
+body[data-page="episodes"] .eps-notes__hide, body[data-page="episodes"] .eps-notes[open] .eps-notes__show { display: none; }
+body[data-page="episodes"] .eps-notes[open] .eps-notes__hide { display: inline; }
+body[data-page="episodes"] .eps-notes__glyph { position: relative; flex: 0 0 auto; width: .9rem; height: .9rem; margin-left: auto; }
+body[data-page="episodes"] .eps-notes__glyph::before, body[data-page="episodes"] .eps-notes__glyph::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; background: var(--colAccent); }
+body[data-page="episodes"] .eps-notes__glyph::after { transform: rotate(90deg); }
+body[data-page="episodes"] .eps-notes[open] .eps-notes__glyph::after { transform: rotate(0deg); }
+@media (prefers-reduced-motion: no-preference) {
+    body[data-page="episodes"] .eps-notes__glyph::after { transition: transform var(--aniUi) var(--easeOut); }
+    body[data-page="episodes"] .eps-notes__summary { transition: background-color var(--aniUi) var(--easeInOutSine); }
+    body[data-page="episodes"] .eps-notes[open] .eps-notes__body { animation: eps-notes-in .3s var(--easeOut) both; }
+    #p-episodes-03-all-episodes .eps-item.is-entering { animation: eps-item-in .3s var(--easeOut) both; animation-delay: calc(var(--i, 0) * 40ms); }
+}
+@keyframes eps-notes-in { from { opacity: 0; transform: translate3d(0, -6px, 0); } to { opacity: 1; transform: none; } }
+@keyframes eps-item-in { from { opacity: 0; transform: translate3d(0, 14px, 0); } to { opacity: 1; transform: none; } }
+body[data-page="episodes"] .eps-notes__body { padding: .5rem 1.35rem 1.5rem; }
+body[data-page="episodes"] .eps-quote { margin: 1.5rem 0 0; }
+body[data-page="episodes"] .eps-quote blockquote { margin: 0; }
+body[data-page="episodes"] .eps-quote blockquote p { margin: 0; font-weight: var(--wLead); font-size: 1.125rem; line-height: 1.3; letter-spacing: -.01em; color: var(--colBrand); text-wrap: pretty; }
+body[data-page="episodes"] .eps-notes__listen { margin: 1.5rem 0 0; }
+/* reveals: base.css staggers .animated by child index up to 1.9 s - in a grid that is a per-COLUMN beat instead */
+@media screen and (prefers-reduced-motion: no-preference) {
+    #p-episodes-03-all-episodes .eps-item.animated { transition-delay: .05s; }
+    #p-episodes-03-all-episodes .eps-item.animated:nth-child(3n + 2) { transition-delay: .13s; }
+    #p-episodes-03-all-episodes .eps-item.animated:nth-child(3n) { transition-delay: .21s; }
+}
+#p-episodes-03-all-episodes .eps-empty { margin-top: var(--vpad); }
+#p-episodes-03-all-episodes .eps-archive { margin: calc(var(--vpad) * 1.1) auto 0; max-width: 40rem; text-align: center; font-size: .9375rem; line-height: 1.5; color: var(--colTextMuted); }
+
+/* ==========================================================================  04 audio note (white): platform links, no player */
+#p-episodes-04-audio { padding: var(--secPad) 0; }
+#p-episodes-04-audio .eps-audio__grid { display: grid; gap: var(--vpad); }
+#p-episodes-04-audio .strip__title1 { max-width: 13ch; }
+#p-episodes-04-audio .eps-audio__lead { margin-top: max(1.1rem, calc(var(--vpad) / 2)); max-width: 38rem; color: var(--colBrand); }
+@media (min-width: 60em) { #p-episodes-04-audio .strip__title1 { max-width: none; } }
+#p-episodes-04-audio .eps-eyebrow { margin-bottom: 1.2em; }
+body[data-page="episodes"] .eps-platforms { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--colBrandLine); }
+body[data-page="episodes"] .eps-platforms__link {
+    display: flex; align-items: center; gap: .65em;
+    min-height: 3.75rem; padding: .4rem .25rem;
+    border-bottom: 1px solid var(--colBrandLine);
+    font-weight: var(--wTitle); font-size: clamp(20px, 1.9vw, 28px); line-height: 1; letter-spacing: var(--trackTitle); text-transform: uppercase;
+    color: var(--colBrand); text-decoration: none;
+}
+body[data-page="episodes"] .eps-platforms__link:hover { color: var(--colAccent); }
+body[data-page="episodes"] .eps-platforms__icon { width: 1em; height: 1em; flex: 0 0 auto; }
+body[data-page="episodes"] .eps-platforms__name { flex: 1 1 auto; min-width: 0; }
+body[data-page="episodes"] .eps-platforms__arrow { width: .8em; height: .8em; flex: 0 0 auto; opacity: .55; transform: translateX(-.35em); }
+body[data-page="episodes"] .eps-platforms__link:hover .eps-platforms__arrow, body[data-page="episodes"] .eps-platforms__link:focus-visible .eps-platforms__arrow { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: no-preference) {
+    body[data-page="episodes"] .eps-platforms__arrow { transition: transform var(--aniUi) var(--easeOut), opacity var(--aniUi) var(--easeOut); }
+    body[data-page="episodes"] .eps-platforms__link { transition: background-color var(--aniUi) var(--easeInOutSine), color var(--aniUi) var(--easeInOutSine); }
+}
+
+/* from 48em the four platforms become a row of tiles UNDER the copy (the copy says "the links below") */
+@media (min-width: 48em) {
+    body[data-page="episodes"] .eps-platforms { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 0; border-left: 1px solid var(--colBrandLine); }
+    body[data-page="episodes"] .eps-platforms__link { position: relative; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 2.25rem; min-height: 9.5rem; padding: 1.25rem; border: 1px solid var(--colBrandLine); border-left: 0; font-size: clamp(18px, 1.7vw, 24px); }
+    body[data-page="episodes"] .eps-platforms__icon { width: 1.6em; height: 1.6em; }
+    body[data-page="episodes"] .eps-platforms__name { flex: 0 0 auto; }
+    body[data-page="episodes"] .eps-platforms__arrow { position: absolute; right: 1.25rem; top: 1.4rem; }
+    .is-mouse body[data-page="episodes"] .eps-platforms__link:hover { background: var(--colBrandSoft); }
+}
+
+/* ==========================================================================  05 next (accent CTA band) */
+#p-episodes-05-next { padding: var(--secPad) 0; }                               /* the pt-lg / pb-lg rhythm of the other closing bands */
+#p-episodes-05-next .strip__title1 { --fontSize: clamp(40px, 7vw, 96px); line-height: .95; letter-spacing: var(--trackDisplay); max-width: 14ch; margin-inline: auto; }   /* 2026-09-17: same closing-title size as cafe 07 / menu 11 / events 07 */
+#p-episodes-05-next .eps-next__lead { margin: calc(var(--vpad) / 2) auto 0; max-width: 32rem; color: var(--colOnBrand); }
+#p-episodes-05-next .eps-next__actions { margin-top: var(--vpad); display: flex; flex-wrap: wrap; justify-content: center; gap: 1em; }
+#p-episodes-05-next .eps-next__actions .button + .button { margin: 0; }
+#p-episodes-05-next .button:not(.button--outlined) { --colFondoBottoni: var(--colOnBrand); --colTextBottoni: var(--colBrand); }   /* the kit flips buttons on the brown bands only: white on caramel here */
+#p-episodes-05-next .button:not(.button--outlined)::after { background: var(--colBrand); opacity: 1; }
+#p-episodes-05-next .button:not(.button--outlined):hover { color: var(--colOnBrand); }
+#p-episodes-05-next .eps-next__more { margin-top: calc(var(--vpad) / 1.5); }

@@ -1,0 +1,227 @@
+/* ==========================================================================
+   10-hosts - inverted two-column story row MEET LATA (build-C, section-scoped; brand edition 2026-09-17, lane C;
+   PAGES update 2026-09-17, lane FOUNDER: 4:5 portrait + the "in the podcast" composition;
+   UPDATE-3 2026-09-17, lane L2 HOST PHOTO: the client's podcast photograph, the broadcast frame re-mapped around it - see the block below)
+   Grid, columns, reveals, text-narrow, figures and the zoom-settle window are base.css (foundation):
+     grid       PZ main/modules/_strip.7.5.scss:255-277 (compiled main.1.beautified.css:4470-4523); .strip--wide -> container 100%, no padding
+                (_strip.7.5.scss:33-40) = 24 tracks of 60px @1440: col1 x 0 w 691.2 (720 - gap/2), col2 x 748.8 w 691.2 (manifest [280]/[281])
+     text-narrow _strip.7.5.scss:375-386 + 469-474: col2 content max-width 37.5rem + vpad (657.6), padding-right --container-pad (57.6)
+                -> text box 600 wide, margin-left 0 / margin-right auto (`.strip__column--2 { --strip-textNarrow-marginRight: auto }`)
+                NOTE (hand-off): the manifest's x 782.8 for the col2 text (spec 10 (c) "34px inset") is a mid-reveal capture of the
+                .anima--right-in slide (748.8 + 34 of the 5vh = 45px travel; computed-styles.json has the same h2 at 793.8 = 748.8 + 45,
+                the full .waiting offset). At rest the source text box sits at x 748.8 - no inset is authored, none is added here.
+     reveals    _animate.scss:16-19, 41-58 (compiled main.1:5566-5717): col1 .anima--left-in, col2 .anima--right-in (+.5s), as in rendered.html [280]/[281]
+     figures    _strip.7.5.scss:194-208 (overflow hidden under .js-image-anime; --after margin-top vpad/2 = 28.8, first-child 0)
+     band       PZ main.1.beautified.css:7147-7160 (.bg-np-black) -> tokens.css .bg-band-black = BK --colNero (#502506) with --colOnBrand text
+   BK = the client's brand kit (BRAND.md): h2 = title role via base (Creato Display Bold 700, white on brand through --colTitle);
+   body = Regular 400 17px/1.6 on >= 60em (base); byline = name Bold 700 uppercase + role eyebrow Medium 500 ("Lata Singh" / "Host");
+   portrait = the host's own podcast photograph (assets/brand/lata-singh-podcast.jpg), cropped and resampled only.
+   Only the rules the source needs beyond base.css live here. No font-family here (inherits --fontBrand).
+   ========================================================================== */
+
+/* h2 colour on the brown band: tokens.css sets `.bg-band-black { --colTitle: var(--strip-text-color) }` (PZ main.1.beautified.css:7151
+   `--colTitle: ""` fall-through) -> white (13.06:1). */
+
+/* links on the brown band - PZ main.1.beautified.css:7154-7160 (.bg-np-black a:not(.button) { color: inherit } :hover { color: var(--colContrasto) })
+   -> the read-more label and its currentColor disc turn --colAccent on hover, as the source does on this band (the single accent) */
+#s-10-hosts a:not(.button) { color: inherit; }
+#s-10-hosts a:not(.button):hover { color: var(--colAccent); }
+/* FINAL home check 2026-09-17 (shared-polish request): caramel text on this brown band was 2.00:1 on hover. The read-more stays white (13.06:1)
+   with an underline on hover / focus; disc = currentColor (white), arrow brand brown on it (13.06:1), as 11-live. Before: hover disc caramel
+   2.00:1 on the band, and on keyboard focus the white arrow sat on a white disc (1:1). */
+#s-10-hosts a.read-more:hover, #s-10-hosts a.read-more:focus-visible {
+    color: var(--colOnBrand);
+    text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .3em;   /* decoration only: no layout shift */
+}
+#s-10-hosts .read-more::after { background-color: var(--colBrand); }
+/* read-more arrow blend on the brown band: base.css s10 carries `.bg-band-black .read-more::after { mix-blend-mode: normal }`; the arrow is brand brown on the white disc (rule above). */
+/* focus ring: white on this band via tokens.css --colFocus (base.css reads it directly since the brand pass finish). Former note:
+   sets --focusRing per band. */
+
+/* Paragraph rhythm: the source separates its blocks with empty <p>&nbsp;</p> lines (rendered.html [281]: h2, p&nbsp;, p, p&nbsp;, p&nbsp;,
+   p > a.read-more, figure) = one 24px body line between blocks (p margin 0 in the reset). Re-expressed as margins so the markup stays
+   semantic - INFERRED, same rule as 04-story-a so both story rows share one rhythm:
+   24px (1.5em) between paragraphs and before the read-more line; h2 -> first paragraph = h2 margin-bottom vpad/4 (14.4, _typography.scss:14)
+   + the spacer line (24) = 38.4 (computed-styles [170] h2 margin 0 0 14.4px; the following p&nbsp; is 24px tall). */
+#s-10-hosts .strip__text > p { margin-top: 1.5em; }
+#s-10-hosts .strip__text > p:first-child { margin-top: 0; }
+#s-10-hosts .strip__text > h2 + p { margin-top: calc(1.5em + var(--vpad) / 4); }
+
+/* Byline (BRAND: hosts.name + hosts.role) - sits in the h2 -> paragraph gap: it takes the h2's spacer slot (vpad/4 after the h2's own
+   margin-bottom) and the first paragraph keeps its 1.5em below it.
+   UPDATE-3 (lane L2): the illustrated branded cup moved here from the photo corner (see the composition block) - one row = cup + name / role,
+   so the column grows by the cup's height instead of the byline's (~100px instead of ~40px). The cup is decorative (aria-hidden). */
+#s-10-hosts .hosts__byline {
+    display: flex; align-items: center; gap: clamp(14px, 1.4vw, 22px);
+    margin-top: calc(var(--vpad) / 4 + 24px);                             /* overrides the h2 + p rule above (same specificity, later); +24px = room for the steam */
+    line-height: 1.2;
+    color: var(--colOnBrand);
+}
+#s-10-hosts .hosts__byline-text { display: flex; flex-direction: column; gap: .35em; min-width: 0; }
+#s-10-hosts .hosts__name {
+    font-size: 1.125rem;                                                  /* 18px: a Bold line, clearly below the h2 (60 / 33.3px) - INFERRED */
+    font-weight: var(--wTitle);                                           /* BK Bold 700 uppercase ls -.01em */
+    letter-spacing: var(--trackTitle);
+    text-transform: uppercase;
+}
+#s-10-hosts .hosts__role {
+    font-size: .75rem;                                                    /* BK eyebrow role: Medium 500, 12px, uppercase, ls .14em */
+    font-weight: var(--wLead);
+    letter-spacing: var(--trackEyebrow);
+    text-transform: uppercase;
+    color: var(--colTextOnBrandMuted);                                    /* 10.7:1 on brand */
+}
+#s-10-hosts .strip__text > p:not([class]) { text-wrap: pretty; }          /* BK polish: no single-word last lines on the three paragraphs - INFERRED */
+
+/* --- branded cup (assets/svg/cup-branded.svg: original flat illustration carrying the OFFICIAL mark, never redrawn) + two steam lines.
+       110px at every width: the mark on the cup body = 110 x 94 / 320 = 32.3px tall (LOGO-USAGE minimum 32px); clear space around the mark
+       is baked into the illustration. Brown mark on the white cup = kit colours, no tint, no shadow on the mark itself (the drop-shadow is cast
+       by the whole cup silhouette onto the band). --- */
+#s-10-hosts .hosts__cup { position: relative; flex: none; width: 110px; pointer-events: none; user-select: none; }
+#s-10-hosts .hosts__cup-art {
+    display: block; width: 100%; height: auto; aspect-ratio: 320 / 290;
+    filter: drop-shadow(0 10px 12px rgb(var(--colBrandDeep-rgb) / .5));
+}
+#s-10-hosts .hosts__steam {
+    position: absolute; left: 31%; bottom: 80%; width: 32%; height: auto; overflow: visible;
+    fill: none; stroke: rgb(var(--colOnBrand-rgb) / .85); stroke-width: 2; stroke-linecap: round;
+}
+#s-10-hosts .hosts__steam path { vector-effect: non-scaling-stroke; opacity: .7; }
+
+/* Figures: lock the ratio so the column height is stable before decode and the zoom-settle window is known.
+   col2 host-corner (1200x1800) keeps the 2:3 window: 600x900 @1440, 338.8x508.2 @390 - INFERRED, as 04-story-a.
+   col1 portrait: 4:5 window = 691.2x864 @1440, 483.2x604 @1024, 768x960 @768, 390x487.5 @390. The file is exactly 4:5 (1200x1500), so
+   object-fit never crops it. --hosts-focus defaults to 50% 23.4%: if the uncropped 2:3 source (1024x1536) is ever put in the slot, cover +
+   this position reproduces the delivered crop box (y 60-1340 = 60 / 256 of the spare height). */
+#s-10-hosts .strip__image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+#s-10-hosts .hosts__portrait img { aspect-ratio: 4 / 5; object-position: var(--hosts-focus, 50% 23.4%); }
+
+/* ==========================================================================
+   BROADCAST FRAME AROUND THE CLIENT'S PODCAST PHOTOGRAPH (UPDATE-3 2026-09-17, lane L2 HOST PHOTO; was the FOUNDER lane's "in the podcast"
+   composition around the square office portrait: drawn microphone + hanging cup removed, chip and lower third re-mapped).
+   figure.hosts__stage = positioning box (overflow visible: both tabs straddle an edge); .strip__image inside it = the zoom-settle clip window
+   with the photo only. Every layer: aria-hidden in the markup, pointer-events none, brand tokens only, Creato Display inherited.
+
+   SAFE MAP - fractions of the 4:5 photo box (measured on the 1024x1536 source, mapped through the crop y 60-1340):
+     head (hair + face)  x 38.6-76.2%  y 17.6-43.4%   (face skin x 47.9-67.9%, eyes y 30.1-32.7%, mouth y 37.1-40.0%)
+     hands (+ pen hand)  x 14.2-59.6%  y 74.2-84.0%
+     real microphone     x 58.0-77.3%  y 52.3-94.1%   (grille, yoke, stand and round base)
+     real latte + saucer x  3.7-31.6%  y 83.3-99.2%
+   Scroll zoom (js): scale 1.06 -> 1 about the BOTTOM centre, yPercent 0, so a point moves to x' = 50 + (x - 50)s, y' = 100 - (100 - y)s:
+   hair top 17.6 -> 12.7% (never cropped), saucer left 3.7 -> 0.9% (never cropped), mic base bottom 94.1 -> 93.8% (moves UP, away from the plate).
+   Layers: ON AIR tab = top-left, at most the top 2.6% of the photo; lower third = right-aligned, from 96.5% down (below the mic base at every
+   zoom value, right of the latte's 31.6% at every plate width). Nothing reaches the head, hands, mic or latte at any width or scroll position.
+   Motion: ON AIR pulse 2 s, level meter 1.2 s, steam 4.8 s - all inside `prefers-reduced-motion: no-preference`; reduced motion = static
+   chip, static mid-height bars, still full steam lines. js adds --idle while a block is off screen (animation-play-state: paused).
+   ========================================================================== */
+#s-10-hosts .hosts__stage {
+    position: relative; margin: 0 0 44px; isolation: isolate;             /* 44px: the lower third hangs ~41px below the photo on phones (stacked layout) */
+    container-type: inline-size;                                          /* the layers size off the FIGURE (cqi), not the viewport: it is 100vw wide when stacked,
+                                                                             ~48vw in two columns. Every cqi declaration follows a vw / px fallback. */
+}
+#s-10-hosts .hosts__stage > :not(.strip__image) { position: absolute; z-index: 1; pointer-events: none; user-select: none; }
+
+/* --- ON AIR tab, top-left, straddling the top edge (half on the band, half on the photo, above the chalkboard lettering at every width):
+       white plate, brand text (13.06:1), caramel dot (6.54:1 on white, non-text) --- */
+#s-10-hosts .hosts__onair {
+    top: 0; left: clamp(14px, 3.2%, 28px);
+    transform: translateY(-50%);
+    display: inline-flex; align-items: center; gap: .6em;
+    padding: .62em .9em .58em .8em;
+    background: var(--colOnBrand);
+    color: var(--colBrand);
+    font-size: .6875rem;                                                  /* 11px; 12px wherever the figure is >= 560 wide */
+    font-weight: var(--wLead);                                            /* BK Medium 500 tracked caps (eyebrow role) */
+    letter-spacing: var(--trackEyebrow);
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-radius: 2px;
+    box-shadow: 0 6px 18px rgb(var(--colBrandDeep-rgb) / .28);
+}
+#s-10-hosts .hosts__onair-label { margin-right: calc(var(--trackEyebrow) * -1); }   /* drop the trailing tracking so the padding reads even */
+#s-10-hosts .hosts__onair-dot { position: relative; flex: none; width: .72em; height: .72em; border-radius: 50%; background: var(--colAccent); }
+#s-10-hosts .hosts__onair-dot::after {
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    border: 1px solid var(--colAccent); opacity: 0;
+}
+
+/* --- lower third, bottom-right, straddling the bottom edge: level meter + LATA SINGH / HOST on a SOLID brand plate with a 2px caramel rule on top.
+       Solid (not 85%) so the photo's bottom edge never shows through behind the name; below the photo the plate merges with the brown band, so it
+       reads as the band rising into the frame. White on brand 13.06:1, role at 80% white 10.7:1 - independent of the photo pixels. --- */
+#s-10-hosts .hosts__lower {
+    top: 96.5%; right: 0;
+    display: flex; align-items: center;
+    gap: clamp(12px, 1.4vw, 20px); gap: clamp(12px, 2.8cqi, 20px);
+    max-width: 72%;
+    padding: clamp(11px, 1.05vw, 15px) clamp(18px, 2vw, 28px) clamp(10px, 1vw, 14px) clamp(16px, 1.8vw, 26px);
+    padding: clamp(11px, 2.1cqi, 15px) clamp(18px, 4cqi, 28px) clamp(10px, 2cqi, 14px) clamp(16px, 3.6cqi, 26px);
+    background: var(--colBrand);
+    border-top: 2px solid var(--colAccent);
+    color: var(--colOnBrand);
+    line-height: 1;
+}
+#s-10-hosts .hosts__lower-text { display: flex; flex-direction: column; gap: .5em; min-width: 0; }
+#s-10-hosts .hosts__lower-name {
+    font-size: clamp(1rem, 1.55vw, 1.375rem);
+    font-size: clamp(1rem, 3.2cqi, 1.375rem);                             /* 16px (figure <= 500 wide) -> 22px (figure >= 688 wide) */
+    font-weight: var(--wTitle);                                           /* BK Bold 700 uppercase */
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+#s-10-hosts .hosts__lower-role {
+    font-size: .6875rem;
+    font-weight: var(--wLead);                                            /* BK Medium 500 tracked caps */
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--colTextOnBrandMuted);
+}
+#s-10-hosts .hosts__meter { display: flex; align-items: flex-end; gap: 3px; flex: none; height: clamp(22px, 2.2vw, 30px); height: clamp(22px, 4.2cqi, 30px); }
+#s-10-hosts .hosts__meter i {
+    display: block; width: 3px; height: 100%;
+    background: var(--colOnBrand); border-radius: 1px;
+    transform: scaleY(var(--lvl, .5)); transform-origin: 50% 100%;
+}
+#s-10-hosts .hosts__meter i:nth-child(1) { --lvl: .42; --d: -.10s; }
+#s-10-hosts .hosts__meter i:nth-child(2) { --lvl: .68; --d: -.55s; }
+#s-10-hosts .hosts__meter i:nth-child(3) { --lvl: .52; --d: -.30s; }
+#s-10-hosts .hosts__meter i:nth-child(4) { --lvl: .86; --d: -.85s; }
+#s-10-hosts .hosts__meter i:nth-child(5) { --lvl: .60; --d: -.20s; }
+#s-10-hosts .hosts__meter i:nth-child(6) { --lvl: .74; --d: -.70s; }
+#s-10-hosts .hosts__meter i:nth-child(7) { --lvl: .38; --d: -.45s; }
+
+@media (min-width: 50em) {
+    #s-10-hosts .hosts__stage { margin-bottom: 0; }                       /* two columns: the column's md-pb-md (57.6px) holds the overhang */
+}
+@media (min-width: 36em) and (max-width: 49.99em), (min-width: 60em) {
+    #s-10-hosts .hosts__onair, #s-10-hosts .hosts__lower-role { font-size: .75rem; }   /* 12px wherever the figure is >= 560 wide */
+}
+
+/* --- motion (only when the visitor has not asked for less) --- */
+@media (prefers-reduced-motion: no-preference) {
+    #s-10-hosts .hosts__onair-dot::after { animation: hostsPulse 2s var(--easeOut) infinite; }
+    #s-10-hosts .hosts__meter i { animation: hostsMeter 1.2s var(--easeInOutSine) var(--d, 0s) infinite; }
+    #s-10-hosts .hosts__steam path { stroke-dasharray: 56 100; stroke-dashoffset: 56; animation: hostsSteam 4.8s linear infinite; }
+    #s-10-hosts .hosts__steam path + path { animation-delay: -2.1s; }
+    #s-10-hosts .hosts__stage--idle .hosts__onair-dot::after,
+    #s-10-hosts .hosts__stage--idle .hosts__meter i,
+    #s-10-hosts .hosts__byline--idle .hosts__steam path { animation-play-state: paused; }
+}
+@keyframes hostsPulse { 0% { transform: scale(1); opacity: .7; } 70%, 100% { transform: scale(2.6); opacity: 0; } }
+@keyframes hostsMeter { 0%, 100% { transform: scaleY(.28); } 22% { transform: scaleY(1); } 48% { transform: scaleY(.46); } 72% { transform: scaleY(.82); } }
+@keyframes hostsSteam { 0% { stroke-dashoffset: 56; opacity: 0; } 15% { opacity: .8; } 80% { opacity: .5; } 100% { stroke-dashoffset: -100; opacity: 0; } }
+
+/* deep link index.html#host: clear the fixed header */
+#s-10-hosts #host { scroll-margin-top: calc(var(--hH, 76) * 1px + var(--vpad)); }
+
+/* Stamp OFF: the source [280] carries .strip--stamp (top-left, column-1 variant - _strip_site.scss:94-99), but DD Pick 13 caps the mark at
+   4 instances (05 parallax strip, 04 story row, 08 band opener, 14 footer seam; SPEC G6/G7). The class stays in the markup so the instance
+   can be switched on by deleting this rule (initStamps already drives --stamp-y on it). */
+#s-10-hosts .strip--stamp::after { display: none; }

@@ -1,0 +1,192 @@
+/* ==========================================================================
+   09-episodes - Episodes carousel: Iceberg project-card anatomy inside the Paszkowski bleed-right carousel
+   (build-C; brand edition 2026-09-17, lane C)
+   Sources: IC   = teardowns/2026-09-14-icebergdoc-org/source/css/inline-scoped.beautified.css (project card :2054-2336)
+            PZ   = teardowns/2026-09-14-caffepaszkowski-com/source (rail + arrows = base.css s12, i.e. _strip_site.scss:163-211,
+                   plug-ins/_splide.scss; band = main.1.beautified.css:7147-7160 .bg-np-black)
+            DD   = teardowns/BEST-PARTS-latte-with-lata.md (Pick 6 rail perPage 1->2->3, Pick 8 card + play disc + touch blurb)
+            SPEC = rebuild/BUILD-SPEC.md section 09 (c)/(e)
+            BK   = the client's brand kit (BRAND.md): band --colNero (#502506), card = white panel, title = Creato Display Bold 700
+                   uppercase ls -.01em lh 1 (size clamp unchanged), blurb + meta = Regular 400 14px, play disc --colBrand,
+                   hover / focus panel -> --colAccent with --colOnBrand text (the single accent), transitions 150-300 ms.
+   IC values are calc(N/2024*vw): px@1440 = N*0.7115; measured card 419.8x576.8 (ratio .728) -> rebuild card = the slide
+   (389.3 @1440, 3 per page) x aspect-ratio 590/811 = 534.9 (SPEC 09 (c), INFERRED rule that keeps the .728 ratio).
+   The rail mechanism (bleed-right wrapper, 1em gap, arrows 44px bottom-right, hover-only arrows) is base.css s12 untouched.
+   No font-family here: everything inherits --fontBrand (base.css).
+   ========================================================================== */
+
+/* ---- band: the root is a wrapper, the two rows are the strips (PZ [161]/[168] pattern on .bg-np-black).
+        Re-asserted on every row so the brown stays continuous even if the integrator adds `strip` to the root
+        (base.css :where(.strip) .strip resets --bgStrip). No margins in the 08-13 brown run (SPEC G7). */
+#s-09-episodes { background: var(--colNero); color: var(--colOnBrand); }
+#s-09-episodes .strip { --bgStrip: var(--colNero); --strip-text-color: var(--colOnBrand); }
+#s-09-episodes a:not(.button) { color: inherit; }                          /* PZ main.1:7154-7156 .bg-np-black a:not(.button) */
+#s-09-episodes a:not(.button):hover { color: var(--colAccent); }           /* PZ main.1:7158-7160 (read-more label + disc turn accent on hover, as the source) */
+/* FINAL home check 2026-09-17 (shared-polish request): caramel text on the brand-brown band was 2.00:1 on hover. The read-more now stays white
+   (13.06:1) with an underline on hover / focus; the disc is currentColor (white) and the arrow brand brown on it (13.06:1) - the pattern
+   11-live already uses. Before: hover disc caramel 2.00:1 on the band, and on keyboard focus the white arrow sat on a white disc (1:1). */
+#s-09-episodes a.read-more:hover, #s-09-episodes a.read-more:focus-visible {
+    color: var(--colOnBrand);
+    text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .3em;   /* decoration only: no layout shift */
+}
+#s-09-episodes .read-more::after { background-color: var(--colBrand); }
+
+/* ---- rail: base.css s12 (PZ _strip_site.scss:163-211). Only the picture-rail assumptions are lifted for a text card. */
+#s-09-episodes .strip__gallery { text-align: left; }                       /* base .strip__gallery { text-align: center } (PZ main.1:5059-5066) - the card is left-aligned copy */
+#s-09-episodes .splide__slide { height: auto; }                            /* the card's aspect-ratio sets the slide height (Splide core sets no height) - INFERRED */
+
+/* ---- card - IC:2054-2059 .project-card { height:100%; max-height:72vw; min-height:62svh; width: calc(590/2024*100vw) } */
+#s-09-episodes .episode-card {
+    position: relative;
+    display: flex;                                                         /* SPEC 09 (c): column flex = image on top of the panel */
+    flex-direction: column;
+    width: 100%;                                                           /* = the slide (389.3 @1440 / 338.8 @390) */
+    aspect-ratio: 590 / 811;                                               /* IC measured 419.8x576.8 -> ratio .7276 (SPEC 09 (c), INFERRED rule) = 534.9 tall @1440 */
+    background: var(--colBg);                                              /* IC var(--color-white) panel -> BK white (sub-pixel seams stay white) */
+    color: var(--colBrand);                                                /* IC var(--color-black) copy -> BK espresso (13.06:1 on white) */
+    text-align: left;
+}
+@media (max-width: 35.99em) {                                              /* IC:2062-2066 (<=1023px tier): height:auto -> rebuild switches at the perPage-1 breakpoint 36em (SPEC 09 (c)) */
+    #s-09-episodes .episode-card { aspect-ratio: auto; }
+}
+
+/* ---- cover - IC:2076-2081 .project-card__image { display:block; height:67%; overflow:hidden; width:100% } */
+#s-09-episodes .episode-card__cover {
+    position: relative;                                                    /* anchor for the play disc (net-new, DD Pick 8 "Change") */
+    display: block;                                                        /* base .strip__gallery__link { display:flex } (PZ main.1:5080) -> IC block */
+    flex: 0 1 67%;                                                         /* IC height 67% (386.5 of 576.8 = .670); flex-shrink 1 = the cover gives way if the panel needs more room (INFERRED safety valve, see panel) */
+    height: 67%;                                                           /* IC:2078 */
+    min-height: 0;
+    width: 100%;                                                           /* IC:2080 */
+    overflow: hidden;                                                      /* IC:2079 - clips the 1.2x hover zoom */
+    cursor: pointer;                                                       /* WIG: clickable */
+}
+@media (max-width: 35.99em) {                                              /* IC:2084-2088 (<=1023px): aspect-ratio 322/311; height:auto */
+    #s-09-episodes .episode-card__cover { flex: 0 0 auto; height: auto; aspect-ratio: 322 / 311; }
+}
+#s-09-episodes .episode-card__cover img {
+    display: block;                                                        /* IC:2091 */
+    width: 100%; height: 100%;                                             /* IC:2098, 2092 */
+    max-width: none; max-height: none;                                     /* lift the picture-rail caps (base: max-height 70vh / 50vh + max-width 80vw, PZ _strip_site.scss:202-208) - the cover is 67% of the card, not a portrait */
+    object-fit: cover;                                                     /* IC:2093-2094 */
+    transform-origin: center;                                              /* IC:2095 */
+    transition: transform 1.2s ease-in-out;                                /* IC:2096 (replaces the rail's .6s ease-reveal zoom, PZ _strip_site.scss:184-186) */
+    will-change: transform;                                                /* IC:2099 */
+}
+#s-09-episodes .strip__gallery__link:hover img { transform: none; }        /* neutralise the rail's scale3d(1.02) hover (PZ _strip_site.scss:187-191): the card owns its hover below (is-mouse only) */
+/* keyboard: the cover link's focus ring is drawn inside the clipped cover so it stays visible (outline-offset negative); the panel + disc
+   also flip to the accent on :focus-within (below), so keyboard users get the full hover state as feedback */
+#s-09-episodes .episode-card__cover:focus-visible { outline-offset: -4px; }
+/* focus ring: white on the band via tokens.css --colFocus (base.css reads it directly since the brand pass finish); the white card panel
+   keeps the accent ring (6.5:1 on white) and flips back to white while the panel is accent on :focus-within */
+#s-09-episodes .episode-card__title a:focus-visible { outline-color: var(--colAccent); }   /* on the white panel; the panel is accent on :focus-within, so the ring is drawn white there too */
+#s-09-episodes .episode-card:focus-within .episode-card__title a:focus-visible { outline-color: var(--colOnBrand); }
+
+/* ---- play disc - net-new (DD Pick 8 "Change": round --colBrand disc with a play glyph at the cover's bottom-right); geometry SPEC 09 (c)/(e): 2em, inset 1em */
+#s-09-episodes .episode-card__play {
+    position: absolute; right: 1em; bottom: 1em;                           /* SPEC 09 (e): x = slide w - 16 - 32 (341.3), y = cover h - 16 - 32 (310.4) @1440 */
+    width: 2em; height: 2em; border-radius: 50%;                           /* same 2em disc as .read-more::before (PZ _common.scss:81-83) */
+    background: var(--colBrand); color: var(--colOnBrand);                 /* BK: brand espresso disc, white glyph */
+    display: grid; place-items: center;
+    z-index: var(--z-content);                                             /* Z-INDEX PLAN: section content 1 */
+    pointer-events: none;                                                  /* the whole cover <a> is the control (aria-label "Play episode NN") */
+    transition: background-color var(--aniUi) var(--easeOut);              /* 200 ms: the disc follows the panel into the accent on hover / focus (no layout shift) */
+}
+#s-09-episodes .episode-card__play .icon { width: 1em; height: 1em; fill: currentColor; stroke: currentColor; margin-left: .1em; }   /* filled triangle (sprite i-play); .1em optical centring - INFERRED */
+
+/* ---- panel - IC:2101-2112 .project-card__content { background:#fff; display:flex; flex-direction:column; height:33%; justify-content:space-between;
+        padding: calc(16/2024vw) calc(20/2024vw) (= 11.4px 14.2px @1440); transition: background-color .3s ease-in-out; width:100% } */
+#s-09-episodes .episode-card__panel {
+    flex: 0 0 auto;
+    height: 33%;                                                           /* IC:2105 (190.3 of 576.8) -> 176.5 of 534.9 @1440 */
+    min-height: 33%;                                                       /* INFERRED safety valve: longer LwL copy grows the panel (the cover shrinks) instead of overflowing the card */
+    display: flex; flex-direction: column; justify-content: space-between; /* IC:2103-2104, 2106 */
+    gap: .5em;                                                             /* the guest line may wrap to two lines (brand copy) - keeps a minimum air between blurb and meta - INFERRED */
+    width: 100%;                                                           /* IC:2112 */
+    padding: .75em 1em;                                                    /* IC 11.4px 14.2px -> 12px 16px (SPEC 09 (c), INFERRED em equivalents) */
+    background-color: var(--colBg);                                        /* IC:2102 var(--color-white) -> BK white */
+    transition: background-color .3s ease-in-out;                          /* IC:2111 */
+}
+@media (max-width: 35.99em) {                                              /* IC:2120-2124 (<=767px): height calc(166/393vw) = 164.7 @390; padding 10/393vw 8/393vw = 9.9px 7.9px */
+    #s-09-episodes .episode-card__panel { height: calc(166 / 393 * 100vw); min-height: calc(166 / 393 * 100vw); padding: .625em .5em; }   /* .625em/.5em = 10px/8px INFERRED em */
+}
+#s-09-episodes .episode-card__top { width: 90%; }                          /* IC:2126 .project-card__content__top { width: 90% } */
+
+/* ---- title - IC:2130-2136 (30/2024vw; 24/1440 tier -> 22.77px measured; 600; ls -.01em; lh 110%; uppercase; color .3s ease-in-out) */
+#s-09-episodes .episode-card__title {
+    font-weight: var(--wTitle);                                            /* BK title role: Creato Display Bold 700 (IC Neue Montreal 600; DD s5 Fraunces 500 retired) */
+    font-variation-settings: normal;
+    font-size: clamp(18px, 1.6vw, 24px);                                   /* DD Pick 8 / SPEC G2: 23.04 @1440, 18 @390 (IC 22.77 / 27.8) - unchanged */
+    line-height: var(--lhTitle);                                           /* BK lh 1 (IC:2134 110%) */
+    letter-spacing: var(--trackTitle);                                     /* IC:2133 / BK -.01em */
+    text-transform: uppercase;                                             /* IC:2135 */
+    text-wrap: balance;                                                    /* BK polish: two even lines instead of a long line + one orphan word - INFERRED */
+    margin: 0;
+    color: inherit;
+    transition: color .3s ease-in-out;                                     /* IC:2136 */
+}
+#s-09-episodes .episode-card__title a { color: inherit; text-decoration: none; }   /* the IC card is one <a>; the title link inherits the panel colour (base a { color: var(--colLink) }) */
+#s-09-episodes .episode-card__title a:hover { color: inherit; }
+/* 44px hit box for the (secondary) title link - WIG / WCAG 2.5.5: vertical padding on an INLINE box grows the clickable area without
+   touching the line box (inline padding is not part of line layout), so the card geometry is untouched: 23px line -> 53px @1440, 18 -> 44 @390.
+   The focus ring is pulled back onto the text (offset = -padding + 2px) so it does not draw over the blurb. INFERRED */
+#s-09-episodes .episode-card__title a { padding-block: .65em; }
+#s-09-episodes .episode-card__title a:focus-visible { outline-offset: calc(-.65em + 2px); }
+
+/* ---- blurb - IC:2169-2178 .project-card__impact { color:#a6a6a6; font 16/2024vw (14/1440 tier = 14px); 600; lh 120%; margin-top 8/2024vw = 5.7px; color .3s } */
+#s-09-episodes .episode-card__blurb {
+    font-weight: var(--wBody);                                             /* IC 600 -> BK caption / meta role Regular 400 14px (SPEC 09 (f)) */
+    font-size: .875rem; line-height: 1.2;                                  /* IC 14/1440*100vw = 14px @1440, lh 120% */
+    color: var(--colText);                                                 /* IC #a6a6a6 -> BK --colText #4a3a30 (10.83:1 on white) */
+    margin: .4em 0 0;                                                      /* IC 5.7px -> .4em = 5.6px (SPEC wrote .5em; the measured value is kept) */
+    text-wrap: pretty;                                                     /* no orphan word on the blurb's last line - INFERRED */
+    transition: color .3s ease-in-out;                                     /* IC:2177 */
+}
+/* hover-line state - IC:2211-2215 .project-card__impact .line { opacity:0; transform: translateY(50%); will-change: transform, opacity }
+   Active only when the JS split runs (html.is-mouse, no reduced motion): the module adds .episodes--lines to the root. */
+#s-09-episodes.episodes--lines .episode-card__blurb .line { opacity: 0; transform: translateY(50%); will-change: transform, opacity; }
+#s-09-episodes.episodes--lines .episode-card__blurb:not(.is-split) { visibility: hidden; }   /* no flash of the unsplit text between init and SplitText - INFERRED */
+/* is-touch / reduced motion: the blurb is simply visible (DD Pick 8 "Change"; IC hides .project-card__impact at <=1023px, :2197 - deliberate deviation) */
+
+/* ---- meta - IC:2217-2222 .project-card__scope (600) + :2256-2261 .project-card__location/__year (400): 16/2024vw (14/1440 tier = 14px), lh 120%, color .3s */
+#s-09-episodes .episode-card__meta {
+    font-weight: var(--wBody);                                             /* BK meta: Regular 400 14px */
+    font-size: .875rem; line-height: 1.2;                                  /* IC 14px / 120% (measured 14.2) */
+    margin: 0;
+    width: 90%;                                                            /* same right reserve as .episode-card__top (IC:2126): the "guest, role" line now wraps and must stay clear of the 44px rail arrows that sit over the panel's right edge on phones (tokens.md request 4) - INFERRED */
+    color: var(--colBrand);                                                /* IC var(--color-black) -> BK espresso (13.06:1) */
+    transition: color .3s ease-in-out;                                     /* IC:2222, 2261 */
+}
+#s-09-episodes .episode-card__meta dd { margin: 0; display: inline; }
+#s-09-episodes .episode-card__guest { font-weight: var(--fontBold); }      /* IC .project-card__scope { font-weight: 600 } (first meta line) -> BK Bold 700 (Creato has no 600); "guest, role" may wrap - copy.md */
+#s-09-episodes .episode-card__duration, #s-09-episodes .episode-card__date { display: inline; }   /* duration + date share one line: the IC card had 3 short meta lines (scope / location / year); with the LwL copy the panel stays inside its 33% - INFERRED (dl layout, SPEC 09 (i)) */
+#s-09-episodes .episode-card__duration { color: var(--colTextMuted); }     /* BK: the secondary line in muted (5.43:1 on white); flips to white with the panel */
+#s-09-episodes .episode-card__date { color: var(--colTextMuted); }
+#s-09-episodes .episode-card__date::before { content: "\00b7"; margin: 0 .35em 0 .1em; }   /* middle-dot separator - INFERRED (the inline whitespace between the two groups already adds ~.25em before the dot) */
+
+/* ---- hover flip - IC:2315-2336 @media (pointer:fine) -> html.is-mouse (core.js pointer:coarse gate = DD Pick 19). BK: the panel goes --colAccent, every text --colOnBrand (6.54:1) */
+.is-mouse #s-09-episodes .episode-card:hover { color: var(--colOnBrand); }                                  /* IC:2316-2318 .project-card:hover { color: var(--color-white) } */
+.is-mouse #s-09-episodes .episode-card:hover .episode-card__cover img { transform: scale(1.2); }             /* IC:2320-2322 */
+.is-mouse #s-09-episodes .episode-card:hover .episode-card__panel { background-color: var(--colAccent); }    /* IC:2324-2326 var(--color-orange) -> --colAccent (DD Pick 8) */
+.is-mouse #s-09-episodes .episode-card:hover .episode-card__play { background-color: var(--colAccent); }     /* the disc follows the panel (one accent, no second colour) - INFERRED */
+.is-mouse #s-09-episodes .episode-card:hover .episode-card__title,
+.is-mouse #s-09-episodes .episode-card:hover .episode-card__blurb,
+.is-mouse #s-09-episodes .episode-card:hover .episode-card__meta,
+.is-mouse #s-09-episodes .episode-card:hover .episode-card__duration,
+.is-mouse #s-09-episodes .episode-card:hover .episode-card__date { color: var(--colOnBrand); }               /* IC:2328-2334 (impact / location / scope / year -> white) */
+/* keyboard parity: focus inside the card = the hover state (INFERRED, DD s7 accessibility) */
+#s-09-episodes .episode-card:focus-within .episode-card__panel { background-color: var(--colAccent); }
+#s-09-episodes .episode-card:focus-within .episode-card__play { background-color: var(--colAccent); }
+#s-09-episodes .episode-card:focus-within .episode-card__title,
+#s-09-episodes .episode-card:focus-within .episode-card__blurb,
+#s-09-episodes .episode-card:focus-within .episode-card__meta,
+#s-09-episodes .episode-card:focus-within .episode-card__duration,
+#s-09-episodes .episode-card:focus-within .episode-card__date { color: var(--colOnBrand); }
+#s-09-episodes .episode-card:focus-within .episode-card__blurb .line { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+    #s-09-episodes .episode-card__cover img, #s-09-episodes .episode-card__play, #s-09-episodes .episode-card__panel,
+    #s-09-episodes .episode-card__title, #s-09-episodes .episode-card__blurb, #s-09-episodes .episode-card__meta { transition: none; }
+}
+
+/* ---- CTA row - PZ [168] pattern (base.css .read-more, PZ _common.scss:64-117). Arrow blend on the brown band: base.css s10 carries
+        `.bg-band-black .read-more::after { mix-blend-mode: normal }`. Hover = accent label + disc (PZ .bg-np-black a:hover), white arrow. */

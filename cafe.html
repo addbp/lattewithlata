@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<!-- no-js -> js-ok before first paint (PZ pattern: .no-js in inline-critical, rendered.html:1 <html class="js-ok ...">); the section CSS carries html:not(.js-ok) fallbacks -->
+<script>document.documentElement.classList.replace("no-js","js-ok")</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cafe | Latte with Lata</title>
+<meta name="description" content="The cafe where Latte with Lata is recorded: a neighbourhood room in Harrowfield built for honest conversation, with good coffee and breakfast all week.">
+<meta name="theme-color" content="#502506">
+<link rel="canonical" href="https://addbp.github.io/lattewithlata/cafe.html">
+<meta property="og:url" content="https://addbp.github.io/lattewithlata/cafe.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Latte with Lata">
+<meta property="og:title" content="The Cafe | Latte with Lata">
+<meta property="og:description" content="The cafe where Latte with Lata is recorded: a neighbourhood room in Harrowfield built for honest conversation, with good coffee and breakfast all week.">
+<meta property="og:image" content="https://addbp.github.io/lattewithlata/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Latte with Lata - Real Conversations. Built on Purpose.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Cafe | Latte with Lata">
+<meta name="twitter:description" content="The cafe where Latte with Lata is recorded: a neighbourhood room in Harrowfield built for honest conversation, with good coffee and breakfast all week.">
+<meta name="twitter:image" content="https://addbp.github.io/lattewithlata/assets/images/og-image.jpg">
+<link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/brand/fonts/creato_display/CreatoDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/brand/fonts/creato_display/CreatoDisplay-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="vendor/splide-core.min.css">
+<link rel="stylesheet" href="css/sections/00-header.css">
+<link rel="stylesheet" href="css/sections/13-newsletter.css">
+<link rel="stylesheet" href="css/sections/14-footer.css">
+<link rel="stylesheet" href="css/pages/_shell.css">
+<link rel="stylesheet" href="css/pages/cafe.css">
+</head>
+<body id="top" data-page="cafe" data-page-module="true">
+<a class="skip-main" href="#page-content">Skip to main content</a>
+
+<!-- ===== sections/00-header.html ===== -->
+<!-- 00-header: fixed header + off-canvas drawer + mobile Book-a-table pill. Shared by EVERY page (build-site.cjs inlines it on the home page and on all sub-pages).
+     Sits BEFORE <main>. Source skeleton: PZ/source/rendered.html #page-header (BUILD-SPEC 00 (b)); pill: Iceberg .home__about-button.
+     Copy: content/site.json -> brand.name (lockup wordmark + aria-label), nav[], bookingLabel, listenOn[], newsletter.eyebrow (side link).
+     Note: .header__container is NOT a .container (the source header is a full-width flex row, measured 1440x78 / 390x63).
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 1a + 3): the drawer keeps the white cup mark at 72px, now a link home. Every href is the PAGES-SPEC
+     navigation map: real pages, no same-page anchors, platform links stay "#" placeholders.
+     UPDATE-3 (2026-09-17, client request): the header row is burger LEFT + the logo lockup RIGHT again - the white cup mark (decorative img,
+     482x571 attrs = the viewBox box so nothing shifts on load; 44px, 56px at >= 60em) + the "LATTE WITH LATA" wordmark text (hidden below
+     36em: mark only), one link home. "Book a table" left the bar; it stays in the drawer, the mobile pill and every page CTA. -->
+<header id="page-header" class="header page__header">
+  <div class="header__container">
+    <button class="header__burger menu__switcher js-menu-switcher" type="button" aria-label="Menu" aria-haspopup="true" aria-controls="menu-container" aria-expanded="false"><span class="menu__burger"><u></u></span></button>
+
+    <a class="header__logo" href="index.html" aria-label="Latte with Lata, home">
+      <img class="header__mark" src="assets/brand/logo/latte-with-lata-mark-white.svg" alt="" width="482" height="571" decoding="async">
+      <span class="header__wordmark" aria-hidden="true">Latte with Lata</span>
+    </a>
+
+    <aside class="menu__screen js-menu-switcher" aria-hidden="true"></aside>
+
+    <div id="menu-container" class="menu__container drawer" aria-hidden="true">
+      <a class="menu__home" href="index.html" aria-label="Latte with Lata - home"><img class="menu__mark" src="assets/brand/logo/latte-with-lata-mark-white.svg" alt="" width="482" height="571" decoding="async"></a>
+      <div class="menu__row">
+        <nav id="menu-main" class="menu__main js-menu-main" aria-label="Main">
+          <ul>
+            <li><a href="index.html" data-nav="home"><div>Home</div><div aria-hidden="true">Home</div></a></li>
+            <li><a href="cafe.html" data-nav="cafe"><div>The Cafe</div><div aria-hidden="true">The Cafe</div></a></li>
+            <li><a href="menu.html" data-nav="menu"><div>Menu</div><div aria-hidden="true">Menu</div></a></li>
+            <li><a href="podcast.html" data-nav="podcast"><div>The Podcast</div><div aria-hidden="true">The Podcast</div></a></li>
+            <li><a href="episodes.html" data-nav="episodes"><div>Episodes</div><div aria-hidden="true">Episodes</div></a></li>
+            <li><a href="podcast.html#host"><div>The Host</div><div aria-hidden="true">The Host</div></a></li>
+            <li><a href="events.html" data-nav="events"><div>Events</div><div aria-hidden="true">Events</div></a></li>
+            <li><a href="contact.html" data-nav="contact"><div>Contact</div><div aria-hidden="true">Contact</div></a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="menu__mid">
+        <nav id="menu-side" class="menu__side" aria-label="Tools">
+          <ul>
+            <!-- side links: "Get directions" = the contact page's find-us block (navigation map); the newsletter block ships on every page, so its anchor stays same-page -->
+            <li><a href="contact.html#find-us"><div>Get directions</div><div aria-hidden="true">Get directions</div></a></li>
+            <li><a href="#s-13-newsletter"><div>Stay for the conversation</div><div aria-hidden="true">Stay for the conversation</div></a></li>
+          </ul>
+        </nav>
+        <a class="button button--outlined button--no-icon button--squared" href="book.html" data-nav="book"><strong>Book a table</strong></a>
+      </div>
+
+      <div class="menu__footer">
+        <span class="menu__footer__label" aria-hidden="true">Listen on</span>
+        <nav class="menu__listen" aria-label="Listen on">
+          <ul class="socials">
+            <li><a href="#" aria-label="Spotify"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-spotify"></use></svg><span class="visual-hide">Spotify</span></a></li>
+            <li><a href="#" aria-label="Apple Podcasts"><svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-apple"></use></svg><span class="visual-hide">Apple Podcasts</span></a></li>
+            <li><a href="#" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-youtube"></use></svg><span class="visual-hide">YouTube</span></a></li>
+            <li><a href="#" aria-label="RSS"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-rss"></use></svg><span class="visual-hide">RSS</span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Iceberg mobile pill (I11): wrapper = .home__about-button (fixed, full width, faded by GSAP), link = .vertical-button__link -->
+<div id="book-pill-wrap" class="book-pill__wrap">
+  <a id="book-pill" class="book-pill" href="book.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-cup"></use></svg><span>Book a table</span></a>
+</div>
+
+<main id="page-content" class="page__content">
+<!-- ===== pages/cafe/01-hero.html ===== -->
+<!-- cafe 01-hero - page hero (PAGES-SPEC 2 / shell.md s5). Copy: content/pages.json cafe.hero verbatim; alt + size: assets-manifest (manifest wins). -->
+<section id="p-cafe-01-hero" class="page-hero" data-banner aria-labelledby="p-cafe-title">
+  <div class="page-hero__media"><img src="assets/images/page-cafe.jpg" alt="A long wooden table and yellow chairs against an exposed brick wall lit by bare hanging bulbs" width="2400" height="1350" fetchpriority="high" decoding="async"></div>
+  <div class="container page-hero__content">
+    <p class="page-hero__eyebrow">The cafe</p>
+    <h1 id="p-cafe-title" class="page-hero__title">A ROOM BUILT FOR TALKING</h1>
+    <p class="page-hero__intro">Good coffee, music quiet enough to talk over, and the corner table where Latte with Lata is recorded. 27 Bellwood Street, Harrowfield.</p>
+  </div>
+</section>
+
+<!-- ===== pages/cafe/02-story.html ===== -->
+<!-- cafe 02-story - .mark-row, then the two-column editorial story (the home 04 pattern, twice: image | copy, copy | image). Anchor #story
+     (home 04 "Discover the story" -> cafe.html#story). Motion = core inits only: word-rise title, side reveals, zoom-settle images, floating stamp.
+     Copy: content/pages.json cafe.sections[story] verbatim (six paragraphs, 1-3 in row A, 4-6 in row B; the last line is set as the lead).
+     Images: cafe-02 / cafe-03 per the lane brief (the home page already shows story-a-1 / story-a-2); alt + size from assets-manifest when present. -->
+<section id="p-cafe-02-story" class="strip pt-md pb-lg">
+  <div class="container">
+    <div class="mark-row anima--bottom-in"><img class="mark-row__mark" src="assets/brand/logo/latte-with-lata-mark-brown.svg" alt="" width="482" height="571" decoding="async"></div>
+  </div>
+  <div id="story" class="story">
+    <div class="strip strip--normal strip--columns story__row story__row--a">
+      <div class="container">
+        <div class="strip__data strip__column strip__column--1 anima--left-in js-image-anime">
+          <div class="strip__column__content">
+            <div class="strip__text">
+              <figure class="strip__image story__figure">
+                <img src="assets/images/cafe-02.jpg" alt="A barista's hands steaming milk in a steel jug at an espresso machine" width="1200" height="1800" loading="eager" decoding="async">
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="strip__data strip__column strip__column--2 anima--right-in mobile-first v-center">
+          <div class="strip__column__content">
+            <div class="strip__text story__copy">
+              <p class="eyebrow">Our story</p>
+              <h2 class="strip__title1">FROM FIRST POUR TO LAST WORD</h2>
+              <p>The cafe opened in the spring of 2024 with a second-hand espresso machine, a borrowed oven and one rule: the music stays quiet enough to talk over.</p>
+              <p>The talking turned out to be the point. By autumn there were microphones on the corner table, and leaders from clinics, councils and charities were coming in to say what they could not say at a podium.</p>
+              <p>The microphones were not part of the plan. One Thursday a food bank director stayed past closing to talk through a decision she could not raise at her own board table, and the tables around her went quiet to listen. The week after, people came back for the next conversation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="strip strip--normal strip--columns story__row story__row--b">
+      <div class="container">
+        <div class="strip__data strip__column strip__column--1 anima--left-in v-center">
+          <div class="strip__column__content">
+            <div class="strip__text story__copy">
+              <p>So the chairs were turned to face the corner. Two second-hand microphones arrived in a shoebox, then a small mixer, then a lamp, and Latte with Lata had a home. Nobody has asked for the corner table back.</p>
+              <p>It is still a cafe first. Most of the week the corner table is just a table, and the room belongs to anyone who wants a good coffee and an unhurried conversation. On Thursday nights it is where someone with a hard job says what it actually took.</p>
+              <p class="lead story__last">The machine has since been replaced. The rule has not.</p>
+            </div>
+          </div>
+        </div>
+        <div class="strip__data strip__column strip__column--2 strip--stamp anima--right-in js-image-anime">
+          <div class="strip__column__content">
+            <div class="strip__text">
+              <figure class="strip__image story__figure">
+                <img src="assets/images/cafe-03.jpg" alt="A small round table with flowers and two chairs in a bright corner next to an old upright piano" width="1600" height="1200" loading="eager" decoding="async">
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/cafe/03-values.html ===== -->
+<!-- cafe 03-values - four value cards on the warm --colBrandSoft band. Disc = sprite icon where one fits (cup, microphone), else the card number.
+     Copy: content/pages.json cafe.sections[values] verbatim. -->
+<section id="p-cafe-03-values" class="strip strip--normal bg-band-cream2 pt-lg pb-lg">
+  <div id="values" class="container">
+    <div class="sec-head anima--bottom-in">
+      <p class="eyebrow">How we run the place</p>
+      <h2 class="strip__title1">WHAT WE CARE ABOUT</h2>
+      <p class="lead sec-head__intro">Four things. None of them are complicated. All of them cost a little more than the alternative.</p>
+    </div>
+    <ul class="values-grid mt-md">
+      <li class="anima--bottom-in">
+        <article class="card value-card">
+          <div class="card__body">
+            <p class="value-card__disc" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-cup"></use></svg></p>
+            <h3 class="card__title">Coffee from two streets over</h3>
+            <p class="card__text">Our beans come from a small roaster two streets away. We buy what they are roasting that week, so the filter coffee changes with it. It is fresh, the supply line is a short walk, and there is someone to talk to when a bag is not right.</p>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in">
+        <article class="card value-card">
+          <div class="card__body">
+            <p class="value-card__disc" aria-hidden="true"><span>02</span></p>
+            <h3 class="card__title">A kitchen that does breakfast properly</h3>
+            <p class="card__text">Eggs cooked to order. Croissants baked at six. Porridge that was started before you woke up. The kitchen is small, so the menu is short. We would rather do a dozen things well than thirty things quickly.</p>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in">
+        <article class="card value-card">
+          <div class="card__body">
+            <p class="value-card__disc" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-mic"></use></svg></p>
+            <h3 class="card__title">A room built for talking</h3>
+            <p class="card__text">No speakers over the tables. Soft surfaces, quiet music and chairs you can sit in for an hour. If you cannot hear the person across from you, we have done something wrong.</p>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in">
+        <article class="card value-card">
+          <div class="card__body">
+            <p class="value-card__disc" aria-hidden="true"><span>04</span></p>
+            <h3 class="card__title">A living wage for the team</h3>
+            <p class="card__text">Everyone who works here is paid at least the local living wage, and tips are shared evenly across the shift. It adds a little to the price of a cup. We think that is the right price.</p>
+          </div>
+        </article>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== pages/cafe/04-room.html ===== -->
+<!-- cafe 04-room - the room: sticky photo | copy + facts (.info-list) + the accessibility checklist. The honest "tell us, we will do what we can"
+     note is kept verbatim. Copy: content/pages.json cafe.sections[room]; photo = room.image (alt + size from assets-manifest). -->
+<section id="p-cafe-04-room" class="strip strip--normal pt-lg pb-lg">
+  <div id="room" class="container room">
+    <div class="room__media anima--left-in js-image-anime">
+      <figure class="strip__image room__figure">
+        <img src="assets/images/gallery-01.jpg" alt="Cafe interior with a dark leather banquette, wooden tables and a copper pendant lamp" width="1200" height="1800" loading="eager" decoding="async">
+      </figure>
+    </div>
+    <div class="room__body anima--right-in">
+      <p class="eyebrow">The room</p>
+      <h2 class="strip__title1">SEATS <span class="keep-together">ABOUT FORTY</span></h2>
+      <p>The room seats about 40. There is a long bench under the window, a dozen small tables, four stools at the counter and a few tables outside under the awning.</p>
+      <p>The corner table is the one with the microphones. Most of the week it is the best seat in the house for two people and a long conversation. On Thursday nights the other chairs turn to face it.</p>
+      <p>Order at the counter and find a seat. We bring everything to you.</p>
+      <dl class="info-list room__facts">
+        <div class="info-list__row"><dt>Seats</dt><dd>About 40 inside, 8 outside</dd></div>
+        <div class="info-list__row"><dt>The corner table</dt><dd>Seats 4. Yours any day but Thursday night.</dd></div>
+        <div class="info-list__row"><dt>Wifi</dt><dd>Free. Ask at the counter.</dd></div>
+        <div class="info-list__row"><dt>Payment</dt><dd>Card, contactless and cash</dd></div>
+      </dl>
+      <div class="panel room__access">
+        <h3 class="room__access-title">Getting in and getting comfortable</h3>
+        <ul class="check-list">
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg><span>Step-free entry from Bellwood Street</span></li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg><span>Accessible toilet on the ground floor</span></li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg><span>High chairs and a baby-changing table</span></li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg><span>Dogs welcome at the outside tables, with a water bowl by the door</span></li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg><span>Assistance dogs welcome everywhere</span></li>
+          <li><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg><span>Large-print menus at the counter</span></li>
+        </ul>
+        <p class="room__access-note">If something would make your visit easier, tell us when you book or call ahead. We will do what we can.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/cafe/05-gallery.html ===== -->
+<!-- cafe 05-gallery - the bleed-right Splide rail of home 03 through the shared carousel contract ([data-carousel] + data-splide-sizes; arrows,
+     fan-in, hover zoom and the loop come from js/carousel.js + base.css s12). Slides: cafe-01..06 (captions from pages.json) interleaved with the
+     home gallery-01..06; FINAL PASS: the three photos already shown above (cafe-02, cafe-03 in #story, gallery-01 in #room) sit late in the rail, not in the first view. Alt + size: assets-manifest (manifest wins). -->
+<section id="p-cafe-05-gallery" class="strip pb-lg look">
+  <div id="gallery">
+    <div class="strip strip--normal">
+      <div class="container">
+        <div class="sec-head sec-head--center text-center anima--bottom-in">
+          <p class="eyebrow">Around the room</p>
+          <h2 class="strip__title1">A LOOK INSIDE</h2>
+        </div>
+      </div>
+    </div>
+    <div class="strip strip__gallery--slider js-splide-arrows carousel strip--wide mt-md look__rail">
+      <div class="container">
+        <div class="strip__data anima--fade">
+          <div class="strip__gallery splide" data-carousel data-splide-sizes='{"all":1,"576":2,"800":3}' aria-label="Photos of the cafe">
+            <div class="splide__track">
+              <ul class="splide__list">
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link look__slide">
+                <img src="assets/images/cafe-01.jpg" alt="A cappuccino, a paperback and a pot of purple flowers on a small wooden table by a cushioned window bench" width="1600" height="1067" loading="eager" decoding="async">
+                <figcaption class="look__caption">The window bench. Best light before ten.</figcaption>
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link look__slide">
+                <img src="assets/images/gallery-03.jpg" alt="Croissants and pastries on a marble board in a bakery display case" width="1200" height="1800" loading="eager" decoding="async">
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link look__slide">
+                <img src="assets/images/cafe-04.jpg" alt="Wooden folding bistro chairs and a table on the pavement against a terracotta-red wall" width="1600" height="1067" loading="eager" decoding="async">
+                <figcaption class="look__caption">Outside on Bellwood Street. Dogs welcome.</figcaption>
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link look__slide">
+                <img src="assets/images/gallery-02.jpg" alt="Barista pouring steamed milk into a cup to form latte art" width="1200" height="1800" loading="lazy" decoding="async">
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link look__slide">
+                <img src="assets/images/cafe-05.jpg" alt="Freshly roasted coffee beans turning in the cooling tray of a roaster" width="1600" height="1067" loading="lazy" decoding="async">
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link look__slide">
+                <img src="assets/images/gallery-04.jpg" alt="Condenser microphone on a desk with guitars hanging on the wall behind" width="1200" height="1800" loading="lazy" decoding="async">
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link look__slide">
+                <img src="assets/images/cafe-02.jpg" alt="A barista's hands steaming milk in a steel jug at an espresso machine" width="1200" height="1800" loading="lazy" decoding="async">
+                <figcaption class="look__caption">The counter. Order here, then find a seat.</figcaption>
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link look__slide">
+                <img src="assets/images/gallery-05.jpg" alt="Cup of coffee with rosetta latte art on a wooden table" width="1200" height="1800" loading="lazy" decoding="async">
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link look__slide">
+                <img src="assets/images/cafe-03.jpg" alt="A small round table with flowers and two chairs in a bright corner next to an old upright piano" width="1600" height="1200" loading="lazy" decoding="async">
+                <figcaption class="look__caption">The corner table. Most of the week, just a table.</figcaption>
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link look__slide">
+                <img src="assets/images/gallery-06.jpg" alt="Cafe bar counter with a large lampshade and staff working behind it" width="1200" height="1800" loading="lazy" decoding="async">
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link look__slide">
+                <img src="assets/images/cafe-06.jpg" alt="Loaves, pastries and fruit slices piled on a bakery counter under black pendant lamps, staff blurred behind" width="1200" height="1800" loading="lazy" decoding="async">
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link look__slide">
+                <img src="assets/images/gallery-01.jpg" alt="Cafe interior with a dark leather banquette, wooden tables and a copper pendant lamp" width="1200" height="1800" loading="lazy" decoding="async">
+              </figure>
+            </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/cafe/06-faqs.html ===== -->
+<!-- cafe 06-faqs - native <details>/<summary> disclosure list on the soft band (no script needed; js/pages/cafe.js only opens a deep-linked
+     item and refreshes ScrollTrigger after a toggle). Summary rows are >= 44px. Copy: content/pages.json cafe.sections[faqs] verbatim; item ids = q.id. -->
+<section id="p-cafe-06-faqs" class="strip strip--normal bg-band-cream2 pt-lg pb-lg">
+  <div id="faqs" class="container faq">
+    <div class="faq__head sec-head anima--left-in">
+      <p class="eyebrow">Good to know</p>
+      <h2 class="strip__title1">QUESTIONS PEOPLE ASK</h2>
+    </div>
+    <div class="faq__list anima--right-in">
+        <details class="faq__item" id="laptops">
+          <summary class="faq__q"><span class="faq__q-text">Can I work here on a laptop?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a">
+            <p>Yes, on weekdays. The wifi is free and there are sockets along the window bench. At weekends between 10:00&nbsp;am and 2:00&nbsp;pm we ask you to keep laptops closed so the tables can turn.</p>
+          </div>
+        </details>
+        <details class="faq__item" id="dogs">
+          <summary class="faq__q"><span class="faq__q-text">Can I bring my dog?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a">
+            <p>Dogs are welcome at the outside tables, and there is a water bowl by the door. Inside, assistance dogs only.</p>
+          </div>
+        </details>
+        <details class="faq__item" id="prams">
+          <summary class="faq__q"><span class="faq__q-text">Is there room for a pram?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a">
+            <p>Yes. The entry is step-free and there is space to park a pram by the window bench. We have high chairs and a changing table. When the room is full we may ask you to fold it.</p>
+          </div>
+        </details>
+        <details class="faq__item" id="booking">
+          <summary class="faq__q"><span class="faq__q-text">Do I need to book?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a">
+            <p>No. We always keep some tables for walk-ins. If you want to be sure, book online. We hold a table for 15 minutes and sittings are 90 minutes. For more than 8 people, call or email us.</p>
+            <p class="faq__more"><a class="read-more" href="book.html">Book a table</a></p>
+          </div>
+        </details>
+        <details class="faq__item" id="allergens">
+          <summary class="faq__q"><span class="faq__q-text">How do you handle allergens?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a">
+            <p>Tell us when you order. The menu marks vegetarian, vegan, gluten-free and dairy-free dishes and anything that contains nuts, and the kitchen will talk you through any plate. It is one small kitchen that handles nuts, gluten, dairy and eggs, so we cannot promise a dish is free of traces.</p>
+            <p class="faq__more"><a class="read-more" href="menu.html">See the menu</a></p>
+          </div>
+        </details>
+        <details class="faq__item" id="private-hire">
+          <summary class="faq__q"><span class="faq__q-text">Can I hire the room?</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__a">
+            <p>Yes. The room is available on Monday, Tuesday and Wednesday evenings from 6:30&nbsp;pm, for up to 40 seated. Write to us with your date and numbers and we will reply within 2 working days.</p>
+            <p class="faq__more"><a class="read-more" href="contact.html?topic=events">Ask about private hire</a></p>
+          </div>
+        </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/cafe/07-visit.html ===== -->
+<!-- cafe 07-visit - closing call to action on the caramel accent band (FINAL PASS: the one closing-band style shared with menu 11 / events 07): hours table, address, "See the menu" -> menu.html, "Book a table" -> book.html,
+     "Get directions" -> contact.html#find-us (navigation map). data-pill-away: the brown mobile pill would sit on the band, over the hours, next to this band's own Book a table. Copy: content/pages.json cafe.sections[visit] verbatim. -->
+<section id="p-cafe-07-visit" class="strip strip--normal bg-band-accent pt-lg pb-lg closing" data-pill-away>
+  <div id="visit" class="container visit">
+    <div class="visit__lead anima--left-in">
+      <p class="eyebrow">Visit</p>
+      <h2 class="strip__title1 closing__title">COME IN</h2>
+      <address class="visit__address">
+        <strong>Latte with Lata</strong><br>27 Bellwood Street<br>Corner of Fenwick Lane<br>Harrowfield
+      </address>
+      <p class="visit__contact"><a href="tel:+15550142024">(555) 014-2024</a><a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a></p>
+      <p class="visit__ctas"><a class="button button--outlined" href="menu.html">See the menu</a><a class="button" href="book.html">Book a table</a></p>
+      <p class="visit__directions"><a class="read-more" href="contact.html#find-us">Get directions</a></p>
+    </div>
+    <div class="visit__hours anima--right-in">
+      <div class="data-table__wrap">
+        <table class="data-table visit__table">
+          <caption class="eyebrow">Opening hours</caption>
+          <tbody>
+            <tr><th scope="row">Mon - Wed</th><td class="is-num">7:00&nbsp;am - 6:00&nbsp;pm</td></tr>
+            <tr><th scope="row">Thu</th><td class="is-num">7:00&nbsp;am - 6:00&nbsp;pm<small>Reopens 6:30&nbsp;pm for the recording</small></td></tr>
+            <tr><th scope="row">Fri</th><td class="is-num">7:00&nbsp;am - 10:00&nbsp;pm</td></tr>
+            <tr><th scope="row">Sat</th><td class="is-num">8:00&nbsp;am - 10:00&nbsp;pm</td></tr>
+            <tr><th scope="row">Sun</th><td class="is-num">8:00&nbsp;am - 3:00&nbsp;pm</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="visit__note">Thursdays we reopen at 6:30&nbsp;pm for the recording. Free, first come first seated, and the guest stays for a coffee afterwards.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sections/13-newsletter.html ===== -->
+<!-- 13-newsletter - Black newsletter block: eyebrow, lead paragraph, floating-label email input, square accent submit with
+     the two-arrow swap, consent checkbox; right column big "Listen and follow" links
+     SOURCE skeleton: Iceberg div#join.footer-newsletter > .footer-newsletter__left (.__title, .__text, form.__form >
+       .form-group.__form-input (.form-input > label + input#email ; button.__form-input__button > span > svg x2)
+       + .form-group.__form-checkbox (.form-checkbox > input#subscribe + label > div + span)) ; .footer-newsletter__right
+       (.__title + ul > li > a)  (IC rendered.html line 29 block; CSS inline-scoped.beautified.css:2836-3300;
+       engine ZNMh4Fg5.beautified.js:909-935)
+     Copy: content/site.json newsletter.* verbatim (brand pass 2026-09-17: eyebrow "First to know", new paragraph). Right column = newsletter.follow[5] (DD Pick 12 "Change": platforms
+       + Instagram; copy.md maps follow[] to the right column). Hard-coded label (INFERRED): "Listen and follow" eyebrow.
+       "privacy policy" links to #privacy (copy.md). success/error strings ride on data-* so the JS shows visible text.
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 4): shared by every page; the form is wired to POST /api/subscribe through js/lib/api.js
+       ({ email, consent: true, source: "footer-newsletter", website }) - "website" is the hidden honeypot the server wants empty. When the API is
+       not there (static hosting: GET /api/health fails) the form does NOT pretend: it shows the .newsletter__notice line with the cafe's email.
+       The action attribute is the no-JS fallback only (the JS always intercepts the submit). -->
+<section id="s-13-newsletter" class="strip strip--normal bg-band-black newsletter-band" aria-labelledby="nl-eyebrow">
+  <div class="container newsletter">
+
+    <div class="newsletter__left">
+      <p id="nl-eyebrow" class="newsletter__eyebrow eyebrow">Stay for the conversation</p>
+      <p class="newsletter__text lead">The conversation doesn't end with the podcast. Follow along for meaningful moments, leadership insights, guest stories and upcoming conversations. One email a week, never more.</p>
+      <form class="newsletter__form" action="/api/subscribe" method="post" novalidate data-source="footer-newsletter"
+            data-success="You are on the list. See you Thursday."
+            data-error="That address did not go through. Check it and try once more.">
+        <div class="newsletter__row">
+          <div class="newsletter__field">
+            <label for="nl-email">Your email</label>
+            <input id="nl-email" class="newsletter__input" type="email" name="email" autocomplete="email" spellcheck="false" required aria-describedby="nl-msg-error">
+          </div>
+          <button class="newsletter__submit" type="submit" aria-label="Subscribe">
+            <span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+            <span aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+          </button>
+        </div>
+        <div class="newsletter__consent">
+          <input id="nl-consent" type="checkbox" name="consent" required>
+          <label for="nl-consent">
+            <span class="newsletter__box" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg></span>
+            <span>Yes, send me the Thursday email from Latte with Lata. I have read the <a href="contact.html#privacy">privacy policy</a>.</span>
+          </label>
+        </div>
+        <div class="newsletter__hp" aria-hidden="true"><label for="nl-website">Website</label><input id="nl-website" type="text" name="website" tabindex="-1" autocomplete="off"></div>
+        <p id="nl-msg-error" class="newsletter__error" role="alert" hidden></p>
+        <p class="newsletter__success" role="status" hidden></p>
+        <p class="newsletter__notice" role="status" hidden>Sign-ups are handled by our team right now - email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a></p>
+      </form>
+    </div>
+
+    <div class="newsletter__right">
+      <p class="newsletter__eyebrow eyebrow">Listen and follow</p>
+      <ul class="newsletter__links">
+        <li><a href="#">Spotify</a></li>
+        <li><a href="#">Apple Podcasts</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">RSS</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<!-- ===== sections/14-footer.html ===== -->
+<!-- 14-footer - Footer curtain (4 columns), stamp at the seam, back-to-top disc, cropped giant wordmark. Sits AFTER <main>.
+     SOURCE skeleton: PZ rendered.html:189-272  aside.strip.strip--stamp + footer#page-footer.page__footer > .footer__container >
+       .strip > .container > .footer__top > .footer__column--1 (h2.footer__logo + nav.footer__menu) / --2 (p, p.mt-md) /
+       --3 (nav.footer__shortcuts) / --4 (aside.footer__socials > h3.footer__title + ul.socials) ; .js-scroll-top-limit > .strip >
+       .container > .footer__mid (.footer__legal + aside.footer__credits) + .footer__bottom (awards - DROPPED) ; aside#back-to-top
+       .scroll-top > a. Wordmark row: IC rendered.html .footer-logo > .footer-logo__content > span (BEST-PARTS Pick 17).
+     Single-root contract (file contract: the footer fragment root is <footer id="page-footer">): the stamp aside and
+       #back-to-top live INSIDE the footer. The source's clip (.page__footer { overflow:hidden }) moved to the inner
+       .footer__curtain wrapper so the stamp can overhang 56px up into 13 (spec 14 (h)) and the fixed disc is neither
+       clipped nor inside the transformed .footer__container.
+     Copy: content/site.json footer.* verbatim (nav labels = footer.columns.sitemap = nav). Hard-coded labels (INFERRED,
+       spec 14 (b)): "Find us", "Explore", "Listen & follow", legal nav "Privacy" / "Photo credits". The photo-credit list
+       (closed <details>, id="credits") satisfies verify/handoff/assets.md ("not optional" for the CC BY / CC BY-SA files).
+     Brand mark (brand pass 2026-09-17, LOGO-USAGE.md): the kit's cup mark, brown variant, as an <img> 120px tall (--markFooter) with the
+       tagline brand.tagline under it (one saucer-height of clear space); footer.legal = copyright + the independence disclaimer.
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 3): shared by every page. The mark links home (index.html); the sitemap = the six pages + "Book a table"
+       (content/site.json footer.columns.sitemap; "The Host" lives in the drawer only); Privacy -> contact.html#privacy; Photo credits -> contact.html#credits. The photo-credit
+       <details> stays in the footer as id="footer-credits" (the id "credits" belongs to the contact page now - no duplicate ids on contact.html);
+       14-footer.js opens it whenever a #credits link is followed on a page that has no #credits block of its own. -->
+<footer id="page-footer" class="page__footer footer">
+  <!-- brand pass: stamp instance 4 is OFF (data-stamp="off", CSS hides the pseudo-element) - it straddled the brown 13 band (brown mark on brown,
+       LOGO-USAGE) and doubled the 120px footer mark one viewport later; the aside + its tween stay so data-stamp="on" restores it. -->
+  <aside class="strip strip--stamp footer__stamp" aria-hidden="true" data-stamp="off"></aside>
+
+  <div class="footer__curtain">
+    <div class="footer__container">
+
+      <div class="strip">
+        <div class="container">
+          <div class="footer__top">
+
+            <div class="footer__column footer__column--1">
+              <a class="footer__logo" href="index.html" aria-label="Latte with Lata - home">
+                <img class="footer__mark" src="assets/brand/logo/latte-with-lata-mark-brown.svg" alt="" width="482" height="571" loading="lazy" decoding="async">
+              </a>
+              <p class="footer__tagline">Real Conversations. Built on Purpose.</p>
+              <nav class="footer__menu" aria-label="Legal">
+                <ul>
+                  <li><a href="contact.html#privacy">Privacy</a></li>
+                  <li><a href="contact.html#credits">Photo credits</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="footer__column footer__column--2">
+              <h3 class="footer__title">Find us</h3>
+              <div class="footer__find">
+                <address class="footer__address">
+                  Latte with Lata<br>
+                  27 Bellwood Street<br>
+                  Corner of Fenwick Lane<br>
+                  Harrowfield<br>
+                  <a href="tel:+15550142024">(555) 014-2024</a><br>
+                  <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a>
+                </address>
+                <p class="mt-md footer__hours">
+                  Mon - Thu 7:00&nbsp;am - 6:00&nbsp;pm<br>
+                  Fri 7:00&nbsp;am - 10:00&nbsp;pm<br>
+                  Sat 8:00&nbsp;am - 10:00&nbsp;pm<br>
+                  Sun 8:00&nbsp;am - 3:00&nbsp;pm<br>
+                  Thursday recordings: doors 6:30&nbsp;pm
+                </p>
+              </div>
+            </div>
+
+            <div class="footer__column footer__column--3">
+              <h3 class="footer__title">Explore</h3>
+              <nav class="footer__shortcuts" aria-label="Sitemap">
+                <ul>
+                  <li><a href="cafe.html">The Cafe</a></li>
+                  <li><a href="menu.html">Menu</a></li>
+                  <li><a href="podcast.html">The Podcast</a></li>
+                  <li><a href="episodes.html">Episodes</a></li>
+                  <li><a href="events.html">Events</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="book.html">Book a table</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="footer__column footer__column--4">
+              <aside class="footer__socials">
+                <h3 class="footer__title">Follow us on our socials</h3>
+                <ul class="footer__listen">
+                  <li><a href="#">Spotify</a></li>
+                  <li><a href="#">Apple Podcasts</a></li>
+                  <li><a href="#">YouTube</a></li>
+                  <li><a href="#">RSS</a></li>
+                </ul>
+                <ul class="socials">
+                  <li><a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-instagram"></use></svg></a></li>
+                  <li><a href="#" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-youtube"></use></svg></a></li>
+                </ul>
+              </aside>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="js-scroll-top-limit">
+        <div class="strip">
+          <div class="container">
+            <div class="footer__mid">
+              <div class="footer__legal">
+                <p>Copyright 2026 Latte with Lata. All rights reserved.</p>
+                <details id="footer-credits" class="footer__photo-credits">
+                  <summary>Photo credits</summary>
+                  <ul>
+                    <li>“Latte art 0.jpg” by Angela CoffeeRank, <a href="https://creativecommons.org/licenses/by/2.0" rel="noopener" target="_blank">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Latte_art_0.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“A coffee cup featuring intricate latte art sits on a wooden table next to an open laptop.jpg” by Shixart1985, <a href="https://creativecommons.org/licenses/by/2.0" rel="noopener" target="_blank">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:A_coffee_cup_featuring_intricate_latte_art_sits_on_a_wooden_table_next_to_an_open_laptop.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“A cup of cappuccino.jpg” by Vee Satayamas, <a href="https://creativecommons.org/licenses/by/4.0" rel="noopener" target="_blank">CC BY 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:A_cup_of_cappuccino.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“BoulderCoffeeOpenMicNight2018.jpg” by DanielPenfield, <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener" target="_blank">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:BoulderCoffeeOpenMicNight2018.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> - this crop is a derivative shared under the same CC BY-SA licence.</li>
+                    <li>“Guerrilla on air – Fatti d’arte teaser” (video) by M. Capriglione, M. Rainò and R. Romita, <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener" target="_blank">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Guerrilla_on_air_%E2%80%93_Fatti_d%27arte_teaser.mpg" rel="noopener" target="_blank">Wikimedia Commons</a> - cut, slowed, colour-graded and looped; this edit is shared under the same CC BY-SA licence.</li>
+                    <li>All other photographs: CC0 (public domain dedication) via Wikimedia Commons - full register in the site's ASSETS.md.</li>
+                  </ul>
+                </details>
+                <p class="footer__disclaimer">Latte with Lata is a personal platform and is independent of any employer or institution.</p>
+              </div>
+              <aside class="footer__credits">Site by Agora Data Driven</aside>
+            </div>
+          </div>
+        </div>
+        <div class="footer-wordmark" aria-hidden="true"><span>LATTE WITH LATA</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <aside id="back-to-top" class="scroll-top"><a href="#top" aria-label="Back to top"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-up"></use></svg></a></aside>
+</footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/SplitText.min.js"></script>
+<script src="vendor/ScrollToPlugin.min.js"></script>
+<script src="vendor/splide.min.js"></script>
+<script type="module" src="js/page.js"></script>
+</body>
+</html>

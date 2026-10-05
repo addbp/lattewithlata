@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<!-- no-js -> js-ok before first paint (PZ pattern: .no-js in inline-critical, rendered.html:1 <html class="js-ok ...">); the section CSS carries html:not(.js-ok) fallbacks -->
+<script>document.documentElement.classList.replace("no-js","js-ok")</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact | Latte with Lata</title>
+<meta name="description" content="Find Latte with Lata at 27 Bellwood Street, Harrowfield. Opening hours, directions, and how to write to us about bookings, events, press or the podcast.">
+<meta name="theme-color" content="#502506">
+<link rel="canonical" href="https://addbp.github.io/lattewithlata/contact.html">
+<meta property="og:url" content="https://addbp.github.io/lattewithlata/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Latte with Lata">
+<meta property="og:title" content="Contact | Latte with Lata">
+<meta property="og:description" content="Find Latte with Lata at 27 Bellwood Street, Harrowfield. Opening hours, directions, and how to write to us about bookings, events, press or the podcast.">
+<meta property="og:image" content="https://addbp.github.io/lattewithlata/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Latte with Lata - Real Conversations. Built on Purpose.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact | Latte with Lata">
+<meta name="twitter:description" content="Find Latte with Lata at 27 Bellwood Street, Harrowfield. Opening hours, directions, and how to write to us about bookings, events, press or the podcast.">
+<meta name="twitter:image" content="https://addbp.github.io/lattewithlata/assets/images/og-image.jpg">
+<link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/brand/fonts/creato_display/CreatoDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/brand/fonts/creato_display/CreatoDisplay-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="vendor/splide-core.min.css">
+<link rel="stylesheet" href="css/sections/00-header.css">
+<link rel="stylesheet" href="css/sections/13-newsletter.css">
+<link rel="stylesheet" href="css/sections/14-footer.css">
+<link rel="stylesheet" href="css/pages/_shell.css">
+<link rel="stylesheet" href="css/pages/contact.css">
+</head>
+<body id="top" data-page="contact" data-page-module="true">
+<a class="skip-main" href="#page-content">Skip to main content</a>
+
+<!-- ===== sections/00-header.html ===== -->
+<!-- 00-header: fixed header + off-canvas drawer + mobile Book-a-table pill. Shared by EVERY page (build-site.cjs inlines it on the home page and on all sub-pages).
+     Sits BEFORE <main>. Source skeleton: PZ/source/rendered.html #page-header (BUILD-SPEC 00 (b)); pill: Iceberg .home__about-button.
+     Copy: content/site.json -> brand.name (lockup wordmark + aria-label), nav[], bookingLabel, listenOn[], newsletter.eyebrow (side link).
+     Note: .header__container is NOT a .container (the source header is a full-width flex row, measured 1440x78 / 390x63).
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 1a + 3): the drawer keeps the white cup mark at 72px, now a link home. Every href is the PAGES-SPEC
+     navigation map: real pages, no same-page anchors, platform links stay "#" placeholders.
+     UPDATE-3 (2026-09-17, client request): the header row is burger LEFT + the logo lockup RIGHT again - the white cup mark (decorative img,
+     482x571 attrs = the viewBox box so nothing shifts on load; 44px, 56px at >= 60em) + the "LATTE WITH LATA" wordmark text (hidden below
+     36em: mark only), one link home. "Book a table" left the bar; it stays in the drawer, the mobile pill and every page CTA. -->
+<header id="page-header" class="header page__header">
+  <div class="header__container">
+    <button class="header__burger menu__switcher js-menu-switcher" type="button" aria-label="Menu" aria-haspopup="true" aria-controls="menu-container" aria-expanded="false"><span class="menu__burger"><u></u></span></button>
+
+    <a class="header__logo" href="index.html" aria-label="Latte with Lata, home">
+      <img class="header__mark" src="assets/brand/logo/latte-with-lata-mark-white.svg" alt="" width="482" height="571" decoding="async">
+      <span class="header__wordmark" aria-hidden="true">Latte with Lata</span>
+    </a>
+
+    <aside class="menu__screen js-menu-switcher" aria-hidden="true"></aside>
+
+    <div id="menu-container" class="menu__container drawer" aria-hidden="true">
+      <a class="menu__home" href="index.html" aria-label="Latte with Lata - home"><img class="menu__mark" src="assets/brand/logo/latte-with-lata-mark-white.svg" alt="" width="482" height="571" decoding="async"></a>
+      <div class="menu__row">
+        <nav id="menu-main" class="menu__main js-menu-main" aria-label="Main">
+          <ul>
+            <li><a href="index.html" data-nav="home"><div>Home</div><div aria-hidden="true">Home</div></a></li>
+            <li><a href="cafe.html" data-nav="cafe"><div>The Cafe</div><div aria-hidden="true">The Cafe</div></a></li>
+            <li><a href="menu.html" data-nav="menu"><div>Menu</div><div aria-hidden="true">Menu</div></a></li>
+            <li><a href="podcast.html" data-nav="podcast"><div>The Podcast</div><div aria-hidden="true">The Podcast</div></a></li>
+            <li><a href="episodes.html" data-nav="episodes"><div>Episodes</div><div aria-hidden="true">Episodes</div></a></li>
+            <li><a href="podcast.html#host"><div>The Host</div><div aria-hidden="true">The Host</div></a></li>
+            <li><a href="events.html" data-nav="events"><div>Events</div><div aria-hidden="true">Events</div></a></li>
+            <li><a href="contact.html" data-nav="contact"><div>Contact</div><div aria-hidden="true">Contact</div></a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="menu__mid">
+        <nav id="menu-side" class="menu__side" aria-label="Tools">
+          <ul>
+            <!-- side links: "Get directions" = the contact page's find-us block (navigation map); the newsletter block ships on every page, so its anchor stays same-page -->
+            <li><a href="contact.html#find-us"><div>Get directions</div><div aria-hidden="true">Get directions</div></a></li>
+            <li><a href="#s-13-newsletter"><div>Stay for the conversation</div><div aria-hidden="true">Stay for the conversation</div></a></li>
+          </ul>
+        </nav>
+        <a class="button button--outlined button--no-icon button--squared" href="book.html" data-nav="book"><strong>Book a table</strong></a>
+      </div>
+
+      <div class="menu__footer">
+        <span class="menu__footer__label" aria-hidden="true">Listen on</span>
+        <nav class="menu__listen" aria-label="Listen on">
+          <ul class="socials">
+            <li><a href="#" aria-label="Spotify"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-spotify"></use></svg><span class="visual-hide">Spotify</span></a></li>
+            <li><a href="#" aria-label="Apple Podcasts"><svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-apple"></use></svg><span class="visual-hide">Apple Podcasts</span></a></li>
+            <li><a href="#" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-youtube"></use></svg><span class="visual-hide">YouTube</span></a></li>
+            <li><a href="#" aria-label="RSS"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-rss"></use></svg><span class="visual-hide">RSS</span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Iceberg mobile pill (I11): wrapper = .home__about-button (fixed, full width, faded by GSAP), link = .vertical-button__link -->
+<div id="book-pill-wrap" class="book-pill__wrap">
+  <a id="book-pill" class="book-pill" href="book.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-cup"></use></svg><span>Book a table</span></a>
+</div>
+
+<main id="page-content" class="page__content">
+<!-- ===== pages/contact/01-hero.html ===== -->
+<!-- contact 01-hero - page hero (PAGES-SPEC 2). Copy: content/pages.json contact.hero (verbatim). Generated by the PAGE events+contact lane. -->
+<section id="p-contact-01-hero" class="page-hero" data-banner aria-labelledby="p-contact-title" style="--pinY: 55%">
+  <div class="page-hero__media"><img src="assets/images/page-contact.jpg" alt="A red-brick shopfront with a wide arched window and wooden doors on a quiet street in daylight" width="2400" height="1350" fetchpriority="high" decoding="async"></div>
+  <div class="container page-hero__content">
+    <p class="page-hero__eyebrow">Contact</p>
+    <h1 id="p-contact-title" class="page-hero__title">COME AND FIND US</h1>
+    <p class="page-hero__intro">27 Bellwood Street, on the corner of Fenwick Lane. Call, write, or just walk in.</p>
+    <p class="page-hero__actions"><a class="button" href="#find-us">Get directions</a><a class="button button--outlined" href="#write">Write to us</a></p>
+  </div>
+</section>
+
+<!-- ===== pages/contact/02-find-us.html ===== -->
+<!-- contact 02-find-us - address, the sketch map, four ways to get here, opening hours. Copy: contact.sections[find-us] (verbatim); hours = the pages.json rows.
+     The map is a static brand-coloured SVG drawn for this page (NO third-party embed, no external request); "Get directions" is the external maps link
+     PLACEHOLDER (href="#", find-us.map.placeholder) - swap in the real maps URL when the address is real. Anchor: #find-us. First content strip -> .mark-row. -->
+<section id="p-contact-02-find-us" class="strip find" aria-labelledby="find-us-title">
+  <div id="find-us" class="find__wrap pt-md pb-lg">
+    <div class="strip strip--narrow">
+      <div class="container">
+        <div class="mark-row anima--bottom-in"><img class="mark-row__mark" src="assets/brand/logo/latte-with-lata-mark-brown.svg" alt="" width="482" height="571" decoding="async"></div>
+        <div class="strip__data text-center">
+          <div class="strip__text">
+            <p class="eyebrow mb-xs">Find us</p>
+            <h2 id="find-us-title" class="strip__title1">WHERE WE ARE</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="strip strip--normal mt-md">
+      <div class="container find__grid">
+        <figure class="map anima--left-in">
+          <div class="map__frame">
+            <svg class="map__svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="map-title map-desc" focusable="false">
+              <title id="map-title">Sketch map of the streets around the cafe</title>
+              <desc id="map-desc">Latte with Lata is on the corner of Bellwood Street and Fenwick Lane, a five minute walk north of Harrowfield Market Square. Buses 4 and 11 stop outside on Fenwick Lane. Harrowfield Central station is to the south east.</desc>
+              <rect class="map__ground" width="800" height="600"/>
+              <path class="map__blocks" d="M-141.8 -112L60.2 -124.3L43.9 77.7L-158.1 90zM-159.5 108.1L42.5 95.8L30.8 240.5L-171.2 252.8zM-174.3 291L27.7 278.7L16.4 419.4L-185.6 431.7zM-187.1 449.8L14.9 437.5L3.8 575.2L-198.2 587.5zM-199.6 605.6L2.4 593.2L-11.1 760.1L-213.1 772.4zM78.3 -125.4L241.1 -135.3L224.8 66.7L62 76.6zM60.6 94.7L223.4 84.8L211.7 229.5L48.9 239.4zM45.8 277.6L208.6 267.7L197.3 408.4L34.5 418.3zM33 436.4L195.8 426.5L184.7 564.1L21.9 574.1zM20.4 592.1L183.2 582.2L169.8 749L7 759zM259.2 -136.4L411.9 -145.7L395.7 56.3L242.9 65.6zM241.4 83.7L394.2 74.4L382.5 219.1L229.8 228.4zM226.7 266.6L379.4 257.3L368.1 397.9L215.4 407.3zM201.3 581.1L354.1 571.8L340.6 738.6L187.9 747.9zM450.1 -148.1L602.9 -157.4L586.6 44.6L433.8 53.9zM432.4 72L585.1 62.7L573.5 207.4L420.7 216.7zM417.6 254.9L570.4 245.6L559 386.3L406.3 395.6zM404.8 413.7L557.6 404.4L546.5 542.1L393.7 551.4zM392.3 569.5L545 560.2L531.6 727L378.8 736.3zM621 -158.5L773.7 -167.8L757.4 34.2L604.7 43.5zM603.2 61.6L756 52.3L744.3 197L591.6 206.3zM588.5 244.5L741.2 235.2L729.9 375.9L577.1 385.2zM575.7 403.3L728.4 394L717.3 531.7L564.6 541zM563.1 559.1L715.9 549.7L702.4 716.6L549.7 725.9zM791.8 -168.9L963.7 -179.4L947.4 22.6L775.5 33.1zM774.1 51.2L945.9 40.7L934.2 185.4L762.4 195.9zM759.3 234.1L931.2 223.6L919.8 364.3L748 374.8zM746.5 392.9L918.4 382.4L907.3 520.1L735.4 530.5zM733.9 548.6L905.8 538.2L892.3 705L720.5 715.5z"/>
+              <path class="map__square" d="M213.9 425.3L366.6 416L355.5 553.7L202.8 563z"/>
+              <g class="map__roads">
+                <path d="M420 -10L370 610"/><path d="M-10 262L810 212"/>
+              </g>
+              <path class="map__rail" d="M520 610 810 452"/>
+              <path class="map__route" d="M383.2 446L399.1 261"/>
+              <g class="map__labels" aria-hidden="true">
+                <text class="map__street" transform="translate(402.7 204) rotate(-85.4)" dy=".35em">Bellwood Street</text>
+                <text class="map__street" transform="translate(526.1 229.3) rotate(-3.5)" dy=".35em">Fenwick Lane</text>
+                <text class="map__place" x="284.7" y="485.5" text-anchor="middle"><tspan x="284.7">Market</tspan><tspan x="284.7" dy="1.15em">Square</tspan></text>
+                <text class="map__place map__place--small" x="628" y="463.5" text-anchor="middle"><tspan x="628">Harrowfield</tspan><tspan x="628" dy="1.2em">Central</tspan></text>
+              </g>
+              <g class="map__stop" transform="translate(496.1 231.1)" aria-hidden="true"><circle r="13"/><text y="4" text-anchor="middle">Bus</text></g>
+              <g class="map__stop map__stop--p" transform="translate(442.8 453.7)" aria-hidden="true"><rect x="-13" y="-13" width="26" height="26" rx="5"/><text y="5.5" text-anchor="middle">P</text></g>
+              <g class="map__compass" transform="translate(664 62)" aria-hidden="true"><circle r="21"/><path d="M0 -13 5.5 6 0 2.5-5.5 6z"/><text y="-28" text-anchor="middle">N</text></g>
+              <g class="map__pin" transform="translate(442.1 217.4)">
+                <circle class="map__pulse" r="15"/>
+                <path class="map__pin-body" d="M0 0C-7-12-27-25-27-46a27 27 0 0 1 54 0C27-25 7-12 0 0z"/>
+                <image href="assets/brand/logo/latte-with-lata-mark-white.svg" x="-13.5" y="-64" width="27" height="32"/>
+              </g>
+            </svg>
+          </div>
+        </figure>
+        <div class="find__card anima--right-in">
+          <address class="find__address">
+            <span class="find__name">Latte with Lata</span>
+            <span class="find__street">27 Bellwood Street</span>
+            <span>Corner of Fenwick Lane</span>
+            <span>Harrowfield</span>
+          </address>
+          <dl class="info-list find__contact">
+            <div class="info-list__row"><dt>Phone</dt><dd><a class="find__link" href="tel:+15550142024">(555) 014-2024</a></dd></div>
+            <div class="info-list__row"><dt>Email</dt><dd><a class="find__link" href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a></dd></div>
+          </dl>
+          <p class="find__actions">
+            <a class="button" href="#" data-placeholder="maps-link">Get directions</a>
+            <a class="button button--outlined" href="book.html">Book a table</a>
+          </p>
+          <p class="find__more"><a class="read-more" href="events.html">What's on</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="strip strip--normal mt-lg">
+      <div class="container">
+        <h3 class="a11y-only">Directions</h3>
+        <ul class="directions">
+          <li class="directions__item anima--bottom-in">
+            <svg class="icon directions__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="13" cy="4.2" r="1.7"/><path d="M12.6 8.2 9.4 9.8l-1.2 3.4"/><path d="m12.6 8.2.9 5.2 3 2.4.9 4.7"/><path d="m13.5 13.4-2.3 3.1-2.6 4"/><path d="m13 9.4 2.4 2.3 2.6.7"/></svg>
+            <h4 class="directions__mode">On foot</h4>
+            <p class="directions__text">Five minutes from Harrowfield Market Square. Walk north up Bellwood Street and we are on the corner of Fenwick Lane, under the brown awning.</p>
+          </li>
+          <li class="directions__item anima--bottom-in">
+            <svg class="icon directions__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="3.5" width="14" height="14" rx="2.5"/><path d="M5 11.5h14"/><path d="M8.5 14.6h.01M15.5 14.6h.01"/><path d="M8 17.5 6.8 20.5M16 17.5l1.2 3"/></svg>
+            <h4 class="directions__mode">By bus or train</h4>
+            <p class="directions__text">Buses 4 and 11 stop at Fenwick Lane, right outside. Harrowfield Central station is a 12-minute walk.</p>
+          </li>
+          <li class="directions__item anima--bottom-in">
+            <svg class="icon directions__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="6" cy="16" r="3.5"/><circle cx="18" cy="16" r="3.5"/><path d="M6 16l3.5-7.5h5L18 16"/><path d="M9.5 8.5 12.5 16 15 9.5"/><path d="M8.2 8.5h2.6M14 6.5h2.2"/></svg>
+            <h4 class="directions__mode">By bike</h4>
+            <p class="directions__text">There are six bike stands on Fenwick Lane, beside the side door.</p>
+          </li>
+          <li class="directions__item anima--bottom-in">
+            <svg class="icon directions__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10 17V7.5h3a2.75 2.75 0 0 1 0 5.5h-3"/></svg>
+            <h4 class="directions__mode">By car</h4>
+            <p class="directions__text">Street parking on Bellwood Street is free for 2 hours. The Market Square car park is five minutes away. There is one accessible bay outside the door.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="strip strip--normal mt-lg">
+      <div class="container">
+        <div class="hours panel anima--bottom-in">
+          <div class="hours__head">
+            <h3 class="strip__title3 hours__title">Opening hours</h3>
+            <p class="hours__note">Thursdays we reopen at 6:30&nbsp;pm for the recording. Free, first come first seated, and the guest stays for a coffee afterwards.</p>
+            <p class="hours__note hours__note--muted">Breakfast until 11:30&nbsp;am. Brunch and lunch 11:30&nbsp;am to 3:00&nbsp;pm. Cakes, pastry and drinks until close.</p>
+          </div>
+          <div class="data-table__wrap hours__table">
+            <table class="data-table">
+              <caption class="a11y-only">Opening hours</caption>
+              <tbody>
+              <tr><th scope="row">Mon - Wed</th><td class="is-num">7:00&nbsp;am - 6:00&nbsp;pm</td></tr>
+              <tr><th scope="row">Thu<small>Reopens 6:30&nbsp;pm for the recording</small></th><td class="is-num">7:00&nbsp;am - 6:00&nbsp;pm</td></tr>
+              <tr><th scope="row">Fri</th><td class="is-num">7:00&nbsp;am - 10:00&nbsp;pm</td></tr>
+              <tr><th scope="row">Sat</th><td class="is-num">8:00&nbsp;am - 10:00&nbsp;pm</td></tr>
+              <tr><th scope="row">Sun</th><td class="is-num">8:00&nbsp;am - 3:00&nbsp;pm</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/contact/03-write.html ===== -->
+<!-- contact 03-write - the contact form (POST /api/contact through js/lib/api.js; logic in js/pages/contact.js). Copy: contact.sections[write] (verbatim);
+     every runtime string rides on data-* attributes (validation per field, errors on the form, hints on the options) - no inline script, no inline handlers (CSP).
+     ?topic=<enum> preselects the topic. API unavailable -> the shared.apiFallback notice + the form disabled (it never pretends to send).
+     Anchor: #write. data-pill-away: the mobile "Book a table" pill parks while the form is in view. -->
+<section id="p-contact-03-write" class="strip strip--normal bg-band-black write" aria-labelledby="write-title">
+  <div id="write" class="write__wrap pt-lg pb-lg">
+    <div class="container write__grid">
+      <div class="write__intro">
+        <div class="strip__data">
+          <p class="eyebrow mb-xs">Write to us</p>
+          <h2 id="write-title" class="strip__title1">SEND <span class="keep-together">A MESSAGE</span></h2>
+        </div>
+        <div class="anima--bottom-in">
+          <p class="lead write__lead">Pick what it is about so it reaches the right person. We reply within 2 working days.</p>
+          <p class="write__promise">We reply to every message within 2 working days, Monday to Friday. If it is about a booking today, call us instead.</p>
+          <ul class="write__direct">
+            <li><a href="tel:+15550142024"><span class="write__direct-label">Phone</span>(555) 014-2024</a></li>
+            <li><a href="mailto:hello@lattewithlata.example"><span class="write__direct-label">Email</span>hello@lattewithlata.example</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="write__panel kit-light anima--bottom-in" data-pill-away>
+        <noscript><div class="notice notice--info"><div><p class="notice__title">This form is not connected</p><p>Online booking and messages are switched off on this copy of the site. Call <a href="tel:+15550142024">(555) 014-2024</a> or email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a> and we will sort it out by hand.</p></div></div></noscript>
+        <div class="notice notice--info write__fallback" id="contact-fallback" role="status" hidden><div><p class="notice__title">This form is not connected</p><p>Online booking and messages are switched off on this copy of the site. Call <a href="tel:+15550142024">(555) 014-2024</a> or email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a> and we will sort it out by hand.</p></div></div>
+        <form class="form" id="contact-form" action="/api/contact" method="post" novalidate
+              data-topic-param="topic"
+              data-label-submit="Send message" data-label-sending="Sending..."
+                data-err-validation="Some of the form needs another look. The details are next to each field."
+                  data-err-rate-limited="That is a lot of messages in a short time. Wait a few minutes and try again."
+                  data-err-server-error="Something went wrong on our side and your message was not sent. Try again, or email hello@lattewithlata.example."
+                  data-err-unavailable="We could not send your message just now. Try again, or email hello@lattewithlata.example."
+                  data-err-network="You seem to be offline. Check your connection and try again.">
+          <div class="field">
+            <label class="field__label" for="ct-topic">What is it about?</label>
+            <select class="select" id="ct-topic" name="topic" required aria-describedby="ct-topic-hint ct-topic-error"
+                    data-msg-required="Choose what your message is about.">
+              <option value="">Choose a topic</option>
+                <option value="general" data-hint="Opening hours, lost property, anything that does not fit below.">A general question</option>
+                <option value="booking" data-hint="Parties over 8, changes to a booking, accessibility needs.">A booking or a large group</option>
+                <option value="events" data-hint="Recording nights, Open table, or hiring the room.">Events and private hire</option>
+                <option value="podcast-guest" data-hint="Tell us who, what they run, and the decision worth an hour.">Be a guest or suggest one</option>
+                <option value="press" data-hint="Interviews, features, images and speaking requests.">Press and partnerships</option>
+                <option value="other" data-hint="Feedback, a complaint, or a kind word for the kitchen.">Something else</option>
+            </select>
+            <p class="field__hint write__topic-hint" id="ct-topic-hint" aria-live="polite"></p>
+            <p class="field__error" id="ct-topic-error" aria-live="polite"></p>
+          </div>
+          <div class="form__row form__row--2">
+            <div class="field">
+              <label class="field__label" for="ct-name">Your name</label>
+              <input class="input" id="ct-name" name="name" type="text" autocomplete="name" autocapitalize="words" spellcheck="false" required aria-describedby="ct-name-error"
+                     data-msg-required="Tell us your name." data-msg-invalid="Use at least 2 characters." data-msg-too-long="Keep the name under 80 characters.">
+              <p class="field__error" id="ct-name-error" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="ct-email">Email</label>
+              <input class="input" id="ct-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required aria-describedby="ct-email-hint ct-email-error"
+                     data-msg-required="We need an email address to reply to." data-msg-invalid="That email does not look right. Check it and try again.">
+              <p class="field__hint" id="ct-email-hint">We only use it to reply.</p>
+              <p class="field__error" id="ct-email-error" aria-live="polite"></p>
+            </div>
+          </div>
+          <div class="field write__phone">
+            <label class="field__label" for="ct-phone">Phone <span class="field__optional">(optional)</span></label>
+            <input class="input" id="ct-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="ct-phone-error"
+                   data-msg-invalid="Enter a phone number with 7 to 15 digits, or leave it blank.">
+            <p class="field__error" id="ct-phone-error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label class="field__label" for="ct-message">Your message</label>
+            <textarea class="textarea" id="ct-message" name="message" rows="6" required aria-describedby="ct-message-hint ct-message-error"
+                      data-min="10" data-max="2000"
+                      data-msg-required="Write your message." data-msg-too-short="Give us a little more to go on: at least 10 characters." data-msg-too-long="Keep it under 2,000 characters."></textarea>
+            <div class="write__message-meta">
+              <p class="field__hint" id="ct-message-hint">A few sentences is plenty. 2,000 characters at most.</p>
+              <p class="write__count" id="ct-message-count" aria-hidden="true"><span data-count>0</span> / 2,000</p>
+            </div>
+            <p class="a11y-only" id="ct-message-count-live" role="status"></p>
+            <p class="field__error" id="ct-message-error" aria-live="polite"></p>
+          </div>
+          <div class="checkbox">
+            <input id="ct-consent" name="consent" type="checkbox" required aria-describedby="ct-consent-error" data-msg-required="Please tick the box so we can store and answer your message.">
+            <label for="ct-consent">I agree that Latte with Lata may store this message and my contact details so it can reply. I have read the <a href="#privacy">privacy summary</a>.</label>
+            <p class="field__error" id="ct-consent-error" aria-live="polite"></p>
+          </div>
+          <div class="form__hp" aria-hidden="true"><label for="ct-website">Website</label><input id="ct-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+          <p class="notice" id="contact-status" role="status" hidden></p>
+          <div class="form__actions">
+            <button class="button" type="submit" id="contact-submit">Send message</button>
+            <p class="form__note">We reply within 2 working days.</p>
+          </div>
+        </form>
+        <div class="write__success" id="contact-success" hidden>
+          <svg class="icon write__success-icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg>
+          <h3 class="strip__title3 write__success-title" id="contact-success-title" tabindex="-1">Message sent</h3>
+          <p class="lead write__success-text">Thank you. It is in, and we will reply within 2 working days. For anything about a booking today, call <a href="tel:+15550142024">(555) 014-2024</a>.</p>
+          <p class="write__success-promise">We reply to every message within 2 working days, Monday to Friday. If it is about a booking today, call us instead.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/contact/04-press-guests.html ===== -->
+<!-- contact 04-press-guests - how to pitch. Copy: contact.sections[press-guests] (verbatim). The two CTAs point at this page with ?topic=...#write;
+     js/pages/contact.js handles them in place (preselect + scroll + focus) and they still work as plain links without it. Anchor: #press-guests. -->
+<section id="p-contact-04-press-guests" class="strip strip--normal pitch" aria-labelledby="press-guests-title">
+  <div id="press-guests" class="pitch__wrap pt-lg pb-lg">
+    <div class="container">
+      <div class="strip__data text-center">
+        <p class="eyebrow mb-xs">Press and guests</p>
+        <h2 id="press-guests-title" class="strip__title1">PITCHING US</h2>
+      </div>
+      <div class="pitch__grid mt-md">
+          <article class="pitch__col anima--left-in">
+          <h3 class="strip__title3 pitch__title">Press</h3>
+          <div class="stack pitch__text">
+              <p>For interviews, features or images, choose Press and partnerships and tell us your outlet, your deadline and what you need. We can supply photos of the room, the logo and a short description of the show.</p>
+              <p>Lata speaks about the podcast in a personal capacity only. She does not comment on behalf of any employer or institution, and requests about her day job will be declined.</p>
+          </div>
+          <p class="pitch__cta"><a class="read-more" href="contact.html?topic=press#write" data-topic-link>Write to us about press</a></p>
+        </article>
+          <article class="pitch__col anima--right-in">
+          <h3 class="strip__title3 pitch__title">Guests</h3>
+          <div class="stack pitch__text">
+              <p>We look for people who run something built around a mission and have a decision they are willing to talk about honestly. Tell us who they are, what they run, and the origin story or trade-off that is worth an hour.</p>
+              <p>Please do not send a press kit. Three sentences is enough. Nobody pays to appear, and we do not take pitches for products.</p>
+          </div>
+          <p class="pitch__cta"><a class="read-more" href="contact.html?topic=podcast-guest#write" data-topic-link>Suggest a guest</a></p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/contact/05-privacy.html ===== -->
+<!-- contact 05-privacy - the plain-language privacy summary. Copy: contact.sections[privacy] (verbatim), including the review note: this is a TEMPLATE
+     for legal review (template: true) and says so on the page. Anchor: #privacy (footer "Privacy", newsletter + form consent links). -->
+<section id="p-contact-05-privacy" class="strip strip--normal bg-band-cream2 privacy" aria-labelledby="privacy-title">
+  <div id="privacy" class="privacy__wrap pt-lg pb-lg">
+    <div class="container privacy__grid">
+      <div class="privacy__head">
+        <div class="strip__data">
+          <p class="eyebrow mb-xs">Privacy</p>
+          <h2 id="privacy-title" class="strip__title2 privacy__title">WHAT WE DO WITH YOUR DETAILS</h2>
+        </div>
+        <div class="anima--bottom-in">
+          <p class="lead privacy__intro">This is a plain summary of what this site collects, why, and how long we keep it. We collect as little as we can.</p>
+          <div class="notice notice--info privacy__review" role="note"><div><p class="notice__title">Template for legal review.</p><p>Written in plain language for the study build; it has not been checked by a lawyer and must be reviewed against local privacy law before launch.</p></div></div>
+          <p class="caption caption--muted privacy__updated">Last updated 17 Sep 2026</p>
+        </div>
+      </div>
+      <div class="privacy__body">
+        <div class="privacy__blocks">
+            <article class="privacy__block anima--bottom-in">
+            <h3 class="privacy__block-title">Who we are</h3>
+            <p>Latte with Lata, 27 Bellwood Street, Harrowfield. For anything about your data, email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a> or ask at the counter.</p>
+          </article>
+            <article class="privacy__block anima--bottom-in">
+            <h3 class="privacy__block-title">When you book a table or reserve a seat</h3>
+            <p>We collect your name, email, phone number, the date, time and size of your party, and any occasion or notes you choose to add. We use them to hold your table, to contact you if something changes, and to recognise you if you book again. We keep booking records for 12 months after the date of the booking, then delete them.</p>
+          </article>
+            <article class="privacy__block anima--bottom-in">
+            <h3 class="privacy__block-title">When you send us a message</h3>
+            <p>We collect your name, email, phone number if you give one, the topic and your message. We use them to reply. We keep messages for 12 months after our last reply, then delete them.</p>
+          </article>
+            <article class="privacy__block anima--bottom-in">
+            <h3 class="privacy__block-title">When you join the newsletter</h3>
+            <p>We collect your email address, the date you agreed and the page you signed up on. We use it to send one email a week. We keep it until you unsubscribe, which you can do from any email or by asking us.</p>
+          </article>
+            <article class="privacy__block anima--bottom-in">
+            <h3 class="privacy__block-title">Marketing</h3>
+            <p>We only send marketing email if you tick the box. Booking without ticking it changes nothing about your booking.</p>
+          </article>
+            <article class="privacy__block anima--bottom-in">
+            <h3 class="privacy__block-title">Who sees it</h3>
+            <p>Cafe staff who need it to run bookings and answer messages. We do not sell your details, share them with advertisers or pass them to the host's employer or any other institution.</p>
+          </article>
+            <article class="privacy__block anima--bottom-in">
+            <h3 class="privacy__block-title">Cookies</h3>
+            <p>The public site sets no advertising or tracking cookies. The staff sign-in to the booking system uses one essential cookie.</p>
+          </article>
+            <article class="privacy__block anima--bottom-in">
+            <h3 class="privacy__block-title">Recording nights</h3>
+            <p>Thursday recordings are audio-recorded and sometimes photographed. We say so at the door. Tell a member of staff if you would rather stay out of photos.</p>
+          </article>
+            <article class="privacy__block anima--bottom-in">
+            <h3 class="privacy__block-title">Asking us to delete or correct something</h3>
+            <p>Email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a> from the address you used, or ask at the counter. Tell us what you want removed: a booking, a message, your newsletter sign-up or everything. We confirm within 2 working days and finish within 30 days. We may need to keep anything the law requires us to keep.</p>
+          </article>
+        </div>
+        <div class="data-table__wrap privacy__retention anima--bottom-in" tabindex="0" role="region" aria-label="How long we keep your details">
+          <table class="data-table">
+            <caption>How long we keep it</caption>
+            <thead><tr><th scope="col">What</th><th scope="col">How long</th></tr></thead>
+            <tbody>
+                <tr><th scope="row">Bookings</th><td>12 months after the booking date</td></tr>
+                <tr><th scope="row">Messages</th><td>12 months after our last reply</td></tr>
+                <tr><th scope="row">Newsletter sign-ups</th><td>Until you unsubscribe</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/contact/06-credits.html ===== -->
+<!-- contact 06-credits - photo credits summary + the licence note; the full register stays in every footer (details#footer-credits) and in ASSETS.md.
+     Copy: contact.sections[credits] (verbatim). Closing block of the page: its CTA goes back to the form. Anchor: #credits (footer "Photo credits").
+     FINAL PASS 2026-09-17: the attribution list for EVERY CC BY / CC BY-SA file in ASSETS.md (13: 12 photos + the home video) - work title linked to its
+     Commons page, author, licence linked to its deed, the change made; external links open a new tab (rel="noopener", announced to screen readers).
+     Generated from ASSETS.md by scratchpad final-d/gen-credits.cjs; the list title and the "Used on" labels are functional microcopy (not in pages.json). -->
+<section id="p-contact-06-credits" class="strip strip--narrow credits" aria-labelledby="credits-title">
+  <div id="credits" class="credits__wrap pt-lg pb-lg">
+    <div class="container">
+      <div class="strip__data text-center">
+        <p class="eyebrow mb-xs">Photo credits</p>
+        <h2 id="credits-title" class="strip__title2">WHO TOOK THE PHOTOS</h2>
+      </div>
+      <div class="credits__text text-center anima--bottom-in">
+        <p>Apart from the photo of Lata Singh, which is her own, the photos and the home-page video on this site are licensed images from Wikimedia Commons, used under CC0, CC BY or CC BY-SA terms. Every photographer, licence and source link is listed in the site's asset register (ASSETS.md) and in the Photo credits panel in the footer.</p>
+      </div>
+      <div class="credits__register anima--bottom-in">
+        <h3 id="credits-list-title" class="credits__list-title">Attribution for CC BY and CC BY-SA files</h3>
+        <ol class="credits__list" aria-labelledby="credits-list-title">
+          <li class="credits__item">
+            <p class="credits__used">Home and cafe galleries</p>
+            <p class="credits__work"><a href="https://commons.wikimedia.org/wiki/File:Latte_art_0.jpg" target="_blank" rel="noopener">&ldquo;Latte art 0&rdquo;<span class="visual-hide"> (opens in a new tab)</span></a></p>
+            <p class="credits__meta">by Angela CoffeeRank &middot; <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0<span class="visual-hide"> (opens in a new tab)</span></a> &middot; Cropped and resized.</p>
+          </li>
+          <li class="credits__item">
+            <p class="credits__used">Home and cafe galleries</p>
+            <p class="credits__work"><a href="https://commons.wikimedia.org/wiki/File:A_coffee_cup_featuring_intricate_latte_art_sits_on_a_wooden_table_next_to_an_open_laptop.jpg" target="_blank" rel="noopener">&ldquo;A coffee cup featuring intricate latte art sits on a wooden table next to an open laptop&rdquo;<span class="visual-hide"> (opens in a new tab)</span></a></p>
+            <p class="credits__meta">by Shixart1985 &middot; <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0<span class="visual-hide"> (opens in a new tab)</span></a> &middot; Cropped and resized.</p>
+          </li>
+          <li class="credits__item">
+            <p class="credits__used">Home: menu band</p>
+            <p class="credits__work"><a href="https://commons.wikimedia.org/wiki/File:A_cup_of_cappuccino.jpg" target="_blank" rel="noopener">&ldquo;A cup of cappuccino&rdquo;<span class="visual-hide"> (opens in a new tab)</span></a></p>
+            <p class="credits__meta">by Vee Satayamas &middot; <a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener">CC BY 4.0<span class="visual-hide"> (opens in a new tab)</span></a> &middot; Cropped and resized.</p>
+          </li>
+          <li class="credits__item">
+            <p class="credits__used">Home: live nights</p>
+            <p class="credits__work"><a href="https://commons.wikimedia.org/wiki/File:BoulderCoffeeOpenMicNight2018.jpg" target="_blank" rel="noopener">&ldquo;BoulderCoffeeOpenMicNight2018&rdquo;<span class="visual-hide"> (opens in a new tab)</span></a></p>
+            <p class="credits__meta">by DanielPenfield &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0<span class="visual-hide"> (opens in a new tab)</span></a> &middot; Resized. Our copy is shared under the same licence.</p>
+          </li>
+          <li class="credits__item">
+            <p class="credits__used">Home: hero video</p>
+            <p class="credits__work"><a href="https://commons.wikimedia.org/wiki/File:Guerrilla_on_air_%E2%80%93_Fatti_d%27arte_teaser.mpg" target="_blank" rel="noopener">&ldquo;Guerrilla on air &ndash; Fatti d&rsquo;arte teaser&rdquo;<span class="visual-hide"> (opens in a new tab)</span></a></p>
+            <p class="credits__meta">by M. Capriglione, M. Rain&ograve;, R. Romita &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0<span class="visual-hide"> (opens in a new tab)</span></a> &middot; Cut, slowed, colour-graded and looped. Our copy is shared under the same licence.</p>
+          </li>
+          <li class="credits__item">
+            <p class="credits__used">Events: page hero</p>
+            <p class="credits__work"><a href="https://commons.wikimedia.org/wiki/File:%D0%9A%D0%BE%D0%BD%D1%86%D0%B5%D1%80%D1%82_%D1%83_%D0%A6%D0%B8%D1%82%D1%80%D1%96.jpg" target="_blank" rel="noopener">&ldquo;Концерт у Цитрі&rdquo;<span class="visual-hide"> (opens in a new tab)</span></a></p>
+            <p class="credits__meta">by Ivannamartyniv &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0<span class="visual-hide"> (opens in a new tab)</span></a> &middot; Cropped and resized. Our copy is shared under the same licence.</p>
+          </li>
+          <li class="credits__item">
+            <p class="credits__used">Menu: masala chai</p>
+            <p class="credits__work"><a href="https://commons.wikimedia.org/wiki/File:%E0%A6%B6%E0%A7%87%E0%A6%B7_%E0%A6%AC%E0%A6%BF%E0%A6%95%E0%A6%BE%E0%A6%B2%E0%A7%87%E0%A6%B0_%E0%A6%9A%E0%A6%BE.jpg" target="_blank" rel="noopener">&ldquo;শেষ বিকালের চা&rdquo;<span class="visual-hide"> (opens in a new tab)</span></a></p>
+            <p class="credits__meta">by Muntaha Maryum &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0<span class="visual-hide"> (opens in a new tab)</span></a> &middot; Cropped and resized. Our copy is shared under the same licence.</p>
+          </li>
+          <li class="credits__item">
+            <p class="credits__used">Menu: cheese board</p>
+            <p class="credits__work"><a href="https://commons.wikimedia.org/wiki/File:Wine_%26_Cheese_Platter.jpg" target="_blank" rel="noopener">&ldquo;Wine &amp; Cheese Platter&rdquo;<span class="visual-hide"> (opens in a new tab)</span></a></p>
+            <p class="credits__meta">by Jordan Johnson &middot; <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0<span class="visual-hide"> (opens in a new tab)</span></a> &middot; Cropped and resized.</p>
+          </li>
+          <li class="credits__item">
+            <p class="credits__used">Menu: reserve photo</p>
+            <p class="credits__work"><a href="https://commons.wikimedia.org/wiki/File:Freshly_brewed_cup_of_espresso_in_sunlight_on_kitchen_counter.jpg" target="_blank" rel="noopener">&ldquo;Freshly brewed cup of espresso in sunlight on kitchen counter&rdquo;<span class="visual-hide"> (opens in a new tab)</span></a></p>
+            <p class="credits__meta">by Daniel Case &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0<span class="visual-hide"> (opens in a new tab)</span></a> &middot; Cropped and resized. Our copy is shared under the same licence.</p>
+          </li>
+          <li class="credits__item">
+            <p class="credits__used">Events: Thursday nights</p>
+            <p class="credits__work"><a href="https://commons.wikimedia.org/wiki/File:2024-09-02_Andersraum_Lesung_Lutz_van_Dijk_21.jpg" target="_blank" rel="noopener">&ldquo;2024-09-02 Andersraum Lesung Lutz van Dijk 21&rdquo;<span class="visual-hide"> (opens in a new tab)</span></a></p>
+            <p class="credits__meta">by Bernd Schwabe in Hannover &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0<span class="visual-hide"> (opens in a new tab)</span></a> &middot; Cropped and resized. Our copy is shared under the same licence.</p>
+          </li>
+          <li class="credits__item">
+            <p class="credits__used">Events and episodes</p>
+            <p class="credits__work"><a href="https://commons.wikimedia.org/wiki/File:Neumann_U87_Condenser_Microphone_-_Studio_A,_In_Your_Ear_Studios.jpg" target="_blank" rel="noopener">&ldquo;Neumann U87 Condenser Microphone - Studio A, In Your Ear Studios&rdquo;<span class="visual-hide"> (opens in a new tab)</span></a></p>
+            <p class="credits__meta">by Will Fisher from Richmond, VA, United States &middot; <a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0<span class="visual-hide"> (opens in a new tab)</span></a> &middot; Resized. Our copy is shared under the same licence.</p>
+          </li>
+          <li class="credits__item">
+            <p class="credits__used">Events: Thursday nights</p>
+            <p class="credits__work"><a href="https://commons.wikimedia.org/wiki/File:Elliott_Bay_Books_-_author_reading_01A.jpg" target="_blank" rel="noopener">&ldquo;Elliott Bay Books - author reading 01A&rdquo;<span class="visual-hide"> (opens in a new tab)</span></a></p>
+            <p class="credits__meta">by Joe Mabel &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0<span class="visual-hide"> (opens in a new tab)</span></a> &middot; Cropped and resized. Our copy is shared under the same licence.</p>
+          </li>
+          <li class="credits__item">
+            <p class="credits__used">Events and podcast</p>
+            <p class="credits__work"><a href="https://commons.wikimedia.org/wiki/File:Justyna_Kulikowska,_Star%C3%A1_Ar%C3%A9na_2025_(8).jpg" target="_blank" rel="noopener">&ldquo;Justyna Kulikowska, Stará Aréna 2025 (8)&rdquo;<span class="visual-hide"> (opens in a new tab)</span></a></p>
+            <p class="credits__meta">by Tadeáš Bednarz &middot; <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0<span class="visual-hide"> (opens in a new tab)</span></a> &middot; Resized. Our copy is shared under the same licence.</p>
+          </li>
+        </ol>
+      </div>
+      <div class="credits__text text-center anima--bottom-in">
+        <p class="credits__note">Spotted a missing or wrong credit? Write to us and we will fix it within 2 working days.</p>
+        <p class="credits__cta"><a class="button" href="contact.html?topic=other#write" data-topic-link>Report a credit</a><a class="button button--outlined" href="#footer-credits" data-open-credits>Photo credits</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sections/13-newsletter.html ===== -->
+<!-- 13-newsletter - Black newsletter block: eyebrow, lead paragraph, floating-label email input, square accent submit with
+     the two-arrow swap, consent checkbox; right column big "Listen and follow" links
+     SOURCE skeleton: Iceberg div#join.footer-newsletter > .footer-newsletter__left (.__title, .__text, form.__form >
+       .form-group.__form-input (.form-input > label + input#email ; button.__form-input__button > span > svg x2)
+       + .form-group.__form-checkbox (.form-checkbox > input#subscribe + label > div + span)) ; .footer-newsletter__right
+       (.__title + ul > li > a)  (IC rendered.html line 29 block; CSS inline-scoped.beautified.css:2836-3300;
+       engine ZNMh4Fg5.beautified.js:909-935)
+     Copy: content/site.json newsletter.* verbatim (brand pass 2026-09-17: eyebrow "First to know", new paragraph). Right column = newsletter.follow[5] (DD Pick 12 "Change": platforms
+       + Instagram; copy.md maps follow[] to the right column). Hard-coded label (INFERRED): "Listen and follow" eyebrow.
+       "privacy policy" links to #privacy (copy.md). success/error strings ride on data-* so the JS shows visible text.
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 4): shared by every page; the form is wired to POST /api/subscribe through js/lib/api.js
+       ({ email, consent: true, source: "footer-newsletter", website }) - "website" is the hidden honeypot the server wants empty. When the API is
+       not there (static hosting: GET /api/health fails) the form does NOT pretend: it shows the .newsletter__notice line with the cafe's email.
+       The action attribute is the no-JS fallback only (the JS always intercepts the submit). -->
+<section id="s-13-newsletter" class="strip strip--normal bg-band-black newsletter-band" aria-labelledby="nl-eyebrow">
+  <div class="container newsletter">
+
+    <div class="newsletter__left">
+      <p id="nl-eyebrow" class="newsletter__eyebrow eyebrow">Stay for the conversation</p>
+      <p class="newsletter__text lead">The conversation doesn't end with the podcast. Follow along for meaningful moments, leadership insights, guest stories and upcoming conversations. One email a week, never more.</p>
+      <form class="newsletter__form" action="/api/subscribe" method="post" novalidate data-source="footer-newsletter"
+            data-success="You are on the list. See you Thursday."
+            data-error="That address did not go through. Check it and try once more.">
+        <div class="newsletter__row">
+          <div class="newsletter__field">
+            <label for="nl-email">Your email</label>
+            <input id="nl-email" class="newsletter__input" type="email" name="email" autocomplete="email" spellcheck="false" required aria-describedby="nl-msg-error">
+          </div>
+          <button class="newsletter__submit" type="submit" aria-label="Subscribe">
+            <span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+            <span aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+          </button>
+        </div>
+        <div class="newsletter__consent">
+          <input id="nl-consent" type="checkbox" name="consent" required>
+          <label for="nl-consent">
+            <span class="newsletter__box" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg></span>
+            <span>Yes, send me the Thursday email from Latte with Lata. I have read the <a href="contact.html#privacy">privacy policy</a>.</span>
+          </label>
+        </div>
+        <div class="newsletter__hp" aria-hidden="true"><label for="nl-website">Website</label><input id="nl-website" type="text" name="website" tabindex="-1" autocomplete="off"></div>
+        <p id="nl-msg-error" class="newsletter__error" role="alert" hidden></p>
+        <p class="newsletter__success" role="status" hidden></p>
+        <p class="newsletter__notice" role="status" hidden>Sign-ups are handled by our team right now - email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a></p>
+      </form>
+    </div>
+
+    <div class="newsletter__right">
+      <p class="newsletter__eyebrow eyebrow">Listen and follow</p>
+      <ul class="newsletter__links">
+        <li><a href="#">Spotify</a></li>
+        <li><a href="#">Apple Podcasts</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">RSS</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<!-- ===== sections/14-footer.html ===== -->
+<!-- 14-footer - Footer curtain (4 columns), stamp at the seam, back-to-top disc, cropped giant wordmark. Sits AFTER <main>.
+     SOURCE skeleton: PZ rendered.html:189-272  aside.strip.strip--stamp + footer#page-footer.page__footer > .footer__container >
+       .strip > .container > .footer__top > .footer__column--1 (h2.footer__logo + nav.footer__menu) / --2 (p, p.mt-md) /
+       --3 (nav.footer__shortcuts) / --4 (aside.footer__socials > h3.footer__title + ul.socials) ; .js-scroll-top-limit > .strip >
+       .container > .footer__mid (.footer__legal + aside.footer__credits) + .footer__bottom (awards - DROPPED) ; aside#back-to-top
+       .scroll-top > a. Wordmark row: IC rendered.html .footer-logo > .footer-logo__content > span (BEST-PARTS Pick 17).
+     Single-root contract (file contract: the footer fragment root is <footer id="page-footer">): the stamp aside and
+       #back-to-top live INSIDE the footer. The source's clip (.page__footer { overflow:hidden }) moved to the inner
+       .footer__curtain wrapper so the stamp can overhang 56px up into 13 (spec 14 (h)) and the fixed disc is neither
+       clipped nor inside the transformed .footer__container.
+     Copy: content/site.json footer.* verbatim (nav labels = footer.columns.sitemap = nav). Hard-coded labels (INFERRED,
+       spec 14 (b)): "Find us", "Explore", "Listen & follow", legal nav "Privacy" / "Photo credits". The photo-credit list
+       (closed <details>, id="credits") satisfies verify/handoff/assets.md ("not optional" for the CC BY / CC BY-SA files).
+     Brand mark (brand pass 2026-09-17, LOGO-USAGE.md): the kit's cup mark, brown variant, as an <img> 120px tall (--markFooter) with the
+       tagline brand.tagline under it (one saucer-height of clear space); footer.legal = copyright + the independence disclaimer.
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 3): shared by every page. The mark links home (index.html); the sitemap = the six pages + "Book a table"
+       (content/site.json footer.columns.sitemap; "The Host" lives in the drawer only); Privacy -> contact.html#privacy; Photo credits -> contact.html#credits. The photo-credit
+       <details> stays in the footer as id="footer-credits" (the id "credits" belongs to the contact page now - no duplicate ids on contact.html);
+       14-footer.js opens it whenever a #credits link is followed on a page that has no #credits block of its own. -->
+<footer id="page-footer" class="page__footer footer">
+  <!-- brand pass: stamp instance 4 is OFF (data-stamp="off", CSS hides the pseudo-element) - it straddled the brown 13 band (brown mark on brown,
+       LOGO-USAGE) and doubled the 120px footer mark one viewport later; the aside + its tween stay so data-stamp="on" restores it. -->
+  <aside class="strip strip--stamp footer__stamp" aria-hidden="true" data-stamp="off"></aside>
+
+  <div class="footer__curtain">
+    <div class="footer__container">
+
+      <div class="strip">
+        <div class="container">
+          <div class="footer__top">
+
+            <div class="footer__column footer__column--1">
+              <a class="footer__logo" href="index.html" aria-label="Latte with Lata - home">
+                <img class="footer__mark" src="assets/brand/logo/latte-with-lata-mark-brown.svg" alt="" width="482" height="571" loading="lazy" decoding="async">
+              </a>
+              <p class="footer__tagline">Real Conversations. Built on Purpose.</p>
+              <nav class="footer__menu" aria-label="Legal">
+                <ul>
+                  <li><a href="contact.html#privacy">Privacy</a></li>
+                  <li><a href="contact.html#credits">Photo credits</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="footer__column footer__column--2">
+              <h3 class="footer__title">Find us</h3>
+              <div class="footer__find">
+                <address class="footer__address">
+                  Latte with Lata<br>
+                  27 Bellwood Street<br>
+                  Corner of Fenwick Lane<br>
+                  Harrowfield<br>
+                  <a href="tel:+15550142024">(555) 014-2024</a><br>
+                  <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a>
+                </address>
+                <p class="mt-md footer__hours">
+                  Mon - Thu 7:00&nbsp;am - 6:00&nbsp;pm<br>
+                  Fri 7:00&nbsp;am - 10:00&nbsp;pm<br>
+                  Sat 8:00&nbsp;am - 10:00&nbsp;pm<br>
+                  Sun 8:00&nbsp;am - 3:00&nbsp;pm<br>
+                  Thursday recordings: doors 6:30&nbsp;pm
+                </p>
+              </div>
+            </div>
+
+            <div class="footer__column footer__column--3">
+              <h3 class="footer__title">Explore</h3>
+              <nav class="footer__shortcuts" aria-label="Sitemap">
+                <ul>
+                  <li><a href="cafe.html">The Cafe</a></li>
+                  <li><a href="menu.html">Menu</a></li>
+                  <li><a href="podcast.html">The Podcast</a></li>
+                  <li><a href="episodes.html">Episodes</a></li>
+                  <li><a href="events.html">Events</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="book.html">Book a table</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="footer__column footer__column--4">
+              <aside class="footer__socials">
+                <h3 class="footer__title">Follow us on our socials</h3>
+                <ul class="footer__listen">
+                  <li><a href="#">Spotify</a></li>
+                  <li><a href="#">Apple Podcasts</a></li>
+                  <li><a href="#">YouTube</a></li>
+                  <li><a href="#">RSS</a></li>
+                </ul>
+                <ul class="socials">
+                  <li><a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-instagram"></use></svg></a></li>
+                  <li><a href="#" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-youtube"></use></svg></a></li>
+                </ul>
+              </aside>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="js-scroll-top-limit">
+        <div class="strip">
+          <div class="container">
+            <div class="footer__mid">
+              <div class="footer__legal">
+                <p>Copyright 2026 Latte with Lata. All rights reserved.</p>
+                <details id="footer-credits" class="footer__photo-credits">
+                  <summary>Photo credits</summary>
+                  <ul>
+                    <li>“Latte art 0.jpg” by Angela CoffeeRank, <a href="https://creativecommons.org/licenses/by/2.0" rel="noopener" target="_blank">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Latte_art_0.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“A coffee cup featuring intricate latte art sits on a wooden table next to an open laptop.jpg” by Shixart1985, <a href="https://creativecommons.org/licenses/by/2.0" rel="noopener" target="_blank">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:A_coffee_cup_featuring_intricate_latte_art_sits_on_a_wooden_table_next_to_an_open_laptop.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“A cup of cappuccino.jpg” by Vee Satayamas, <a href="https://creativecommons.org/licenses/by/4.0" rel="noopener" target="_blank">CC BY 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:A_cup_of_cappuccino.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“BoulderCoffeeOpenMicNight2018.jpg” by DanielPenfield, <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener" target="_blank">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:BoulderCoffeeOpenMicNight2018.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> - this crop is a derivative shared under the same CC BY-SA licence.</li>
+                    <li>“Guerrilla on air – Fatti d’arte teaser” (video) by M. Capriglione, M. Rainò and R. Romita, <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener" target="_blank">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Guerrilla_on_air_%E2%80%93_Fatti_d%27arte_teaser.mpg" rel="noopener" target="_blank">Wikimedia Commons</a> - cut, slowed, colour-graded and looped; this edit is shared under the same CC BY-SA licence.</li>
+                    <li>All other photographs: CC0 (public domain dedication) via Wikimedia Commons - full register in the site's ASSETS.md.</li>
+                  </ul>
+                </details>
+                <p class="footer__disclaimer">Latte with Lata is a personal platform and is independent of any employer or institution.</p>
+              </div>
+              <aside class="footer__credits">Site by Agora Data Driven</aside>
+            </div>
+          </div>
+        </div>
+        <div class="footer-wordmark" aria-hidden="true"><span>LATTE WITH LATA</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <aside id="back-to-top" class="scroll-top"><a href="#top" aria-label="Back to top"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-up"></use></svg></a></aside>
+</footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/SplitText.min.js"></script>
+<script src="vendor/ScrollToPlugin.min.js"></script>
+<script src="vendor/splide.min.js"></script>
+<script type="module" src="js/page.js"></script>
+</body>
+</html>

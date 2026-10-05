@@ -1,0 +1,348 @@
+/* ==========================================================================
+   00-header - fixed header, plate, hide/show, off-canvas drawer, mobile pill
+   Source keys: IC = PZ/source/css/inline-critical.beautified.css
+                CS = PZ/source/css/scss-from-map/main/_custom_site.scss
+                M1 = PZ/source/css/main.1.beautified.css
+                MS = PZ/source/css/scss-from-map/minimal/_minimal_site.scss
+                SC = IC(eberg)/source/css/inline-scoped.beautified.css
+   Scoped under #page-header / #menu-container / #book-pill-wrap. Every ported value cites file:line; invented = INFERRED.
+   BRAND EDITION (2026-09-17, BK = the client's brand kit, see BRAND.md / LOGO-USAGE.md): colour + type + mark only.
+   Geometry (header row 78/63, logo box 265x30 / 132x15, drawer clamp, pill) is unchanged. PAGES UPDATE (2026-09-17): the drawer mark is a
+   home link. UPDATE-3 (2026-09-17, client request): the header's "Book a table" link is gone (its CSS is deleted) and the rebuild-v2 logo
+   lockup is back at the far right (mark + wordmark text, mark only below 36em). Type roles come from tokens.css
+   (--fontBrand is inherited from body - no font-family here); the 44px hit boxes use padding + equal negative margin.
+   ========================================================================== */
+
+/* ---- header box - IC:959-967 (.page__header), IC:1073-1092 ---- */
+#page-header {
+    position: fixed;                                   /* IC:963 */
+    top: 0; left: 0; right: 0;                         /* IC:962,964,966 (inset 0 0 auto) */
+    z-index: var(--z-header);                          /* IC:967 (100) = Z-INDEX PLAN header 100 */
+    background: transparent;                           /* IC:960 */
+    font-size: calc(var(--fontSize) * 1em);            /* IC:961 */
+    color: var(--colOnBrand);                          /* IC:1075 - BK: white in every state (over the hero video, on the brown plate) */
+    --colBurger: var(--colOnBrand);                    /* IC:1074 */
+    --colFocus: var(--colOnBrand);                     /* BK/WIG: the focus ring is white on the brown plate / drawer (the accent would be 2:1 on brown) - INFERRED; base.css reads --colFocus directly */
+    --aniProp: transform;                              /* INFERRED: source transitions "all" (IC:1080); narrowed so the hero's gsap.from(opacity) (M8) is not fought by a CSS transition */
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+    #page-header {
+        transition: var(--aniTime, .3s) cubic-bezier(.445, .05, .55, .95);   /* IC:1078-1081 */
+        transition-property: var(--aniProp, all);
+    }
+}
+#page-header::before {                                 /* IC:969-977 + 1084-1087 (plate) */
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    background: var(--colNero);
+    opacity: 1;
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+    #page-header::before { transition: var(--aniTime, .3s) cubic-bezier(.445, .05, .55, .95); transition-property: opacity; }   /* IC:446-461 list (.page__header:before) */
+}
+body:not(.opaque) #page-header::before { opacity: 0; } /* IC:1089-1091 (.home:not(.opaque) .page__header:before) - body carries the state here */
+.header-up #page-header { transform: translate3d(0, -100%, 0); }   /* IC:1094-1096 -> -78px desktop / -63px mobile (manifest ix:header-hidden) */
+#page-header a { color: inherit; }                     /* CS:56-58 pattern (.menu__container a); header links inherit --colBianco - INFERRED for the bar */
+
+/* `html.m-open body { overflow: hidden }` (BUILD-SPEC G6 / DD Pick 3) now lives in base.css s2 - the scoped OVERRIDE was dropped by the
+   global verifier (round 2). */
+
+/* ---- header row - IC:985-992 + IC:1098-1100; measured 1440x78 (24 + 30 + 24) / 390x63 ---- */
+#page-header .header__container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 6;                                        /* IC:991 */
+    padding: 1.5em var(--container-pad, var(--vpad));  /* IC:1099 */
+}
+
+/* ---- burger - IC:1147-1249 (compiled burger mixin), MS:110-186; measured 48x15 @1440 (x 57.6 y 31.5), 24x15 @390 ---- */
+#page-header .menu__switcher {
+    display: flex; align-items: center; justify-content: center;   /* IC:1150-1152 */
+    position: relative;
+    z-index: calc(var(--z-drawer) + 1);                /* IC:1154 has 10 (> drawer 5): the burger stays clickable above the open drawer; re-numbered above --z-drawer inside the header's stacking context - INFERRED */
+    color: inherit;
+}
+#page-header .menu__burger {
+    display: block;                                    /* IC:1176 */
+    position: relative;                                /* IC:1179 */
+    margin-top: 7px; margin-bottom: 7px;               /* IC:1177-1178 ($gap 6px + $h 1px) */
+    -webkit-user-select: none; user-select: none;      /* IC:1180-1182 */
+    width: 1.5em;                                      /* IC:1214 ($w - 1.5 = 24px below 430px) */
+}
+@media only screen and (min-width: 430px) { #page-header .menu__burger { width: 2em; } }   /* IC:1218-1222 */
+@media screen and (min-width: 36em)       { #page-header .menu__burger { width: 3em; } }   /* IC:1224-1228 (= 48px) */
+#page-header .menu__burger u,
+#page-header .menu__burger::after,
+#page-header .menu__burger::before {
+    display: block;                                    /* IC:1188 */
+    width: 100%;                                       /* IC:1247 */
+    height: 1px;                                       /* IC:1189 */
+    background-color: var(--colBurger);                /* IC:1187 */
+    text-decoration: none;
+    border-radius: .5px;                               /* IC:1244 */
+    transform-origin: 50% 50%;                         /* IC:1245 */
+    transition-duration: .3s;                          /* IC:1191 */
+    transition-property: transform, opacity;           /* IC:1246 has `all`; only these two change (WIG) */
+}
+#page-header .menu__burger::after,
+#page-header .menu__burger::before { content: ""; position: absolute; left: 0; }   /* IC:1196-1199 (left:0 INFERRED - static offset of the source) */
+#page-header .menu__burger::before { top: -7px; height: 3px; }   /* IC:1201-1203, 1230-1232 */
+#page-header .menu__burger::after  { top: 7px; }                 /* IC:1205-1207 */
+#page-header .menu__burger u { opacity: 0; position: relative; }  /* IC:1250-1253 */
+.m-open #page-header .menu__burger::before { transform: translate3d(0, 7px, 0) rotate(-15deg); }   /* IC:1234-1236 */
+.is-mouse:not(.m-open) #page-header .menu__switcher:hover .menu__burger::before { transform: translate3d(0, 1px, 0); }    /* IC:1167-1169 */
+.is-mouse:not(.m-open) #page-header .menu__switcher:hover .menu__burger::after  { transform: translate3d(0, -1px, 0); }   /* IC:1171-1173 */
+
+/* ---- burger hit box: 48x15 / 24x15 lines -> 47 tall (WIG / WCAG 2.5.5 44px); padding + equal negative margin = zero layout change ---- */
+#page-header .header__burger { padding: 1em .75em; margin: -1em -.75em; }   /* moved here from base.css s17 (tokens hand-off request 2) */
+
+/* ---- logo lockup, far right of the row (UPDATE-3 2026-09-17, client request: "Book a table" left the bar and the brand lockup came back
+        in its place - burger left, lockup right via the row's space-between). One link home: href index.html, aria-label "Latte with Lata,
+        home"; the mark is decorative (alt="") and the wordmark text aria-hidden. Values = the brand-pass header (rebuild-v2), unchanged:
+        IC:1102-1111 (.header__logo__marchio 132x15 -> 265x30 @36em), measured x 1117.4 (right gap = --vpad)
+        BK lockup (LOGO-USAGE.md): white mark 44px (56px >= 60em) + "LATTE WITH LATA" Creato Bold 15px uppercase ls .12em, one clear
+        space (the saucer = 11.4% of the mark height) between them; below 36em the mark only. The link keeps its measured 132x15 / 265x30
+        margin box (header row stays 78 / 63): the mark is centred in it and overhangs it top and bottom, the hit box is the padded
+        47 / 62px band (padding + equal negative margin; the border-box height includes the padding so the content box stays 15 / 30).
+        White in every state (--colOnBrand): over the hero scrims and on the brown plate. ---- */
+#page-header .header__logo {
+    display: flex;                                     /* IC:1101 (.header__logo{display:flex}) */
+    align-items: center;
+    justify-content: flex-end;
+    gap: calc(var(--markHeader) * .114);               /* BK clear space = saucer height (5px @44, 6.4px @56) */
+    margin-left: auto;
+    width: 132px; height: calc(15px + 2em);            /* IC:1103-1107 (15px content box) + the 1em hit-box padding below */
+    padding-block: 1em; margin-block: -1em;            /* 44px hit box, margin box = 15 / 30 as measured (moved here from base.css s17) */
+    font-size: 1em;                                    /* IC:994 */
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--colOnBrand);
+}
+@media screen and (min-width: 36em) { #page-header .header__logo { width: 265px; height: calc(30px + 2em); } }   /* IC:1108-1111 */
+#page-header .header__mark {
+    display: block;
+    height: var(--markHeader);                         /* BK 44px -> 56px at >= 60em (tokens.css) */
+    width: auto;                                       /* never stretched: 0.844 x height (the width/height attrs reserve the box) */
+    max-width: none;
+    flex: 0 0 auto;
+}
+#page-header .header__wordmark {                       /* BK header wordmark text: Creato Bold 15px uppercase, tracking .12em (LOGO-USAGE.md) */
+    display: none;                                     /* < 36em: mark only */
+    font-weight: var(--wTitle);
+    font-size: .9375rem;                               /* 15px */
+    letter-spacing: var(--trackWordmark);
+    text-transform: uppercase;
+    line-height: 1;
+}
+@media screen and (min-width: 36em) { #page-header .header__wordmark { display: block; } }
+.is-mouse #page-header .header__logo:hover { opacity: .7; }   /* CS:213-216 pattern - INFERRED (opacity only: no layout shift, WIG) */
+
+/* ---- screen + drawer boxes - IC:1276-1292, M1:8342-8372, CS:22-52 ---- */
+#page-header .menu__screen,
+#menu-container {
+    position: fixed;                                   /* IC:1288 */
+    top: 0; bottom: 0; left: 0;                        /* IC:1284,1286,1289 */
+    opacity: 0;                                        /* IC:1287 */
+    pointer-events: none;                              /* IC:1288 */
+    transform: translate3d(-100%, 0, 0);               /* IC:1290 */
+    visibility: hidden;                                /* INFERRED (keeps drawer links out of the tab order while closed; .m-open sets visible - M1:8352,8371) */
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+    #page-header .menu__screen, #menu-container {
+        transition: var(--aniTime, var(--aniSlow)) var(--easeInOutCubic);   /* %animate2 - CS:23,33 -> .6s cubic-bezier(.645,.045,.355,1) */
+        transition-property: var(--aniProp, all);
+    }
+}
+#page-header .menu__screen {
+    right: 0;                                          /* IC:1294 */
+    display: block;                                    /* M1:8344 */
+    background: var(--colNero);                        /* M1:8343 */
+    opacity: .3;                                       /* M1:8345 (overrides the critical opacity 0 - the screen slides in at .3) */
+    z-index: var(--z-screen);                          /* M1:8346 has 4; Z-INDEX PLAN screen 105 */
+}
+.m-open #page-header .menu__screen { pointer-events: all; transform: none; visibility: visible; }   /* M1:8349-8353 */
+#menu-container {
+    display: flex;                                     /* M1:8358 */
+    flex-direction: column;                            /* M1:8359 */
+    width: clamp(50vw, 36em, 100%);                    /* IC:1278 -> 720 @1440, 390 @390 */
+    max-width: 50em;                                   /* IC:1277 */
+    background: var(--colNero);                        /* M1:8356 */
+    color: var(--colBianco);                           /* M1:8357 */
+    line-height: 1.2;                                  /* M1:8360 */
+    z-index: var(--z-drawer);                          /* M1:8363 has 5; Z-INDEX PLAN drawer 110 */
+    /* NO padding: the compiled rule M1:8361 (`padding-top: <3 values>`) is invalid CSS and was dropped by the browser -
+       the manifest confirms it (#menu-main x 0 w 720, .menu__footer ends at y 900). Kept as measured. */
+}
+.m-open #menu-container { opacity: 1; pointer-events: all; transform: none; visibility: visible; }   /* M1:8366-8371 */
+#menu-container a { color: inherit; }                  /* M1:8374-8376 */
+@media screen and (prefers-reduced-motion: no-preference) {
+    #menu-container li {                               /* M1:8379-8382 + CS:59-63 (%animate .3s cubic-bezier(.445,.05,.55,.95)) */
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+        transition: var(--aniTime, var(--aniFast)) var(--easeInOutSine);
+        transition-property: var(--aniProp, all);
+    }
+    /* delay ladder i*.05s + .3s - CS:64-68 (compiled M1:8384-8414) */
+    #menu-container li:nth-child(1) { transition-delay: .35s; }  #menu-container li:nth-child(2) { transition-delay: .4s; }
+    #menu-container li:nth-child(3) { transition-delay: .45s; }  #menu-container li:nth-child(4) { transition-delay: .5s; }
+    #menu-container li:nth-child(5) { transition-delay: .55s; }  #menu-container li:nth-child(6) { transition-delay: .6s; }
+    #menu-container li:nth-child(7) { transition-delay: .65s; }  #menu-container li:nth-child(8) { transition-delay: .7s; }
+    #menu-container li:nth-child(9) { transition-delay: .75s; }
+    .m-open #menu-container li { opacity: 1; transform: none; }   /* M1:8417-8422 */
+}
+
+/* ---- menu row + main links - CS:79-116 (compiled M1:8432-8441); measured #menu-main y 149.1 h 457.6 @1440 (6 links at 48px) ---- */
+#menu-container .menu__row {
+    max-width: 75rem;                                  /* CS:80 ($contWidth) */
+    margin-top: auto;                                  /* CS:81 */
+    display: grid;                                     /* CS:82 */
+    max-height: 100%;                                  /* CS:83 */
+    overflow: auto;                                    /* CS:84 */
+    overscroll-behavior: contain;                      /* WIG: no scroll chaining out of the drawer - INFERRED */
+    width: 100%;                                       /* CS:85 */
+    gap: calc(var(--vpad) / 2) var(--vpad);            /* CS:86 */
+    padding-left: calc(var(--vpad) / 2);               /* CS:87 -> 12.8px @390 (manifest #menu-main x 12.8) */
+    padding-right: calc(var(--vpad) / 2);              /* CS:88 */
+}
+@media screen and (min-width: 36em) { #menu-container .menu__row { padding-left: 0; padding-right: 0; } }   /* CS:89-92 ($screenSmall 36em) */
+#menu-container .menu__main {
+    font-weight: var(--wTitle);                        /* %fontTitoli - CS:95 (_extend_site.scss:12-18) with the BK title role: Creato Bold 700 uppercase ls -.01em (family inherited) */
+    text-transform: uppercase;
+    letter-spacing: var(--trackTitle);
+    width: 100%;                                       /* CS:96 */
+    padding: 1em var(--vpad);                          /* CS:97 */
+    max-height: 100%;                                  /* CS:98 */
+    overflow: auto;                                    /* CS:99 */
+    overscroll-behavior: contain;                      /* WIG drawer scroll box - INFERRED */
+}
+#menu-container .menu__main ul { display: grid; gap: 1em; list-style: none; padding: 0; margin: 0; }   /* CS:100-103 */
+#menu-container .menu__main li { display: flex; justify-content: center; align-items: center; text-align: center; }   /* CS:104-108 */
+@media screen and (min-width: 50em) { #menu-container .menu__main li { text-align: unset; justify-content: flex-start; } }   /* CS:109-112 ($screenMedium 50em) */
+#menu-container .menu__main a {
+    font-size: clamp(var(--titleSize) / 1.7, 4vw, var(--titleSize));   /* CS:115 = clamp(35.3px, 4vw, 60px) -> 57.6 @1440 (manifest measured 48; BUILD-SPEC G2 says use the formula) */
+    line-height: 1.2;                                  /* inherited from #menu-container (M1:8360) */
+}
+
+/* ---- rolling link hover (M4) - CS:119-147 ---- */
+#menu-container .menu__main a,
+#menu-container .menu__side a { position: relative; display: inline-block; overflow: hidden; }   /* CS:122-124 */
+#menu-container .menu__main a div,
+#menu-container .menu__side a div {
+    display: block;                                    /* CS:127 */
+    transition: var(--aniTime, var(--aniFast)) var(--easeInOutSine);   /* %animate - CS:126 */
+    transition-property: var(--aniProp, all);
+}
+#menu-container .menu__main a div + div,
+#menu-container .menu__side a div + div {
+    position: absolute; top: 0; left: 0; height: 100%; /* CS:129-132 */
+    width: 100%;                                       /* INFERRED (keeps the copy centred on mobile) */
+    opacity: 0;                                        /* CS:133 */
+    transform: translate3d(0, -100%, 0);               /* CS:134 */
+}
+.is-mouse #menu-container .menu__main a:hover div,
+.is-mouse #menu-container .menu__side a:hover div { opacity: 0; transform: translate3d(0, 100%, 0); }   /* CS:137-141 */
+.is-mouse #menu-container .menu__main a:hover div + div,
+.is-mouse #menu-container .menu__side a:hover div + div { opacity: 1; transform: none; }               /* CS:142-145 */
+
+/* ---- mid row: side links + square CTA - CS:150-171; measured #menu-side x 57.6 y 635.5, button 116.3x59.2 at x 546.1 ---- */
+#menu-container .menu__mid {
+    padding: calc(var(--vpad) / 2) var(--vpad) 0;      /* CS:151 */
+    margin-bottom: auto;                               /* CS:152 */
+    display: grid;                                     /* CS:153 */
+    gap: 1em;                                          /* CS:154 */
+}
+@media screen and (min-width: 36em) { #menu-container .menu__mid { display: flex; justify-content: space-between; } }   /* CS:155-158 */
+#menu-container .menu__side { text-transform: uppercase; font-size: 1.1em; text-align: center; font-weight: var(--wLead); letter-spacing: .04em; }   /* CS:161-163 (17.6px); BK: Medium 500 + light tracking for the small uppercase - INFERRED */
+@media screen and (min-width: 36em) { #menu-container .menu__side { text-align: unset; } }        /* CS:164-166 */
+#menu-container .menu__side ul { display: grid; gap: .5em; list-style: none; padding: 0; margin: 0; }   /* CS:167-170 */
+#menu-container .button--squared { border-radius: 0; }  /* _button.scss:147-149 (already in base.css; restated for clarity of the contract) */
+/* BK "Book a table": outlined white, 44px tall (base.css .button min-height --tapMin). Hover fill = the single accent at full opacity so the
+   white label keeps 6.5:1 (the ported 40% white sheet would leave white on #967c6a at 3.7:1) - INFERRED colour, same slide mechanism */
+#menu-container .button--outlined::after { background: var(--colAccent); opacity: 1; }
+#menu-container .button--outlined:hover, #menu-container .button--outlined:focus-visible { --colBordoBottoni: var(--colAccent); }
+
+/* ---- drawer mark - BK white cup mark 72px (LOGO-USAGE.md), top-right of the drawer opposite the burger; absolute so the measured
+        row / mid / footer flow is untouched; clear space >= 8.2px on every side. PAGES-SPEC 3: the mark is the drawer's "home" link
+        (a.menu__home > img.menu__mark, 61x72 hit box >= 44px) ---- */
+#menu-container .menu__home {
+    position: absolute;
+    top: calc(var(--vpad) / 2);                        /* 28.8px @1440, 12.8px @390 */
+    right: var(--vpad);
+    z-index: 1;
+    display: block;
+    line-height: 0;
+}
+#menu-container .menu__mark {
+    display: block;
+    height: var(--markDrawer);
+    width: auto;
+    max-width: none;
+}
+.is-mouse #menu-container .menu__home:hover { opacity: .7; }   /* opacity only (no layout shift) */
+/* current page in the drawer (aria-current="page" set by 00-header.js from body[data-page]): a hairline under the label - INFERRED */
+#menu-container .menu__main a[aria-current="page"] div { box-shadow: inset 0 -2px 0 var(--colLineOnBrand); }
+
+/* ---- footer row: Listen-on icons - CS:173-179, 208-219; measured h 56.2 at y 843.8 ---- */
+#menu-container .menu__footer {
+    padding: 1em var(--vpad);                          /* CS:174 */
+    display: flex;                                     /* CS:175 */
+    gap: 1em;                                          /* CS:176 */
+    align-items: center;                               /* CS:177 */
+    justify-content: space-between;                    /* CS:178 */
+}
+#menu-container .menu__footer__label { font-size: .75rem; font-weight: var(--wLead); text-transform: uppercase; letter-spacing: var(--trackEyebrow); color: var(--colTextOnBrandMuted); }   /* INFERRED (replaces the source language nav on the left); BK eyebrow role, muted-on-brand token (10.7:1) instead of opacity */
+#menu-container .socials { display: flex; gap: 1em; list-style: none; margin: 0; padding: 0; }   /* CS:15-19 + CS:209-211 */
+#menu-container .socials a { display: block; font-size: 1.5em; line-height: 1; padding: .45em; margin: -.45em; }   /* CS:214 (a::before font-size 1.5em -> 24px icon); 45.6px hit box (moved here from base.css s17) */
+#menu-container .socials a:hover { color: inherit; opacity: .7; }                   /* CS:216-219 */
+#menu-container .socials .icon { display: block; width: 1em; height: 1em; }
+
+/* ---- mobile pill (M28) - Iceberg SC:917-930 (.home__about-button), SC:1609-1613 (link), SC:1653-1660 (inner) ---- */
+#book-pill-wrap {
+    position: fixed;                                   /* SC:925 */
+    left: 0; right: 0;                                 /* SC:1591-1593 (<=1023: left 0, width 100%, justify-content center) */
+    bottom: 10vh;                                      /* SC:921 */
+    top: auto;                                         /* SC:926 */
+    z-index: var(--z-pill);                            /* SC:927 has 900; Z-INDEX PLAN pill 90 */
+    display: none;                                     /* SC:922 */
+    justify-content: center;                           /* SC:1590 */
+    align-items: center;
+    opacity: 0;                                        /* SC:924 (GSAP fades the wrapper in: M28) */
+    visibility: hidden;
+    pointer-events: none;
+}
+@media screen and (max-width: 47.99em) { #book-pill-wrap { display: flex; } }   /* SC:929-933 (<=1023 -> rebuild <768: BUILD-SPEC 00 (c) `@media (min-width:48em){display:none}`) */
+#book-pill {
+    display: inline-flex; align-items: center; justify-content: center;   /* SC:1654-1658 */
+    gap: .75em;                                        /* SC:1657 (10/393vw ~ 9.9px) */
+    height: 2.6rem;                                    /* INFERRED = measured 41.5px (SC padding 10/393vw + 12px line + icon) */
+    padding: 0 1.5em 0 1.25em;                         /* SC:1659 (10 20 10 10 /393vw) re-expressed - INFERRED */
+    min-height: var(--tapMin);                         /* 41.6 -> 44px touch target, fixed element = no flow impact (moved here from base.css s17) */
+    border-radius: 9999em;                             /* SC:1610 */
+    background: var(--colBrand);                       /* BK: brand espresso with white text (13.1:1); was the accent (BEST-PARTS Pick 18 "Change") */
+    color: var(--colOnBrand);
+    font-size: 12px; font-weight: var(--wButton); line-height: 1;   /* SC:1653-1655 (12/393vw, 100%); BK button role Bold 700 (was 600) */
+    letter-spacing: var(--trackButton);                /* BK .08em (SC:1656 had -.01em) */
+    text-transform: uppercase;                         /* SC:1657 */
+    white-space: nowrap;                               /* SC:1658 */
+    pointer-events: auto;
+}
+#book-pill .icon { width: 1.5em; height: 1.5em; }      /* INFERRED (source svg 35/2024vw) */
+#book-pill:hover, #book-pill:focus-visible { color: var(--colOnBrand); background: var(--colAccent); }   /* BK hover feedback: the single accent (white 6.5:1), no movement */
+/* SHARED POLISH 2026-09-17: over a brand / deep / caramel band (or a dark photo) the brown plate vanished (1:1 / 2:1). 00-header.js resolves the
+   colour behind the pill on every scroll frame and sets .is-on-dark on the wrapper: white plate, brown label + icon (13.06:1), white focus ring.
+   Plate vs band: white on brand 13.06, deep 16.97, caramel 6.54. Hover / focus: brand-soft plate, brown label (11.45:1). Colour only - no layout. */
+/* + a 1px keyline in the OPPOSITE brand colour and a soft shadow (paint only): invisible on a plain band, a crisp edge where the pill crosses
+   mid-tone photos or the big white display type of 07 / 08 (where no single plate colour can reach 4.5:1 against every pixel) */
+#book-pill { box-shadow: 0 0 0 1px var(--colOnBrand), 0 .25rem 1rem var(--colShadow); }
+#book-pill-wrap.is-on-dark #book-pill { background: var(--colOnBrand); color: var(--colBrand); --colFocus: var(--colOnBrand); box-shadow: 0 0 0 1px var(--colBrand), 0 .25rem 1rem var(--colShadow); }
+#book-pill-wrap.is-on-dark #book-pill:hover, #book-pill-wrap.is-on-dark #book-pill:focus-visible { background: var(--colBrandSoft); color: var(--colBrand); }
+@media screen and (prefers-reduced-motion: no-preference) { #book-pill { transition: background-color var(--aniUi) var(--easeInOutSine), color var(--aniUi) var(--easeInOutSine); } }   /* 200 ms (--aniUi); reduced motion = instant swap (base.css s15) */
+.m-open #book-pill-wrap { opacity: 0 !important; visibility: hidden !important; pointer-events: none; }   /* BEST-PARTS Pick 18 "Change": hidden while the drawer is open (overrides GSAP inline) */
+.pill-away #book-pill-wrap { opacity: 0 !important; visibility: hidden !important; pointer-events: none; }   /* brand pass (review POLISH 5): parked while 12 VISIT / LISTEN (own "Book a table") is in view - html class from 00-header.js */
+body[data-page="book"] #book-pill-wrap { display: none; }                                              /* the booking page IS the destination - no pill there (PAGES UPDATE) */
+html:not(.js-ok) #book-pill-wrap { opacity: 1; visibility: visible; pointer-events: auto; }             /* no-JS fallback - INFERRED */

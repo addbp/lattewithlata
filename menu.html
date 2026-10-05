@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<!-- no-js -> js-ok before first paint (PZ pattern: .no-js in inline-critical, rendered.html:1 <html class="js-ok ...">); the section CSS carries html:not(.js-ok) fallbacks -->
+<script>document.documentElement.classList.replace("no-js","js-ok")</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menu | Latte with Lata</title>
+<meta name="description" content="Coffee from a roaster two streets over, breakfast until 11:30, brunch and lunch, cakes baked in house, and a few plates on Thursday recording nights.">
+<meta name="theme-color" content="#502506">
+<link rel="canonical" href="https://addbp.github.io/lattewithlata/menu.html">
+<meta property="og:url" content="https://addbp.github.io/lattewithlata/menu.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Latte with Lata">
+<meta property="og:title" content="Menu | Latte with Lata">
+<meta property="og:description" content="Coffee from a roaster two streets over, breakfast until 11:30, brunch and lunch, cakes baked in house, and a few plates on Thursday recording nights.">
+<meta property="og:image" content="https://addbp.github.io/lattewithlata/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Latte with Lata - Real Conversations. Built on Purpose.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Menu | Latte with Lata">
+<meta name="twitter:description" content="Coffee from a roaster two streets over, breakfast until 11:30, brunch and lunch, cakes baked in house, and a few plates on Thursday recording nights.">
+<meta name="twitter:image" content="https://addbp.github.io/lattewithlata/assets/images/og-image.jpg">
+<link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/brand/fonts/creato_display/CreatoDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/brand/fonts/creato_display/CreatoDisplay-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="vendor/splide-core.min.css">
+<link rel="stylesheet" href="css/sections/00-header.css">
+<link rel="stylesheet" href="css/sections/13-newsletter.css">
+<link rel="stylesheet" href="css/sections/14-footer.css">
+<link rel="stylesheet" href="css/pages/_shell.css">
+<link rel="stylesheet" href="css/pages/menu.css">
+</head>
+<body id="top" data-page="menu" data-page-module="true">
+<a class="skip-main" href="#page-content">Skip to main content</a>
+
+<!-- ===== sections/00-header.html ===== -->
+<!-- 00-header: fixed header + off-canvas drawer + mobile Book-a-table pill. Shared by EVERY page (build-site.cjs inlines it on the home page and on all sub-pages).
+     Sits BEFORE <main>. Source skeleton: PZ/source/rendered.html #page-header (BUILD-SPEC 00 (b)); pill: Iceberg .home__about-button.
+     Copy: content/site.json -> brand.name (lockup wordmark + aria-label), nav[], bookingLabel, listenOn[], newsletter.eyebrow (side link).
+     Note: .header__container is NOT a .container (the source header is a full-width flex row, measured 1440x78 / 390x63).
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 1a + 3): the drawer keeps the white cup mark at 72px, now a link home. Every href is the PAGES-SPEC
+     navigation map: real pages, no same-page anchors, platform links stay "#" placeholders.
+     UPDATE-3 (2026-09-17, client request): the header row is burger LEFT + the logo lockup RIGHT again - the white cup mark (decorative img,
+     482x571 attrs = the viewBox box so nothing shifts on load; 44px, 56px at >= 60em) + the "LATTE WITH LATA" wordmark text (hidden below
+     36em: mark only), one link home. "Book a table" left the bar; it stays in the drawer, the mobile pill and every page CTA. -->
+<header id="page-header" class="header page__header">
+  <div class="header__container">
+    <button class="header__burger menu__switcher js-menu-switcher" type="button" aria-label="Menu" aria-haspopup="true" aria-controls="menu-container" aria-expanded="false"><span class="menu__burger"><u></u></span></button>
+
+    <a class="header__logo" href="index.html" aria-label="Latte with Lata, home">
+      <img class="header__mark" src="assets/brand/logo/latte-with-lata-mark-white.svg" alt="" width="482" height="571" decoding="async">
+      <span class="header__wordmark" aria-hidden="true">Latte with Lata</span>
+    </a>
+
+    <aside class="menu__screen js-menu-switcher" aria-hidden="true"></aside>
+
+    <div id="menu-container" class="menu__container drawer" aria-hidden="true">
+      <a class="menu__home" href="index.html" aria-label="Latte with Lata - home"><img class="menu__mark" src="assets/brand/logo/latte-with-lata-mark-white.svg" alt="" width="482" height="571" decoding="async"></a>
+      <div class="menu__row">
+        <nav id="menu-main" class="menu__main js-menu-main" aria-label="Main">
+          <ul>
+            <li><a href="index.html" data-nav="home"><div>Home</div><div aria-hidden="true">Home</div></a></li>
+            <li><a href="cafe.html" data-nav="cafe"><div>The Cafe</div><div aria-hidden="true">The Cafe</div></a></li>
+            <li><a href="menu.html" data-nav="menu"><div>Menu</div><div aria-hidden="true">Menu</div></a></li>
+            <li><a href="podcast.html" data-nav="podcast"><div>The Podcast</div><div aria-hidden="true">The Podcast</div></a></li>
+            <li><a href="episodes.html" data-nav="episodes"><div>Episodes</div><div aria-hidden="true">Episodes</div></a></li>
+            <li><a href="podcast.html#host"><div>The Host</div><div aria-hidden="true">The Host</div></a></li>
+            <li><a href="events.html" data-nav="events"><div>Events</div><div aria-hidden="true">Events</div></a></li>
+            <li><a href="contact.html" data-nav="contact"><div>Contact</div><div aria-hidden="true">Contact</div></a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="menu__mid">
+        <nav id="menu-side" class="menu__side" aria-label="Tools">
+          <ul>
+            <!-- side links: "Get directions" = the contact page's find-us block (navigation map); the newsletter block ships on every page, so its anchor stays same-page -->
+            <li><a href="contact.html#find-us"><div>Get directions</div><div aria-hidden="true">Get directions</div></a></li>
+            <li><a href="#s-13-newsletter"><div>Stay for the conversation</div><div aria-hidden="true">Stay for the conversation</div></a></li>
+          </ul>
+        </nav>
+        <a class="button button--outlined button--no-icon button--squared" href="book.html" data-nav="book"><strong>Book a table</strong></a>
+      </div>
+
+      <div class="menu__footer">
+        <span class="menu__footer__label" aria-hidden="true">Listen on</span>
+        <nav class="menu__listen" aria-label="Listen on">
+          <ul class="socials">
+            <li><a href="#" aria-label="Spotify"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-spotify"></use></svg><span class="visual-hide">Spotify</span></a></li>
+            <li><a href="#" aria-label="Apple Podcasts"><svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-apple"></use></svg><span class="visual-hide">Apple Podcasts</span></a></li>
+            <li><a href="#" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-youtube"></use></svg><span class="visual-hide">YouTube</span></a></li>
+            <li><a href="#" aria-label="RSS"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-rss"></use></svg><span class="visual-hide">RSS</span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Iceberg mobile pill (I11): wrapper = .home__about-button (fixed, full width, faded by GSAP), link = .vertical-button__link -->
+<div id="book-pill-wrap" class="book-pill__wrap">
+  <a id="book-pill" class="book-pill" href="book.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-cup"></use></svg><span>Book a table</span></a>
+</div>
+
+<main id="page-content" class="page__content">
+<!-- ===== pages/menu/01-hero.html ===== -->
+<!-- menu 01-hero - page hero (PAGES-SPEC 2 / shell.md s5). Copy: content/pages.json menu.hero verbatim; alt + size: assets-manifest (manifest wins). -->
+<section id="p-menu-01-hero" class="page-hero" data-banner aria-labelledby="p-menu-title">
+  <div class="page-hero__media"><img src="assets/images/page-menu.jpg" alt="A wooden table from above with pancakes on blue patterned plates, mugs of hot chocolate and a jug" width="2400" height="1350" fetchpriority="high" decoding="async"></div>
+  <div class="container page-hero__content">
+    <p class="page-hero__eyebrow">Eat and drink</p>
+    <h1 id="p-menu-title" class="page-hero__title">ON THE MENU</h1>
+    <p class="page-hero__intro">Espresso from a roaster two streets over, croissants baked at six, and brunch until the kitchen runs out.</p>
+  </div>
+</section>
+
+<!-- ===== pages/menu/02-intro.html ===== -->
+<!-- menu 02-intro - .mark-row, title, the two intro paragraphs | service times (.info-list), then the menu tools: tag legend + the dietary filter
+     (aria-pressed chips; js/pages/menu.js hides non-matching items and announces the count in the role=status line; hidden without JS because it
+     would do nothing), then the category chips (.page-nav--sticky).
+     STICKY NOTE: the shell's sticky chips only stick inside their parent. The six category sections are separate fragments (04..09), so the nav sits
+     in .menu-rail__track - an absolutely positioned, click-through box that js/pages/menu.js stretches from here to the end of 09 (--railH). Native
+     position: sticky does the rest (top offsets + header hand-over = css/pages/_shell.css). Without JS the track is as tall as the nav: plain chips.
+     Copy: content/pages.json menu.sections[intro] + menu.tags verbatim. "Filter the menu", the chip labels and the status line are UI microcopy. -->
+<section id="p-menu-02-intro" class="strip pt-md">
+  <div class="container">
+    <div class="mark-row anima--bottom-in"><img class="mark-row__mark" src="assets/brand/logo/latte-with-lata-mark-brown.svg" alt="" width="482" height="571" decoding="async"></div>
+  </div>
+  <div id="intro" class="strip strip--normal menu-intro">
+    <div class="container">
+      <div class="sec-head sec-head--center text-center anima--bottom-in">
+        <h2 class="strip__title1">A SHORT MENU, DONE WELL</h2>
+      </div>
+      <div class="menu-intro__cols mt-md">
+        <div class="menu-intro__copy anima--left-in">
+          <p class="lead">Espresso from a roaster two streets over, croissants baked at six, and brunch until the kitchen runs out. The prices are for a cup at the counter; a seat by the window, or at the corner table, costs the same.</p>
+          <p>The kitchen is small, so the list is short and it changes with the season. What is printed here is what we cook most weeks. The board by the counter has today&rsquo;s soup, today&rsquo;s filter coffee and anything new.</p>
+        </div>
+        <div class="menu-intro__times anima--right-in">
+          <dl class="info-list">
+            <div class="info-list__row"><dt>Breakfast</dt><dd>Opening until 11:30&nbsp;am</dd></div>
+            <div class="info-list__row"><dt>Brunch and lunch</dt><dd>11:30&nbsp;am to 3:00&nbsp;pm</dd></div>
+            <div class="info-list__row"><dt>Cakes, pastry and drinks</dt><dd>All day</dd></div>
+            <div class="info-list__row"><dt>Thursday night plates</dt><dd>Recording nights, 6:30&nbsp;pm to 8:30&nbsp;pm. Also Friday and Saturday evenings until 9:00&nbsp;pm.</dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="menu-tools mt-md anima--bottom-in">
+        <div class="menu-legend">
+          <h3 class="menu-tools__title">How to read the tags</h3>
+          <ul class="menu-legend__list">
+            <li><span class="diet" data-tag="v" aria-hidden="true">V</span><span>Vegetarian</span></li>
+            <li><span class="diet" data-tag="vg" aria-hidden="true">VG</span><span>Vegan</span></li>
+            <li><span class="diet" data-tag="gf" aria-hidden="true">GF</span><span>Gluten-free ingredients</span></li>
+            <li><span class="diet" data-tag="df" aria-hidden="true">DF</span><span>Dairy-free</span></li>
+            <li><span class="diet" data-tag="n" aria-hidden="true">N</span><span>Contains nuts</span></li>
+          </ul>
+          <p class="menu-legend__note">Vegan dishes are also vegetarian; they carry VG only.</p>
+        </div>
+        <div class="menu-filter" role="group" aria-labelledby="menu-filter-title">
+          <h3 class="menu-tools__title" id="menu-filter-title">Filter the menu</h3>
+          <div class="menu-filter__chips">
+            <button type="button" class="chip" data-filter="all" aria-pressed="true">Show all</button>
+            <button type="button" class="chip" data-filter="v" aria-pressed="false">Vegetarian</button>
+            <button type="button" class="chip" data-filter="vg" aria-pressed="false">Vegan</button>
+            <button type="button" class="chip" data-filter="gf" aria-pressed="false">Gluten-free</button>
+          </div>
+          <p class="menu-filter__status" role="status" data-total="36">Showing all 36 items</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="menu-rail">
+    <div class="menu-rail__track">
+      <nav class="page-nav page-nav--sticky page-nav--center" aria-label="Menu categories">
+        <ul class="page-nav__list">
+          <li><a href="#coffee">Coffee</a></li>
+          <li><a href="#not-coffee">Not coffee</a></li>
+          <li><a href="#breakfast">Breakfast until 11:30</a></li>
+          <li><a href="#brunch-lunch">Brunch and lunch</a></li>
+          <li><a href="#cakes-pastry">Cakes and pastry</a></li>
+          <li><a href="#thursday-plates">Thursday night plates</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/menu/03-featured.html ===== -->
+<!-- menu 03-featured - the twelve featured items as a photo card grid (menu-01..12.jpg). Each card links to its line in the list below
+     (#item-<id>); tags come from the item in its category. The filter hides cards too (data-tags). Copy: content/pages.json menu.featured +
+     menu.sections[featured] verbatim; alt + size: assets-manifest (manifest wins). -->
+<section id="p-menu-03-featured" class="strip strip--normal bg-band-cream2 pt-lg pb-lg">
+  <div id="featured" class="container">
+    <div class="sec-head sec-head--center text-center anima--bottom-in">
+      <p class="eyebrow">From the counter</p>
+      <h2 class="strip__title1">WHAT <span class="keep-together">PEOPLE ORDER</span></h2>
+      <p class="lead sec-head__intro">Twelve plates and cups that leave the counter most often.</p>
+    </div>
+    <ul class="card-grid feat-grid mt-md">
+      <li class="anima--bottom-in" data-menu-card data-tags="v gf">
+        <article class="card card--hover feat-card">
+          <div class="card__media"><img src="assets/images/menu-01.jpg" alt="A flat white with tulip latte art in a rust-brown cup on a rough wooden table" width="1200" height="1200" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Coffee</p>
+            <h3 class="card__title"><a href="#item-flat-white">Flat white</a></h3>
+            <div class="card__meta feat-card__meta"><span class="card__price">$5.50</span><ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li></ul></div>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in" data-menu-card data-tags="v gf">
+        <article class="card card--hover feat-card">
+          <div class="card__media"><img src="assets/images/menu-02.jpg" alt="A latte with a rosetta in a black cup on a wooden counter beside a brass bell" width="1200" height="1200" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Coffee</p>
+            <h3 class="card__title"><a href="#item-latte">Latte</a></h3>
+            <div class="card__meta feat-card__meta"><span class="card__price">$5.50</span><ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li></ul></div>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in" data-menu-card data-tags="vg gf df">
+        <article class="card card--hover feat-card">
+          <div class="card__media"><img src="assets/images/menu-03.jpg" alt="Filter coffee brewing through a glass dripper into a glass server on a scale" width="1200" height="1200" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Coffee</p>
+            <h3 class="card__title"><a href="#item-batch-filter">Batch filter</a></h3>
+            <div class="card__meta feat-card__meta"><span class="card__price">$4.50</span><ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul></div>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in" data-menu-card data-tags="v gf">
+        <article class="card card--hover feat-card">
+          <div class="card__media"><img src="assets/images/menu-04.jpg" alt="A hand holding a clay cup of milky chai with warm lights blurred behind" width="1200" height="1200" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Not coffee</p>
+            <h3 class="card__title"><a href="#item-masala-chai">Masala chai</a></h3>
+            <div class="card__meta feat-card__meta"><span class="card__price">$5.50</span><ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li></ul></div>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in" data-menu-card data-tags="v">
+        <article class="card card--hover feat-card">
+          <div class="card__media"><img src="assets/images/menu-05.jpg" alt="Golden butter croissants on a dark plate with white tulips behind" width="1200" height="1200" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Cakes and pastry</p>
+            <h3 class="card__title"><a href="#item-butter-croissant">Butter croissant</a></h3>
+            <div class="card__meta feat-card__meta"><span class="card__price">$5.00</span><ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul></div>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in" data-menu-card data-tags="v">
+        <article class="card card--hover feat-card">
+          <div class="card__media"><img src="assets/images/menu-06.jpg" alt="A slice of frosted cake with chopped nuts, caramel sauce and a fork on a white plate" width="1200" height="1200" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Cakes and pastry</p>
+            <h3 class="card__title"><a href="#item-cardamom-cake">Cardamom cake</a></h3>
+            <div class="card__meta feat-card__meta"><span class="card__price">$7.50</span><ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul></div>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in" data-menu-card data-tags="v n">
+        <article class="card card--hover feat-card">
+          <div class="card__media"><img src="assets/images/menu-07.jpg" alt="A bowl of muesli with nuts on a wooden table, hands holding a mug of tea and a magazine" width="1200" height="1200" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Breakfast until 11:30</p>
+            <h3 class="card__title"><a href="#item-bircher-muesli">Bircher muesli</a></h3>
+            <div class="card__meta feat-card__meta"><span class="card__price">$11.00</span><ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="n" title="Contains nuts"><span aria-hidden="true">N</span><span class="visual-hide">Contains nuts</span></li></ul></div>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in" data-menu-card data-tags="v">
+        <article class="card card--hover feat-card">
+          <div class="card__media"><img src="assets/images/menu-08.jpg" alt="A fried egg on toast with tomato and herbs on a floral plate, seen from above" width="1200" height="1200" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Breakfast until 11:30</p>
+            <h3 class="card__title"><a href="#item-eggs-on-toast">Eggs on toast</a></h3>
+            <div class="card__meta feat-card__meta"><span class="card__price">$12.00</span><ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul></div>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in" data-menu-card data-tags="vg df">
+        <article class="card card--hover feat-card">
+          <div class="card__media"><img src="assets/images/menu-09.jpg" alt="Toast with spinach, sliced avocado and soft-boiled eggs on a dark plate" width="1200" height="1200" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Brunch and lunch</p>
+            <h3 class="card__title"><a href="#item-avocado-on-rye">Avocado on rye</a></h3>
+            <div class="card__meta feat-card__meta"><span class="card__price">$16.00</span><ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul></div>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in" data-menu-card data-tags="v">
+        <article class="card card--hover feat-card">
+          <div class="card__media"><img src="assets/images/menu-10.jpg" alt="A steaming poached egg on toast with wilted greens and mushrooms on a wooden table" width="1200" height="1200" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Brunch and lunch</p>
+            <h3 class="card__title"><a href="#item-eggs-greens-sourdough">Eggs, greens, sourdough</a></h3>
+            <div class="card__meta feat-card__meta"><span class="card__price">$18.00</span><ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul></div>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in" data-menu-card data-tags="v">
+        <article class="card card--hover feat-card">
+          <div class="card__media"><img src="assets/images/menu-11.jpg" alt="A bowl of pumpkin soup topped with feta and pumpkin seeds, seen from above" width="1200" height="1200" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Brunch and lunch</p>
+            <h3 class="card__title"><a href="#item-soup-of-the-day">Soup of the day</a></h3>
+            <div class="card__meta feat-card__meta"><span class="card__price">$12.00</span><ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul></div>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in" data-menu-card data-tags="v n">
+        <article class="card card--hover feat-card">
+          <div class="card__media"><img src="assets/images/menu-12.jpg" alt="A slate board with brie, aged cheddar, crackers and green grapes" width="1200" height="1200" loading="lazy" decoding="async"></div>
+          <div class="card__body">
+            <p class="card__eyebrow">Thursday night plates</p>
+            <h3 class="card__title"><a href="#item-cheese-board">Cheese board</a></h3>
+            <div class="card__meta feat-card__meta"><span class="card__price">$19.00</span><ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="n" title="Contains nuts"><span aria-hidden="true">N</span><span class="visual-hide">Contains nuts</span></li></ul></div>
+          </div>
+        </article>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== pages/menu/04-coffee.html ===== -->
+<!-- menu 04-coffee - category "Coffee": name + dotted leader + price, description, dietary tags; two columns from 48em.
+     #coffee wraps the whole band so the scroll-spy chip stays current for the full section. Copy: content/pages.json menu.sections[coffee] verbatim. -->
+<section id="p-menu-04-coffee" class="strip strip--normal menu-cat">
+  <div id="coffee" class="menu-cat__inner pt-lg pb-lg" data-menu-cat>
+    <div class="container">
+      <header class="menu-cat__head">
+        <div class="menu-cat__titles">
+          <p class="eyebrow menu-cat__index anima--bottom-in" aria-hidden="true">01 / 06</p>
+          <h2 class="strip__title1 menu-cat__title" tabindex="-1">COFFEE</h2>
+        </div>
+        <p class="menu-cat__note anima--bottom-in">Double shots as standard. Oat, soy or lactose-free milk add $0.80. Decaf costs the same.</p>
+      </header>
+      <ul class="menu-list anima--bottom-in">
+      <li class="menu-item" id="item-espresso" data-menu-item data-tags="vg gf df">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Espresso</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$4.00</span>
+        </div>
+        <p class="menu-item__desc">A double shot of the house blend. Cocoa, a little orange, no sugar needed.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-macchiato" data-menu-item data-tags="v gf">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Macchiato</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$4.50</span>
+        </div>
+        <p class="menu-item__desc">A double espresso marked with a spoon of milk foam.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-long-black" data-menu-item data-tags="vg gf df">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Long black</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$4.50</span>
+        </div>
+        <p class="menu-item__desc">A double shot over hot water. Ask for it short if you like it stronger.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-flat-white" data-menu-item data-tags="v gf">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Flat white</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$5.50</span>
+        </div>
+        <p class="menu-item__desc">Double shot, steamed milk, thin foam. The cup most regulars order.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-cappuccino" data-menu-item data-tags="v gf">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Cappuccino</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$5.50</span>
+        </div>
+        <p class="menu-item__desc">Equal parts espresso, milk and thick foam, dusted with chocolate.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-latte" data-menu-item data-tags="v gf">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Latte</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$5.50</span>
+        </div>
+        <p class="menu-item__desc">The namesake. A double shot and a tall pour of steamed milk.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-batch-filter" data-menu-item data-tags="vg gf df">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Batch filter</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$4.50</span>
+        </div>
+        <p class="menu-item__desc">A single-origin filter, brewed fresh every hour. Today&rsquo;s origin is on the board.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-cold-brew" data-menu-item data-tags="vg gf df">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Cold brew</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$6.50</span>
+        </div>
+        <p class="menu-item__desc">Steeped for 16 hours and served over ice. Milk on the side if you ask.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul>
+      </li>
+      </ul>
+      <p class="menu-cat__empty" hidden>Nothing in this section carries that tag.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/menu/05-not-coffee.html ===== -->
+<!-- menu 05-not-coffee - category "Not coffee": name + dotted leader + price, description, dietary tags; two columns from 48em.
+     #not-coffee wraps the whole band so the scroll-spy chip stays current for the full section. Copy: content/pages.json menu.sections[not-coffee] verbatim. -->
+<section id="p-menu-05-not-coffee" class="strip strip--normal bg-band-cream2 menu-cat">
+  <div id="not-coffee" class="menu-cat__inner pt-lg pb-lg" data-menu-cat>
+    <div class="container">
+      <header class="menu-cat__head">
+        <div class="menu-cat__titles">
+          <p class="eyebrow menu-cat__index anima--bottom-in" aria-hidden="true">02 / 06</p>
+          <h2 class="strip__title1 menu-cat__title" tabindex="-1">NOT COFFEE</h2>
+        </div>
+        <p class="menu-cat__note anima--bottom-in">For the people who came for the conversation.</p>
+      </header>
+      <ul class="menu-list anima--bottom-in">
+      <li class="menu-item" id="item-masala-chai" data-menu-item data-tags="v gf">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Masala chai</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$5.50</span>
+        </div>
+        <p class="menu-item__desc">Black tea simmered with ginger, cardamom and clove. Made in a pot, not from syrup.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-pot-of-tea" data-menu-item data-tags="vg gf df">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Pot of tea</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$5.00</span>
+        </div>
+        <p class="menu-item__desc">Loose leaf: breakfast, Earl Grey, green, peppermint or chamomile.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-hot-chocolate" data-menu-item data-tags="v gf">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Hot chocolate</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$5.50</span>
+        </div>
+        <p class="menu-item__desc">Dark chocolate melted into steamed milk. Not too sweet.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-fresh-orange-juice" data-menu-item data-tags="vg gf df">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Fresh orange juice</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$6.50</span>
+        </div>
+        <p class="menu-item__desc">Squeezed to order. Nothing else in the glass.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-house-lemonade" data-menu-item data-tags="vg gf df">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">House lemonade</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$5.50</span>
+        </div>
+        <p class="menu-item__desc">Lemon, mint and sparkling water, made each morning.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul>
+      </li>
+      </ul>
+      <p class="menu-cat__empty" hidden>Nothing in this section carries that tag.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/menu/06-breakfast.html ===== -->
+<!-- menu 06-breakfast - category "Breakfast until 11:30": name + dotted leader + price, description, dietary tags; two columns from 48em.
+     #breakfast wraps the whole band so the scroll-spy chip stays current for the full section. Copy: content/pages.json menu.sections[breakfast] verbatim. -->
+<section id="p-menu-06-breakfast" class="strip strip--normal menu-cat">
+  <div id="breakfast" class="menu-cat__inner pt-lg pb-lg" data-menu-cat>
+    <div class="container">
+      <header class="menu-cat__head">
+        <div class="menu-cat__titles">
+          <p class="eyebrow menu-cat__index anima--bottom-in" aria-hidden="true">03 / 06</p>
+          <h2 class="strip__title1 menu-cat__title" tabindex="-1">BREAKFAST UNTIL 11:30</h2>
+        </div>
+        <p class="menu-cat__note anima--bottom-in">Served from opening until 11:30&nbsp;am, every day.</p>
+      </header>
+      <ul class="menu-list anima--bottom-in">
+      <li class="menu-item" id="item-sourdough-toast" data-menu-item data-tags="v">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Sourdough toast</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$7.00</span>
+        </div>
+        <p class="menu-item__desc">Two thick slices with salted butter and house jam or marmalade.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-porridge-with-brown-sugar" data-menu-item data-tags="vg df">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Porridge with brown sugar</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$10.00</span>
+        </div>
+        <p class="menu-item__desc">Steel-cut oats cooked in oat milk, with this week&rsquo;s stewed fruit.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-bircher-muesli" data-menu-item data-tags="v n">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Bircher muesli</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$11.00</span>
+        </div>
+        <p class="menu-item__desc">Oats soaked overnight with apple and yoghurt, topped with almonds and honey.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="n" title="Contains nuts"><span aria-hidden="true">N</span><span class="visual-hide">Contains nuts</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-eggs-on-toast" data-menu-item data-tags="v">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Eggs on toast</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$12.00</span>
+        </div>
+        <p class="menu-item__desc">Two eggs, poached, fried or scrambled, on buttered sourdough.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-bacon-and-egg-roll" data-menu-item data-tags="">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Bacon and egg roll</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$13.00</span>
+        </div>
+        <p class="menu-item__desc">Smoked bacon, a fried egg and tomato relish in a soft milk bun.</p>
+        
+      </li>
+      <li class="menu-item" id="item-masala-omelette" data-menu-item data-tags="v">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Masala omelette</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$15.00</span>
+        </div>
+        <p class="menu-item__desc">Three eggs with onion, green chilli, tomato and coriander. Toast on the side.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul>
+      </li>
+      </ul>
+      <p class="menu-cat__empty" hidden>Nothing in this section carries that tag.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/menu/07-brunch-lunch.html ===== -->
+<!-- menu 07-brunch-lunch - category "Brunch and lunch": name + dotted leader + price, description, dietary tags; two columns from 48em.
+     #brunch-lunch wraps the whole band so the scroll-spy chip stays current for the full section. Copy: content/pages.json menu.sections[brunch-lunch] verbatim. -->
+<section id="p-menu-07-brunch-lunch" class="strip strip--normal bg-band-cream2 menu-cat">
+  <div id="brunch-lunch" class="menu-cat__inner pt-lg pb-lg" data-menu-cat>
+    <div class="container">
+      <header class="menu-cat__head">
+        <div class="menu-cat__titles">
+          <p class="eyebrow menu-cat__index anima--bottom-in" aria-hidden="true">04 / 06</p>
+          <h2 class="strip__title1 menu-cat__title" tabindex="-1">BRUNCH AND LUNCH</h2>
+        </div>
+        <p class="menu-cat__note anima--bottom-in">From 11:30&nbsp;am until 3:00&nbsp;pm, or until the kitchen runs out.</p>
+      </header>
+      <ul class="menu-list anima--bottom-in">
+      <li class="menu-item" id="item-eggs-greens-sourdough" data-menu-item data-tags="v">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Eggs, greens, sourdough</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$18.00</span>
+        </div>
+        <p class="menu-item__desc">Two fried eggs, garlicky greens, chilli oil and grilled sourdough.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-avocado-on-rye" data-menu-item data-tags="vg df">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Avocado on rye</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$16.00</span>
+        </div>
+        <p class="menu-item__desc">Smashed avocado, lemon, pickled red onion and seeds on dark rye.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-mushrooms-on-toast" data-menu-item data-tags="v">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Mushrooms on toast</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$17.00</span>
+        </div>
+        <p class="menu-item__desc">Roast field mushrooms, thyme, ricotta and a poached egg on sourdough.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-smoked-trout-plate" data-menu-item data-tags="">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Smoked trout plate</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$19.00</span>
+        </div>
+        <p class="menu-item__desc">Hot-smoked trout, potato salad, a soft egg, pickles and rye crisps.</p>
+        
+      </li>
+      <li class="menu-item" id="item-soup-of-the-day" data-menu-item data-tags="v">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Soup of the day</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$12.00</span>
+        </div>
+        <p class="menu-item__desc">Made each morning and always vegetarian. Comes with bread and butter.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-toasted-cheese-sandwich" data-menu-item data-tags="v">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Toasted cheese sandwich</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$13.00</span>
+        </div>
+        <p class="menu-item__desc">Sharp cheddar, leek and mustard on sourdough, pressed until it crackles.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-grain-bowl" data-menu-item data-tags="vg gf df">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Grain bowl</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$17.00</span>
+        </div>
+        <p class="menu-item__desc">Brown rice, roast pumpkin, chickpeas, greens, tahini and toasted seeds.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul>
+      </li>
+      </ul>
+      <p class="menu-cat__empty" hidden>Nothing in this section carries that tag.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/menu/08-cakes-pastry.html ===== -->
+<!-- menu 08-cakes-pastry - category "Cakes and pastry": name + dotted leader + price, description, dietary tags; two columns from 48em.
+     #cakes-pastry wraps the whole band so the scroll-spy chip stays current for the full section. Copy: content/pages.json menu.sections[cakes-pastry] verbatim. -->
+<section id="p-menu-08-cakes-pastry" class="strip strip--normal menu-cat">
+  <div id="cakes-pastry" class="menu-cat__inner pt-lg pb-lg" data-menu-cat>
+    <div class="container">
+      <header class="menu-cat__head">
+        <div class="menu-cat__titles">
+          <p class="eyebrow menu-cat__index anima--bottom-in" aria-hidden="true">05 / 06</p>
+          <h2 class="strip__title1 menu-cat__title" tabindex="-1">CAKES <span class="keep-together">AND PASTRY</span></h2>
+        </div>
+        <p class="menu-cat__note anima--bottom-in">In the cabinet from opening. When it is gone, it is gone.</p>
+      </header>
+      <ul class="menu-list anima--bottom-in">
+      <li class="menu-item" id="item-butter-croissant" data-menu-item data-tags="v">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Butter croissant</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$5.00</span>
+        </div>
+        <p class="menu-item__desc">Baked at six each morning. Usually gone by eleven.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-almond-croissant" data-menu-item data-tags="v n">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Almond croissant</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$6.50</span>
+        </div>
+        <p class="menu-item__desc">Yesterday&rsquo;s croissant, filled with almond cream and baked again.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="n" title="Contains nuts"><span aria-hidden="true">N</span><span class="visual-hide">Contains nuts</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-cheese-scone" data-menu-item data-tags="v">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Cheese scone</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$5.50</span>
+        </div>
+        <p class="menu-item__desc">Cheddar and chive, served warm with butter.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-cardamom-cake" data-menu-item data-tags="v">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Cardamom cake</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$7.50</span>
+        </div>
+        <p class="menu-item__desc">A soft, spiced loaf cake with a lemon glaze. On the counter since day one.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-flourless-chocolate-cake" data-menu-item data-tags="v gf n">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Flourless chocolate cake</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$8.00</span>
+        </div>
+        <p class="menu-item__desc">Dense and dark, made with ground almonds instead of flour.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="gf" title="Gluten-free ingredients"><span aria-hidden="true">GF</span><span class="visual-hide">Gluten-free ingredients</span></li><li class="diet" data-tag="n" title="Contains nuts"><span aria-hidden="true">N</span><span class="visual-hide">Contains nuts</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-oat-and-date-slice" data-menu-item data-tags="vg df">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Oat and date slice</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$5.50</span>
+        </div>
+        <p class="menu-item__desc">Oats, dates, coconut oil and a pinch of salt.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul>
+      </li>
+      </ul>
+      <p class="menu-cat__empty" hidden>Nothing in this section carries that tag.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/menu/09-thursday-plates.html ===== -->
+<!-- menu 09-thursday-plates - category "Thursday night plates": name + dotted leader + price, description, dietary tags; two columns from 48em.
+     #thursday-plates wraps the whole band so the scroll-spy chip stays current for the full section. Copy: content/pages.json menu.sections[thursday-plates] verbatim. -->
+<section id="p-menu-09-thursday-plates" class="strip strip--normal bg-band-cream2 menu-cat">
+  <div id="thursday-plates" class="menu-cat__inner pt-lg pb-lg" data-menu-cat>
+    <div class="container">
+      <header class="menu-cat__head">
+        <div class="menu-cat__titles">
+          <p class="eyebrow menu-cat__index anima--bottom-in" aria-hidden="true">06 / 06</p>
+          <h2 class="strip__title1 menu-cat__title" tabindex="-1">THURSDAY NIGHT PLATES</h2>
+        </div>
+        <p class="menu-cat__note anima--bottom-in">Recording nights from 6:30&nbsp;pm, last plates at 8:30&nbsp;pm. Order before 7:00&nbsp;pm, at the break, or after the recording. Also served Friday and Saturday evenings until 9:00&nbsp;pm.</p>
+      </header>
+      <ul class="menu-list anima--bottom-in">
+      <li class="menu-item" id="item-olives-and-warm-bread" data-menu-item data-tags="vg df">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Olives and warm bread</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$9.00</span>
+        </div>
+        <p class="menu-item__desc">Marinated olives, olive oil and a quarter loaf from the oven.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-hummus-and-flatbread" data-menu-item data-tags="vg df">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Hummus and flatbread</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$12.00</span>
+        </div>
+        <p class="menu-item__desc">Hummus, chilli oil, pickled vegetables and warm flatbread.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="vg" title="Vegan"><span aria-hidden="true">VG</span><span class="visual-hide">Vegan</span></li><li class="diet" data-tag="df" title="Dairy-free"><span aria-hidden="true">DF</span><span class="visual-hide">Dairy-free</span></li></ul>
+      </li>
+      <li class="menu-item" id="item-toastie-of-the-night" data-menu-item data-tags="">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Toastie of the night</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$13.00</span>
+        </div>
+        <p class="menu-item__desc">Whatever the kitchen built that afternoon. Ask at the counter.</p>
+        
+      </li>
+      <li class="menu-item" id="item-cheese-board" data-menu-item data-tags="v n">
+        <div class="menu-item__head">
+          <h3 class="menu-item__name">Cheese board</h3>
+          <span class="menu-item__dots" aria-hidden="true"></span>
+          <span class="menu-item__price">$19.00</span>
+        </div>
+        <p class="menu-item__desc">Three cheeses, quince paste, walnuts and crackers. Enough for two.</p>
+        <ul class="diet-list" aria-label="Dietary tags"><li class="diet" data-tag="v" title="Vegetarian"><span aria-hidden="true">V</span><span class="visual-hide">Vegetarian</span></li><li class="diet" data-tag="n" title="Contains nuts"><span aria-hidden="true">N</span><span class="visual-hide">Contains nuts</span></li></ul>
+      </li>
+      </ul>
+      <p class="menu-cat__empty" hidden>Nothing in this section carries that tag.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/menu/10-notes.html ===== -->
+<!-- menu 10-notes - allergen, sourcing, counter-price and large-group notes as .notice blocks (role="note": static copy, not a live status).
+     Copy: content/pages.json menu.sections[notes] verbatim; item ids = note ids (menu.html#allergens ...). -->
+<section id="p-menu-10-notes" class="strip strip--normal pt-lg pb-lg">
+  <div id="notes" class="container notes">
+    <div class="sec-head notes__head anima--left-in">
+      <h2 class="strip__title1">BEFORE YOU ORDER</h2>
+    </div>
+    <div class="notes__grid">
+      <div class="notice notice--info anima--bottom-in" role="note" id="allergens"><div><p class="notice__title">Allergens</p><p>Tell us about any allergy when you order, every time. One small kitchen handles nuts, gluten, dairy, eggs, sesame and fish, so we cannot promise that any dish is free of traces. GF means made with gluten-free ingredients, not made in a gluten-free kitchen.</p></div></div>
+      <div class="notice notice--info anima--bottom-in" role="note" id="sourcing"><div><p class="notice__title">Where it comes from</p><p>Coffee from a roaster two streets over. Bread, croissants and cakes baked here each morning. Eggs are free range. Vegetables come from the Saturday market when the season allows.</p></div></div>
+      <div class="notice notice--info anima--bottom-in" role="note" id="prices"><div><p class="notice__title">Prices at the counter</p><p>The prices are for a cup at the counter. A seat by the window, or at the corner table, costs the same. Prices include tax. There is no service charge, and tips are shared evenly across the team.</p></div></div>
+      <div class="notice notice--info anima--bottom-in" role="note" id="groups"><div><p class="notice__title">Large groups</p><p>We can seat up to 8 on one booking. For a bigger group, call or email us a few days ahead and we will plan the tables and, if you like, a set menu.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/menu/11-book.html ===== -->
+<!-- menu 11-book - closing call to action on the caramel accent band (FINAL PASS: one closing-band style with cafe 07 / events 07) -> book.html (+ the large-group line -> contact.html?topic=booking).
+     data-pill-away: the mobile "Book a table" pill parks while this row (its own Book a table) is in view. Copy: content/pages.json menu.sections[book]. -->
+<section id="p-menu-11-book" class="strip strip--narrow bg-band-accent pt-lg pb-lg closing" data-pill-away>
+  <div id="book" class="container text-center">
+    <div class="anima--bottom-in">
+      <h2 class="strip__title1 closing__title">HUNGRY?</h2>
+      <p class="lead closing__text">Walk in any time, or book a table and we will keep one for you.</p>
+      <p class="closing__ctas"><a class="button" href="book.html">Book a table</a><a class="button button--outlined" href="contact.html?topic=booking">Large group? Write to us</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sections/13-newsletter.html ===== -->
+<!-- 13-newsletter - Black newsletter block: eyebrow, lead paragraph, floating-label email input, square accent submit with
+     the two-arrow swap, consent checkbox; right column big "Listen and follow" links
+     SOURCE skeleton: Iceberg div#join.footer-newsletter > .footer-newsletter__left (.__title, .__text, form.__form >
+       .form-group.__form-input (.form-input > label + input#email ; button.__form-input__button > span > svg x2)
+       + .form-group.__form-checkbox (.form-checkbox > input#subscribe + label > div + span)) ; .footer-newsletter__right
+       (.__title + ul > li > a)  (IC rendered.html line 29 block; CSS inline-scoped.beautified.css:2836-3300;
+       engine ZNMh4Fg5.beautified.js:909-935)
+     Copy: content/site.json newsletter.* verbatim (brand pass 2026-09-17: eyebrow "First to know", new paragraph). Right column = newsletter.follow[5] (DD Pick 12 "Change": platforms
+       + Instagram; copy.md maps follow[] to the right column). Hard-coded label (INFERRED): "Listen and follow" eyebrow.
+       "privacy policy" links to #privacy (copy.md). success/error strings ride on data-* so the JS shows visible text.
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 4): shared by every page; the form is wired to POST /api/subscribe through js/lib/api.js
+       ({ email, consent: true, source: "footer-newsletter", website }) - "website" is the hidden honeypot the server wants empty. When the API is
+       not there (static hosting: GET /api/health fails) the form does NOT pretend: it shows the .newsletter__notice line with the cafe's email.
+       The action attribute is the no-JS fallback only (the JS always intercepts the submit). -->
+<section id="s-13-newsletter" class="strip strip--normal bg-band-black newsletter-band" aria-labelledby="nl-eyebrow">
+  <div class="container newsletter">
+
+    <div class="newsletter__left">
+      <p id="nl-eyebrow" class="newsletter__eyebrow eyebrow">Stay for the conversation</p>
+      <p class="newsletter__text lead">The conversation doesn't end with the podcast. Follow along for meaningful moments, leadership insights, guest stories and upcoming conversations. One email a week, never more.</p>
+      <form class="newsletter__form" action="/api/subscribe" method="post" novalidate data-source="footer-newsletter"
+            data-success="You are on the list. See you Thursday."
+            data-error="That address did not go through. Check it and try once more.">
+        <div class="newsletter__row">
+          <div class="newsletter__field">
+            <label for="nl-email">Your email</label>
+            <input id="nl-email" class="newsletter__input" type="email" name="email" autocomplete="email" spellcheck="false" required aria-describedby="nl-msg-error">
+          </div>
+          <button class="newsletter__submit" type="submit" aria-label="Subscribe">
+            <span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+            <span aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+          </button>
+        </div>
+        <div class="newsletter__consent">
+          <input id="nl-consent" type="checkbox" name="consent" required>
+          <label for="nl-consent">
+            <span class="newsletter__box" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg></span>
+            <span>Yes, send me the Thursday email from Latte with Lata. I have read the <a href="contact.html#privacy">privacy policy</a>.</span>
+          </label>
+        </div>
+        <div class="newsletter__hp" aria-hidden="true"><label for="nl-website">Website</label><input id="nl-website" type="text" name="website" tabindex="-1" autocomplete="off"></div>
+        <p id="nl-msg-error" class="newsletter__error" role="alert" hidden></p>
+        <p class="newsletter__success" role="status" hidden></p>
+        <p class="newsletter__notice" role="status" hidden>Sign-ups are handled by our team right now - email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a></p>
+      </form>
+    </div>
+
+    <div class="newsletter__right">
+      <p class="newsletter__eyebrow eyebrow">Listen and follow</p>
+      <ul class="newsletter__links">
+        <li><a href="#">Spotify</a></li>
+        <li><a href="#">Apple Podcasts</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">RSS</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<!-- ===== sections/14-footer.html ===== -->
+<!-- 14-footer - Footer curtain (4 columns), stamp at the seam, back-to-top disc, cropped giant wordmark. Sits AFTER <main>.
+     SOURCE skeleton: PZ rendered.html:189-272  aside.strip.strip--stamp + footer#page-footer.page__footer > .footer__container >
+       .strip > .container > .footer__top > .footer__column--1 (h2.footer__logo + nav.footer__menu) / --2 (p, p.mt-md) /
+       --3 (nav.footer__shortcuts) / --4 (aside.footer__socials > h3.footer__title + ul.socials) ; .js-scroll-top-limit > .strip >
+       .container > .footer__mid (.footer__legal + aside.footer__credits) + .footer__bottom (awards - DROPPED) ; aside#back-to-top
+       .scroll-top > a. Wordmark row: IC rendered.html .footer-logo > .footer-logo__content > span (BEST-PARTS Pick 17).
+     Single-root contract (file contract: the footer fragment root is <footer id="page-footer">): the stamp aside and
+       #back-to-top live INSIDE the footer. The source's clip (.page__footer { overflow:hidden }) moved to the inner
+       .footer__curtain wrapper so the stamp can overhang 56px up into 13 (spec 14 (h)) and the fixed disc is neither
+       clipped nor inside the transformed .footer__container.
+     Copy: content/site.json footer.* verbatim (nav labels = footer.columns.sitemap = nav). Hard-coded labels (INFERRED,
+       spec 14 (b)): "Find us", "Explore", "Listen & follow", legal nav "Privacy" / "Photo credits". The photo-credit list
+       (closed <details>, id="credits") satisfies verify/handoff/assets.md ("not optional" for the CC BY / CC BY-SA files).
+     Brand mark (brand pass 2026-09-17, LOGO-USAGE.md): the kit's cup mark, brown variant, as an <img> 120px tall (--markFooter) with the
+       tagline brand.tagline under it (one saucer-height of clear space); footer.legal = copyright + the independence disclaimer.
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 3): shared by every page. The mark links home (index.html); the sitemap = the six pages + "Book a table"
+       (content/site.json footer.columns.sitemap; "The Host" lives in the drawer only); Privacy -> contact.html#privacy; Photo credits -> contact.html#credits. The photo-credit
+       <details> stays in the footer as id="footer-credits" (the id "credits" belongs to the contact page now - no duplicate ids on contact.html);
+       14-footer.js opens it whenever a #credits link is followed on a page that has no #credits block of its own. -->
+<footer id="page-footer" class="page__footer footer">
+  <!-- brand pass: stamp instance 4 is OFF (data-stamp="off", CSS hides the pseudo-element) - it straddled the brown 13 band (brown mark on brown,
+       LOGO-USAGE) and doubled the 120px footer mark one viewport later; the aside + its tween stay so data-stamp="on" restores it. -->
+  <aside class="strip strip--stamp footer__stamp" aria-hidden="true" data-stamp="off"></aside>
+
+  <div class="footer__curtain">
+    <div class="footer__container">
+
+      <div class="strip">
+        <div class="container">
+          <div class="footer__top">
+
+            <div class="footer__column footer__column--1">
+              <a class="footer__logo" href="index.html" aria-label="Latte with Lata - home">
+                <img class="footer__mark" src="assets/brand/logo/latte-with-lata-mark-brown.svg" alt="" width="482" height="571" loading="lazy" decoding="async">
+              </a>
+              <p class="footer__tagline">Real Conversations. Built on Purpose.</p>
+              <nav class="footer__menu" aria-label="Legal">
+                <ul>
+                  <li><a href="contact.html#privacy">Privacy</a></li>
+                  <li><a href="contact.html#credits">Photo credits</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="footer__column footer__column--2">
+              <h3 class="footer__title">Find us</h3>
+              <div class="footer__find">
+                <address class="footer__address">
+                  Latte with Lata<br>
+                  27 Bellwood Street<br>
+                  Corner of Fenwick Lane<br>
+                  Harrowfield<br>
+                  <a href="tel:+15550142024">(555) 014-2024</a><br>
+                  <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a>
+                </address>
+                <p class="mt-md footer__hours">
+                  Mon - Thu 7:00&nbsp;am - 6:00&nbsp;pm<br>
+                  Fri 7:00&nbsp;am - 10:00&nbsp;pm<br>
+                  Sat 8:00&nbsp;am - 10:00&nbsp;pm<br>
+                  Sun 8:00&nbsp;am - 3:00&nbsp;pm<br>
+                  Thursday recordings: doors 6:30&nbsp;pm
+                </p>
+              </div>
+            </div>
+
+            <div class="footer__column footer__column--3">
+              <h3 class="footer__title">Explore</h3>
+              <nav class="footer__shortcuts" aria-label="Sitemap">
+                <ul>
+                  <li><a href="cafe.html">The Cafe</a></li>
+                  <li><a href="menu.html">Menu</a></li>
+                  <li><a href="podcast.html">The Podcast</a></li>
+                  <li><a href="episodes.html">Episodes</a></li>
+                  <li><a href="events.html">Events</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="book.html">Book a table</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="footer__column footer__column--4">
+              <aside class="footer__socials">
+                <h3 class="footer__title">Follow us on our socials</h3>
+                <ul class="footer__listen">
+                  <li><a href="#">Spotify</a></li>
+                  <li><a href="#">Apple Podcasts</a></li>
+                  <li><a href="#">YouTube</a></li>
+                  <li><a href="#">RSS</a></li>
+                </ul>
+                <ul class="socials">
+                  <li><a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-instagram"></use></svg></a></li>
+                  <li><a href="#" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-youtube"></use></svg></a></li>
+                </ul>
+              </aside>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="js-scroll-top-limit">
+        <div class="strip">
+          <div class="container">
+            <div class="footer__mid">
+              <div class="footer__legal">
+                <p>Copyright 2026 Latte with Lata. All rights reserved.</p>
+                <details id="footer-credits" class="footer__photo-credits">
+                  <summary>Photo credits</summary>
+                  <ul>
+                    <li>“Latte art 0.jpg” by Angela CoffeeRank, <a href="https://creativecommons.org/licenses/by/2.0" rel="noopener" target="_blank">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Latte_art_0.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“A coffee cup featuring intricate latte art sits on a wooden table next to an open laptop.jpg” by Shixart1985, <a href="https://creativecommons.org/licenses/by/2.0" rel="noopener" target="_blank">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:A_coffee_cup_featuring_intricate_latte_art_sits_on_a_wooden_table_next_to_an_open_laptop.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“A cup of cappuccino.jpg” by Vee Satayamas, <a href="https://creativecommons.org/licenses/by/4.0" rel="noopener" target="_blank">CC BY 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:A_cup_of_cappuccino.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“BoulderCoffeeOpenMicNight2018.jpg” by DanielPenfield, <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener" target="_blank">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:BoulderCoffeeOpenMicNight2018.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> - this crop is a derivative shared under the same CC BY-SA licence.</li>
+                    <li>“Guerrilla on air – Fatti d’arte teaser” (video) by M. Capriglione, M. Rainò and R. Romita, <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener" target="_blank">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Guerrilla_on_air_%E2%80%93_Fatti_d%27arte_teaser.mpg" rel="noopener" target="_blank">Wikimedia Commons</a> - cut, slowed, colour-graded and looped; this edit is shared under the same CC BY-SA licence.</li>
+                    <li>All other photographs: CC0 (public domain dedication) via Wikimedia Commons - full register in the site's ASSETS.md.</li>
+                  </ul>
+                </details>
+                <p class="footer__disclaimer">Latte with Lata is a personal platform and is independent of any employer or institution.</p>
+              </div>
+              <aside class="footer__credits">Site by Agora Data Driven</aside>
+            </div>
+          </div>
+        </div>
+        <div class="footer-wordmark" aria-hidden="true"><span>LATTE WITH LATA</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <aside id="back-to-top" class="scroll-top"><a href="#top" aria-label="Back to top"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-up"></use></svg></a></aside>
+</footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/SplitText.min.js"></script>
+<script src="vendor/ScrollToPlugin.min.js"></script>
+<script src="vendor/splide.min.js"></script>
+<script type="module" src="js/page.js"></script>
+</body>
+</html>

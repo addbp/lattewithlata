@@ -1,0 +1,221 @@
+/* ==========================================================================
+   Latte with Lata - css/pages/contact.css (PAGE lane events + contact, PAGES-SPEC 2 / 6)
+   contact.html = page hero -> 02 find us (mark row, sketch map | address card, four ways to get here, opening hours) -> 03 write (the contact
+   form: white card on the espresso band) -> 04 press + guests -> 05 privacy (soft band, template for legal review) -> 06 credits (closing block).
+   Everything is scoped under body[data-page="contact"] or the section ids; the kit classes of css/pages/_shell.css are used as they are.
+   Brand tokens only, Creato Display only (inherited), feedback transitions on --aniUi (.2s), every animation behind prefers-reduced-motion.
+   The map is an inline SVG coloured here with the brand tokens: no third-party embed, no external request.
+   ========================================================================== */
+
+/* (VERIFY: the page-level [hidden] override moved to base.css - one site-wide rule) */   /* .button / .notice set their own display, which would beat the UA [hidden] rule */
+/* phones: --vpad is 25.6px, which leaves a heading too close to the block it introduces - the heading -> content step never drops under 2.25rem */
+body[data-page="contact"] main > [id^="p-"] .mt-md { margin-top: max(var(--vpad), 2.25rem); }
+/* FINAL PASS 2026-09-17 - one system with cafe / menu / events: eyebrows take the single accent on light bands (6.5:1 white, 5.7:1 soft) and white .8
+   on the brown band (10.7:1; the home + newsletter value); hero CTAs share the row on phones instead of two ragged widths */
+body[data-page="contact"] main > [id^="p-contact-"] .eyebrow { color: var(--colAccent); }
+body[data-page="contact"] main > [id^="p-contact-"]:is(.bg-band-black, .bg-band-brand) .eyebrow { color: var(--colTextOnBrandMuted); }
+@media (max-width: 35.99em) { #p-contact-01-hero .page-hero__actions .button { flex: 1 1 auto; } }
+
+/* --------------------------------------------------------------------------
+   02 find us
+   -------------------------------------------------------------------------- */
+#p-contact-02-find-us .find__grid { display: grid; gap: var(--vpad); align-items: stretch; }
+@media (min-width: 75em) { #p-contact-02-find-us .find__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 0; } }
+@media (max-width: 74.99em) { #p-contact-02-find-us .find__grid { gap: 0; } }   /* stacked: the card sits flush under the map */
+
+/* the sketch map */
+.map { margin: 0; min-width: 0; }
+.map__frame { position: relative; overflow: hidden; aspect-ratio: 1 / 1; background: var(--colBrandSoft); }
+@media (min-width: 36em) { .map__frame { aspect-ratio: 4 / 3; } }
+@media (min-width: 75em) { .map__frame { aspect-ratio: auto; height: 100%; min-height: 32rem; } }
+.map__svg { position: absolute; inset: 0; display: block; width: 100%; height: 100%; font-family: inherit; }
+.map__ground { fill: var(--colBrandSoft); }
+.map__blocks { fill: var(--colBrandLine); opacity: .62; }
+.map__square { fill: var(--colAccentTint); opacity: .5; }
+.map__roads path { fill: none; stroke: var(--colBg); stroke-width: 30; }
+.map__rail { fill: none; stroke: var(--colTextMuted); stroke-width: 3; stroke-dasharray: 2 9; opacity: .7; }
+.map__route { fill: none; stroke: var(--colBrand); stroke-width: 3; stroke-linecap: round; stroke-dasharray: .1 9; }
+.map__street { fill: var(--colBrand); font-size: 13px; font-weight: var(--wButton); letter-spacing: .16em; text-transform: uppercase; }
+.map__place { fill: var(--colBrand); font-size: 14px; font-weight: var(--wButton); letter-spacing: .12em; text-transform: uppercase; }
+.map__place--small { font-size: 11.5px; fill: var(--colText); }
+.map__stop circle, .map__stop rect { fill: var(--colBg); stroke: var(--colBrand); stroke-width: 1.5; }
+.map__stop text { fill: var(--colBrand); font-size: 9.5px; font-weight: var(--wButton); letter-spacing: .04em; text-transform: uppercase; }
+.map__stop--p text { font-size: 15px; letter-spacing: 0; }
+.map__compass circle { fill: none; stroke: var(--colTextMuted); stroke-width: 1; }
+.map__compass path { fill: var(--colBrand); }
+.map__compass text { fill: var(--colBrand); font-size: 11px; font-weight: var(--wButton); letter-spacing: .1em; }
+.map__pin-body { fill: var(--colBrand); stroke: var(--colBg); stroke-width: 2; }
+.map__pulse { fill: var(--colBrand); opacity: .18; transform-box: fill-box; transform-origin: center; }
+@media (max-width: 35.99em) {      /* the square phone crop shows 600 of the 800 units at ~.6 scale: bigger label type */
+    .map__street { font-size: 17px; }
+    .map__place { font-size: 18px; }
+    .map__place--small { font-size: 15px; }
+    .map__stop text { font-size: 10.5px; }
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+    .map__pulse { animation: map-pulse 2.8s var(--easeOut) infinite; }
+}
+@keyframes map-pulse { 0% { transform: scale(.6); opacity: .32; } 70%, 100% { transform: scale(2.6); opacity: 0; } }
+
+/* the address card: espresso, flush against the map */
+#p-contact-02-find-us .find__card {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: calc(var(--vpad) * 1.1) var(--vpad);
+    background: var(--colBrand); color: var(--colOnBrand);
+    --kitTitle: var(--colOnBrand); --kitText: var(--colOnBrand); --kitMuted: var(--colTextOnBrandMuted); --kitLine: var(--colLineOnBrand);
+    --colFocus: var(--colOnBrand); --strip-text-color: var(--colOnBrand); --colRead-more: var(--colOnBrand);
+}
+@media (min-width: 75em) { #p-contact-02-find-us .find__card { padding: calc(var(--vpad) * 1.25); } }
+#p-contact-02-find-us .find__address { font-style: normal; display: grid; gap: .15rem; font-size: clamp(1.125rem, 1.5vw, 1.3125rem); font-weight: var(--wLead); line-height: 1.35; }
+#p-contact-02-find-us .find__name { margin-bottom: .9rem; font-size: .75rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; line-height: 1; color: var(--colTextOnBrandMuted); }
+#p-contact-02-find-us .find__street { margin-bottom: .35rem; font-size: clamp(2rem, 3.4vw, 3rem); font-weight: var(--wTitle); line-height: .98; letter-spacing: var(--trackTitle); text-transform: uppercase; text-wrap: balance; }
+#p-contact-02-find-us .find__contact { margin-top: calc(var(--vpad) / 1.5); }
+#p-contact-02-find-us .find__contact .info-list__row { grid-template-columns: 5.5rem minmax(0, 1fr); align-items: center; padding: .35em 0; }
+@media (max-width: 35.99em), (min-width: 75em) and (max-width: 84.99em) { #p-contact-02-find-us .find__contact .info-list__row { grid-template-columns: minmax(0, 1fr); gap: 0; padding: .9em 0 .35em; } }   /* label above value where the column cannot hold the email address on one line */
+#p-contact-02-find-us .find__link { display: inline-flex; align-items: center; min-height: var(--tapMin); color: var(--colOnBrand); text-decoration: underline; text-underline-offset: .2em; text-decoration-thickness: 1px; overflow-wrap: anywhere; }
+#p-contact-02-find-us .find__link:hover { color: var(--colTextOnBrandMuted); }
+#p-contact-02-find-us .find__actions { margin-top: calc(var(--vpad) / 1.5); display: flex; flex-wrap: wrap; gap: .85rem; }
+#p-contact-02-find-us .find__actions .button { margin: 0; flex: 1 1 11rem; width: auto; }
+#p-contact-02-find-us .find__card .button:not(.button--outlined) { --colFondoBottoni: var(--colOnBrand); --colTextBottoni: var(--colBrand); }
+#p-contact-02-find-us .find__card .button:not(.button--outlined)::after { background: var(--colAccent); opacity: 1; }
+#p-contact-02-find-us .find__card .button:not(.button--outlined):hover { color: var(--colOnBrand); }
+#p-contact-02-find-us .find__card .button--outlined { --colTextBottoni: var(--colOnBrand); --colBordoBottoni: var(--colOnBrand); }
+#p-contact-02-find-us .find__card .button--outlined:hover { color: var(--colOnBrand); }
+#p-contact-02-find-us .find__card .button--outlined::after { background: var(--colOnBrand); opacity: .16; }
+#p-contact-02-find-us .find__more { margin-top: 1.4rem; }
+.is-mouse #p-contact-02-find-us .find__card .read-more::after { mix-blend-mode: normal; background-color: var(--colBrand); }
+
+/* four ways to get here */
+#p-contact-02-find-us .directions { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(var(--vpad) / 1.5) var(--vpad); }
+@media (min-width: 36em) { #p-contact-02-find-us .directions { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 64em) { #p-contact-02-find-us .directions { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(var(--vpad) / 1.25); } }
+#p-contact-02-find-us .directions__item { padding-top: 1.4rem; border-top: 1px solid var(--colBrand); }
+#p-contact-02-find-us .directions__icon { display: block; width: 2rem; height: 2rem; color: var(--colBrand); stroke-width: 1.4; }
+#p-contact-02-find-us .directions__mode { margin: 1.1rem 0 .5rem; font-size: 1.125rem; font-weight: var(--wTitle); line-height: 1.1; letter-spacing: var(--trackTitle); text-transform: uppercase; color: var(--colBrand); }
+#p-contact-02-find-us .directions__text { margin: 0; font-size: 1rem; line-height: 1.55; }
+
+/* opening hours */
+#p-contact-02-find-us .hours { display: grid; gap: calc(var(--vpad) / 1.5); }
+@media (min-width: 60em) { #p-contact-02-find-us .hours { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: calc(var(--vpad) * 1.5); padding: var(--vpad) calc(var(--vpad) * 1.25); align-items: center; } }
+@media (max-width: 35.99em) { #p-contact-02-find-us .hours { padding: 1.5rem 1.25rem; } }   /* FINAL PASS: the kit panel is 12.8px inside on phones - too tight for the hours table */
+#p-contact-02-find-us .hours__title { margin: 0 0 1rem; }
+#p-contact-02-find-us .hours__note { margin: 0; max-width: 32em; }
+#p-contact-02-find-us .hours__note + .hours__note { margin-top: .8em; }
+#p-contact-02-find-us .hours__note--muted { font-size: .9375rem; color: var(--colTextMuted); }
+#p-contact-02-find-us .hours .data-table { --kitLine: var(--colGrigio); }
+#p-contact-02-find-us .hours .data-table tbody th { font-size: 1.0625rem; }
+#p-contact-02-find-us .hours .data-table td { font-weight: var(--wLead); color: var(--colBrand); }
+#p-contact-02-find-us .hours .data-table tr:first-child > * { border-top: 1px solid var(--colGrigio); }
+
+/* --------------------------------------------------------------------------
+   03 write - the form: a white card (kit-light) on the espresso band
+   -------------------------------------------------------------------------- */
+#p-contact-03-write { --strip-text-color: var(--colOnBrand); }
+#p-contact-03-write .write__grid { display: grid; gap: max(var(--vpad), 2.25rem); }
+@media (min-width: 60em) {
+    #p-contact-03-write .write__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: calc(var(--vpad) * 1.5); align-items: start; }
+    #p-contact-03-write .write__intro { position: sticky; top: calc(var(--hH, 78) * 1px + var(--vpad) / 2); }
+}
+#p-contact-03-write .write__lead { margin-top: calc(var(--vpad) / 2.5); color: var(--colOnBrand); max-width: 24em; }
+#p-contact-03-write .write__promise { margin-top: 1rem; max-width: 30em; color: var(--colTextOnBrandMuted); }
+#p-contact-03-write .write__direct { list-style: none; margin: calc(var(--vpad) / 1.5) 0 0; padding: 0; border-top: 1px solid var(--colLineOnBrand); }
+#p-contact-03-write .write__direct li { border-bottom: 1px solid var(--colLineOnBrand); }
+#p-contact-03-write .write__direct a { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); align-items: center; gap: 1rem; min-height: 3.5rem; padding: .5rem 0; color: var(--colOnBrand); font-size: clamp(1.0625rem, 1.5vw, 1.3125rem); font-weight: var(--wLead); line-height: 1.25; overflow-wrap: anywhere; }
+#p-contact-03-write .write__direct a:hover { color: var(--colTextOnBrandMuted); }
+#p-contact-03-write .write__direct-label { font-size: .75rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; color: var(--colTextOnBrandMuted); }
+@media screen and (prefers-reduced-motion: no-preference) { #p-contact-03-write .write__direct a { transition: color var(--aniUi) var(--easeInOutSine); } }
+
+#p-contact-03-write .write__panel { padding: 1.5rem 1.25rem 1.75rem; --kitSurfaceSoft: var(--colBrandSoft); }
+@media (min-width: 36em) { #p-contact-03-write .write__panel { padding: calc(var(--vpad) / 1.1); } }
+@media (min-width: 60em) { #p-contact-03-write .write__panel { padding: var(--vpad) calc(var(--vpad) * 1.1); } }
+/* the kit turns plain links inside a brand band white (_shell.css s2); this panel is a WHITE card on that band, so its copy links go back to the text colour */
+/* (VERIFY: the white-link-on-white-card override moved to the kit: _shell.css `.kit-light :is(p, dd, td) > a:not([class])`) */
+#p-contact-03-write .write__fallback { margin-bottom: 1.5rem; }
+#p-contact-03-write .write__topic-hint { min-height: 1.45em; }
+#p-contact-03-write .write__topic-hint:empty { display: block; }
+#p-contact-03-write .write__phone { max-width: 100%; }
+@media (min-width: 36em) { #p-contact-03-write .write__phone { max-width: calc(50% - .625rem); } }
+#p-contact-03-write .write__message-meta { display: flex; align-items: baseline; justify-content: space-between; gap: .25rem 1.25rem; flex-wrap: wrap; }
+#p-contact-03-write .write__count { margin: 0 0 0 auto; font-size: .875rem; line-height: 1.45; color: var(--colTextMuted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+#p-contact-03-write .write__count.is-over { color: var(--colError); font-weight: var(--wButton); }
+#p-contact-03-write .form.is-disabled .field__label, #p-contact-03-write .form.is-disabled .field__hint, #p-contact-03-write .form.is-disabled .write__count { opacity: .55; }
+#p-contact-03-write .form__actions .button { width: 100%; }
+@media (min-width: 36em) { #p-contact-03-write .form__actions .button { width: auto; min-width: 13rem; } }
+
+/* success state (replaces the form) */
+#p-contact-03-write .write__success { display: grid; justify-items: start; gap: 1rem; padding: calc(var(--vpad) / 2) 0; }
+#p-contact-03-write .write__success-icon { width: 3.5rem; height: 3.5rem; padding: .9rem; border-radius: 50%; background: var(--colAccent); color: var(--colOnBrand); stroke-width: 2; }
+#p-contact-03-write .write__success-title { margin: .4rem 0 0; color: var(--colBrand); }
+#p-contact-03-write .write__success-title:focus-visible { outline-offset: .35rem; }
+#p-contact-03-write .write__success-text { margin: 0; color: var(--colBrand); max-width: 26em; }
+#p-contact-03-write .write__success-text a { color: inherit; text-decoration: underline; text-underline-offset: .15em; text-decoration-thickness: 1px; white-space: nowrap; }
+#p-contact-03-write .write__success-promise { margin: 0; max-width: 34em; color: var(--colTextMuted); }
+
+/* --------------------------------------------------------------------------
+   04 press + guests
+   -------------------------------------------------------------------------- */
+#p-contact-04-press-guests .pitch__grid { display: grid; gap: var(--vpad); }
+@media (min-width: 48em) {
+    #p-contact-04-press-guests .pitch__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; }
+    #p-contact-04-press-guests .pitch__col { padding: 0 calc(var(--vpad) * .9); }
+    #p-contact-04-press-guests .pitch__col:first-child { padding-left: 0; }
+    #p-contact-04-press-guests .pitch__col:last-child { padding-right: 0; border-left: 1px solid var(--colBrandLine); }
+}
+#p-contact-04-press-guests .pitch__col { border-top: 1px solid var(--colBrand); padding-top: 1.5rem; }
+#p-contact-04-press-guests .pitch__title { margin: 0 0 1.1rem; }
+#p-contact-04-press-guests .pitch__text { max-width: 36em; }
+#p-contact-04-press-guests .pitch__cta { margin-top: 1.75rem; }
+@media (min-width: 48em) {                                                      /* FINAL PASS: the two read-mores sit on one line (the columns hold different amounts of copy) */
+    #p-contact-04-press-guests .pitch__col { display: flex; flex-direction: column; }
+    #p-contact-04-press-guests .pitch__cta { margin-top: auto; padding-top: 1.75rem; }
+}
+
+/* --------------------------------------------------------------------------
+   05 privacy - plain-language summary, flagged as a template for legal review
+   -------------------------------------------------------------------------- */
+#p-contact-05-privacy .privacy__grid { display: grid; gap: max(var(--vpad), 2.25rem); }
+@media (min-width: 60em) {
+    #p-contact-05-privacy .privacy__grid { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: calc(var(--vpad) * 1.5); align-items: start; }
+    #p-contact-05-privacy .privacy__head { position: sticky; top: calc(var(--hH, 78) * 1px + var(--vpad) / 2); }
+}
+#p-contact-05-privacy .privacy__title { --fontSize: clamp(1.75rem, 3.4vw, 2.75rem); }
+#p-contact-05-privacy .privacy__intro { margin-top: calc(var(--vpad) / 2.5); color: var(--colBrand); font-size: clamp(1.125rem, 1.5vw, 1.3125rem); }
+#p-contact-05-privacy .privacy__review { margin-top: 1.5rem; background: var(--colBg); border-color: var(--colGrigio); border-left-color: var(--colBrand); }
+#p-contact-05-privacy .privacy__updated { margin-top: 1.1rem; }
+#p-contact-05-privacy .privacy__blocks { display: grid; gap: 0 var(--vpad); }
+@media (min-width: 48em) { #p-contact-05-privacy .privacy__blocks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+#p-contact-05-privacy .privacy__block { padding: 1.4rem 0 1.6rem; border-top: 1px solid var(--colGrigio); }
+#p-contact-05-privacy .privacy__block.animated { transition-delay: 0s; }
+#p-contact-05-privacy .privacy__block-title { margin: 0 0 .6rem; font-size: 1rem; font-weight: var(--wTitle); line-height: 1.2; letter-spacing: .02em; text-transform: uppercase; color: var(--colBrand); text-wrap: balance; }
+#p-contact-05-privacy .privacy__block p { margin: 0; font-size: 1rem; line-height: 1.6; }
+#p-contact-05-privacy .privacy__block a { overflow-wrap: anywhere; }
+#p-contact-05-privacy .privacy__retention { margin-top: calc(var(--vpad) / 2); padding: 1.4rem 1.5rem 1rem; background: var(--colBg); --kitLine: var(--colBrandLine); }
+#p-contact-05-privacy .privacy__retention caption { padding-bottom: .5em; font-size: 1rem; font-weight: var(--wTitle); letter-spacing: .02em; text-transform: uppercase; color: var(--colBrand); }
+#p-contact-05-privacy .privacy__retention tbody tr:last-child > * { border-bottom: 0; }
+
+/* --------------------------------------------------------------------------
+   06 credits - the closing block. FINAL PASS 2026-09-17: the attribution register (every CC BY / CC BY-SA file of ASSETS.md) between the licence
+   sentence and the "Report a credit" row: two columns from 48em, hairline rows, left-aligned (a centred list of long titles reads ragged).
+   -------------------------------------------------------------------------- */
+#p-contact-06-credits .credits__text { margin-top: calc(var(--vpad) / 2); }
+#p-contact-06-credits .credits__text p { margin: 0 auto; max-width: 40em; text-wrap: pretty; }
+#p-contact-06-credits .credits__note { color: var(--colTextMuted); }
+#p-contact-06-credits .credits__cta { margin-top: calc(var(--vpad) / 1.5) !important; display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+#p-contact-06-credits .credits__cta .button { margin: 0; }
+@media (max-width: 35.99em) { #p-contact-06-credits .credits__cta .button { flex: 1 1 100%; } }
+#p-contact-06-credits .credits__register { margin-top: max(var(--vpad), 2.25rem); }
+#p-contact-06-credits .credits__list-title { margin: 0 0 1rem; font-size: .75rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); line-height: 1.2; text-transform: uppercase; color: var(--colAccent); }
+#p-contact-06-credits .credits__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); column-gap: var(--vpad); border-top: 1px solid var(--colBrand); }
+@media (min-width: 48em) { #p-contact-06-credits .credits__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+#p-contact-06-credits .credits__item { padding: 1rem 0 1.1rem; border-bottom: 1px solid var(--colBrandLine); min-width: 0; }
+#p-contact-06-credits .credits__item p { margin: 0; }
+#p-contact-06-credits .credits__used { font-size: .75rem; font-weight: var(--wLead); letter-spacing: .08em; line-height: 1.3; text-transform: uppercase; color: var(--colTextMuted); }
+#p-contact-06-credits .credits__work { margin-top: -.3rem !important; font-size: 1rem; font-weight: var(--wButton); line-height: 1.35; color: var(--colBrand); overflow-wrap: anywhere; }
+#p-contact-06-credits .credits__work a { display: inline-flex; align-items: center; min-height: var(--tapMin); padding: .15rem 0; color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }   /* 44px target; the row above it is plain text, so the hit box never meets another link */
+#p-contact-06-credits .credits__meta { font-size: .875rem; line-height: 1.5; color: var(--colText); }
+#p-contact-06-credits .credits__meta a { color: var(--colBrand); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+.is-mouse #p-contact-06-credits .credits__item a:hover { color: var(--colAccent); }
+
+/* FINAL PASS 2026-09-17: keeps the last words of a split display title together (SplitText turns an &nbsp; into a plain space, so the orphan fix is a nowrap span; the words inside still rise one by one) */
+body[data-page="contact"] main .keep-together { white-space: nowrap; }
+@media (min-width: 60em) and (max-width: 63.99em) { body[data-page="contact"] main .keep-together { white-space: normal; } }   /* the 5fr write column is 316px at 960: "A MESSAGE" would overhang by 10px */

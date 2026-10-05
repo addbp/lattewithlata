@@ -1,0 +1,181 @@
+/* ==========================================================================
+   Latte with Lata - css/pages/menu.css (PAGE lane cafe + menu, PAGES-SPEC 2 / 6)
+   The Menu landing page. Scoped under body[data-page="menu"] / the section ids; the kit (css/pages/_shell.css: page hero, .mark-row, .page-nav,
+   .chip, .card, .info-list, .notice, .button) and base.css are reused, never redefined. Brand tokens only, Creato Display only (inherited),
+   feedback transitions 200 ms (--aniUi), reveals 600 ms; base.css switches every animation off under prefers-reduced-motion.
+   Everything works without JS: every item is visible, the chips are plain anchors, the (inert) filter group is not shown.
+
+   Contents   1 shared bits   2 hero   3 intro + menu tools (legend, filter)   4 sticky category rail   5 featured cards
+              6 category lists (name . . . price)   7 notes   8 closing band
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Shared bits
+   -------------------------------------------------------------------------- */
+body[data-page="menu"] main > [id^="p-menu-"] .eyebrow { color: var(--colAccent); }                    /* 6.5:1 on white, 5.7:1 on soft */
+body[data-page="menu"] main > [id^="p-menu-"].bg-band-brand .eyebrow { color: var(--colTextOnBrandMuted); }
+body[data-page="menu"] .sec-head { max-width: 46rem; }
+body[data-page="menu"] .sec-head--center { margin-inline: auto; }
+body[data-page="menu"] .sec-head .eyebrow + .strip__title1 { margin-top: calc(var(--vpad) / 3); }
+body[data-page="menu"] .sec-head__intro { margin-top: calc(var(--vpad) / 3); color: var(--colText); text-wrap: balance; }
+body[data-page="menu"] .sec-head--center .sec-head__intro { margin-inline: auto; max-width: 32ch; }
+/* the filter hides with the hidden attribute; .card-grid > li { display: flex } (kit) would out-rank the UA rule */
+/* (VERIFY: the page-level [hidden] override moved to base.css - one site-wide rule) */
+
+/* dietary tag chip: a letter code in a squared box; the full word rides along as title + visually hidden text (never colour-only:
+   "contains nuts" is the filled one AND the letter N) */
+body[data-page="menu"] .diet-list { list-style: none; margin: 0; padding: 0; display: inline-flex; flex-wrap: wrap; gap: .3rem; }
+body[data-page="menu"] .diet {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 1.875rem; height: 1.5rem; padding: 0 .4em;
+    border: 1px solid rgb(var(--colBrand-rgb) / .45);
+    color: var(--colBrand);
+    font-size: .6875rem; font-weight: var(--wButton); letter-spacing: .08em; line-height: 1; text-transform: uppercase;
+    cursor: default;
+}
+body[data-page="menu"] .diet[data-tag="n"] { background: var(--colBrand); border-color: var(--colBrand); color: var(--colOnBrand); }
+
+/* --------------------------------------------------------------------------
+   2. Hero - page-menu.jpg is a table from above: centre crop
+   -------------------------------------------------------------------------- */
+#p-menu-01-hero { --pinX: 50%; --pinY: 55%; }
+
+/* --------------------------------------------------------------------------
+   3. Intro + menu tools
+   -------------------------------------------------------------------------- */
+#p-menu-02-intro .menu-intro__cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--vpad); }
+@media (min-width: 50em) { #p-menu-02-intro .menu-intro__cols { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: calc(var(--vpad) * 1.5); align-items: start; } }
+#p-menu-02-intro .menu-intro__copy > p { text-wrap: pretty; }
+#p-menu-02-intro .menu-intro__copy > .lead { color: var(--colBrand); }
+#p-menu-02-intro .menu-intro__copy > p + p { margin-top: 1.4em; }
+
+#p-menu-02-intro .menu-tools {
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: calc(var(--vpad) / 1.5) calc(var(--vpad) * 1.5);
+    padding: calc(var(--vpad) / 1.75) 0 0;
+    border-top: 1px solid var(--colBrandLine);
+}
+@media (min-width: 60em) { #p-menu-02-intro .menu-tools { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); } }
+#p-menu-02-intro .menu-tools__title { margin: 0 0 1.1em; font-size: .75rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; line-height: 1.2; color: var(--colAccent); }
+#p-menu-02-intro .menu-legend__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .7em 1.6em; }
+#p-menu-02-intro .menu-legend__list li { display: inline-flex; align-items: center; gap: .6em; font-size: .9375rem; line-height: 1.3; color: var(--colText); }
+#p-menu-02-intro .menu-legend__note { margin: 1em 0 0; font-size: .875rem; line-height: 1.5; color: var(--colTextMuted); }
+#p-menu-02-intro .menu-filter__chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+#p-menu-02-intro .menu-filter .chip { cursor: pointer; font-family: inherit; }
+.is-mouse #p-menu-02-intro .menu-filter .chip:hover { background: var(--kitSurfaceSoft); border-color: var(--kitFieldLineStrong); }
+#p-menu-02-intro .menu-filter .chip[aria-pressed="true"],
+.is-mouse #p-menu-02-intro .menu-filter .chip[aria-pressed="true"]:hover { background: var(--kitOn); border-color: var(--kitOn); color: var(--kitOnText); }
+#p-menu-02-intro .menu-filter__status { margin: 1em 0 0; min-height: 1.5em; font-size: .875rem; line-height: 1.5; color: var(--colTextMuted); font-variant-numeric: tabular-nums; }
+html:not(.js-ok) #p-menu-02-intro .menu-filter { display: none; }               /* the filter is script-driven: without JS every item simply shows */
+
+/* --------------------------------------------------------------------------
+   4. Sticky category rail. The kit's .page-nav--sticky sticks inside its parent only, and the six categories are separate fragments - so the
+      nav's parent is an absolutely positioned, click-through track that starts here and (js/pages/menu.js, --railH) ends with the last category.
+      Native position: sticky does the work; the top offsets / header hand-over are the kit's. Without JS the track is one nav tall: plain chips.
+   -------------------------------------------------------------------------- */
+#p-menu-02-intro .menu-rail { --navH: calc(var(--tapMin) + 1.5rem + 2px); position: relative; height: var(--navH); margin-top: var(--vpad); }
+#p-menu-02-intro .menu-rail__track { position: absolute; left: 0; right: 0; top: 0; height: var(--railH, 100%); min-height: 100%; z-index: 20; pointer-events: none; }
+#p-menu-02-intro .menu-rail__track > .page-nav { pointer-events: auto; border-top: 1px solid var(--kitLine); }
+@media (min-width: 60em) { #p-menu-02-intro .page-nav__list { gap: .625rem; } }
+
+/* anchors: a category wrapper spans its whole band (so its chip stays current from edge to edge); 1.5rem keeps the heading clear of the rail
+   whether the header is showing or not. Items reached from a featured card clear the header + the rail. */
+body[data-page="menu"] [data-menu-cat] { scroll-margin-top: 1.5rem; }
+body[data-page="menu"] .menu-item { scroll-margin-top: calc(var(--tapMin) + 1.5rem + 2px + var(--vpad)); }
+
+/* --------------------------------------------------------------------------
+   5. Featured - twelve photo cards (square photos)
+   -------------------------------------------------------------------------- */
+#p-menu-03-featured .feat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin-bottom: 0; }
+@media (min-width: 40em) { #p-menu-03-featured .feat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--vpad) / 3); } }
+@media (min-width: 64em) { #p-menu-03-featured .feat-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(var(--vpad) / 2.4); } }
+#p-menu-03-featured .feat-card { border-color: transparent; }
+#p-menu-03-featured .feat-card .card__media { aspect-ratio: 1 / 1; }
+#p-menu-03-featured .feat-card .card__body { padding: 1.1rem 1.15rem 1.2rem; gap: .5em; }
+#p-menu-03-featured .feat-card .card__title { font-size: clamp(15px, 1.35vw, 20px); line-height: 1.1; }
+@supports selector(:has(a)) {                                                   /* the ring goes round the whole (stretched-link) card; without :has() the link keeps its own ring */
+    #p-menu-03-featured .feat-card .card__title a:focus-visible { outline: none; }
+    #p-menu-03-featured .feat-card:has(.card__title a:focus-visible) { outline: 2px solid var(--colFocus); outline-offset: var(--focusOffset); }
+}
+#p-menu-03-featured .feat-card__meta { margin-top: auto; padding-top: .6em; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .45em .75em; }
+#p-menu-03-featured .feat-card .card__price { font-size: 1rem; }
+#p-menu-03-featured .feat-card .diet-list { position: relative; z-index: 1; }   /* above the stretched link so the title tooltips work */
+@media (max-width: 39.99em) {
+    #p-menu-03-featured .feat-card .card__body { padding: .8rem .8rem .9rem; }
+    #p-menu-03-featured .feat-card .card__eyebrow { font-size: .6875rem; letter-spacing: .1em; }
+}
+.is-mouse #p-menu-03-featured .feat-card:hover .card__title { color: var(--colAccent); }
+/* reveal stagger by COLUMN (the base ladder counts children: the twelfth card would wait 1.2 s) */
+#p-menu-03-featured .feat-grid > li.animated { transition-delay: calc(var(--col, 0) * 90ms); }
+#p-menu-03-featured .feat-grid > li:nth-child(2n + 1) { --col: 0; }
+#p-menu-03-featured .feat-grid > li:nth-child(2n + 2) { --col: 1; }
+@media (min-width: 40em) and (max-width: 63.99em) {
+    #p-menu-03-featured .feat-grid > li:nth-child(3n + 1) { --col: 0; }
+    #p-menu-03-featured .feat-grid > li:nth-child(3n + 2) { --col: 1; }
+    #p-menu-03-featured .feat-grid > li:nth-child(3n + 3) { --col: 2; }
+}
+@media (min-width: 64em) {
+    #p-menu-03-featured .feat-grid > li:nth-child(4n + 1) { --col: 0; }
+    #p-menu-03-featured .feat-grid > li:nth-child(4n + 2) { --col: 1; }
+    #p-menu-03-featured .feat-grid > li:nth-child(4n + 3) { --col: 2; }
+    #p-menu-03-featured .feat-grid > li:nth-child(4n + 4) { --col: 3; }
+}
+
+/* --------------------------------------------------------------------------
+   6. Category lists - a printed-menu layout: NAME . . . . . PRICE / description / tags; two columns from 48em
+   -------------------------------------------------------------------------- */
+body[data-page="menu"] .menu-cat { --menuLine: rgb(var(--colBrand-rgb) / .16); }
+body[data-page="menu"] .menu-cat__head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.1em var(--vpad); align-items: end; padding-bottom: calc(var(--vpad) / 2); border-bottom: 2px solid var(--colBrand); }
+@media (min-width: 64em) { body[data-page="menu"] .menu-cat__head { grid-template-columns: minmax(0, 1fr) minmax(0, 23rem); } }   /* FINAL PASS: was 50em - at 800-1000px the title column (274px) broke "BRUNCH / AND / LUNCH" one word a line and "BREAKFAST" overflowed */
+body[data-page="menu"] .menu-cat__index { margin: 0 0 1.1em; font-variant-numeric: tabular-nums; }
+body[data-page="menu"] .menu-cat__title { --fontSize: clamp(2.25rem, 6.4vw, 5.5rem); margin: 0; line-height: .95; letter-spacing: var(--trackDisplay); }
+body[data-page="menu"] .menu-cat__title:focus { outline: none; }
+body[data-page="menu"] .menu-cat__title:focus-visible { outline: 2px solid var(--colFocus); outline-offset: 6px; }
+body[data-page="menu"] .menu-cat__note { margin: 0; font-size: 1rem; line-height: 1.55; color: var(--colText); text-wrap: balance; }
+@media (min-width: 64em) { body[data-page="menu"] .menu-cat__note { padding-bottom: .35em; } }
+
+body[data-page="menu"] .menu-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); column-gap: calc(var(--vpad) * 1.5); }
+@media (min-width: 60em) { body[data-page="menu"] .menu-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }   /* FINAL PASS: was 48em - two 290px columns at 768 put six names on two lines */
+body[data-page="menu"] .menu-item { display: flex; flex-direction: column; gap: .5em; padding: 1.5em 0 1.45em; border-bottom: 1px solid var(--menuLine); }
+body[data-page="menu"] .menu-item__head { display: flex; align-items: flex-end; gap: .7em; }
+body[data-page="menu"] .menu-item__name { margin: 0; font-weight: var(--wTitle); font-size: clamp(17px, 1.4vw, 20px); line-height: 1.15; letter-spacing: var(--trackTitle); text-transform: uppercase; color: var(--colBrand); text-wrap: balance; }
+body[data-page="menu"] .menu-item__dots {                                       /* the dotted leader (decorative) */
+    flex: 1 1 1.5em; min-width: 1.5em; height: 3px; margin-bottom: .34em;
+    background: radial-gradient(circle at 1.5px 1.5px, rgb(var(--colBrand-rgb) / .5) 1.1px, transparent 1.5px) 0 0 / 8px 3px repeat-x;
+}
+body[data-page="menu"] .menu-item__price { flex: 0 0 auto; font-weight: var(--wTitle); font-size: clamp(17px, 1.4vw, 20px); line-height: 1.15; color: var(--colBrand); font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 35.99em) {                                                   /* FINAL PASS: 17px names + a 1.5em leader wrapped "Flourless chocolate cake" / "Toasted cheese sandwich" at 390 */
+    body[data-page="menu"] .menu-item__head { gap: .45em; }
+    body[data-page="menu"] .menu-item__dots { flex-basis: .75em; min-width: .75em; }
+    body[data-page="menu"] .menu-item__name, body[data-page="menu"] .menu-item__price { font-size: 16px; }
+}
+body[data-page="menu"] .menu-item__desc { margin: 0; max-width: 54ch; font-size: 1rem; line-height: 1.5; color: var(--colText); text-wrap: pretty; }
+body[data-page="menu"] .menu-item .diet-list { margin-top: .25em; }
+/* arriving from a featured card: mark the line (static accent name + a short wash that fades; no wash under reduced motion) */
+body[data-page="menu"] .menu-item:target .menu-item__name, body[data-page="menu"] .menu-item:target .menu-item__price { color: var(--colAccent); }
+@media (prefers-reduced-motion: no-preference) { body[data-page="menu"] .menu-item:target { animation: menu-item-wash 1.8s var(--easeOut) both; } }
+@keyframes menu-item-wash { from { box-shadow: inset 0 0 0 100vmax rgb(var(--colBrand-rgb) / .1); } to { box-shadow: inset 0 0 0 100vmax rgb(var(--colBrand-rgb) / 0); } }
+body[data-page="menu"] .menu-cat__empty { margin: 0; padding: 1.5em 0; border-bottom: 1px solid var(--menuLine); color: var(--colText); }
+
+/* --------------------------------------------------------------------------
+   7. Notes - four .notice blocks
+   -------------------------------------------------------------------------- */
+#p-menu-10-notes .notes__grid { margin-top: var(--vpad); display: grid; grid-template-columns: minmax(0, 1fr); gap: calc(var(--vpad) / 2.4); }
+@media (min-width: 48em) { #p-menu-10-notes .notes__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+#p-menu-10-notes .notice { padding: 1.35em 1.5em 1.45em; font-size: 1rem; line-height: 1.55; scroll-margin-top: calc(var(--vpad) / 2); }
+#p-menu-10-notes .notice__title { margin-bottom: .45em; font-size: 1.0625rem; text-transform: uppercase; letter-spacing: var(--trackTitle); }
+#p-menu-10-notes .notice p { text-wrap: pretty; }
+
+/* --------------------------------------------------------------------------
+   8. Closing band. FINAL PASS 2026-09-17: ONE closing-band style on cafe 07 / menu 11 / events 07 = the caramel accent band (kit tokens + buttons
+      flip by themselves), the title at the page-hero h1 size, a white lead, white + outlined CTAs at 48px, full width on phones. No hairline:
+      the accent band meets the brown newsletter band.
+   -------------------------------------------------------------------------- */
+#p-menu-11-book .closing__title { --fontSize: clamp(40px, 7vw, 96px); line-height: .95; letter-spacing: var(--trackDisplay); margin: 0; }
+#p-menu-11-book .closing__text { margin: calc(var(--vpad) / 2) auto 0; max-width: 30ch; color: var(--colOnBrand); text-wrap: balance; }
+#p-menu-11-book .closing__ctas { margin-top: calc(var(--vpad) / 1.5); display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+#p-menu-11-book .closing__ctas .button + .button { margin: 0; }
+#p-menu-11-book .closing__ctas .button { --aniTime: var(--aniUi); min-height: 3rem; }
+@media (max-width: 35.99em) { #p-menu-11-book .closing__ctas .button { flex: 1 1 100%; } }
+
+/* FINAL PASS 2026-09-17: keeps the last words of a split display title together (SplitText turns an &nbsp; into a plain space, so the orphan fix is a nowrap span; the words inside still rise one by one) */
+body[data-page="menu"] main .keep-together { white-space: nowrap; }

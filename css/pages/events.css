@@ -1,0 +1,195 @@
+/* ==========================================================================
+   Latte with Lata - css/pages/events.css (PAGE lane events + contact, PAGES-SPEC 2 / 6)
+   events.html = page hero -> 02 recording night (mark row, lead, copy + facts | the night as a timeline) -> 03 upcoming (eight event cards,
+   live seats) -> 04 house rules (espresso band) -> 05 other events -> 06 faqs (native details) -> 07 reserve (caramel CTA band).
+   Everything is scoped under body[data-page="events"] or the section ids; the kit classes of css/pages/_shell.css are used as they are.
+   Brand tokens only, Creato Display only (inherited), feedback transitions on --aniUi (.2s), every animation behind prefers-reduced-motion.
+   ========================================================================== */
+
+/* (VERIFY: the page-level [hidden] override moved to base.css - one site-wide rule) */
+/* phones: --vpad is 25.6px, which leaves a heading too close to the block it introduces - the heading -> content step never drops under 2.25rem */
+body[data-page="events"] main > [id^="p-"] .mt-md { margin-top: max(var(--vpad), 2.25rem); }
+/* FINAL PASS 2026-09-17 - one system with cafe / menu: eyebrows take the single accent on light bands (6.5:1 white, 5.7:1 soft) and white .8 on the
+   brown band (10.7:1; the home + newsletter value); hero CTAs share the row on phones instead of two ragged widths */
+body[data-page="events"] main > [id^="p-events-"] .eyebrow { color: var(--colAccent); }
+body[data-page="events"] main > [id^="p-events-"]:is(.bg-band-black, .bg-band-brand) .eyebrow { color: var(--colTextOnBrandMuted); }
+@media (max-width: 35.99em) { #p-events-01-hero .page-hero__actions .button { flex: 1 1 auto; } }
+
+/* --------------------------------------------------------------------------
+   02 recording night
+   -------------------------------------------------------------------------- */
+#p-events-02-recording-night .night__lead { max-width: 34em; margin-inline: auto; color: var(--colBrand); text-wrap: balance; }
+#p-events-02-recording-night .night__grid { display: grid; gap: max(calc(var(--vpad) * 1.25), 2.5rem); align-items: stretch; }   /* FINAL PASS: 32px under the CTAs read cramped on phones */
+@media (min-width: 60em) {
+    #p-events-02-recording-night .night__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: calc(var(--vpad) * 1.75); }
+}
+#p-events-02-recording-night .night__paragraphs { max-width: 38em; }
+#p-events-02-recording-night .night__facts { margin-top: calc(var(--vpad) / 1.5); }
+#p-events-02-recording-night .night__actions { margin-top: calc(var(--vpad) / 1.5); display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.75rem; }
+#p-events-02-recording-night .night__actions .button { width: auto; }
+
+/* the night, hour by hour: an espresso panel (kit-dark paints the ground and flips the tokens) */
+#p-events-02-recording-night .night__panel { display: flex; align-items: center; padding: calc(var(--vpad) / 1.25) calc(var(--vpad) / 1.5); }
+#p-events-02-recording-night .night__panel .timeline { width: 100%; }
+@media (min-width: 60em) { #p-events-02-recording-night .night__panel { padding: var(--vpad); } }
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline__item {
+    position: relative;
+    display: grid; grid-template-columns: 5.25rem 1rem minmax(0, 1fr); column-gap: .9rem; align-items: baseline;
+    padding: .8rem 0;
+}
+@media (min-width: 36em) { .timeline__item { grid-template-columns: 6.75rem 1rem minmax(0, 1fr); column-gap: 1.25rem; padding: .95rem 0; } }
+.timeline__time { grid-column: 1; margin: 0; text-align: right; font-size: 1.0625rem; font-weight: var(--wLead); line-height: 1.3; letter-spacing: .01em; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--colTextOnBrandMuted); }
+.timeline__label { grid-column: 3; margin: 0; font-size: 1rem; line-height: 1.5; color: var(--colTextOnBrandMuted); }
+/* the rail: a hairline through the dot column, a dot per stop (hollow = a note, filled = doors / recording / last plates) */
+.timeline__item::before { content: ""; position: absolute; left: calc(5.25rem + .9rem + .5rem); top: 0; bottom: 0; width: 1px; background: var(--colLineOnBrand); transform: translateX(-.5px); }
+.timeline__item::after { content: ""; position: absolute; left: calc(5.25rem + .9rem + .5rem); top: 1.42rem; width: .5rem; height: .5rem; border-radius: 50%; border: 1.5px solid var(--colOnBrand); background: var(--colBrand); transform: translate(-50%, -50%); }
+@media (min-width: 36em) {
+    .timeline__item::before, .timeline__item::after { left: calc(6.75rem + 1.25rem + .5rem); }
+    .timeline__item::after { top: 1.62rem; }
+}
+.timeline__item:first-child::before { top: 1.5rem; }
+.timeline__item:last-child::before { bottom: auto; height: 1.5rem; }
+.timeline__item.is-key .timeline__time { font-size: 1.375rem; font-weight: var(--wTitle); line-height: 1.1; letter-spacing: var(--trackTitle); color: var(--colOnBrand); }
+.timeline__item.is-key .timeline__label { color: var(--colOnBrand); font-weight: var(--wLead); }
+.timeline__item.is-key::after { width: .8125rem; height: .8125rem; background: var(--colOnBrand); }
+@media (min-width: 36em) { .timeline__item.is-key .timeline__time { font-size: 1.625rem; } }
+
+/* --------------------------------------------------------------------------
+   03 upcoming - event cards. White cards on the soft band. >= 75em one row per night: date block | photo | copy | seats + reserve.
+   Below that the photo leads, the date block sits on its lower-left corner and the rest stacks.
+   -------------------------------------------------------------------------- */
+#p-events-03-upcoming .upcoming__head { display: grid; gap: calc(var(--vpad) / 2); align-items: end; }
+@media (min-width: 60em) { #p-events-03-upcoming .upcoming__head { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--vpad); } }
+#p-events-03-upcoming .upcoming__intro > * + * { margin-top: .6em; }
+#p-events-03-upcoming .upcoming__empty { margin-top: var(--vpad); color: var(--colBrand); }
+
+.event-list { list-style: none; margin-bottom: 0; padding: 0; display: grid; gap: max(1rem, calc(var(--vpad) / 2.5)); }
+@media (min-width: 40em) and (max-width: 74.99em) { .event-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.event-row { display: flex; min-width: 0; }
+#p-events-03-upcoming .event-row.animated { transition-delay: 0s; }   /* rows enter one by one as they scroll in: the nth-child delay ladder of base.css would make the 8th wait .8s */
+.event {
+    position: relative; width: 100%;
+    display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto;   /* photo | copy takes the slack | seats + reserve pinned to the bottom (two cards side by side stay aligned) */
+    background: var(--colBg); color: var(--colText);
+}
+.event__media { position: relative; overflow: hidden; aspect-ratio: 3 / 2; background: var(--colBrandLine); grid-row: 1; grid-column: 1; }
+.event__media img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; transition: transform var(--aniSlow) var(--easeInOutCubic); }
+.is-mouse .event:hover .event__media img { transform: scale3d(1.04, 1.04, 1); }
+.event__date {
+    grid-row: 1; grid-column: 1; align-self: end; justify-self: start; z-index: 1;
+    margin: 0; min-width: 5.5rem; padding: .85rem 1rem .8rem;
+    background: var(--colBrand); color: var(--colOnBrand); text-align: center; line-height: 1;
+}
+.event__date time { display: grid; gap: .3rem; justify-items: center; }
+.event__dow, .event__month { font-size: .75rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; }
+.event__day { font-size: clamp(2.5rem, 4.2vw, 3.75rem); font-weight: var(--wTitle); letter-spacing: var(--trackDisplay); line-height: .9; font-variant-numeric: tabular-nums; }
+.event__body { display: flex; flex-direction: column; gap: .7rem; padding: 1.4rem 1.25rem .5rem; min-width: 0; }
+.event__pillar { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .7rem; }
+.event__pillar-label { font-size: .75rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; line-height: 1; color: var(--colTextMuted); }
+.event__pillar .tag { color: var(--colBrand); border-color: var(--colGrigio); }
+.event__title { margin: 0; font-weight: var(--wTitle); font-size: clamp(1.375rem, 2.1vw, 1.875rem); line-height: 1.02; letter-spacing: var(--trackTitle); text-transform: uppercase; color: var(--colBrand); text-wrap: balance; }
+.event__guest { margin: 0; font-size: 1rem; line-height: 1.4; color: var(--colTextMuted); }
+.event__guest strong { display: block; font-size: 1.0625rem; color: var(--colBrand); }
+.event__blurb { margin: 0; font-size: 1rem; line-height: 1.55; color: var(--colText); max-width: 40em; }
+.event__aside { display: flex; flex-direction: column; gap: .8rem; padding: .9rem 1.25rem 1.4rem; min-width: 0; }
+.event__meta { margin: 0; display: flex; flex-wrap: wrap; gap: .15rem .5rem; font-size: .875rem; line-height: 1.45; color: var(--colTextMuted); font-variant-numeric: tabular-nums; }
+.event__meta > span:not(:last-child)::after { content: "\00b7"; margin-left: .5rem; }
+.event__meta > span:first-child { color: var(--colBrand); font-weight: var(--wButton); }
+/* seats badge: text first (never colour-only); low = filled, full = filled + the waitlist note */
+.event__seats {
+    margin: 0; align-self: flex-start;
+    display: inline-flex; align-items: center; gap: .5em;
+    min-height: 2rem; padding: 0 .8em;
+    border: 1px solid var(--colBrand); color: var(--colBrand);
+    font-size: .75rem; font-weight: var(--wButton); letter-spacing: var(--trackButton); text-transform: uppercase; line-height: 1; white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+.event__seats .icon { width: 1.15em; height: 1.15em; }
+.event__seats.is-low, .event__seats.is-full { background: var(--colBrand); color: var(--colOnBrand); }
+.event__note { margin: 0; font-size: .875rem; line-height: 1.45; color: var(--colText); }
+.event__aside .button { width: 100%; margin: auto 0 0; }
+.event__aside .button + .button { margin-left: 0; }
+@media (min-width: 75em) {
+    .event { grid-template-columns: 8.75rem minmax(0, 17rem) minmax(0, 1fr) 16.5rem; grid-template-rows: auto; }
+    .event__date { grid-row: 1; grid-column: 1; align-self: stretch; justify-self: stretch; display: grid; place-items: center; padding: 1rem .5rem; }
+    .event__date time { gap: .55rem; }
+    .event__media { grid-column: 2; aspect-ratio: auto; min-height: 15rem; }
+    .event__body { grid-column: 3; padding: 1.9rem 2.25rem; gap: .75rem; justify-content: center; }
+    .event__aside { grid-column: 4; margin: 1.9rem 0; padding: 0 1.9rem; gap: .9rem; border-left: 1px solid var(--colBrandLine); }
+    .event__meta { flex-direction: column; gap: .1rem; }
+    .event__meta > span:not(:last-child)::after { content: none; }
+}
+
+/* --------------------------------------------------------------------------
+   04 house rules - espresso band, oversized numerals
+   -------------------------------------------------------------------------- */
+#p-events-04-house-rules { --strip-text-color: var(--colOnBrand); }
+#p-events-04-house-rules .rules__grid { display: grid; gap: max(var(--vpad), 2.25rem); }
+@media (min-width: 60em) {
+    #p-events-04-house-rules .rules__grid { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: calc(var(--vpad) * 1.5); align-items: start; }   /* FINAL PASS: = cafe FAQ split */
+    #p-events-04-house-rules .rules__head { position: sticky; top: calc(var(--hH, 78) * 1px + var(--vpad) / 2); }
+}
+#p-events-04-house-rules .rules__intro { margin-top: calc(var(--vpad) / 3); color: var(--colTextOnBrandMuted); }
+#p-events-04-house-rules .rules__list { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--colLineOnBrand); }
+#p-events-04-house-rules .rules__item { display: grid; grid-template-columns: 3.75rem minmax(0, 1fr); gap: 0 1rem; align-items: start; padding: 1.5rem 0; border-top: 1px solid var(--colLineOnBrand); }
+@media (min-width: 48em) { #p-events-04-house-rules .rules__item { grid-template-columns: 6.5rem minmax(0, 1fr); gap: 0 1.5rem; padding: 1.9rem 0; } }
+#p-events-04-house-rules .rules__num { font-size: clamp(2.25rem, 4.4vw, 3.75rem); font-weight: var(--wTitle); line-height: .9; letter-spacing: var(--trackDisplay); font-variant-numeric: tabular-nums; color: var(--colOnBrand); opacity: .55; }
+#p-events-04-house-rules .rules__title { margin: 0 0 .5rem; font-size: clamp(1.25rem, 1.9vw, 1.625rem); font-weight: var(--wTitle); line-height: 1.05; letter-spacing: var(--trackTitle); text-transform: uppercase; color: var(--colOnBrand); }
+#p-events-04-house-rules .rules__text p { margin: 0; max-width: 38em; color: var(--colTextOnBrandMuted); }
+#p-events-04-house-rules .rules__item.animated { transition-delay: 0s; }
+
+/* --------------------------------------------------------------------------
+   05 other events - two soft cards
+   -------------------------------------------------------------------------- */
+#p-events-05-other-events .other__card .card__body { padding: calc(var(--vpad) / 1.4); gap: .9rem; }
+#p-events-05-other-events .other__title { font-size: clamp(1.75rem, 3.2vw, 2.75rem); line-height: 1; }
+#p-events-05-other-events .card__eyebrow { color: var(--colBrand); }
+#p-events-05-other-events .card__text { max-width: 36em; }
+#p-events-05-other-events .other__dates { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+#p-events-05-other-events .other__dates li { display: inline-flex; align-items: center; min-height: 2rem; padding: 0 .8em; border: 1px solid var(--colGrigio); font-size: .8125rem; font-weight: var(--wLead); line-height: 1; letter-spacing: .04em; color: var(--colBrand); font-variant-numeric: tabular-nums; white-space: nowrap; }
+#p-events-05-other-events .card__actions { padding-top: 1.1rem; }
+
+/* --------------------------------------------------------------------------
+   06 faqs - native details / summary
+   -------------------------------------------------------------------------- */
+#p-events-06-faqs .faqs__grid { display: grid; gap: max(var(--vpad), 2.25rem); }
+@media (min-width: 60em) { #p-events-06-faqs .faqs__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: calc(var(--vpad) * 1.5); align-items: start; } }   /* FINAL PASS: = cafe FAQ split (5 | 7 below 75em, 4 | 7 above) */
+@media (min-width: 75em) { #p-events-06-faqs .faqs__grid { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); } }
+.faq { border-bottom: 1px solid var(--colGrigio); }
+.faq__item { border-top: 1px solid var(--colGrigio); }
+.faq__q {
+    display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+    min-height: 4.25rem; padding: 1.1rem 0;
+    list-style: none; cursor: pointer;
+    font-size: clamp(18px, 1.5vw, 22px); font-weight: var(--wTitle); line-height: 1.2; letter-spacing: var(--trackTitle); color: var(--colBrand);   /* FINAL PASS: = cafe FAQ rows (Bold) */
+}
+.faq__q::-webkit-details-marker { display: none; }
+.faq__q:hover { color: var(--colAccent); }
+.faq__icon { position: relative; flex: 0 0 2.75rem; width: 2.75rem; height: 2.75rem; border: 1px solid currentColor; border-radius: 50%; }
+.faq__icon::before, .faq__icon::after { content: ""; position: absolute; left: 50%; top: 50%; width: .9rem; height: 1.5px; background: currentColor; transform: translate(-50%, -50%); }
+.faq__icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+.faq__item[open] .faq__icon::after { transform: translate(-50%, -50%) rotate(0deg); }
+.faq__item[open] .faq__icon, .is-mouse .faq__q:hover .faq__icon { background: var(--colBrand); border-color: var(--colBrand); color: var(--colOnBrand); }   /* FINAL PASS: = cafe (filled disc when open) */
+.faq__a { padding: 0 3.75rem 1.6rem 0; max-width: 44em; }
+.faq__a p { margin: 0; }
+@media (max-width: 35.99em) { .faq__a { padding-right: 0; } }
+@media screen and (prefers-reduced-motion: no-preference) {
+    .faq__q { transition: color var(--aniUi) var(--easeInOutSine); }
+    .faq__icon::after { transition: transform var(--aniUi) var(--easeInOutSine); }
+}
+
+/* --------------------------------------------------------------------------
+   07 reserve - closing CTA band. FINAL PASS 2026-09-17: ONE closing-band style on cafe 07 / menu 11 / events 07 = the caramel accent band (the kit
+   flips tokens + buttons), the title at the page-hero h1 size, a white lead, white + outlined CTAs at 48px, full width on phones; the mark row
+   is gone (the footer mark follows one band later).
+   -------------------------------------------------------------------------- */
+#p-events-07-reserve .closing__title { --fontSize: clamp(40px, 7vw, 96px); line-height: .95; letter-spacing: var(--trackDisplay); margin: 0; }
+#p-events-07-reserve .closing__text { margin: calc(var(--vpad) / 2) auto 0; max-width: 30ch; color: var(--colOnBrand); text-wrap: balance; }
+#p-events-07-reserve .closing__ctas { margin-top: calc(var(--vpad) / 1.5); display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+#p-events-07-reserve .closing__ctas .button + .button { margin: 0; }
+#p-events-07-reserve .closing__ctas .button { --aniTime: var(--aniUi); min-height: 3rem; }
+@media (max-width: 35.99em) { #p-events-07-reserve .closing__ctas .button { flex: 1 1 100%; } }
+
+/* FINAL PASS 2026-09-17: keeps the last words of a split display title together (SplitText turns an &nbsp; into a plain space, so the orphan fix is a nowrap span; the words inside still rise one by one) */
+body[data-page="events"] main .keep-together { white-space: nowrap; }

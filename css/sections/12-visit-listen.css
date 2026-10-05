@@ -1,0 +1,201 @@
+/* ==========================================================================
+   12-visit-listen - Twin cards (solid accent VISIT + frosted LISTEN) over a slowly translating room photo
+   Source: IC = teardowns/2026-09-14-icebergdoc-org/source/css/inline-scoped.beautified.css (inline block #23, :2491-2660)
+   Iceberg sizes are calc(N/2024*100vw) -> px@1440 = N*0.7115; re-expressed in the Paszkowski token system per
+   BUILD-SPEC 12 (c) and DD Pick 10 ("Change": 2*--vpad section padding, clamp() title, 24px blur on phones).
+   Measured (IC layout-manifest, state desktop-09-home-podcast-bottom @1440x900): section 1440x1314.8; cards
+   479.5x513.7 at x 240.5 / 720 (adjacent, no gap), padding 14.2; frosted margin-top 256.8. Mobile @390x844:
+   cards 390 wide, stacked, padding 55.6/24.8/116.1, frosted margin-top 0.
+   Everything scoped under #s-12-visit-listen. INFERRED values are marked.
+   Brand pass (2026-09-17): colours via the brand tokens only (VISIT = --colAccent + --colOnBrand; LISTEN = frosted brand-deep tint
+   over the photo, --colOverlayStrong fallback), type from the base.css roles (no font-family here), CTAs = white outlined pills
+   (brief "buttons white outlined"), hairlines --colLineOnBrand, icons white. Geometry (card widths, min-heights, offsets, blur,
+   breakpoints) and the two scrubbed tweens are unchanged.
+   ========================================================================== */
+
+/* ---- section - IC:2491-2500 `.home-podcast-bottom { align-items:flex-start; display:flex; min-height:100svh;
+        padding: 450/2024vw 338/2024vw 315/2024vw; position:relative; width:100% }` ---- */
+#s-12-visit-listen {
+    position: relative;                                    /* :2498 */
+    width: 100%;                                           /* :2499 */
+    min-height: 100svh;                                    /* :2494 - keeps the -40..+40% bg translate covered (spec 12 (h)) */
+    padding-top: calc(var(--vpad) * 2);                    /* :2495 450/2024vw = 320.2 -> 2*--vpad = 115.2 (DD Pick 10 "Change") */
+    padding-bottom: calc(var(--vpad) * 2);                 /* :2495 315/2024vw = 224.1 -> 2*--vpad = 115.2 (DD Pick 10 "Change") */
+}
+
+/* ---- background - IC:2515-2533 ---- */
+#s-12-visit-listen .twin-cards__bg {
+    position: absolute;                                    /* :2519 */
+    left: 0; top: 0;                                       /* :2517, :2520 */
+    width: 100%; height: 100%;                             /* :2521, :2516 */
+    overflow: hidden;                                      /* :2518 */
+    z-index: var(--z-bg);                                  /* Z-INDEX PLAN: section backgrounds 0 */
+}
+#s-12-visit-listen .twin-cards__bg img {
+    display: block;                                        /* :2526 */
+    width: 100%;                                           /* :2531 */
+    height: 100%;                                          /* :2527 */
+    max-width: none;
+    object-fit: cover;                                     /* :2528-2529 */
+    transform-origin: 0 0;                                 /* :2530 (assets.md: keep 0 0 so the arched windows show at the top of travel) */
+    will-change: transform;                                /* :2532 */
+}
+
+/* ---- the row of cards (the IC section itself is the flex row; the rebuild keeps the row inside the strip--wide
+        container so the pair is centred: 2 x 480 in 1440 -> x 240, measured 240.5) ---- */
+#s-12-visit-listen .twin-cards__row {
+    position: relative;
+    z-index: var(--z-content);                             /* Z-INDEX PLAN: section content 1 */
+    display: flex;                                         /* :2493 */
+    align-items: flex-start;                               /* :2492 */
+    justify-content: center;                               /* INFERRED (IC centres via the 338/2024vw side padding) */
+}
+@media (max-width: 47.99em) {                              /* IC:2509-2513 (max-width:767px) */
+    #s-12-visit-listen .twin-cards__row { flex-direction: column; }   /* :2510 */
+}
+
+/* ---- card - IC:2557-2568 ---- */
+#s-12-visit-listen .twin-card {
+    color: var(--colOnBrand);                              /* :2558 var(--color-white) -> BK white on the accent / frosted card */
+    display: flex;                                         /* :2559 */
+    flex-direction: column;                                /* :2560 */
+    justify-content: space-between;                        /* :2562 */
+    position: relative;                                    /* :2567 */
+    width: min(33.333vw, 30rem);                           /* :2568 50% of the padded row = 479.5 = 33.3vw (spec 12 (c) INFERRED min()) */
+    min-height: min(35.7vw, 32.125rem);                    /* :2561 height 722/2024vw = 513.7 -> min-height so longer copy can grow (spec 12 (c)) */
+    padding: calc(var(--vpad) / 4);                        /* :2563-2566 20/2024vw = 14.2 -> --vpad/4 = 14.4 */
+    margin: 0;
+}
+@media (max-width: 47.99em) {                              /* IC:2576-2581 */
+    #s-12-visit-listen .twin-card {
+        width: 100%;                                       /* :2580 */
+        min-height: 0;                                     /* :2577 height:auto */
+        padding: calc(var(--vpad) * 2) var(--vpad) calc(var(--vpad) * 4);   /* :2578-2579 56/25/117/25 of 393vw -> vpad multiples 51.2/25.6/102.4 (INFERRED) */
+    }
+}
+/* solid card - IC:2645-2647 */
+#s-12-visit-listen .twin-card--visit { background: var(--colAccent); }   /* :2646 var(--color-orange) -> --colAccent (BK caramel, white text 6.5:1) */
+/* frosted card - IC:2649-2655 */
+#s-12-visit-listen .twin-card--listen {
+    -webkit-backdrop-filter: blur(min(5vw, 4.45rem));      /* :2650 blur(100/2024vw = 71.2px) */
+    backdrop-filter: blur(min(5vw, 4.45rem));              /* :2651 */
+    background: rgb(var(--colBrandDeep-rgb) / .55);        /* :2652 #ffffff05 -> brand-deep tint (INFERRED .55): the blurred photo alone left white text at ~2.9:1
+                                                              over the bright windows; the tint keeps the frosted look and lifts it past 4.5:1 (measured in verify) */
+    margin-top: min(17.8vw, 16.05rem);                     /* :2653 361/2024vw = 256.8 */
+}
+@media (max-width: 47.99em) {
+    #s-12-visit-listen .twin-card--listen {
+        margin-top: 0;                                     /* :2657-2659 */
+        -webkit-backdrop-filter: blur(24px);
+        backdrop-filter: blur(24px);                       /* DD Pick 10 "Change": 24px on phones */
+        background: var(--colOverlayStrong);               /* DD Pick 10 "Change": semi-opaque brand-deep at .6 (was rgba(26,20,17,.6)) */
+    }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    #s-12-visit-listen .twin-card--listen { background: var(--colOverlayStrong); }   /* INFERRED no-blur fallback: brand-deep at .6 (brief "brand-brown 60% fallback") */
+}
+
+/* ---- title - IC:2583-2590 `.home-podcast-bottom__card-title { font-size: 72/2024vw; font-weight:600; letter-spacing:-.03em;
+        line-height:90%; text-transform:uppercase }` -> spec G2 .twin-card__title (Fraunces 500 clamp(32px,3.5vw,51px)) ---- */
+#s-12-visit-listen .twin-card__title {
+    font-weight: var(--wTitle);                            /* BK title role: Creato Display Bold 700 (family inherited from body; was Fraunces 500) */
+    font-size: clamp(32px, 3.5vw, 51px);                   /* :2584 72/2024vw = 51.2 -> 50.4 @1440, 32 @390 (IC mobile 41.7) */
+    line-height: var(--lhTitle);                           /* :2587 90% -> BK 1 (the single-word titles do not wrap) */
+    letter-spacing: var(--trackTitle);                     /* :2586 -.03em -> BK -.01em */
+    text-transform: uppercase;                             /* :2588 */
+    color: inherit;
+    margin: 0;
+}
+
+/* ---- content block (net-new inner layout, spec 12 (i)) ---- */
+#s-12-visit-listen .twin-card__content { margin-top: var(--vpad); }                          /* INFERRED: title clears the content when the card grows past min-height */
+#s-12-visit-listen .twin-card__content > * + * { margin-top: calc(var(--vpad) / 3); }        /* INFERRED rhythm (19.2 @1440) */
+
+/* text - IC:2622-2628 `.card-text { font-size: 22/2024vw; font-weight:600; line-height:120%; width:70% }` */
+#s-12-visit-listen .twin-card__text {
+    font-weight: var(--wLead);                             /* :2624 600 -> BK lead / quote role Medium 500 */
+    font-size: 1em;                                        /* :2623 22/2024vw = 15.65 -> 16px (spec) */
+    line-height: 1.2;                                      /* :2625 */
+    width: 70%;                                            /* :2627 */
+}
+@media (max-width: 47.99em) { #s-12-visit-listen .twin-card__text { width: 80%; } }   /* :2638-2641 */
+
+/* latest episode = the .lead role (spec G2 / DD Pick 12): BK Creato Display Medium 500 clamp(20px,1.8vw,26px) lh 1.25 (INFERRED lh) ls -.01em - scoped copy, no global .lead */
+#s-12-visit-listen .twin-card__latest {
+    font-weight: var(--wLead);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.25;
+    letter-spacing: -.01em;
+    text-wrap: pretty;
+}
+#s-12-visit-listen .twin-card__duration { font-size: .6em; font-weight: var(--wBody); letter-spacing: 0; white-space: nowrap; color: var(--colTextOnBrandMuted); }   /* INFERRED (muted-on-brand token instead of opacity) */
+
+/* hours table - net-new (spec 12 (c) "hours table" row, INFERRED) */
+#s-12-visit-listen .hours { width: 100%; border-collapse: collapse; font-size: 1em; line-height: 1.5; }
+#s-12-visit-listen .hours th { text-align: left; font-weight: var(--wBody); color: var(--colTextOnBrandMuted); padding: .2em 0; }   /* days muted (white .8 on accent 5.4:1) */
+#s-12-visit-listen .hours td { text-align: right; padding: .2em 0; white-space: nowrap; font-weight: var(--wLead); }   /* times Medium 500 (INFERRED hierarchy) */
+#s-12-visit-listen .hours tr + tr { border-top: 1px solid var(--colLineOnBrand); }   /* BK hairline on brown/accent: white .25 */
+#s-12-visit-listen .twin-card__note { font-size: .875rem; line-height: 1.5; color: var(--colTextOnBrandMuted); }   /* INFERRED (visit.note is an optional line) - BK caption role 14px Regular, muted-on-brand */
+#s-12-visit-listen .twin-card__address { font-style: normal; line-height: 1.5; }            /* INFERRED (UA italic reset) */
+
+/* platform links (LISTEN) - INFERRED list styling; icons from the sprite */
+#s-12-visit-listen .platforms { list-style: none; padding: 0; margin: 0; display: grid; gap: .35em; }
+#s-12-visit-listen .platforms a {
+    display: inline-flex; align-items: center; gap: .6em;
+    padding-block: .175em; margin-block: -.175em;          /* hit boxes meet across the .35em gap (31px rows, WCAG 2.5.8 AA 24px) without moving the list - INFERRED */
+}
+#s-12-visit-listen .platforms .icon { width: 1.25em; height: 1.25em; color: var(--colOnBrand); }   /* BK: platform icons white */
+#s-12-visit-listen .platforms a:hover .icon, #s-12-visit-listen .platforms a:focus-visible .icon { transform: translateX(.15em); }   /* hover feedback without layout shift (WIG) - INFERRED */
+@media screen and (prefers-reduced-motion: no-preference) { #s-12-visit-listen .platforms .icon { transition: transform var(--aniUi) var(--easeOut); } }
+
+/* links inside the cards inherit the white (IC cards are white-on-colour) - base a { color: --colLink } would be brown on accent; hover = muted-on-brand token */
+#s-12-visit-listen .twin-card a { color: inherit; }
+#s-12-visit-listen .platforms a:hover, #s-12-visit-listen .twin-card__address a:hover { color: var(--colTextOnBrandMuted); }   /* INFERRED (Paszkowski footer hover pattern, token instead of opacity) */
+#s-12-visit-listen .twin-card__address a { padding-block: .8em; margin-block: -.8em; }   /* inline phone link: 19px content area + 25.6 = 44.6px hit box, line box unchanged (last line of the address, nothing to overlap) - INFERRED */
+/* focus ring: white on the brand / accent surfaces via tokens.css --colFocus (base.css reads it directly since the brand pass finish) */
+
+/* links row - IC:2603-2606 (.card-link margin-bottom 59/2024vw sits above the text; rebuild: the CTAs close the bottom block) */
+#s-12-visit-listen .twin-card__links {
+    margin-top: auto;                                      /* spec 12 (c): flex space-between does the rest */
+    padding-top: calc(var(--vpad) / 3);                    /* INFERRED */
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: .75em 1.5em;                                      /* INFERRED */
+}
+/* BK brief: the card CTAs are white OUTLINED pills (1px white .7 rule, .5em radius = the base .button radius, 44px tall). Both links keep
+   their markup and engines: .read-more keeps the base.css s10 disc + arrow (the disc is currentColor, so it turns brown on the white
+   hover fill), .twin-card__link keeps its text-link markup (the IC underline reveal is replaced by the pill fill). The pill replaces the
+   read-more's padding + negative-margin hit box with real padding, so the CTA row is 44px tall instead of 22.8 (the card is min-height
+   + space-between; it absorbs the 21px) - INFERRED. */
+#s-12-visit-listen .twin-card__links a {
+    --colRead-more: var(--colOnBrand);
+    min-height: var(--tapMin);
+    padding: .6em 1.2em;
+    margin: 0;
+    border: 1px solid rgb(var(--colOnBrand-rgb) / .7);
+    border-radius: .5em;
+    color: var(--colOnBrand);
+    background: transparent;
+    text-transform: uppercase;                             /* .read-more already is (_common.scss:69); the text link matches */
+    font-weight: var(--wButton); font-size: .9em; letter-spacing: var(--trackButton); line-height: 1.2;   /* BK button role (base.css .button / .read-more) */
+    align-content: center;
+    cursor: pointer;
+}
+#s-12-visit-listen .twin-card__link { display: inline-flex; align-items: center; }
+@media screen and (prefers-reduced-motion: no-preference) {
+    #s-12-visit-listen .twin-card__links a { --aniProp: background-color, color, border-color; transition: var(--aniUi) var(--easeInOutSine); transition-property: var(--aniProp); }   /* .2s (WIG 150-300ms), no layout change */
+}
+/* hover / keyboard: white fill, label in the card's own brown (accent on VISIT 6.5:1, brand on LISTEN 13.1:1); the read-more disc
+   (currentColor) becomes brown and its arrow flips to white so it stays visible */
+#s-12-visit-listen .twin-card__links a:hover, #s-12-visit-listen .twin-card__links a:focus-visible {
+    background: var(--colOnBrand); border-color: var(--colOnBrand);
+    color: var(--colBrand); --colRead-more: var(--colBrand);
+}
+#s-12-visit-listen .twin-card--visit .twin-card__links a:hover, #s-12-visit-listen .twin-card--visit .twin-card__links a:focus-visible { color: var(--colAccent); --colRead-more: var(--colAccent); }
+/* arrow blend on the black band is now base.css s10 (`.bg-band-black .read-more::after { mix-blend-mode: normal }`, global verifier round 2);
+   this section keeps its arrow colour choice: brand glyph on the white disc at rest, white glyph on the brown disc over the white hover fill (INFERRED) */
+#s-12-visit-listen .read-more::after { background-color: var(--colBrand); }
+#s-12-visit-listen .read-more:hover::after, #s-12-visit-listen .read-more:focus-visible::after { background-color: var(--colOnBrand); }
+@media (max-width: 47.99em) {
+    #s-12-visit-listen .twin-card__links a { flex: 1 1 auto; justify-content: center; }   /* phones: the two pills share the row (or stack full-width) - INFERRED */
+    #s-12-visit-listen .twin-card__links .read-more { display: inline-grid; justify-items: center; }
+}

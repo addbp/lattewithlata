@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<!-- no-js -> js-ok before first paint (PZ pattern: .no-js in inline-critical, rendered.html:1 <html class="js-ok ...">); the section CSS carries html:not(.js-ok) fallbacks -->
+<script>document.documentElement.classList.replace("no-js","js-ok")</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Podcast | Latte with Lata</title>
+<meta name="description" content="Candid, unhurried conversations with mission-driven leaders about the decisions that shaped their work. Recorded live in the cafe every Thursday night.">
+<meta name="theme-color" content="#502506">
+<link rel="canonical" href="https://addbp.github.io/lattewithlata/podcast.html">
+<meta property="og:url" content="https://addbp.github.io/lattewithlata/podcast.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Latte with Lata">
+<meta property="og:title" content="The Podcast | Latte with Lata">
+<meta property="og:description" content="Candid, unhurried conversations with mission-driven leaders about the decisions that shaped their work. Recorded live in the cafe every Thursday night.">
+<meta property="og:image" content="https://addbp.github.io/lattewithlata/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Latte with Lata - Real Conversations. Built on Purpose.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Podcast | Latte with Lata">
+<meta name="twitter:description" content="Candid, unhurried conversations with mission-driven leaders about the decisions that shaped their work. Recorded live in the cafe every Thursday night.">
+<meta name="twitter:image" content="https://addbp.github.io/lattewithlata/assets/images/og-image.jpg">
+<link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/brand/fonts/creato_display/CreatoDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/brand/fonts/creato_display/CreatoDisplay-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="vendor/splide-core.min.css">
+<link rel="stylesheet" href="css/sections/00-header.css">
+<link rel="stylesheet" href="css/sections/13-newsletter.css">
+<link rel="stylesheet" href="css/sections/14-footer.css">
+<link rel="stylesheet" href="css/pages/_shell.css">
+<link rel="stylesheet" href="css/pages/podcast.css">
+</head>
+<body id="top" data-page="podcast" data-page-module="true">
+<a class="skip-main" href="#page-content">Skip to main content</a>
+
+<!-- ===== sections/00-header.html ===== -->
+<!-- 00-header: fixed header + off-canvas drawer + mobile Book-a-table pill. Shared by EVERY page (build-site.cjs inlines it on the home page and on all sub-pages).
+     Sits BEFORE <main>. Source skeleton: PZ/source/rendered.html #page-header (BUILD-SPEC 00 (b)); pill: Iceberg .home__about-button.
+     Copy: content/site.json -> brand.name (lockup wordmark + aria-label), nav[], bookingLabel, listenOn[], newsletter.eyebrow (side link).
+     Note: .header__container is NOT a .container (the source header is a full-width flex row, measured 1440x78 / 390x63).
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 1a + 3): the drawer keeps the white cup mark at 72px, now a link home. Every href is the PAGES-SPEC
+     navigation map: real pages, no same-page anchors, platform links stay "#" placeholders.
+     UPDATE-3 (2026-09-17, client request): the header row is burger LEFT + the logo lockup RIGHT again - the white cup mark (decorative img,
+     482x571 attrs = the viewBox box so nothing shifts on load; 44px, 56px at >= 60em) + the "LATTE WITH LATA" wordmark text (hidden below
+     36em: mark only), one link home. "Book a table" left the bar; it stays in the drawer, the mobile pill and every page CTA. -->
+<header id="page-header" class="header page__header">
+  <div class="header__container">
+    <button class="header__burger menu__switcher js-menu-switcher" type="button" aria-label="Menu" aria-haspopup="true" aria-controls="menu-container" aria-expanded="false"><span class="menu__burger"><u></u></span></button>
+
+    <a class="header__logo" href="index.html" aria-label="Latte with Lata, home">
+      <img class="header__mark" src="assets/brand/logo/latte-with-lata-mark-white.svg" alt="" width="482" height="571" decoding="async">
+      <span class="header__wordmark" aria-hidden="true">Latte with Lata</span>
+    </a>
+
+    <aside class="menu__screen js-menu-switcher" aria-hidden="true"></aside>
+
+    <div id="menu-container" class="menu__container drawer" aria-hidden="true">
+      <a class="menu__home" href="index.html" aria-label="Latte with Lata - home"><img class="menu__mark" src="assets/brand/logo/latte-with-lata-mark-white.svg" alt="" width="482" height="571" decoding="async"></a>
+      <div class="menu__row">
+        <nav id="menu-main" class="menu__main js-menu-main" aria-label="Main">
+          <ul>
+            <li><a href="index.html" data-nav="home"><div>Home</div><div aria-hidden="true">Home</div></a></li>
+            <li><a href="cafe.html" data-nav="cafe"><div>The Cafe</div><div aria-hidden="true">The Cafe</div></a></li>
+            <li><a href="menu.html" data-nav="menu"><div>Menu</div><div aria-hidden="true">Menu</div></a></li>
+            <li><a href="podcast.html" data-nav="podcast"><div>The Podcast</div><div aria-hidden="true">The Podcast</div></a></li>
+            <li><a href="episodes.html" data-nav="episodes"><div>Episodes</div><div aria-hidden="true">Episodes</div></a></li>
+            <li><a href="podcast.html#host"><div>The Host</div><div aria-hidden="true">The Host</div></a></li>
+            <li><a href="events.html" data-nav="events"><div>Events</div><div aria-hidden="true">Events</div></a></li>
+            <li><a href="contact.html" data-nav="contact"><div>Contact</div><div aria-hidden="true">Contact</div></a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="menu__mid">
+        <nav id="menu-side" class="menu__side" aria-label="Tools">
+          <ul>
+            <!-- side links: "Get directions" = the contact page's find-us block (navigation map); the newsletter block ships on every page, so its anchor stays same-page -->
+            <li><a href="contact.html#find-us"><div>Get directions</div><div aria-hidden="true">Get directions</div></a></li>
+            <li><a href="#s-13-newsletter"><div>Stay for the conversation</div><div aria-hidden="true">Stay for the conversation</div></a></li>
+          </ul>
+        </nav>
+        <a class="button button--outlined button--no-icon button--squared" href="book.html" data-nav="book"><strong>Book a table</strong></a>
+      </div>
+
+      <div class="menu__footer">
+        <span class="menu__footer__label" aria-hidden="true">Listen on</span>
+        <nav class="menu__listen" aria-label="Listen on">
+          <ul class="socials">
+            <li><a href="#" aria-label="Spotify"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-spotify"></use></svg><span class="visual-hide">Spotify</span></a></li>
+            <li><a href="#" aria-label="Apple Podcasts"><svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-apple"></use></svg><span class="visual-hide">Apple Podcasts</span></a></li>
+            <li><a href="#" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-youtube"></use></svg><span class="visual-hide">YouTube</span></a></li>
+            <li><a href="#" aria-label="RSS"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-rss"></use></svg><span class="visual-hide">RSS</span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Iceberg mobile pill (I11): wrapper = .home__about-button (fixed, full width, faded by GSAP), link = .vertical-button__link -->
+<div id="book-pill-wrap" class="book-pill__wrap">
+  <a id="book-pill" class="book-pill" href="book.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-cup"></use></svg><span>Book a table</span></a>
+</div>
+
+<main id="page-content" class="page__content">
+<!-- ===== pages/podcast/01-hero.html ===== -->
+<!-- podcast 01-hero - page hero (PAGES-SPEC 2). Copy: content/pages.json podcast.hero (verbatim). Photo: assets/images/page-podcast.jpg
+     (ASSETS lane; atmospheric, the h1 + intro carry the message -> alt from the manifest describes the delivered photo). Actions: shared.labels. -->
+<section id="p-podcast-01-hero" class="page-hero" data-banner aria-labelledby="p-podcast-title" style="--pinX:38%; --pinY:30%">
+  <div class="page-hero__media"><img src="assets/images/page-podcast.jpg" alt="A gold microphone with a silver mesh grille against a plain warm brown background" width="2400" height="1350" fetchpriority="high" decoding="async"></div>
+  <div class="container page-hero__content">
+    <p class="page-hero__eyebrow">The podcast</p>
+    <h1 id="p-podcast-title" class="page-hero__title">PULL UP A CHAIR</h1>
+    <p class="page-hero__intro">Coffee. Leadership. Purpose. Real conversation. A new episode every Thursday, recorded live at the corner table.</p>
+    <p class="page-hero__actions"><a class="button" href="episodes.html">All episodes</a><a class="button button--outlined" href="events.html">What's on</a></p>
+  </div>
+</section>
+
+<!-- ===== pages/podcast/02-about.html ===== -->
+<!-- podcast 02-about - what the show is, on white. Opens with the .mark-row (first content strip after the hero). Copy: podcast.sections[about]
+     verbatim: eyebrow, title, lead (client-approved Tile 2), three paragraphs, kicker (Tile 1), four facts as an .info-list. #about = the inner wrapper. -->
+<section id="p-podcast-02-about" class="strip strip--normal pod-about" aria-labelledby="pod-about-title">
+  <div id="about" class="container">
+    <div class="mark-row anima--bottom-in"><img class="mark-row__mark" src="assets/brand/logo/latte-with-lata-mark-brown.svg" alt="" width="482" height="571" decoding="async"></div>
+    <div class="strip__data text-center pod-head pod-head--center">
+      <p class="eyebrow pod-eyebrow anima--bottom-in">What the show is</p>
+      <h2 id="pod-about-title" class="strip__title1">THERE'S MORE BEHIND EVERY MISSION</h2>
+    </div>
+    <p class="pod-about__lead anima--bottom-in">Thoughtful conversations with people building careers, organizations, and movements around purpose.</p>
+    <div class="pod-about__grid">
+      <div class="pod-about__copy anima--bottom-in">
+        <p>Latte with Lata is a conversational podcast with mission-driven leaders: people who have built careers, organizations or movements around purpose rather than profit alone. It has the warmth and pace of a conversation over coffee, and the substance of a real discussion about leadership, impact and the decisions that shape the work.</p>
+        <p>Most leadership shows are about scale, growth and metrics. This one is about the person behind the mission: their motivations, their doubts, and the human decisions behind the work. Real leadership lessons come out over coffee, not in a boardroom.</p>
+        <p>Behind every organization, movement, and meaningful career are difficult decisions, unexpected lessons, doubts, and defining moments. Latte with Lata brings those stories to the table.</p>
+        <p class="pod-kicker">Pull up a chair and discover the stories behind <span class="pod-nobreak">mission-driven</span> work.</p>
+      </div>
+      <dl class="info-list info-list--stack pod-about__facts anima--bottom-in">
+        <div class="info-list__row"><dt>New episode</dt><dd>Every Thursday</dd></div>
+        <div class="info-list__row"><dt>Length</dt><dd>About 40 minutes</dd></div>
+        <div class="info-list__row"><dt>Recorded</dt><dd>Live, at the corner table</dd></div>
+        <div class="info-list__row"><dt>Episodes so far</dt><dd>88</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/podcast/03-audience.html ===== -->
+<!-- podcast 03-audience - "For people building with purpose" (client-approved Tile 4) on --colBrandSoft (.bg-band-cream2): head left / lead right,
+     the audience list as a two-column .info-list (dt = index, dd = the line), kicker underneath. Copy: podcast.sections[audience] verbatim. -->
+<section id="p-podcast-03-audience" class="strip strip--normal bg-band-cream2 pod-audience" aria-labelledby="pod-audience-title">
+  <div id="audience" class="container">
+    <div class="pod-split">
+      <div class="strip__data pod-head">
+        <p class="eyebrow pod-eyebrow anima--bottom-in">Who it is for</p>
+        <h2 id="pod-audience-title" class="strip__title1">FOR PEOPLE BUILDING WITH PURPOSE</h2>
+      </div>
+      <p class="lead pod-split__lead anima--bottom-in">For leaders, aspiring leaders, professionals, and anyone searching for more meaning in the work they do.</p>
+    </div>
+    <dl class="info-list pod-audience__list" aria-label="Who it is for">
+      <div class="info-list__row anima--bottom-in"><dt><span class="visual-hide">Listener </span>01</dt><dd>Current and aspiring leaders in nonprofit, healthcare, public sector and social-impact organizations.</dd></div>
+      <div class="info-list__row anima--bottom-in"><dt><span class="visual-hide">Listener </span>02</dt><dd>Professionals working out a career shift toward more <span class="pod-nobreak">purpose-driven</span> work.</dd></div>
+      <div class="info-list__row anima--bottom-in"><dt><span class="visual-hide">Listener </span>03</dt><dd>Listeners who prefer a long, honest conversation to polished expert content.</dd></div>
+      <div class="info-list__row anima--bottom-in"><dt><span class="visual-hide">Listener </span>04</dt><dd>People who like leadership content but are tired of growth hacks and hustle.</dd></div>
+    </dl>
+    <p class="pod-kicker pod-kicker--center anima--bottom-in">Latte with Lata is a space for conversations about leadership, impact, purpose, and the realities of <span class="pod-nobreak">mission-driven</span> work.</p>
+  </div>
+</section>
+
+<!-- ===== pages/podcast/04-pillars.html ===== -->
+<!-- podcast 04-pillars - the four content pillars as numbered cards 01-04 (kit .card + a caramel rule that grows on hover via transform: no layout
+     shift; equal heights from the grid stretch). Copy: podcast.sections[pillars] verbatim (title, short, body, note). -->
+<section id="p-podcast-04-pillars" class="strip strip--normal pod-pillars" aria-labelledby="pod-pillars-title">
+  <div id="pillars" class="container">
+    <div class="strip__data text-center pod-head pod-head--center">
+      <p class="eyebrow pod-eyebrow anima--bottom-in">The format</p>
+      <h2 id="pod-pillars-title" class="strip__title1">THE SAME FOUR PARTS, EVERY WEEK</h2>
+      <p class="lead pod-head__lead anima--bottom-in">Every conversation moves through the same four parts. Guests know them in advance. They do not get the questions.</p>
+    </div>
+    <ol class="card-grid pod-pillars__grid">
+      <li class="anima--bottom-in">
+        <article class="card card--hover pod-pillar" aria-labelledby="pod-pillar-1">
+          <div class="card__body">
+            <p class="pod-pillar__n"><span class="visual-hide">Part </span>01</p>
+            <span class="pod-pillar__rule" aria-hidden="true"></span>
+            <h3 id="pod-pillar-1" class="card__title">The Origin Story</h3>
+            <p class="pod-pillar__short">What actually pulled this leader into <span class="pod-nobreak">mission-driven</span> work.</p>
+            <p class="card__text">We start with what actually pulled the guest into this work, which is rarely the version in the annual report. It is usually a person, a phone call or a bad week.</p>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in">
+        <article class="card card--hover pod-pillar" aria-labelledby="pod-pillar-2">
+          <div class="card__body">
+            <p class="pod-pillar__n"><span class="visual-hide">Part </span>02</p>
+            <span class="pod-pillar__rule" aria-hidden="true"></span>
+            <h3 id="pod-pillar-2" class="card__title">The Hard Trade-off</h3>
+            <p class="pod-pillar__short">A real decision where mission and practicality were in tension.</p>
+            <p class="card__text">One real decision where the mission and the practical answer pulled in different directions. We ask what it cost, who disagreed, and whether they would make the same call again.</p>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in">
+        <article class="card card--hover pod-pillar" aria-labelledby="pod-pillar-3">
+          <div class="card__body">
+            <p class="pod-pillar__n"><span class="visual-hide">Part </span>03</p>
+            <span class="pod-pillar__rule" aria-hidden="true"></span>
+            <h3 id="pod-pillar-3" class="card__title">What No One Tells You</h3>
+            <p class="pod-pillar__short">An honest, unpolished lesson from the work.</p>
+            <p class="card__text">The honest, unpolished lesson: the thing the guest wishes someone had said in year one. No frameworks, just what happened and what they do differently now.</p>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in">
+        <article class="card card--hover pod-pillar" aria-labelledby="pod-pillar-4">
+          <div class="card__body">
+            <p class="pod-pillar__n"><span class="visual-hide">Part </span>04</p>
+            <span class="pod-pillar__rule" aria-hidden="true"></span>
+            <h3 id="pod-pillar-4" class="card__title">The Coffee Break</h3>
+            <p class="pod-pillar__short">A lighter, personal closing segment.</p>
+            <p class="card__text">We finish lighter. What they are reading, how they take their coffee, and what they do when they are not doing this.</p>
+          </div>
+        </article>
+      </li>
+    </ol>
+    <p class="pod-note text-center anima--bottom-in">Every episode has all four parts. The tag marks the part the conversation leaned on most.</p>
+  </div>
+</section>
+
+<!-- ===== pages/podcast/05-how-it-works.html ===== -->
+<!-- podcast 05-how-it-works - recorded live on Thursdays, doors 6:30 pm: a four-step timeline on the brand-brown band (horizontal from 75em, 2 x 2 from
+     48em, vertical on phones). Copy: podcast.sections[how-it-works] verbatim (steps + both CTAs with CONTENT's hrefs). Photo: event-04.jpg (ASSETS lane,
+     alt from the manifest). data-pill-away on the section: it carries its own booking CTA and the brown pill has no plate on a brown band - the mobile
+     "Book a table" pill parks while this band is in view (same reason on 08-listen). -->
+<section id="p-podcast-05-how-it-works" class="strip strip--normal bg-band-brand pod-how" aria-labelledby="pod-how-title" data-pill-away>
+  <div id="how-it-works" class="container">
+    <div class="pod-how__top">
+      <div class="strip__data pod-head">
+        <p class="eyebrow pod-eyebrow anima--bottom-in">Thursday nights</p>
+        <h2 id="pod-how-title" class="strip__title1">HOW AN EPISODE&nbsp;WORKS</h2>
+        <p class="lead pod-head__lead anima--bottom-in">Every episode is recorded live in the cafe, in front of whoever turns up. There is no studio and no second take.</p>
+      </div>
+      <div class="pod-how__media js-image-anime anima--right-in">
+        <figure class="strip__image pod-how__figure"><img src="assets/images/event-04.jpg" alt="Two people in red armchairs speaking into microphones in a wood-panelled cafe, audience in the foreground" width="1600" height="1067" loading="eager" decoding="async"></figure>
+      </div>
+    </div>
+    <ol class="pod-steps">
+      <li class="pod-step anima--bottom-in">
+        <p class="pod-step__time">6:30&nbsp;pm</p>
+        <h3 class="pod-step__title">Doors</h3>
+        <p class="pod-step__body">The cafe reopens and the chairs turn to face the corner table. It is free. Seats are first come, first seated, or you can reserve one.</p>
+      </li>
+      <li class="pod-step anima--bottom-in">
+        <p class="pod-step__time">7:00&nbsp;pm</p>
+        <h3 class="pod-step__title">Recording</h3>
+        <p class="pod-step__body">One guest, one conversation, four parts, with a short break halfway. We finish by 8:15&nbsp;pm. No slides, no panel, no pitch.</p>
+      </li>
+      <li class="pod-step anima--bottom-in">
+        <p class="pod-step__time">8:15&nbsp;pm</p>
+        <h3 class="pod-step__title">The guest stays for a coffee</h3>
+        <p class="pod-step__body">There is no question time on the recording. The guest stays in the room afterwards, so ask them in person.</p>
+      </li>
+      <li class="pod-step anima--bottom-in">
+        <p class="pod-step__time">The next Thursday</p>
+        <h3 class="pod-step__title">The episode comes out</h3>
+        <p class="pod-step__body">We cut the evening down to about 40&nbsp;minutes. The coughs come out and the pauses stay in. It is on every platform the following Thursday morning.</p>
+      </li>
+    </ol>
+    <p class="pod-actions anima--bottom-in"><a class="button" href="book.html?type=recording">Reserve a seat</a><a class="button button--outlined" href="events.html">What's on</a></p>
+  </div>
+</section>
+
+<!-- ===== pages/podcast/06-host.html ===== -->
+<!-- podcast 06-host - #host (the site-wide "The Host" link lands here). Lata Singh - Host. Her own photo only.
+     UPDATE-3 2026-09-17 (lane L2 HOST PHOTO): assets/images/founder-portrait.jpg is now the 1200x1500 (4:5) crop of the client's podcast photograph
+     assets/brand/lata-singh-podcast.jpg (box x 0-1024, y 60-1340, resampled only): whole head with 17.6% headroom, both shoulders and hands, the real
+     microphone and the real latte. It fills a 4:5 window uncropped. The lower third (name / role + a small level meter) is a solid brand plate that
+     straddles the photo's BOTTOM-RIGHT edge - below the mic base (y > 96.5%) and right of the latte, never over her face or hands; the meter is
+     decorative (aria-hidden). Own scoped block (css/pages/podcast.css), nothing borrowed from #s-10-hosts.
+     Copy: podcast.sections[host] verbatim: paragraphs (the credibility prose = the brand paper's three bullets as prose; the duplicate "credentials"
+     list is not printed), independence statement (the site-wide sentence), pull quote = the brand paper's positioning line, attributed to the show
+     (L4 requests R5-R7 applied), CTA. Row 2 = the quote on the caramel band with the home 07 colour scrub (js/pages/podcast.js; white without JS /
+     reduced motion). -->
+<section id="p-podcast-06-host" class="strip pod-host" aria-labelledby="pod-host-title">
+  <div id="host" class="pod-host__row">
+    <div class="container pod-host__grid">
+      <figure class="pod-host__stage anima--left-in">
+        <div class="pod-host__portrait"><img class="pod-host__photo" src="assets/images/founder-podcast.jpg" alt="Lata Singh, host of Latte with Lata, at a cafe table with a podcast microphone and a latte" width="1200" height="1500" loading="eager" decoding="async"></div>
+        <figcaption class="pod-host__lower">
+          <span class="pod-host__meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          <span class="pod-host__lower-text"><span class="pod-host__lower-name">Lata Singh</span><span class="pod-host__lower-role">Host</span></span>
+        </figcaption>
+      </figure>
+      <div class="pod-host__text">
+        <div class="strip__data pod-head">
+          <p class="eyebrow pod-eyebrow anima--bottom-in">The host</p>
+          <h2 id="pod-host-title" class="strip__title1">MEET LATA</h2>
+          <p class="pod-host__byline anima--bottom-in"><span class="pod-host__name">Lata Singh</span> <span class="pod-host__role">Host</span></p>
+        </div>
+        <div class="pod-host__copy anima--bottom-in">
+          <p>Lata Singh hosts Latte with Lata. She comes to these conversations as a practitioner, not as an outside observer.</p>
+          <p>By day she is a senior operating leader in one of the country's largest safety-net healthcare networks, overseeing operations, quality, workforce and finance at scale. That work has given her hands-on fluency in what mission-driven organizations deal with every day: compliance, funding structures, workforce and public accountability.</p>
+          <p>She is also pursuing doctoral study in leadership and innovation, which brings an academic and reflective lens to the table alongside the operational one.</p>
+          <p>That is the edge of the show. She is fluent in the pressures, the trade-offs and the quiet victories that come with running a purpose-built organization, and those are the things she asks about.</p>
+        </div>
+        <div class="notice pod-host__indep anima--bottom-in"><div><p class="notice__title">A personal platform</p><p>Latte with Lata is a personal platform and is independent of any employer or institution. Nothing said here is official communication on anyone's behalf.</p></div></div>
+        <p class="pod-host__cta anima--bottom-in"><a class="read-more" href="episodes.html">Join the conversation</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="pod-quote bg-band-accent">
+    <div class="container">
+      <figure class="pod-quote__fig">
+        <p class="eyebrow pod-quote__context">On why the show exists</p>
+        <blockquote class="pod-quote__block">
+          <p class="pod-quote__text text-decorated text-decorated--sentence" data-scrub>&ldquo;Real leadership lessons come out over coffee, not in a boardroom.&rdquo;</p>
+        </blockquote>
+        <figcaption class="pod-quote__by">Latte with Lata</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/podcast/07-guest.html ===== -->
+<!-- podcast 07-guest - "Be a guest, or suggest one" -> contact.html?topic=podcast-guest (the contact page pre-selects the topic). Copy:
+     podcast.sections[guest] verbatim (paragraphs, checklist, note, cta). Photo: host-corner.jpg (home asset; alt from the manifest). -->
+<section id="p-podcast-07-guest" class="strip strip--normal pod-guest" aria-labelledby="pod-guest-title">
+  <div id="guest" class="container pod-guest__grid">
+    <div class="pod-guest__text">
+      <div class="strip__data pod-head">
+        <p class="eyebrow pod-eyebrow anima--bottom-in">The other chair</p>
+        <h2 id="pod-guest-title" class="strip__title1">BE A GUEST, OR SUGGEST ONE</h2>
+      </div>
+      <div class="pod-guest__copy anima--bottom-in">
+        <p>We look for people who run something built around a mission: a clinic, a council service, a charity, a school, a social enterprise. Job title matters less than whether you have a decision you are willing to talk about honestly.</p>
+        <p>You do not need media training or a book to promote. You need an evening, an origin story and one hard trade-off.</p>
+      </div>
+      <ol class="pod-checklist anima--bottom-in">
+        <li><svg class="icon pod-checklist__icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg><span>Who you are, or who you are suggesting, and what they run.</span></li>
+        <li><svg class="icon pod-checklist__icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg><span>The decision or lesson you think is worth an hour.</span></li>
+        <li><svg class="icon pod-checklist__icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg><span>Thursdays you could be in Harrowfield.</span></li>
+      </ol>
+      <p class="pod-actions anima--bottom-in"><a class="button" href="contact.html?topic=podcast-guest">Suggest a guest</a></p>
+      <p class="pod-note anima--bottom-in">We read everything and reply within 2 working days. We cannot say yes to everyone, and nobody pays to be on the show.</p>
+    </div>
+    <div class="pod-guest__media js-image-anime anima--right-in">
+      <figure class="strip__image pod-guest__figure"><img src="assets/images/host-corner.jpg" alt="Silver condenser microphone in a shock mount with a pop filter in a dark studio" width="1200" height="1800" loading="lazy" decoding="async"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/podcast/08-listen.html ===== -->
+<!-- podcast 08-listen - platform links with icons (# placeholders until the feeds exist), 44px+ targets, on the brand band. Opens with the home 08
+     glow ticker (copy = content/site.json podcast.ticker verbatim; own scoped CSS loop in js/pages/podcast.js, running only while on screen; static
+     without JS / under reduced motion; the moving copies are aria-hidden, the sentence is read once from the .visual-hide line). No pause / play control
+     (UPDATE-3, 2026-09-17, client decision). Copy: podcast.sections[listen] verbatim. -->
+<section id="p-podcast-08-listen" class="strip bg-band-brand pod-listen" aria-labelledby="pod-listen-title" data-pill-away>
+  <div class="pod-ticker">
+    <p class="visual-hide">LATTE WITH LATA - NEW EPISODE EVERY THURSDAY</p>
+    <div class="pod-marquee" aria-hidden="true">
+      <div class="pod-marquee__track">
+        <div class="pod-marquee__copy">LATTE WITH LATA - NEW EPISODE EVERY THURSDAY -</div>
+        <div class="pod-marquee__copy">LATTE WITH LATA - NEW EPISODE EVERY THURSDAY -</div>
+      </div>
+    </div>
+  </div>
+  <div id="listen" class="container pod-listen__inner">
+    <div class="strip__data pod-head">
+      <p class="eyebrow pod-eyebrow anima--bottom-in">Listen</p>
+      <h2 id="pod-listen-title" class="strip__title1">WHEREVER YOU ALREADY&nbsp;LISTEN</h2>
+      <p class="lead pod-head__lead anima--bottom-in">A new conversation every Thursday, wherever you already listen.</p>
+    </div>
+    <div class="pod-listen__list anima--bottom-in">
+        <ul class="pod-platforms">
+          <li><a class="pod-platforms__link" href="#"><svg class="icon pod-platforms__icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-spotify"></use></svg><span class="pod-platforms__name">Spotify</span><svg class="icon pod-platforms__arrow" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></a></li>
+          <li><a class="pod-platforms__link" href="#"><svg class="icon pod-platforms__icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-apple"></use></svg><span class="pod-platforms__name">Apple Podcasts</span><svg class="icon pod-platforms__arrow" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></a></li>
+          <li><a class="pod-platforms__link" href="#"><svg class="icon pod-platforms__icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-youtube"></use></svg><span class="pod-platforms__name">YouTube</span><svg class="icon pod-platforms__arrow" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></a></li>
+          <li><a class="pod-platforms__link" href="#"><svg class="icon pod-platforms__icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-rss"></use></svg><span class="pod-platforms__name">RSS</span><svg class="icon pod-platforms__arrow" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></a></li>
+        </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/podcast/09-episodes-cta.html ===== -->
+<!-- podcast 09-episodes-cta - the latest three episodes in the home card anatomy (cover 67% / white panel 33%, title + blurb + guest / length / date,
+     accent flip on hover / focus; ONE stretched title link per card -> episodes.html#ep-<n>; the disc carries an arrow, not a play glyph: there is no player
+     yet). Copy: podcast.sections[episodes-cta] (title, text, ctas) + episodes.items[0..2] verbatim. On --colBrandSoft so the white cards read. -->
+<section id="p-podcast-09-episodes-cta" class="strip strip--normal bg-band-cream2 pod-latest" aria-labelledby="pod-latest-title">
+  <div id="episodes-cta" class="container">
+    <div class="strip__data text-center pod-head pod-head--center">
+      <h2 id="pod-latest-title" class="strip__title1">START WITH THE LATEST</h2>
+      <p class="lead pod-head__lead anima--bottom-in">Episode 88: The grant we turned down, with Marisol Vega.</p>
+    </div>
+    <ul class="pod-latest__grid">
+      <li class="anima--bottom-in">
+        <article class="episode-card">
+          <div class="episode-card__cover">
+            <img src="assets/images/episode-01.jpg" alt="Hand writing in a notebook next to a cup of coffee, glasses and a laptop" width="1600" height="1067" loading="lazy" decoding="async">
+            <span class="episode-card__num">Episode 88</span>
+            <span class="episode-card__go" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+          </div>
+          <div class="episode-card__panel">
+            <div class="episode-card__top">
+              <h3 class="episode-card__title"><a href="episodes.html#ep-88"><span class="visual-hide">Episode 88: </span>The grant we turned down</a></h3>
+              <p class="episode-card__blurb">Marisol said no to the biggest cheque in her nonprofit's history. On strings, dignity, and the board meeting that followed.</p>
+            </div>
+            <dl class="episode-card__meta">
+              <div class="episode-card__guest"><dt class="visual-hide">Guest</dt><dd>Marisol Vega, Executive director, Harrowfield Food Bank</dd></div>
+              <div class="episode-card__duration"><dt class="visual-hide">Length</dt><dd>44&nbsp;min</dd></div>
+              <div class="episode-card__date"><dt class="visual-hide">Released</dt><dd><time datetime="2026-09-10">Thu 10 Sep 2026</time></dd></div>
+            </dl>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in">
+        <article class="episode-card">
+          <div class="episode-card__cover">
+            <img src="assets/images/episode-02.jpg" alt="Kettle pouring water into a pour-over coffee brewer" width="1600" height="1067" loading="lazy" decoding="async">
+            <span class="episode-card__num">Episode 87</span>
+            <span class="episode-card__go" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+          </div>
+          <div class="episode-card__panel">
+            <div class="episode-card__top">
+              <h3 class="episode-card__title"><a href="episodes.html#ep-87"><span class="visual-hide">Episode 87: </span>What no one tells you about a waiting room</a></h3>
+              <p class="episode-card__blurb">Kwame runs a clinic where nobody is turned away. On the maths of a Tuesday morning, and the lesson no residency teaches.</p>
+            </div>
+            <dl class="episode-card__meta">
+              <div class="episode-card__guest"><dt class="visual-hide">Guest</dt><dd>Dr Kwame Boateng, Medical director, Eastgate Community Clinic</dd></div>
+              <div class="episode-card__duration"><dt class="visual-hide">Length</dt><dd>47&nbsp;min</dd></div>
+              <div class="episode-card__date"><dt class="visual-hide">Released</dt><dd><time datetime="2026-09-03">Thu 3 Sep 2026</time></dd></div>
+            </dl>
+          </div>
+        </article>
+      </li>
+      <li class="anima--bottom-in">
+        <article class="episode-card">
+          <div class="episode-card__cover">
+            <img src="assets/images/episode-03.jpg" alt="People sitting at a cafe window bar looking out at a city skyline" width="1600" height="1067" loading="lazy" decoding="async">
+            <span class="episode-card__num">Episode 86</span>
+            <span class="episode-card__go" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+          </div>
+          <div class="episode-card__panel">
+            <div class="episode-card__top">
+              <h3 class="episode-card__title"><a href="episodes.html#ep-86"><span class="visual-hide">Episode 86: </span>Fixing a form nobody could finish</a></h3>
+              <p class="episode-card__blurb">Hannah rebuilt a benefits form that failed half the people who started it. On slow change inside government, and who decides it worked.</p>
+            </div>
+            <dl class="episode-card__meta">
+              <div class="episode-card__guest"><dt class="visual-hide">Guest</dt><dd>Hannah Lindgren, Chief innovation officer, City of Harrowfield</dd></div>
+              <div class="episode-card__duration"><dt class="visual-hide">Length</dt><dd>39&nbsp;min</dd></div>
+              <div class="episode-card__date"><dt class="visual-hide">Released</dt><dd><time datetime="2026-08-27">Thu 27 Aug 2026</time></dd></div>
+            </dl>
+          </div>
+        </article>
+      </li>
+    </ul>
+    <p class="pod-actions pod-actions--center anima--bottom-in"><a class="button" href="episodes.html">All episodes</a><a class="button button--outlined" href="events.html">Come to a recording</a></p>
+  </div>
+</section>
+
+<!-- ===== sections/13-newsletter.html ===== -->
+<!-- 13-newsletter - Black newsletter block: eyebrow, lead paragraph, floating-label email input, square accent submit with
+     the two-arrow swap, consent checkbox; right column big "Listen and follow" links
+     SOURCE skeleton: Iceberg div#join.footer-newsletter > .footer-newsletter__left (.__title, .__text, form.__form >
+       .form-group.__form-input (.form-input > label + input#email ; button.__form-input__button > span > svg x2)
+       + .form-group.__form-checkbox (.form-checkbox > input#subscribe + label > div + span)) ; .footer-newsletter__right
+       (.__title + ul > li > a)  (IC rendered.html line 29 block; CSS inline-scoped.beautified.css:2836-3300;
+       engine ZNMh4Fg5.beautified.js:909-935)
+     Copy: content/site.json newsletter.* verbatim (brand pass 2026-09-17: eyebrow "First to know", new paragraph). Right column = newsletter.follow[5] (DD Pick 12 "Change": platforms
+       + Instagram; copy.md maps follow[] to the right column). Hard-coded label (INFERRED): "Listen and follow" eyebrow.
+       "privacy policy" links to #privacy (copy.md). success/error strings ride on data-* so the JS shows visible text.
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 4): shared by every page; the form is wired to POST /api/subscribe through js/lib/api.js
+       ({ email, consent: true, source: "footer-newsletter", website }) - "website" is the hidden honeypot the server wants empty. When the API is
+       not there (static hosting: GET /api/health fails) the form does NOT pretend: it shows the .newsletter__notice line with the cafe's email.
+       The action attribute is the no-JS fallback only (the JS always intercepts the submit). -->
+<section id="s-13-newsletter" class="strip strip--normal bg-band-black newsletter-band" aria-labelledby="nl-eyebrow">
+  <div class="container newsletter">
+
+    <div class="newsletter__left">
+      <p id="nl-eyebrow" class="newsletter__eyebrow eyebrow">Stay for the conversation</p>
+      <p class="newsletter__text lead">The conversation doesn't end with the podcast. Follow along for meaningful moments, leadership insights, guest stories and upcoming conversations. One email a week, never more.</p>
+      <form class="newsletter__form" action="/api/subscribe" method="post" novalidate data-source="footer-newsletter"
+            data-success="You are on the list. See you Thursday."
+            data-error="That address did not go through. Check it and try once more.">
+        <div class="newsletter__row">
+          <div class="newsletter__field">
+            <label for="nl-email">Your email</label>
+            <input id="nl-email" class="newsletter__input" type="email" name="email" autocomplete="email" spellcheck="false" required aria-describedby="nl-msg-error">
+          </div>
+          <button class="newsletter__submit" type="submit" aria-label="Subscribe">
+            <span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+            <span aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+          </button>
+        </div>
+        <div class="newsletter__consent">
+          <input id="nl-consent" type="checkbox" name="consent" required>
+          <label for="nl-consent">
+            <span class="newsletter__box" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg></span>
+            <span>Yes, send me the Thursday email from Latte with Lata. I have read the <a href="contact.html#privacy">privacy policy</a>.</span>
+          </label>
+        </div>
+        <div class="newsletter__hp" aria-hidden="true"><label for="nl-website">Website</label><input id="nl-website" type="text" name="website" tabindex="-1" autocomplete="off"></div>
+        <p id="nl-msg-error" class="newsletter__error" role="alert" hidden></p>
+        <p class="newsletter__success" role="status" hidden></p>
+        <p class="newsletter__notice" role="status" hidden>Sign-ups are handled by our team right now - email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a></p>
+      </form>
+    </div>
+
+    <div class="newsletter__right">
+      <p class="newsletter__eyebrow eyebrow">Listen and follow</p>
+      <ul class="newsletter__links">
+        <li><a href="#">Spotify</a></li>
+        <li><a href="#">Apple Podcasts</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">RSS</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<!-- ===== sections/14-footer.html ===== -->
+<!-- 14-footer - Footer curtain (4 columns), stamp at the seam, back-to-top disc, cropped giant wordmark. Sits AFTER <main>.
+     SOURCE skeleton: PZ rendered.html:189-272  aside.strip.strip--stamp + footer#page-footer.page__footer > .footer__container >
+       .strip > .container > .footer__top > .footer__column--1 (h2.footer__logo + nav.footer__menu) / --2 (p, p.mt-md) /
+       --3 (nav.footer__shortcuts) / --4 (aside.footer__socials > h3.footer__title + ul.socials) ; .js-scroll-top-limit > .strip >
+       .container > .footer__mid (.footer__legal + aside.footer__credits) + .footer__bottom (awards - DROPPED) ; aside#back-to-top
+       .scroll-top > a. Wordmark row: IC rendered.html .footer-logo > .footer-logo__content > span (BEST-PARTS Pick 17).
+     Single-root contract (file contract: the footer fragment root is <footer id="page-footer">): the stamp aside and
+       #back-to-top live INSIDE the footer. The source's clip (.page__footer { overflow:hidden }) moved to the inner
+       .footer__curtain wrapper so the stamp can overhang 56px up into 13 (spec 14 (h)) and the fixed disc is neither
+       clipped nor inside the transformed .footer__container.
+     Copy: content/site.json footer.* verbatim (nav labels = footer.columns.sitemap = nav). Hard-coded labels (INFERRED,
+       spec 14 (b)): "Find us", "Explore", "Listen & follow", legal nav "Privacy" / "Photo credits". The photo-credit list
+       (closed <details>, id="credits") satisfies verify/handoff/assets.md ("not optional" for the CC BY / CC BY-SA files).
+     Brand mark (brand pass 2026-09-17, LOGO-USAGE.md): the kit's cup mark, brown variant, as an <img> 120px tall (--markFooter) with the
+       tagline brand.tagline under it (one saucer-height of clear space); footer.legal = copyright + the independence disclaimer.
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 3): shared by every page. The mark links home (index.html); the sitemap = the six pages + "Book a table"
+       (content/site.json footer.columns.sitemap; "The Host" lives in the drawer only); Privacy -> contact.html#privacy; Photo credits -> contact.html#credits. The photo-credit
+       <details> stays in the footer as id="footer-credits" (the id "credits" belongs to the contact page now - no duplicate ids on contact.html);
+       14-footer.js opens it whenever a #credits link is followed on a page that has no #credits block of its own. -->
+<footer id="page-footer" class="page__footer footer">
+  <!-- brand pass: stamp instance 4 is OFF (data-stamp="off", CSS hides the pseudo-element) - it straddled the brown 13 band (brown mark on brown,
+       LOGO-USAGE) and doubled the 120px footer mark one viewport later; the aside + its tween stay so data-stamp="on" restores it. -->
+  <aside class="strip strip--stamp footer__stamp" aria-hidden="true" data-stamp="off"></aside>
+
+  <div class="footer__curtain">
+    <div class="footer__container">
+
+      <div class="strip">
+        <div class="container">
+          <div class="footer__top">
+
+            <div class="footer__column footer__column--1">
+              <a class="footer__logo" href="index.html" aria-label="Latte with Lata - home">
+                <img class="footer__mark" src="assets/brand/logo/latte-with-lata-mark-brown.svg" alt="" width="482" height="571" loading="lazy" decoding="async">
+              </a>
+              <p class="footer__tagline">Real Conversations. Built on Purpose.</p>
+              <nav class="footer__menu" aria-label="Legal">
+                <ul>
+                  <li><a href="contact.html#privacy">Privacy</a></li>
+                  <li><a href="contact.html#credits">Photo credits</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="footer__column footer__column--2">
+              <h3 class="footer__title">Find us</h3>
+              <div class="footer__find">
+                <address class="footer__address">
+                  Latte with Lata<br>
+                  27 Bellwood Street<br>
+                  Corner of Fenwick Lane<br>
+                  Harrowfield<br>
+                  <a href="tel:+15550142024">(555) 014-2024</a><br>
+                  <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a>
+                </address>
+                <p class="mt-md footer__hours">
+                  Mon - Thu 7:00&nbsp;am - 6:00&nbsp;pm<br>
+                  Fri 7:00&nbsp;am - 10:00&nbsp;pm<br>
+                  Sat 8:00&nbsp;am - 10:00&nbsp;pm<br>
+                  Sun 8:00&nbsp;am - 3:00&nbsp;pm<br>
+                  Thursday recordings: doors 6:30&nbsp;pm
+                </p>
+              </div>
+            </div>
+
+            <div class="footer__column footer__column--3">
+              <h3 class="footer__title">Explore</h3>
+              <nav class="footer__shortcuts" aria-label="Sitemap">
+                <ul>
+                  <li><a href="cafe.html">The Cafe</a></li>
+                  <li><a href="menu.html">Menu</a></li>
+                  <li><a href="podcast.html">The Podcast</a></li>
+                  <li><a href="episodes.html">Episodes</a></li>
+                  <li><a href="events.html">Events</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="book.html">Book a table</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="footer__column footer__column--4">
+              <aside class="footer__socials">
+                <h3 class="footer__title">Follow us on our socials</h3>
+                <ul class="footer__listen">
+                  <li><a href="#">Spotify</a></li>
+                  <li><a href="#">Apple Podcasts</a></li>
+                  <li><a href="#">YouTube</a></li>
+                  <li><a href="#">RSS</a></li>
+                </ul>
+                <ul class="socials">
+                  <li><a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-instagram"></use></svg></a></li>
+                  <li><a href="#" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-youtube"></use></svg></a></li>
+                </ul>
+              </aside>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="js-scroll-top-limit">
+        <div class="strip">
+          <div class="container">
+            <div class="footer__mid">
+              <div class="footer__legal">
+                <p>Copyright 2026 Latte with Lata. All rights reserved.</p>
+                <details id="footer-credits" class="footer__photo-credits">
+                  <summary>Photo credits</summary>
+                  <ul>
+                    <li>“Latte art 0.jpg” by Angela CoffeeRank, <a href="https://creativecommons.org/licenses/by/2.0" rel="noopener" target="_blank">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Latte_art_0.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“A coffee cup featuring intricate latte art sits on a wooden table next to an open laptop.jpg” by Shixart1985, <a href="https://creativecommons.org/licenses/by/2.0" rel="noopener" target="_blank">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:A_coffee_cup_featuring_intricate_latte_art_sits_on_a_wooden_table_next_to_an_open_laptop.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“A cup of cappuccino.jpg” by Vee Satayamas, <a href="https://creativecommons.org/licenses/by/4.0" rel="noopener" target="_blank">CC BY 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:A_cup_of_cappuccino.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“BoulderCoffeeOpenMicNight2018.jpg” by DanielPenfield, <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener" target="_blank">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:BoulderCoffeeOpenMicNight2018.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> - this crop is a derivative shared under the same CC BY-SA licence.</li>
+                    <li>“Guerrilla on air – Fatti d’arte teaser” (video) by M. Capriglione, M. Rainò and R. Romita, <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener" target="_blank">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Guerrilla_on_air_%E2%80%93_Fatti_d%27arte_teaser.mpg" rel="noopener" target="_blank">Wikimedia Commons</a> - cut, slowed, colour-graded and looped; this edit is shared under the same CC BY-SA licence.</li>
+                    <li>All other photographs: CC0 (public domain dedication) via Wikimedia Commons - full register in the site's ASSETS.md.</li>
+                  </ul>
+                </details>
+                <p class="footer__disclaimer">Latte with Lata is a personal platform and is independent of any employer or institution.</p>
+              </div>
+              <aside class="footer__credits">Site by Agora Data Driven</aside>
+            </div>
+          </div>
+        </div>
+        <div class="footer-wordmark" aria-hidden="true"><span>LATTE WITH LATA</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <aside id="back-to-top" class="scroll-top"><a href="#top" aria-label="Back to top"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-up"></use></svg></a></aside>
+</footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/SplitText.min.js"></script>
+<script src="vendor/ScrollToPlugin.min.js"></script>
+<script src="vendor/splide.min.js"></script>
+<script type="module" src="js/page.js"></script>
+</body>
+</html>

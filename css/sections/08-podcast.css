@@ -1,0 +1,151 @@
+/* ==========================================================================
+   08-podcast - Brand-brown band opener: spacer + stamp, blurred glow marquee, left-column paragraph + "Hosted by" line
+   (build-C; brand edition 2026-09-17, lane C)
+   Sources: IC   = teardowns/2026-09-14-icebergdoc-org/source/css/inline-scoped.beautified.css
+            PZ   = teardowns/2026-09-14-caffepaszkowski-com/source (css/main.1.beautified.css, tailwind.beautified.css)
+            DD   = teardowns/BEST-PARTS-latte-with-lata.md (Pick 9, Pick 16, s5)
+            SPEC = rebuild/BUILD-SPEC.md section 08, G2, G7
+            BK   = the client's brand kit (BRAND.md): band --colNero (= --colBrand #502506), text --colOnBrand, marquee = title role
+                   (Creato Display Bold 700, ls -.01em, lh 1, size clamp unchanged), lead = Medium 500, eyebrow = Medium 500 12px ls .14em
+   IC values are calc(N/2024*vw): px@1440 = N*0.7115. No font-family here: every element inherits --fontBrand (base.css).
+   ========================================================================== */
+
+/* ---- band: the root is a wrapper, the rows are the strips. Re-assert the band on every row so the brown stays continuous
+        even if the integrator adds `strip` to the root (base.css :where(.strip) .strip resets --bgStrip / --strip-text-color). DD Pick 16. */
+#s-08-podcast { background: var(--colNero); color: var(--colOnBrand); }                      /* .bg-band-black (tokens.css) made concrete on the wrapper */
+#s-08-podcast .strip { --bgStrip: var(--colNero); --strip-text-color: var(--colOnBrand); }   /* PZ main.1:7147-7160 (.bg-np-black) on each row */
+
+/* ---- spacer row: PZ [221] 1440x57.6 = .strip__data.pt-md (padding-top --vpad, tailwind:4157) + empty .strip__text; stamp = base.css s7 (top -3.5em, right --vpad) */
+#s-08-podcast .podcast__spacer .strip__text { min-height: 0; }                              /* empty text keeps the row at exactly --vpad (SPEC 08 (c)) */
+/* Stamp colour: the mark sits on the 07 -> 08 seam, upper half over the ACCENT band, lower half over the brown band. BK / LOGO-USAGE:
+   white mark on both the accent and the brown surfaces, so the whole cup reads on either side of the seam (tokens.css already flips
+   --colStamp to --colOnBrand on brand bands; made explicit here because this instance straddles two bands). */
+#s-08-podcast .podcast__spacer .strip--stamp { --colStamp: var(--colOnBrand); }
+
+/* ---- marquee row: IC .blur-sentence (inline-scoped:1308-1316) + .home-blur__sentence (:1288-1294) + copies (:1322-1326) ---- */
+#s-08-podcast .marquee {
+    display: flex;                                       /* IC:1309 */
+    flex-wrap: nowrap;                                   /* IC:1310 */
+    overflow: hidden;                                    /* IC:1311 (clips the loop horizontally; the root stays unclipped for the stamp) */
+    position: relative;                                  /* IC:1312 */
+    white-space: nowrap;                                 /* IC:1313 */
+    color: var(--colOnBrand);                            /* IC:1289 color var(--color-white) -> BK white on brand (13.06:1) */
+    font-weight: var(--wTitle);                          /* BK title role: Creato Display Bold 700 (IC: Neue Montreal 600; DD s5 Fraunces 500 retired) */
+    font-variation-settings: normal;                     /* static face (the Fraunces axes are gone) */
+    font-size: clamp(64px, 10vw, 160px);                 /* IC:1290 290/2024vw (206.3px @1440), :1302 130/393vw (129px @390) -> DD Pick 9 / SPEC G2 = 144px @1440, 64px @390 (unchanged) */
+    line-height: var(--lhTitle);                         /* SPEC G2 (.marquee lh 1); measured IC row = font + 2*padding */
+    letter-spacing: var(--trackTitle);                   /* BK -.01em */
+    text-transform: uppercase;                           /* IC:1292 */
+    text-align: left;
+}
+#s-08-podcast .marquee__copy {
+    flex: 0 0 auto;                                      /* copies never shrink (nowrap min-content already prevents it) - INFERRED */
+    padding-block: calc(var(--vpad) / 2);                /* IC:1323 padding: 50/2024vw 0 (35.6px @1440) -> --vpad/2 = 28.8 @1440, 12.8 @390 (SPEC 08 (c)) -> row h 201.6 / 89.6 */
+    padding-right: .25em;                                /* word gap between "... THURSDAY -" and the next copy's "LATTE" (a trailing space is trimmed at a line end) - INFERRED */
+    text-transform: uppercase;                           /* IC:1324 */
+    will-change: transform;                              /* IC:1325 */
+}
+#s-08-podcast .marquee .char { display: inline-block; }  /* SplitText chars (IC .chars) */
+/* UPDATE-3 (2026-09-17, client decision): the ticker has NO pause / play control - its rules are gone. The loop runs only while the row is
+   on screen (08-podcast.js) and is static under reduced motion / without JS (below). */
+
+/* glow: IC:1328-1334 (.is-animated .chars) + @keyframes blur (:1336-1343). The source nests an @media inside the keyframe (invalid, ignored);
+   the intended small-tier radius (10/768, 10/393) is written as a SEPARATE keyframes block (DD Pick 9 "Write separate keyframes per breakpoint").
+   Radius 50/2024vw = 35.6px at font 206.3px = .17em; 10/393vw = 9.9px at 129px = .08em - em conversion INFERRED (SPEC 08 (i)). Keyframes intact (BK). */
+#s-08-podcast .marquee__copy.is-animated .char {
+    animation-name: lwl-glow;                            /* IC:1330 animation-name: blur */
+    animation-timing-function: linear;                   /* IC:1331 */
+    animation-iteration-count: infinite;                 /* IC:1329 */
+    /* animation-duration 4s + animation-delay .4s*i are set inline per char by 08-podcast.js (IC D51_WxQ5:386-387) */
+    color: transparent;                                  /* IC:1332 - the glyph is drawn by the text-shadow only */
+    text-shadow: 0 0 0 var(--colOnBrand);                /* IC:1333 */
+}
+@keyframes lwl-glow {
+    0%   { text-shadow: 0 0 0 var(--colOnBrand); }       /* IC:1337-1339 */
+    50%  { text-shadow: 0 0 .17em var(--colOnBrand); }   /* IC:1340-1341 (50/2024vw) */
+    100% { text-shadow: 0 0 0 var(--colOnBrand); }       /* IC "to" */
+}
+@keyframes lwl-glow-sm {
+    0%   { text-shadow: 0 0 0 var(--colOnBrand); }
+    50%  { text-shadow: 0 0 .08em var(--colOnBrand); }   /* IC nested @media intent: 10/768vw and 10/393vw */
+    100% { text-shadow: 0 0 0 var(--colOnBrand); }
+}
+@media (max-width: 63.9375em) {                          /* IC tiers <=1023px */
+    #s-08-podcast .marquee__copy.is-animated .char { animation-name: lwl-glow-sm; }
+}
+/* reduced motion / no JS: static white text, no glow (DD Pick 9 "Under reduced motion: static, no glow"; base.css s15 already kills animations) */
+.reduce-motion #s-08-podcast .marquee .char, html:not(.js-ok) #s-08-podcast .marquee .char { animation: none; color: inherit; }
+
+/* ---- paragraph row: IC .home-podcast-top__text (inline-scoped:2402-2413) as PZ 24-col column 1 (x 120 w 571.2 @1440, base.css s5) ---- */
+#s-08-podcast .podcast__about .strip__column--2 { min-height: 0; }        /* empty column (keeps column 1 at span 12 = 571.2 wide) */
+@media (max-width: 49.99em) {
+    #s-08-podcast .podcast__about .strip__column--2 { display: none; }    /* no phantom row-gap below the paragraph on the stacked layout - INFERRED */
+}
+#s-08-podcast .podcast__eyebrow {
+    /* .eyebrow = base.css s3 (BK: Creato Display Medium 500, 12px, uppercase, ls .14em) */
+    color: var(--colTextOnBrandMuted);                   /* BK secondary text on brown: white at .8 (10.7:1) - was color white + opacity .8 */
+    margin-bottom: 1em;                                  /* gap eyebrow -> lead, INFERRED */
+}
+#s-08-podcast .podcast__lead {
+    /* IC:2404-2409 font 36/2024vw (25.6px @1440) 600 ls -.01em lh 110%; mobile :2431 22/393vw (21.8px)
+       -> DD Pick 12 / SPEC G2 ".lead" clamp(20px, 1.8vw, 26px) lh 1.25 ls -.01em = 25.9px @1440 / 20px @390 (size unchanged);
+       BK: lead / quote role = Creato Display Medium 500 (was Noto Sans 600) */
+    font-weight: var(--wLead);
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.25;
+    letter-spacing: -.01em;
+    color: var(--colOnBrand);                            /* IC:2403 color var(--color-white) */
+    margin: 0;
+    text-wrap: pretty;                                   /* INFERRED (orphan control on the long lead) */
+}
+
+/* ---- "Hosted by Lata Singh" line (BRAND 2026-09-17, lane C - inside the existing text block, no new row):
+        48px round avatar (assets/images/founder-avatar.jpg, 320x320 crop of the founder photo) + two-line label, the whole line is a link
+        to #s-10-hosts. Height = the avatar (48px >= the 44px target); the ring + name underline are the hover / focus feedback (no layout shift). */
+#s-08-podcast .podcast__hosted { margin: calc(var(--vpad) / 2) 0 0; }                       /* 28.8px @1440 / 12.8 @390 below the lead - INFERRED rhythm (= vpad/2, the figure gap of the story rows) */
+#s-08-podcast .podcast__host {
+    display: inline-flex;
+    align-items: center;
+    gap: .875em;                                         /* 14px: one saucer-height of breathing room next to the portrait - INFERRED */
+    min-height: var(--tapMin);                           /* WIG 44px target (the avatar makes it 48) */
+    color: var(--colOnBrand);
+    text-decoration: none;
+    cursor: pointer;
+}
+#s-08-podcast .podcast__avatar {
+    flex: 0 0 auto;
+    width: 48px; height: 48px;                           /* BK: 48px round avatar */
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 20%;                            /* the crop already centres the face; keeps the eyes high if the file is swapped - BK founder rule */
+    box-shadow: 0 0 0 1px var(--colLineOnBrand);         /* hairline ring on brown (non-text, decorative) */
+    transition: box-shadow var(--aniUi) var(--easeOut);  /* 200 ms hover feedback (WIG 150-300 ms) */
+}
+#s-08-podcast .podcast__host-text { display: flex; flex-direction: column; gap: .2em; line-height: 1.2; }
+#s-08-podcast .podcast__host-by {
+    font-size: .75rem;                                   /* BK eyebrow role: Medium 500, 12px, uppercase, ls .14em */
+    font-weight: var(--wLead);
+    letter-spacing: var(--trackEyebrow);
+    text-transform: uppercase;
+    color: var(--colTextOnBrandMuted);                   /* 10.7:1 on brand */
+}
+#s-08-podcast .podcast__host-name {
+    font-size: 1rem;                                     /* 16px, BK title role at line size: Bold 700, uppercase, ls -.01em */
+    font-weight: var(--wTitle);
+    letter-spacing: var(--trackTitle);
+    text-transform: uppercase;
+    color: var(--colOnBrand);
+    text-decoration: underline transparent;              /* underline slides in on hover (colour only - no layout shift) */
+    text-decoration-thickness: 1px;
+    text-underline-offset: .2em;
+    transition: text-decoration-color var(--aniUi) var(--easeOut);
+}
+#s-08-podcast .podcast__host:hover .podcast__avatar,
+#s-08-podcast .podcast__host:focus-visible .podcast__avatar { box-shadow: 0 0 0 2px var(--colOnBrand); }   /* accent text on brand is 2:1 (BRAND.md don't) - the feedback stays white */
+#s-08-podcast .podcast__host:hover .podcast__host-name,
+#s-08-podcast .podcast__host:focus-visible .podcast__host-name { text-decoration-color: currentColor; }
+#s-08-podcast .podcast__host:hover { color: var(--colOnBrand); }                          /* base a:hover would turn the label accent (2:1 on brown) */
+@media (prefers-reduced-motion: reduce) {
+    #s-08-podcast .podcast__avatar, #s-08-podcast .podcast__host-name { transition: none; }
+}
+/* focus ring: white on this band via tokens.css --colFocus (base.css reads it directly since the brand pass finish) - the scoped override is gone */

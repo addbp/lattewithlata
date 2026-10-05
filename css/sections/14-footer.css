@@ -1,0 +1,216 @@
+/* ==========================================================================
+   14-footer - Footer curtain (4 columns), stamp at the seam, back-to-top disc, cropped giant wordmark
+   Sources: CS = teardowns/2026-09-14-caffepaszkowski-com/source/css/scss-from-map/main/_custom_site.scss (:960-1087)
+            CU = .../main/_custom.scss (.scroll-top :372-419)
+            IC = teardowns/2026-09-14-icebergdoc-org/source/css/Logo.B2n-4vgh.beautified.css (:152-172 wordmark)
+            DD = teardowns/BEST-PARTS-latte-with-lata.md (Pick 17)
+   Measured (PZ layout-manifest, state bottom @1440x900): footer 1440x531.5, .footer__top 1200x392.8 (padding 86.4 = 1.5*vpad),
+   columns x 120 / 395.7 / 799.4 / 1066.7 (gap 28.8, col 4 ends at 1320), logo 80 wide, .footer__title 14.4/21.6, .footer__mid 1200x32.4
+   at y rel 392.8 (12px), back-to-top 72x72 at x 1310.4 y 812; mobile @390: stacked, .footer__top 338.8 wide, disc 57.6 at x 324.4 y 770.4.
+   IC wordmark: box 1440x320.2, font 355.7 -> DD Pick 17 clamp(48px,11vw,170px) in a clamp(120px,20vh,240px) box.
+   Scoped under #page-footer / #back-to-top. INFERRED values are marked.
+   Brand pass (2026-09-17): white ground, columns Creato Regular 15px in brand espresso, column titles = the BK eyebrow role, the kit's
+   brown cup mark 120px (--markFooter) + tagline in column 1, legal row with the independence disclaimer, link hover = the accent
+   (base.css link rule) instead of opacity, back-to-top disc brand -> accent on hover, wordmark ExtraBold 800 ls -.02em lh .9 in brand
+   espresso (size clamp + bottom crop unchanged). The tokens lane's s17 overrides (.footer-wordmark span, .socials a) are folded in.
+   Geometry (grid, paddings, curtain, ride, disc size, wordmark box) unchanged; column 1 grows with the 120px mark + tagline.
+   ========================================================================== */
+
+/* ---- footer box - CS:960-969 `.page__footer { overflow:hidden; a { color:inherit; display:inline-block; &:hover { color:inherit; opacity:.6 } } }`
+        background/colour = the body's (--colBg / --colText); font-size scope = inline-critical.beautified.css:1002-1005 ---- */
+#page-footer {
+    position: relative;
+    background: var(--colBg);                              /* body background (inline-critical:831) - the footer owns the black -> cream seam (spec G7) */
+    color: var(--colText);                                 /* inline-critical:832 */
+    font-size: calc(var(--fontSize) * 1em);                /* inline-critical:1002-1005 .page__footer */
+}
+#page-footer a { color: inherit; display: inline-block; }  /* CS:962-964 */
+#page-footer a:hover, #page-footer a:focus-visible { color: var(--colAccent); opacity: 1; }   /* CS:965-968 opacity .6 -> BK link hover = the single accent (6.5:1 on white), no fade */
+/* the source clips on .page__footer (CS:961); moved to the inner wrapper so the stamp aside (a footer child here) can overhang upward */
+#page-footer .footer__curtain { overflow: hidden; }
+#page-footer .footer__container { will-change: transform; }   /* the curtain tween (M26) translates this box; INFERRED hint */
+
+/* ---- stamp at the seam - spec 14 (c): aside.strip.strip--stamp h 0 at the footer top; the mark itself comes from base.css s7
+        (.strip--stamp::after: top -3.5em, right var(--vpad), 7em at >=36em, colour --colStamp) ---- */
+#page-footer .footer__stamp { position: relative; height: 0; z-index: var(--z-stamp); }   /* Z-INDEX PLAN stamp 10; overhangs 56px into 13 */
+#page-footer .footer__stamp[data-stamp="off"]::after { content: none; }   /* brand pass (review SHOULD-FIX 6): the seam stamp put the brown mark half on the brown 13 band; instance 4 is off (the 120px mark in column 1 is the footer's logo) */
+
+/* ---- top grid - CS:972-981 ---- */
+#page-footer .footer__top {
+    padding: calc(var(--vpad) * 1.5) 0;                    /* CS:973 = 86.4 @1440, 38.4 @390 */
+    display: grid;                                         /* CS:974 */
+    gap: calc(var(--vpad) / 2);                            /* CS:975 = 28.8 */
+    text-align: center;                                    /* CS:976 */
+    font-size: .9375rem;                                   /* BK brief: columns Regular 15px (was 16px; rows 24px instead of 25.6) */
+    color: var(--colBrand);                                /* BK brief: brand espresso text on white (13.1:1) */
+}
+@media screen and (min-width: 50em) {                      /* CS:977-980 ($screenMedium = 50em) */
+    #page-footer .footer__top {
+        text-align: unset;                                 /* CS:978 */
+        grid-template-columns: repeat(4, auto);            /* CS:979 - auto tracks + the default justify-content (normal = stretch): each column = content + an equal
+                                                              share of the free space, which is how the source reaches x 120 / 395.7 / 799.4 / 1066.7 and a right edge at 1320
+                                                              (the spec's "justify-content: space-between" INFERRED note is NOT applied - measured widths 246.9/374.9/238.5/253.3 exceed their content) */
+    }
+}
+#page-footer .footer__column { min-width: 0; }
+/* column 2 "Find us": address | hours side by side at >=50em so the row height stays the sitemap's 220.8 (measured 220 = the
+   8-link shortcuts list); stacked with the source's .mt-md gap below 50em. Layout INFERRED (spec (b) stacks them - 11 lines would
+   make the row 350 tall and miss the .footer__mid rel-y 392.8 target). */
+#page-footer .footer__find { display: grid; }             /* stacked below 50em: the hours keep their .mt-md (CS source markup p.mt-md) */
+@media screen and (min-width: 50em) {
+    #page-footer .footer__find { grid-template-columns: auto auto; column-gap: calc(var(--vpad) / 2); justify-content: start; }   /* gap = the grid's own --vpad/2 (CS:975) */
+    #page-footer .footer__find .footer__hours { margin-top: 0; }
+}
+
+/* logo - CS:982-989; BK: the kit's brown cup mark 120px tall (LOGO-USAGE.md footer row), width auto = 0.844 x 120 = 101px */
+#page-footer .footer__logo {
+    display: block;
+    width: fit-content;                                    /* CS:983 max-width 5em (80px) -> the 101px mark box; the link hugs the mark */
+    margin: 0 auto;                                        /* CS:984 (the vpad/2 gap below moves to the tagline) */
+}
+@media screen and (min-width: 50em) { #page-footer .footer__logo { margin-left: 0; margin-right: 0; } }   /* CS:985-988 */
+#page-footer .footer__mark { display: block; height: var(--markFooter); width: auto; }   /* 120px brown mark on white; never stretched (height + width:auto) */
+#page-footer .footer__logo:hover, #page-footer .footer__logo:focus-visible { opacity: .7; }   /* visible hover / focus feedback on the <img> mark (the accent colour rule cannot tint an image) - mirrors the header lockup, no layout shift (review POLISH 6) */
+/* tagline (brand.tagline) under the mark: BK Regular 400 14px, one saucer-height (11.4% of 120 = 13.7px) of clear space above */
+#page-footer .footer__tagline {
+    margin: .85rem auto calc(var(--vpad) / 2);             /* 13.6px clear space, then the old logo gap (CS:984) before the legal links */
+    max-width: 12em;                                       /* two lines: "Real Conversations." / "Built on Purpose." - INFERRED */
+    font-size: .875rem; line-height: 1.5; font-weight: var(--wBody);
+    color: var(--colText);
+    text-wrap: balance;
+}
+@media screen and (min-width: 50em) { #page-footer .footer__tagline { margin-left: 0; margin-right: 0; } }
+
+/* menus - CS:990-1012 */
+#page-footer .footer__menu ul { display: grid; gap: .25em; }                        /* CS:991-994 */
+/* stacked list links: hit boxes meet across the .25em gap (28px rows, WCAG 2.5.8 AA) with zero layout change; 44px rows would need a
+   different list rhythm (structure rule) - INFERRED */
+#page-footer .footer__menu a, #page-footer .footer__shortcuts a, #page-footer .footer__listen a { padding-block: .125em; margin-block: -.125em; }
+#page-footer .footer__address a { padding-block: .2em; margin-block: -.2em; }   /* inline link: content area 17.8 + 6 = the 24px line box */
+#page-footer .footer__shortcuts ul {
+    display: grid; gap: .25em;                             /* CS:997-998 */
+    grid-template-columns: repeat(2, minmax(1em, 1fr));    /* CS:999 (two columns below 50em) */
+}
+@media screen and (min-width: 50em) { #page-footer .footer__shortcuts ul { grid-template-columns: none; } }   /* CS:1000-1002 */
+#page-footer .footer__shortcuts ul + ul { margin-top: .25em; }                      /* CS:1004-1006 */
+#page-footer .footer__listen { list-style: none; padding: 0; margin: 0; display: grid; gap: .25em; }   /* same rhythm as the shortcuts (INFERRED) */
+
+/* title - CS:1014-1019 -> BK eyebrow role (Medium 500, 12px, ls .14em, uppercase), muted so the links carry the column */
+#page-footer .footer__title {
+    font-size: .75rem;                                     /* CS:1015 .9em = 14.4px -> BK eyebrow 12px */
+    line-height: 1.6;                                      /* keeps the 19-22px title row (CS measured 21.6) */
+    text-transform: uppercase;                             /* CS:1016 */
+    font-weight: var(--wLead);                             /* CS:1017 400 -> BK Medium 500 */
+    letter-spacing: var(--trackEyebrow);                   /* BK .14em */
+    color: var(--colTextMuted);                            /* 5.4:1 on white - INFERRED */
+    margin-bottom: .75em;                                  /* CS:1018 .5em of 14.4 = 7.2 -> .75em of 12 = 9 */
+}
+#page-footer .footer__address { font-style: normal; }      /* INFERRED (UA italic reset; the source uses <p>) */
+
+/* socials - CS:1020-1033 */
+#page-footer .socials {
+    list-style: none; padding: 0;
+    margin: .75em 0 0;                                     /* INFERRED gap under the listen list */
+    gap: .5em;                                             /* CS:1022 */
+    display: flex;                                         /* CS:1023 */
+    justify-content: center;                               /* CS:1024 */
+}
+@media screen and (min-width: 36em) { #page-footer .socials { justify-content: flex-start; } }   /* CS:1025-1027 ($screenSmall = 36em) */
+html #page-footer .socials a { display: inline-flex; padding: .725em; margin: -.625em; border-radius: 50%; }   /* OVERRIDE: requested in handoff - same specificity as the base.css s17 rule (delete that one); .1em + .625em ring = 44px hit box at 15px (22.5 icon + 2 x 10.9), icon where it was */
+#page-footer .socials .icon { width: 1.5em; height: 1.5em; }   /* CS:1029-1031 a::before { font-size:1.5em } (icon font -> sprite) */
+
+/* mid row - CS:1035-1047 */
+#page-footer .footer__mid {
+    padding-bottom: calc(var(--vpad) / 4);                 /* CS:1036 = 14.4 (measured row 32.4 = 18 + 14.4) */
+    display: flex;                                         /* CS:1037 */
+    gap: 1em;                                              /* CS:1038 */
+    justify-content: space-between;                        /* CS:1039 */
+    align-items: center;                                   /* CS:1040 */
+    text-transform: uppercase;                             /* CS:1041 */
+    font-size: .75em;                                      /* CS:1042 = 12px */
+    flex-direction: column;                                /* CS:1043 */
+}
+@media screen and (min-width: 36em) { #page-footer .footer__mid { flex-direction: row; align-items: flex-start; } }   /* CS:1044-1046; flex-start (was center, CS:1040) so the credit sits on the copyright line now that the legal block is two lines - INFERRED */
+#page-footer .footer__credits { text-align: right; }       /* CS:1061 */
+@media screen and (min-width: 36em) { #page-footer .footer__credits { flex: 0 0 auto; text-align: unset; } }   /* CS:1062-1065 */
+#page-footer .footer__legal p { display: inline; margin: 0; }
+/* footer.legal sentence 2 (brand position paper): the independence disclaimer on its own line, sentence case, muted (5.4:1 at 12px) */
+#page-footer .footer__legal .footer__disclaimer { display: block; margin-top: .35em; text-transform: none; color: var(--colTextMuted); max-width: 60ch; }   /* (1,2,0) beats the inline p rule above */
+@media screen and (max-width: 35.99em) { #page-footer .footer__disclaimer { margin-left: auto; margin-right: auto; } }
+/* photo credits (assets.md request) - INFERRED: a closed <details> inline after the copyright line */
+#page-footer .footer__photo-credits { display: inline-block; margin-left: 1em; vertical-align: baseline; }
+#page-footer .footer__photo-credits summary { cursor: pointer; text-decoration: underline; text-underline-offset: .15em; list-style: none; display: inline; padding-block: 1.25em; }   /* inline padding = 44px hit box, no layout change */
+#page-footer .footer__photo-credits summary::-webkit-details-marker { display: none; }
+#page-footer .footer__photo-credits summary:hover { color: var(--colAccent); }
+@media screen and (prefers-reduced-motion: no-preference) { #page-footer .footer__photo-credits summary { transition: color var(--aniFast) var(--easeInOutSine); } }
+#page-footer .footer__photo-credits ul {
+    list-style: none; padding: 0; margin: .5em 0 0;
+    display: grid; gap: .25em;
+    max-width: 70ch; text-align: left; text-transform: none;
+}
+#page-footer .footer__photo-credits a { text-decoration: underline; }
+/* the row is text-center below 36em (CS:1043 column) - keep the credits list readable there */
+@media screen and (max-width: 35.99em) { #page-footer .footer__photo-credits { margin-left: 0; display: block; } #page-footer .footer__photo-credits ul { text-align: center; } }
+
+/* ---- award band (CS:1048-1059 .footer__bottom) DROPPED - replaced by the cropped wordmark row (DD Pick 17) ---- */
+
+/* ---- wordmark - IC:152-172 `.footer-logo, .footer-logo__content { overflow:hidden; width:100% } .footer-logo__content span { color:#fff; display:block;
+        font-size: 500/2024vw; font-weight:600; letter-spacing:-.03em; line-height:.9001996008em; text-align:center; text-transform:uppercase;
+        transform: translate(-1.5%) }` -> DD Pick 17 "Change": clamp(48px,11vw,170px) in a clamp(120px,20vh,240px) box, no texture ---- */
+#page-footer .footer-wordmark {
+    height: clamp(120px, 20vh, 240px);                     /* DD Pick 17 (IC box 320.2 = 35.6vh) = 180 @900 */
+    /* FINAL home check 2026-09-17: the box never outgrows the type by more than 56px. Unchanged at 1440x900 (180) and 1024x768 (153.6);
+       768x1024 205 -> 140.5 and 390x844 169 -> 98.9, where the 20vh box left a 120-130px empty band above a 43-84px wordmark. */
+    height: min(clamp(120px, 20vh, 240px), calc(clamp(36px, 11vw, 170px) + 56px));
+    width: 100%;                                           /* IC:156 */
+    overflow: hidden;                                      /* IC:155 (edge-to-edge crop) */
+    display: flex; align-items: flex-end; justify-content: center;   /* INFERRED (spec 14 (c)): bottom crop like Iceberg */
+    color: var(--colBrand);                                /* IC:160 white on black -> BK brand espresso on white */
+}
+#page-footer .footer-wordmark span {
+    display: block;                                        /* IC:161 */
+    white-space: nowrap;                                   /* spec 14 (c) (three words never wrap) */
+    font-weight: var(--wDisplay);                          /* BK wordmark role: Creato Display ExtraBold 800 (family from body; was Fraunces 500) */
+    font-size: clamp(36px, 11vw, 170px);                   /* DD Pick 17 / G2: 158.4 @1440, 42.9 @390 (IC 500/2024vw = 355.7). FINAL home check: min 48 -> 36px -
+                                                              at 48px the line was 400px wide in a 390 viewport, so the L was cut and the last A was not */
+    line-height: var(--lhDisplay);                         /* IC:165 .9001996008em = BK .9 */
+    letter-spacing: var(--trackDisplay);                   /* IC:164 -.03em -> BK -.02em */
+    text-align: center;                                    /* IC:166 */
+    text-transform: uppercase;                             /* IC:167 */
+    transform: translate(0, .12em);                        /* IC:168 translate(-1.5%) dropped at the final home check: IC's line is wider than the screen, ours is not,
+                                                              and the -1.5% left the ink 48px from the left edge / 80px from the right @1440. The .12em drop is INFERRED
+                                                              (spec 14 (c)) to crop the glyph bottoms */
+}
+
+/* ---- back-to-top - CU:372-396 (.scroll-top) + CS:1069-1082 (the disc) ---- */
+#back-to-top {
+    --aniProp: opacity, visibility, background;            /* CU:373 */
+    display: block;                                        /* CU:375 */
+    position: fixed;                                       /* CU:376 */
+    z-index: var(--z-top);                                 /* CU:377 (source 20) -> Z-INDEX PLAN back-to-top 80 */
+    bottom: 1rem;                                          /* CU:378 */
+    right: .5rem;                                          /* CU:379 */
+    opacity: 0;                                            /* CU:380 */
+    visibility: hidden;                                    /* CU:381 */
+    font-size: .8em;                                       /* CU:382 (-> 57.6px disc on phones) */
+    transition: var(--aniTime, var(--aniSlow)) var(--easeInOutCubic);   /* CU:374 @extend %animate2 (.6s cubic-bezier(.645,.045,.355,1)) */
+    transition-property: var(--aniProp, all);
+}
+@media screen and (min-width: 36em) {                      /* CU:384-387 */
+    #back-to-top { right: var(--vpad); font-size: 1em; }   /* CU:385-386 (-> x 1310.4, 72px disc) */
+}
+.opaque #back-to-top { opacity: 1; visibility: visible; }  /* CU:389-391 body.opaque (set by 00-header, M1) */
+.m-open #back-to-top { opacity: 1; visibility: hidden; }   /* CU:392-395 html.m-open (drawer open) */
+#back-to-top a {
+    display: grid; place-items: center;                    /* CU:398-402 flex centring -> grid (spec 14 (c)) */
+    width: 4.5em; height: 4.5em;                           /* CS:1071-1073 $w: 4.5em (measured 72x72) */
+    padding: 0;                                            /* CU:405 .5em not needed for the sprite glyph */
+    color: var(--colOnBrand);                              /* CS:1074 */
+    background: var(--colBrand);                           /* CS:1075 BK brand espresso disc (72px / 57.6px >= 44) */
+    border: 1px solid;                                     /* CS:1076 (currentColor) */
+    border-radius: 50%;                                    /* CS:1077 */
+    opacity: 1;                                            /* CS:1078 */
+    line-height: 1.1;                                      /* CU:407 */
+}
+#back-to-top a:hover, #back-to-top a:focus-visible { background: var(--colAccent); color: var(--colOnBrand); opacity: 1; }   /* CS:1079-1081 opacity .8 -> accent fill (no layout shift; transition = --aniProp background) */
+#back-to-top .icon { width: 1.3em; height: 1.3em; stroke-width: 2; }   /* CU:408-411 ::before { font-size:1.3em } (icon font glyph -> sprite) */

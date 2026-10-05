@@ -1,0 +1,41 @@
+/* ==========================================================================
+   04-story-a - two-column editorial story row (section-scoped)
+   Grid, columns, column reveals (.anima--left-in / --right-in, col-2 .5s delay), stamp (column-1 variant, top-left),
+   .strip__image--before/--after margins and the .js-image-anime overflow window all come from base.css:
+     grid      PZ main/modules/_strip.7.5.scss:255-277 (compiled main.1.beautified.css:4470-4523) - measured col1 x120 w571.2, col2 x748.8 w571.2
+     reveals   PZ main/modules/_animate.scss:16-19, 41-58 (compiled main.1:5566-5717)
+     stamp     PZ main/modules/_strip_site.scss:70-105 (compiled main.1:7772-7803) - column-1 variant right:auto; left:var(--vpad)
+               (left is relative to the column box: page x = 120 + 57.6 = 177.6 @1440, 25.6 + 25.6 = 51.2 @390)
+     figures   _strip.7.5.scss:194-208 (overflow hidden under .js-image-anime; --before mb vpad/2, --after mt vpad/2)
+     mobile    .mobile-first order:-1 below 50em - _strip.7.5.scss:361-366 (main.1:4576-4584)
+   Only the INFERRED rules of spec 04 (c)/(i) live here.
+   ========================================================================== */
+
+/* Paragraph rhythm: the source separates its blocks with empty <p>&nbsp;</p> lines (PZ source/rendered.html data-id="274":
+   h2, p&nbsp;, p, p&nbsp;, p&nbsp;, p > a.read-more, figure) = one 24px body line between blocks (p margin 0 in the reset).
+   Re-expressed as margins so the markup stays semantic - INFERRED (spec 04 (c) column 2, (i)):
+   - 24px (1.5em) between paragraphs and before the read-more line;
+   - h2 -> first paragraph = h2 margin-bottom vpad/4 (14.4, _typography.scss:14) + the spacer line (24) = 38.4 measured;
+     adjacent block margins collapse, so the first paragraph carries the sum explicitly. */
+#s-04-story-a .strip__text > p { margin-top: 1.5em; }
+#s-04-story-a .strip__text > p:first-child { margin-top: 0; }
+#s-04-story-a .strip__text > h2 + p { margin-top: calc(1.5em + var(--vpad) / 4); }
+
+/* Portrait figures: lock the 2:3 ratio of story-a-1/2 (assets-manifest 1200x1800) so the column height is stable before
+   decode and the zoom-settle window (overflow:hidden, _strip.7.5.scss:194-196) is exactly 571.2x856.8 @1440 (measured
+   857.5 at PZ with a 1333x2000 source) / 338.8x508.2 @390 (measured 508.8). INFERRED - spec 04 (c) column 1. */
+#s-04-story-a .strip__image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+
+/* ---- Brand pass (BK, 2026-09-17) ----
+   Type + colour come from the roles: h2 = base.css .strip__title1 (Creato Display Bold 700 uppercase, ls -.01em, lh 1, --colTitle
+   = --colBrand), copy = body Regular 400 17px/1.6 --colText (10.8:1 on white), read-more = Bold 700 .9em ls .08em --colBrand with the
+   accent hover; the stamp on column 1 = assets/svg/mark.svg masked in --colStamp (--colBrand on this white band). No family, weight,
+   colour or geometry is set here. Copy slots: the three paragraphs are the rewritten site.json storyA.paragraphs (verbatim).
+   Polish: balanced last lines so the narrower 17px measure never leaves an orphan word (ignored by engines without `pretty`). */
+#s-04-story-a .strip__text > p { text-wrap: pretty; }

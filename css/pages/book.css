@@ -1,0 +1,366 @@
+/* ==========================================================================
+   Latte with Lata - css/pages/book.css (PAGE book lane)
+   The booking page: short hero, the booking flow (steps, date picker, slots, review, confirmation), policy, manage + cancel dialog, help.
+   Everything is scoped under body[data-page="book"] or the p-book-* section ids; the shared kit (css/pages/_shell.css) is used as is and only
+   extended. Brand tokens only, Creato Display only, squared controls, 44px targets, feedback transitions 150-300 ms, all motion behind
+   prefers-reduced-motion.
+
+   Contents   1 page base + hero   2 intro + layout   3 steps + type cards   4 date picker   5 party + slots   6 details
+              7 review (the mobile summary bar)   8 summary card   9 confirmation   10 policy   11 manage + dialog   12 help
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Page base + hero
+   -------------------------------------------------------------------------- */
+/* the kit gives several blocks a display value (grid fieldsets, flex action rows, inline-flex chips), which beats the UA's [hidden] rule:
+   on this page `hidden` always means hidden */
+body[data-page="book"] main [hidden] { display: none !important; }
+
+/* short hero: the form should sit near the fold (brief: 46vh) */
+#p-book-01-hero { min-height: max(46vh, 380px); }
+@supports (min-height: 1svh) { #p-book-01-hero { min-height: max(46svh, 380px); } }
+@media (max-width: 47.99em) {
+    #p-book-01-hero { min-height: max(46vh, 360px); }
+    @supports (min-height: 1svh) { #p-book-01-hero { min-height: max(46svh, 360px); } }
+}
+
+/* solid buttons on the light bands: the hover sheet is the accent at full strength (white label stays 6.5:1) instead of the 40% white veil */
+#p-book-02-booking .button:not(.button--outlined)::after, #p-book-04-manage .button:not(.button--outlined)::after { background: var(--colAccent); opacity: 1; }
+
+body[data-page="book"] main a[href^="tel:"] { white-space: nowrap; }   /* a phone number never breaks across lines */
+body[data-page="book"] .book-eyebrow { margin: 0 0 1.1em; color: var(--kitMuted); }
+
+/* --------------------------------------------------------------------------
+   2. Intro + the two-column layout (form | sticky summary from 60em)
+   -------------------------------------------------------------------------- */
+.book-intro__text { max-width: 46ch; margin: max(.9rem, calc(var(--vpad) / 3)) auto 0; text-wrap: pretty; }
+.book-noscript, .book-fallback { max-width: 46rem; margin: var(--vpad) auto 0; }
+
+.book { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--vpad); margin-top: var(--vpad); align-items: start; }
+.book__main { min-width: 0; container-type: inline-size; container-name: bookmain; }   /* the inner layouts answer to the FORM column, not the viewport (at 1024 the column is ~26rem wide next to the summary card) */
+.book__aside { display: none; }
+@media (min-width: 60em) {
+    .book { grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem); gap: calc(var(--vpad) * 1.1); }
+    .book__aside { display: block; position: sticky; top: 1.5rem; transition: top var(--aniFast) var(--easeInOutSine); }
+    body.opaque:not(.header-up) .book__aside { top: calc(var(--hH, 78) * 1px + 1.5rem); }   /* header showing: the card sits under it */
+    .book.is-done { grid-template-columns: minmax(0, 46rem); justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) { .book__aside { transition: none; } }
+
+/* the form sits in a hairline card from tablet up; on phones it runs edge to edge inside the container (more room for the calendar) */
+.book-form { --formGap: 1.5rem; }
+@media (min-width: 48em) {
+    .book-form { padding: calc(var(--vpad) / 1.4); border: 1px solid var(--kitLine); background: var(--kitSurface); --formGap: 1.75rem; }
+}
+
+/* --------------------------------------------------------------------------
+   3. Steps + the type cards
+   -------------------------------------------------------------------------- */
+.book-step { scroll-margin-top: calc(var(--hH, 78) * 1px + 1rem); }
+.book-step > .form__title { align-items: center; }
+.book-step > .form__title .form__step {
+    display: inline-grid; place-items: center; width: 2.25rem; height: 2.25rem; border: 1px solid var(--kitFieldLine); border-radius: 50%;
+    font-size: .6875rem; letter-spacing: .08em; color: var(--kitTitle); font-variant-numeric: tabular-nums;
+}
+.book-step > .field__hint { margin-top: -.6rem; max-width: 72ch; }
+.book-step > .form__title:focus { outline: none; }
+.book-step > .form__title:focus-visible { outline: 2px solid var(--colFocus); outline-offset: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+    .book-step.is-entering { animation: book-step-in .4s var(--easeOut) both; }
+}
+@keyframes book-step-in { from { opacity: 0; transform: translate3d(0, 14px, 0); } to { opacity: 1; transform: none; } }
+
+.book-types { display: grid; grid-template-columns: minmax(0, 1fr); gap: .75rem; }
+@container bookmain (min-width: 31rem) { .book-types { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.book-type { display: flex; }
+body[data-page="book"] .book-type > span {
+    position: relative; align-items: flex-start; justify-content: flex-start; gap: .45rem;
+    min-height: 6.25rem; padding: 1.1rem 3.25rem 1.15rem 1.15rem;
+    text-align: left; white-space: normal; letter-spacing: 0;
+}
+.book-type__label { font-size: 1rem; font-weight: var(--wTitle); letter-spacing: .02em; text-transform: uppercase; line-height: 1.15; color: inherit; }
+.book-type__hint, body[data-page="book"] .book-type small.book-type__hint { font-size: .875rem; font-weight: var(--wBody); letter-spacing: 0; text-transform: none; line-height: 1.45; color: var(--kitMuted); }
+.book-type > input:checked + span .book-type__hint { color: rgb(var(--colOnBrand-rgb) / .85); }
+/* the radio disc in the corner: state is never colour-only */
+.book-type > span::after {
+    content: ""; position: absolute; top: 1.05rem; right: 1.05rem; width: 1.25rem; height: 1.25rem; border-radius: 50%;
+    border: 1px solid var(--kitFieldLine); background: var(--kitSurface);
+    transition: border-color var(--aniUi) var(--easeInOutSine), box-shadow var(--aniUi) var(--easeInOutSine);
+}
+.book-type > input:checked + span::after { border-color: var(--colOnBrand); background: var(--colOnBrand); box-shadow: inset 0 0 0 4px var(--colBrand); }
+.book-explainer { margin-top: -.25rem; }
+
+/* --------------------------------------------------------------------------
+   4. Date picker (js/pages/book/calendar.js)
+   -------------------------------------------------------------------------- */
+.book-when { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+
+/* one column (default): the side block dissolves into the grid and the (non-interactive) hint reads first, above the calendar - focus order is untouched.
+   two columns once the form column has the room: calendar left, hint / recording nights / chosen day right */
+.book-when__side { display: contents; }
+#bk-when-help { order: -1; }
+@container bookmain (min-width: 38rem) {
+    .book-when { grid-template-columns: minmax(0, 23.5rem) minmax(0, 1fr); gap: 1.75rem; }
+    .book-when__side { display: grid; gap: 1.1rem; align-content: start; min-width: 0; }
+    #bk-when-help { order: 0; }
+}
+.book-date { gap: .6rem; }
+
+.cal { max-width: 26rem; border: 1px solid var(--kitLine); background: var(--kitSurface); padding: .75rem; user-select: none; -webkit-user-select: none; }
+@media (min-width: 30em) { .cal { padding: 1rem; } }
+@media (max-width: 29.99em) {                        /* 375px phones: seven 44px days only fit when the grid runs to the card edge */
+    .cal { padding: .6rem .2rem .7rem; }
+    .cal__head, .cal__legend { margin-inline: .45rem; }
+    .cal .cal__grid { border-spacing: 0; }          /* (.cal prefix: this block sits above the base .cal__grid rule) */
+}
+.cal__head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-bottom: .35rem; }
+.cal__title { margin: 0; font-size: 1rem; font-weight: var(--wTitle); letter-spacing: .04em; text-transform: uppercase; color: var(--kitTitle); text-align: center; }
+.cal__nav {
+    display: inline-grid; place-items: center; flex: 0 0 auto; width: var(--tapMin); height: var(--tapMin);
+    border: 1px solid var(--kitFieldLine); background: transparent; color: var(--kitTitle); font-size: 1.15rem;
+    transition: background-color var(--aniUi) var(--easeInOutSine), border-color var(--aniUi) var(--easeInOutSine);
+}
+.cal__nav .icon { stroke-width: 2; }
+.is-mouse .cal__nav:hover:not([aria-disabled="true"]) { background: var(--kitSurfaceSoft); border-color: var(--kitFieldLineStrong); }
+.cal__nav[aria-disabled="true"] { border-style: dashed; color: var(--kitMuted); cursor: not-allowed; opacity: .55; }
+.cal__grid { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 2px; }
+.cal__grid th { padding: .55rem 0 .4rem; font-size: .6875rem; font-weight: var(--wLead); letter-spacing: .1em; text-transform: uppercase; color: var(--kitMuted); text-align: center; }
+.cal__cell { padding: 0; text-align: center; }
+.cal__day {
+    position: relative; display: grid; place-items: center; width: 100%; min-height: var(--tapMin); aspect-ratio: 1 / 1;
+    border: 1px solid transparent; background: transparent; color: var(--kitTitle);
+    font-size: .9375rem; font-weight: var(--wButton); font-variant-numeric: tabular-nums; line-height: 1;
+    transition: background-color var(--aniUi) var(--easeInOutSine), color var(--aniUi) var(--easeInOutSine), border-color var(--aniUi) var(--easeInOutSine);
+}
+.is-mouse .cal__day:hover:not(.is-off):not(.is-selected) { background: var(--kitSurfaceSoft); border-color: var(--kitFieldLineStrong); }
+.cal__day:focus-visible { z-index: 1; outline: 2px solid var(--colFocus); outline-offset: 1px; }
+.cal__day.is-today::after { content: ""; position: absolute; left: 50%; bottom: 15%; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: currentColor; }
+.cal__day.is-selected { background: var(--kitOn); border-color: var(--kitOn); color: var(--kitOnText); }
+/* not bookable: lighter weight + a strike (never colour-only); still focusable so the reason can be read out */
+.cal__day.is-off { color: var(--kitMuted); font-weight: var(--wBody); text-decoration: line-through; text-decoration-thickness: 1px; cursor: not-allowed; }
+.cal__legend { display: flex; flex-wrap: wrap; gap: .35rem 1.1rem; margin: .6rem 0 0; padding-top: .7rem; border-top: 1px solid var(--kitLine); font-size: .75rem; line-height: 1.3; color: var(--kitMuted); }
+.cal__key { display: inline-flex; align-items: center; gap: .45em; }
+.cal__key::before { content: ""; flex: 0 0 auto; width: .8rem; height: .8rem; border: 1px solid var(--kitFieldLine); }
+.cal__key--today::before { border: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--kitTitle); margin: 0 .2rem; }
+.cal__key--on::before { background: var(--kitOn); border-color: var(--kitOn); }
+.cal__key--off::before { border-style: dashed; background: linear-gradient(to top right, transparent calc(50% - .5px), var(--kitMuted) calc(50% - .5px), var(--kitMuted) calc(50% + .5px), transparent calc(50% + .5px)); }
+
+.book-picked { margin: 0; display: grid; gap: .3rem; padding: 1rem 1.1rem; background: var(--kitSurfaceSoft); border-left: 3px solid var(--kitTitle); }
+.book-picked:empty { display: none; }
+.book-picked__label { font-size: .6875rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; color: var(--kitMuted); line-height: 1.2; }
+.book-picked__date { font-size: clamp(22px, 2.2vw, 28px); font-weight: var(--wTitle); letter-spacing: var(--trackTitle); text-transform: uppercase; line-height: 1.05; color: var(--kitTitle); }
+
+.book-nights__title { margin: 0 0 .55rem; font-size: .8125rem; font-weight: var(--wButton); letter-spacing: .06em; text-transform: uppercase; color: var(--kitTitle); line-height: 1.3; }
+body[data-page="book"] .book-nights__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.book-night {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .1rem .75rem; align-items: center; width: 100%; min-height: 3.5rem; padding: .6rem .9rem;
+    border: 1px solid var(--kitFieldLine); background: var(--kitFieldBg); color: var(--kitTitle); text-align: left;
+    transition: background-color var(--aniUi) var(--easeInOutSine), color var(--aniUi) var(--easeInOutSine), border-color var(--aniUi) var(--easeInOutSine);
+}
+.book-night__date { grid-column: 1; font-size: .9375rem; font-weight: var(--wButton); line-height: 1.2; font-variant-numeric: tabular-nums; }
+.book-night__guest { grid-column: 1; font-size: .8125rem; line-height: 1.3; color: var(--kitMuted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.book-night__seats { grid-column: 2; grid-row: 1 / span 2; font-size: .6875rem; font-weight: var(--wLead); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.is-mouse .book-night:hover:not([aria-pressed="true"]):not(.is-off) { background: var(--kitSurfaceSoft); border-color: var(--kitFieldLineStrong); }
+.book-night[aria-pressed="true"] { background: var(--kitOn); border-color: var(--kitOn); color: var(--kitOnText); }
+.book-night[aria-pressed="true"] .book-night__guest { color: rgb(var(--colOnBrand-rgb) / .85); }
+.book-night.is-off { border-style: dashed; color: var(--kitMuted); cursor: not-allowed; }
+
+/* --------------------------------------------------------------------------
+   5. Party + time slots
+   -------------------------------------------------------------------------- */
+body[data-page="book"] .book-party .radio-chip > span { min-width: 3.25rem; min-height: 3rem; font-size: 1.0625rem; }
+@media (max-width: 29.99em) {
+    .book-party { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    body[data-page="book"] .book-party .radio-chip > span { min-width: 0; padding-inline: .25rem; }
+}
+
+.book-slots { display: grid; gap: 1.35rem; min-height: 3.25rem; transition: opacity var(--aniUi) var(--easeInOutSine); }
+.book-slots:empty { display: none; }
+.book-slots.is-loading .radio-chip { opacity: .45; pointer-events: none; }
+.book-slotgroup { display: grid; gap: .6rem; }
+.book-slotgroup__title { margin: 0; display: flex; align-items: center; gap: .9em; font-size: .6875rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; color: var(--kitMuted); line-height: 1.2; }
+.book-slotgroup__title::after { content: ""; flex: 1 1 auto; height: 1px; background: var(--kitLine); }
+.book-slotgroup__gone { margin: 0; font-size: .875rem; color: var(--kitMuted); }
+.book-slotlist, .book-skeleton { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem; }   /* 4 across on phones, 5 from 36em: the usual 10- and 8-slot groups break into tidy rows */
+@media (max-width: 22.49em) { .book-slotlist, .book-skeleton { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@container bookmain (min-width: 34rem) { .book-slotlist, .book-skeleton { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+@container bookmain (max-width: 27.99rem) { body[data-page="book"] .book-slot > span { font-size: .875rem; letter-spacing: 0; padding-inline: .2rem; } }
+body[data-page="book"] .book-slot > span { min-height: 3.25rem; padding-inline: .5rem; }
+.book-slotlist--doors { grid-template-columns: minmax(0, 20rem); }
+body[data-page="book"] .book-slot--doors > span { min-height: 4.25rem; font-size: 1.0625rem; gap: .3em; }
+.book-skeleton__chip { display: block; height: 3.25rem; border: 1px solid var(--kitLine); background: linear-gradient(100deg, var(--kitSurfaceSoft) 30%, var(--colBg) 50%, var(--kitSurfaceSoft) 70%) 0 0 / 300% 100%; }
+@media (prefers-reduced-motion: no-preference) { .book-skeleton__chip { animation: book-shimmer 1.3s linear infinite; } }
+@keyframes book-shimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
+.book-tz { font-size: .8125rem; }
+.book-retry { min-height: 0; font-size: .8125rem; color: inherit; }
+
+/* --------------------------------------------------------------------------
+   6. Details
+   -------------------------------------------------------------------------- */
+.book-notes-meta { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.book-count { flex: 0 0 auto; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.book-count.is-near { color: var(--kitTitle); font-weight: var(--wButton); }
+.book-step__actions { margin-top: .25rem; }
+@media (max-width: 35.99em) { .book-form .form__actions .button { width: 100%; } }
+
+/* --------------------------------------------------------------------------
+   7. Review block (step 06). From 60em: an open panel. Below 60em: THE collapsible summary bar above the submit button.
+   -------------------------------------------------------------------------- */
+.book-review { background: var(--kitSurfaceSoft); border: 1px solid var(--kitLine); }
+.book-review__title { margin: 0; padding: 1.1rem 1.25rem 0; font-size: .8125rem; font-weight: var(--wButton); letter-spacing: .06em; text-transform: uppercase; color: var(--kitTitle); line-height: 1.3; }
+.book-review__toggle { display: none; }
+.book-review__panel { padding: .6rem 1.25rem 1rem; }
+.book-review__list { border-top: 0; }
+.book-review__list .info-list__row { grid-template-columns: minmax(5.5rem, 26%) 1fr; align-items: center; padding: .3em 0; }
+.book-review__list .info-list__row:last-child { border-bottom: 0; }
+.book-review__list dd { display: flex; align-items: center; justify-content: space-between; gap: .75rem; min-width: 0; }
+.book-review__list dd > span:first-child { min-width: 0; overflow-wrap: anywhere; white-space: pre-line; }
+.book-review__list .is-empty { color: var(--kitMuted); }
+@media (max-width: 35.99em) { .book-review__list .info-list__row { grid-template-columns: minmax(0, 1fr); gap: 0; padding: .55em 0 .15em; } }
+.book-change { flex: 0 0 auto; font-size: .6875rem; font-weight: var(--wLead); padding-inline: .25rem; text-decoration-thickness: 1px; }
+@media (max-width: 59.99em) {
+    .book-review__title { display: none; }
+    .book-review__toggle {
+        display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; min-height: 3.75rem; padding: .7rem 1rem .7rem 1.1rem;
+        background: transparent; color: var(--kitTitle); text-align: left;
+    }
+    .book-review__toggle-text { display: grid; gap: .25rem; min-width: 0; }
+    .book-review__toggle-label { font-size: .8125rem; font-weight: var(--wButton); letter-spacing: .06em; text-transform: uppercase; line-height: 1.2; }
+    .book-review__digest { font-size: .875rem; line-height: 1.35; color: var(--kitText); font-variant-numeric: tabular-nums; }
+    .book-review__chev { flex: 0 0 auto; font-size: 1.35rem; stroke-width: 2; transition: transform var(--aniUi) var(--easeInOutSine); }
+    .book-review__toggle[aria-expanded="true"] .book-review__chev { transform: rotate(180deg); }
+    .book-review__toggle:focus-visible { outline-offset: -3px; }
+    .book-review__panel { padding: 0 1.1rem .6rem; border-top: 1px solid var(--kitLine); }
+}
+@media (min-width: 60em) { body[data-page="book"] main .book-review__panel[hidden] { display: block !important; } }   /* the bar only collapses on phones / tablets */
+@media (prefers-reduced-motion: reduce) { .book-review__chev { transition: none; } }
+
+/* --------------------------------------------------------------------------
+   8. Summary card (sticky, >= 60em) - espresso card, white type, like the home page's Visit card
+   -------------------------------------------------------------------------- */
+.book-summary {
+    position: relative; overflow: hidden; padding: 1.75rem 1.6rem 1.6rem; background: var(--colBrand); color: var(--colOnBrand);
+    --colFocus: var(--colOnBrand);
+}
+.book-summary::after {                                  /* the white cup mark as a quiet watermark (decorative) */
+    content: ""; position: absolute; right: -.75rem; top: -1.25rem; width: 7rem; height: 8.25rem; opacity: .08; pointer-events: none;
+    background: url("../../assets/brand/logo/latte-with-lata-mark-white.svg") no-repeat 50% 50% / contain;
+}
+.book-summary__eyebrow { margin: 0 0 .9em; color: var(--colTextOnBrandMuted); }
+.book-summary__title { margin: 0 0 1.1rem; font-size: clamp(24px, 2vw, 30px); font-weight: var(--wTitle); letter-spacing: var(--trackTitle); text-transform: uppercase; line-height: 1; color: var(--colOnBrand); }
+.book-summary__list { margin: 0; border-top: 1px solid var(--colLineOnBrand); }
+.book-summary__row { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: .25rem 1rem; align-items: baseline; padding: .8rem 0; border-bottom: 1px solid var(--colLineOnBrand); }
+.book-summary__row dt { font-size: .6875rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; line-height: 1.4; color: var(--colTextOnBrandMuted); }
+.book-summary__row dd { margin: 0; font-size: 1.0625rem; font-weight: var(--wLead); line-height: 1.35; color: var(--colOnBrand); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.book-summary__row dd.is-empty { font-size: .9375rem; font-weight: var(--wBody); color: var(--colTextOnBrandMuted); }
+.book-summary__note, .book-summary__help { position: relative; z-index: 1; margin: 1.1rem 0 0; font-size: .875rem; line-height: 1.5; color: var(--colTextOnBrandMuted); }
+.book-summary__help { margin-top: .5rem; }
+body[data-page="book"] .book-summary__help a { color: var(--colOnBrand); font-weight: var(--wLead); white-space: nowrap; }
+
+/* --------------------------------------------------------------------------
+   9. Confirmation card
+   -------------------------------------------------------------------------- */
+.book-done { display: grid; gap: 1.75rem; padding: calc(var(--vpad) / 1.2) calc(var(--vpad) / 1.6); border: 1px solid var(--kitLine); background: var(--kitSurface); text-align: center; scroll-margin-top: calc(var(--hH, 78) * 1px + 1rem); }
+.book-done:focus { outline: none; }
+.book-done:focus-visible { outline: 2px solid var(--colFocus); outline-offset: 4px; }
+@media (max-width: 35.99em) { .book-done { padding: 1.75rem 1.1rem; } }
+.book-done__head { display: grid; justify-items: center; }
+.book-done__tick { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; margin-bottom: 1.25rem; border-radius: 50%; background: var(--colBrand); color: var(--colOnBrand); font-size: 1.6rem; }
+.book-done__tick .icon { stroke-width: 2.25; }
+@media (prefers-reduced-motion: no-preference) {
+    .book-done:not([hidden]) .book-done__tick { animation: book-tick .5s var(--easeOut) both; }
+}
+@keyframes book-tick { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+.book-done__title { margin: 0; }
+.book-done__text { max-width: 44ch; margin: .9rem auto 0; text-wrap: pretty; }
+.book-done__ref { display: grid; justify-items: center; gap: .55rem; padding: 1.5rem 1rem 1.6rem; background: var(--kitSurfaceSoft); }
+.book-done__ref-label { margin: 0; font-size: .6875rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; color: var(--kitMuted); line-height: 1.2; }
+.book-done__ref-code { margin: 0; font-size: clamp(34px, 7.4vw, 60px); font-weight: var(--wDisplay); letter-spacing: .04em; line-height: 1; color: var(--kitTitle); font-variant-numeric: tabular-nums; user-select: all; -webkit-user-select: all; overflow-wrap: anywhere; }
+body[data-page="book"] .book-done__copy { width: auto; min-width: 7.5rem; margin-top: .5rem; border-radius: 0; min-height: var(--tapMin); }
+.book-done__list { text-align: left; }
+@media (min-width: 40em) {
+    .book-done__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; }
+    .book-done__list .info-list__row { grid-template-columns: minmax(5rem, 32%) 1fr; align-items: center; min-height: 3.5rem; padding-block: .5em; }
+    .book-done__list .info-list__row:nth-child(-n+2) { border-top: 0; }
+}
+.book-done__notes { display: grid; gap: .6rem; max-width: 52ch; margin: 0 auto; font-size: .9375rem; line-height: 1.55; text-wrap: pretty; }
+.book-done__notes p { font-size: inherit; }
+.book-done__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem 1rem; }
+body[data-page="book"] .book-done__actions .button { margin: 0; border-radius: 0; min-height: 3rem; }
+@media (max-width: 35.99em) { body[data-page="book"] .book-done__actions .button { width: 100%; } }
+.book-done__more { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .25rem 2rem; margin: -.5rem 0 0; }
+
+/* --------------------------------------------------------------------------
+   10. Policy (soft band)
+   -------------------------------------------------------------------------- */
+.book-policy { display: grid; grid-template-columns: minmax(0, 1fr); gap: calc(var(--vpad) / 1.5); }
+@media (min-width: 60em) { .book-policy { grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr); gap: calc(var(--vpad) * 1.5); align-items: start; } }
+.book-policy__list .info-list__row { grid-template-columns: minmax(0, 1fr); gap: .35rem; padding: 1.15em 0; }
+@media (min-width: 40em) { .book-policy__list .info-list__row { grid-template-columns: minmax(11rem, 36%) 1fr; gap: .25em 2em; } }
+.book-policy__list dt { font-size: .8125rem; font-weight: var(--wButton); letter-spacing: .06em; color: var(--kitTitle); line-height: 1.35; }
+
+/* --------------------------------------------------------------------------
+   11. Manage a booking + the cancel dialog
+   -------------------------------------------------------------------------- */
+.book-manage { scroll-margin-top: calc(var(--hH, 78) * 1px + 1rem); }
+.book-manage__intro { max-width: 46ch; margin: calc(var(--vpad) / 3) auto 0; }
+.book-manage__form, #mg-fallback { margin-top: var(--vpad); }
+.book-ref-input { font-variant-numeric: tabular-nums; letter-spacing: .06em; text-transform: uppercase; }
+.book-ref-input::placeholder { letter-spacing: .06em; }
+@media (max-width: 35.99em) { .book-manage__form .form__actions .button { width: 100%; } }
+
+.book-found { display: grid; gap: 1.1rem; margin-top: var(--vpad); padding: calc(var(--vpad) / 1.6); border: 1px solid var(--kitLine); background: var(--kitSurface); }
+@media (max-width: 35.99em) { .book-found { padding: 1.35rem 1.1rem; } }
+.book-found:focus { outline: none; }
+.book-found:focus-visible { outline: 2px solid var(--colFocus); outline-offset: 4px; }
+.book-found__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .6rem 1rem; }
+.book-found__title { margin: 0; font-size: clamp(22px, 2vw, 28px); font-weight: var(--wTitle); letter-spacing: var(--trackTitle); text-transform: uppercase; line-height: 1; color: var(--kitTitle); }
+.book-found__status { margin: 0; }
+.book-found__status .tag { min-height: 2rem; font-size: .75rem; color: var(--kitTitle); border-color: var(--kitFieldLine); }
+.book-found__status .tag--solid { color: var(--kitOnText); border-color: var(--kitOn); }
+.book-found__status .tag[data-status="cancelled"], .book-found__status .tag[data-status="no_show"] { border-style: dashed; text-decoration: line-through; }
+.book-found__text { margin: 0; }
+.book-found__actions { margin-top: .25rem; }
+
+.book-dialog {
+    width: min(32rem, calc(100vw - 2rem)); max-width: none; max-height: calc(100vh - 2rem); margin: auto; padding: 0; border: 0;
+    background: var(--colBg); color: var(--colText); box-shadow: 0 24px 80px rgb(var(--colBrandDeep-rgb) / .35);
+    --colFocus: var(--colAccent);
+}
+.book-dialog::backdrop { background: rgb(var(--colBrandDeep-rgb) / .62); }
+.book-dialog__body { display: grid; gap: 1rem; padding: 2rem 1.75rem 1.75rem; border-top: 4px solid var(--colBrand); }
+@media (max-width: 35.99em) { .book-dialog__body { padding: 1.6rem 1.25rem 1.35rem; } }
+.book-dialog__title { margin: 0; font-size: clamp(22px, 2vw, 28px); font-weight: var(--wTitle); letter-spacing: var(--trackTitle); text-transform: uppercase; line-height: 1.05; color: var(--colBrand); }
+.book-dialog__text { margin: 0; line-height: 1.55; }
+.book-dialog__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .75rem; margin-top: .5rem; }
+body[data-page="book"] .book-dialog__actions .button { margin: 0; border-radius: 0; min-height: 3rem; }
+body[data-page="book"] .book-dialog .button--outlined { --colTextBottoni: var(--colBrand); --colBordoBottoni: var(--colBrand); }
+body[data-page="book"] .book-dialog .button--outlined:hover { color: var(--colBrand); }
+body[data-page="book"] .book-dialog .button--outlined::after { background: var(--colBrand); opacity: .1; }
+@media (max-width: 35.99em) { .book-dialog__actions { flex-direction: column; } body[data-page="book"] .book-dialog__actions .button { width: 100%; } }
+@media (prefers-reduced-motion: no-preference) {
+    .book-dialog[open] { animation: book-dialog-in .22s var(--easeOut) both; }
+    .book-dialog[open]::backdrop { animation: book-fade-in .22s ease-out both; }
+}
+@keyframes book-dialog-in { from { opacity: 0; transform: translate3d(0, 12px, 0) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes book-fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* --------------------------------------------------------------------------
+   12. Help (accent band: white text 6.5:1, muted white .8 = 4.8:1)
+   -------------------------------------------------------------------------- */
+.book-help__text { max-width: 46ch; margin: calc(var(--vpad) / 3) auto 0; text-wrap: pretty; }
+.book-help__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem 1rem; margin: calc(var(--vpad) / 1.5) 0 0; }
+body[data-page="book"] .book-help__actions .button { margin: 0; border-radius: 0; min-height: 3rem; }
+#p-book-05-help .button:not(.button--outlined) { --colFondoBottoni: var(--colOnBrand); --colTextBottoni: var(--colBrand); }
+#p-book-05-help .button:not(.button--outlined)::after { background: var(--colBrand); opacity: 1; }
+#p-book-05-help .button:not(.button--outlined):hover { color: var(--colOnBrand); }
+@media (max-width: 35.99em) { body[data-page="book"] .book-help__actions .button { width: 100%; } }
+.book-help__note { max-width: 52ch; margin: calc(var(--vpad) / 1.5) auto 0; padding-top: calc(var(--vpad) / 2); border-top: 1px solid var(--colLineOnBrand); font-size: .9375rem; line-height: 1.55; color: var(--colTextOnBrandMuted); text-wrap: pretty; }
+.book-help__note strong { color: var(--colOnBrand); }
+
+/* ---- VERIFY (booking + CRM): on phones the fixed back-to-top disc (57.6px, bottom right) sat on top of the calendar's Sunday column, the
+   last time chip of each row and the review block's "Change" links. The booking page is a form, not a long read: below 48em the disc is
+   not shown here (the header comes back on any upward scroll). Scoped to this page; the shared footer styles are untouched. ---- */
+@media (max-width: 47.99em) {
+    body[data-page="book"] #back-to-top { display: none; }
+}

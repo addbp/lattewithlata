@@ -1,0 +1,152 @@
+/* ==========================================================================
+   11-live - Live sessions mosaic (Phase 1 static; Phase 2 zoom-splash behind [data-zoom-splash="on"])
+   Source: PZ = teardowns/2026-09-14-caffepaszkowski-com/source/css/scss-from-map/main/modules/_strip_site.scss
+           (.js-zoom-splash block :376-441), _strip.7.5.scss (:103-111 full-height, :536-542 text-inbox)
+   Measured (layout-manifest, state entry:s169-zoom-splash-mosaic @1440x900): root 1440x900, rows 720 wide at
+   x -235.2 / 955.2 (y rel 55.9), columns 350.4, centre 432x560 at x 504 y rel 170, side figures 350.4x526.5 (2:3)
+   and 350.4x233.3 (3:2) stacked with a 28.8 gap. Mobile @390x844: root 844, centre 390x572.8 at y rel 135.6.
+   Everything scoped under #s-11-live. INFERRED values are marked.
+   Brand pass (2026-09-17): colours via the brand tokens only (--colOnBrand / --colTextOnBrandMuted / --colBrand / --colBrandDeep),
+   type inherited from base.css roles (no font-family here), eyebrow relocated to the bottom band - geometry, rows, tiles unchanged.
+   ========================================================================== */
+
+/* ---- root: block wrapper (band black via .bg-band-black on the section); the 100vh box is .live__stage ---- */
+#s-11-live { position: relative; }
+
+/* .live__stage = the measured section box [169]: 100vh flex box.
+   PZ _strip.7.5.scss:103-105 `.strip--full-height { min-height: calc(100vh - header); display:flex }` + the pin's
+   inline `height: 900px` (rendered.html [169] style) -> Phase 1 (no pin) uses an explicit 100vh (spec 11 (c) root).
+   Column direction + `safe center` reproduce the measured vertical centring of [172] on mobile (y rel 135.6 =
+   (844 - 572.8)/2) while the desktop stack (57.6 + 788.1 + 57.6 = 903.3 > 900, as in the source) stays top-aligned
+   - mechanism INFERRED, outcome measured. */
+#s-11-live .live__stage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: safe center;
+    min-height: 100vh;
+}
+@media (min-width: 36em) {
+    #s-11-live .live__stage { height: 100vh; overflow: hidden; }   /* spec 11 (c): "root height:100vh (>=36em; auto below)"; overflow guard INFERRED: on short
+                                                                      viewports the 903px stack (rows 788 + 2 x 57.6) must not spill into 12 - the source's pinned
+                                                                      100vh box clips the same way; at 1440x900 only 3.3px of bottom padding is hidden */
+}
+#s-11-live .live__stage > .container { flex: 0 0 auto; width: 100%; }
+
+/* eyebrow: absolute so it does not shift the measured rows (spec (g) "INFERRED placement").
+   Brand pass: it now sits in the BOTTOM padding band of the stage (md-pb-md, 57.6px @1440 minus the 3.3px overflow clip) - at the
+   top it lived under the fixed header plate, which is the same brown, so it vanished whenever the header was visible (WIG "no
+   content behind the fixed header"). Below the mosaic it also leads straight into the quote row. Type = the base .eyebrow role
+   (Creato Medium 500, 12px, ls .14em); colour = the muted-on-brand token (10.7:1) instead of white at .7 opacity. */
+#s-11-live .live__eyebrow {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: calc(var(--vpad) / 2 - .35em);                /* INFERRED: centred in the bottom padding band (rows end at 845.7, band 845.7-900 @1440x900) */
+    z-index: var(--z-content);
+    margin: 0;
+    padding: 0 var(--vpad);
+    text-align: center;
+    color: var(--colTextOnBrandMuted);
+    text-wrap: balance;
+}
+@media (max-width: 35.99em) {
+    #s-11-live .live__eyebrow { bottom: calc(var(--vpad) / 2); }   /* phones: the stage is min-height 100vh (no clip), centre tile centred - the band is >= 1 vpad */
+}
+
+/* ---- the flex row - _strip_site.scss:380-386 `.strip__text:has(.strip)` ---- */
+#s-11-live .mosaic__flex {
+    display: flex;                                         /* :381 */
+    overflow: hidden;                                      /* :382 (clips the 235px side bleed) */
+    justify-content: center;                               /* :383 */
+    align-items: center;                                   /* :384 */
+    gap: calc(var(--vpad) / 3);                            /* :385 = 19.2px @1440 */
+}
+/* nested strips - _strip_site.scss:387-389 */
+#s-11-live .mosaic__flex > .strip {
+    min-width: 30vw;                                       /* :388 (centre = 432 @1440) */
+    width: 100%;                                           /* :389 */
+}
+/* side rows - _strip_site.scss:390-399 (selector kept at the same depth as the `> .strip` rule above so the later
+   50vw wins the cascade, as `.strip` / `.strip--columns` tie in the source) */
+#s-11-live .mosaic__flex > .mosaic__row { display: none; }                 /* :391 (hidden below 36em) */
+@media screen and (min-width: 36em) {
+    #s-11-live .mosaic__flex > .mosaic__row { display: block; min-width: 50vw; }   /* :393-394 (720 @1440) */
+}
+#s-11-live .mosaic__row > .container {
+    --strip-column-gap: calc(var(--vpad) / 3);             /* :397 -> columns (720 - 19.2)/2 = 350.4 */
+}
+
+/* ---- side tiles: fixed-ratio crops (the source slots are 2:3 | 3:2 photos; ours are 3:2 - object-fit cover, spec (g)) ---- */
+#s-11-live .mosaic__row .mosaic__tile { overflow: hidden; width: 100%; }
+#s-11-live .mosaic__tile--portrait  { aspect-ratio: 2 / 3; }   /* measured 350.4 x 526.5 */
+#s-11-live .mosaic__tile--landscape { aspect-ratio: 3 / 2; }   /* measured 350.4 x 233.3 */
+#s-11-live .mosaic__row .mosaic__tile > picture { display: block; width: 100%; height: 100%; }
+#s-11-live .mosaic__row .mosaic__tile img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* stack gap: base.css `.strip__image--after { margin-top: vpad/2 }` (_strip.7.5.scss:203-208) = measured 28.8 */
+
+/* ---- centre - _strip_site.scss:400-407 ---- */
+#s-11-live .mosaic__centre { z-index: 1; }                 /* :401 */
+#s-11-live .mosaic__centre .strip__image {
+    height: 35em;                                          /* :404 = 560px */
+    max-height: 100vh;                                     /* :405 */
+    align-items: center;                                   /* :406 */
+    overflow: hidden;                                      /* Phase 1 window (spec 11 (c) "no clip-path") */
+}
+/* .text-inbox at >=50em: figure margin-bottom 0 (measured [172] 560 desktop vs 572.8 mobile) - _strip.7.5.scss:536-542 */
+@media screen and (min-width: 50em) {
+    #s-11-live .mosaic__centre .text-inbox .strip__image { margin-bottom: 0; min-height: 100%; }
+}
+#s-11-live .mosaic__centre .strip__image > picture { display: block; width: 100%; height: 100%; }
+#s-11-live .mosaic__centre .strip__image img {
+    display: block; width: 100%; height: 100%; object-fit: cover;   /* :424-427 (Phase 1: no scale) */
+}
+
+/* ---- Phase 1 quote row (INFERRED placement: spec 11 (b)/(i)) ---- */
+#s-11-live .live__quote-row { position: relative; z-index: var(--z-content); }
+/* quote = the BK manifesto / quote role from base.css .text-decorated (Creato Display Medium 500, lh 1.15, ls -.01em, size clamp unchanged)
+   in SENTENCE CASE like the 07 manifesto (one treatment for the quote role - brand pass finish, review SHOULD-FIX 8; BK: "manifesto / quotes =
+   Medium 500, sentence case allowed"). The block re-wraps ~2 lines shorter than the uppercase version; white on the brand band (13.1:1) */
+#s-11-live .live__quote { color: var(--colOnBrand); text-wrap: balance; }   /* balance: no orphan word on the last line (7 lines @1440) - INFERRED polish */
+#s-11-live .live__cta { margin-top: calc(var(--vpad) / 2); }   /* INFERRED */
+#s-11-live .live__cta .read-more { --colRead-more: var(--colOnBrand); }   /* white CTA on the brand band; base.css s10 = Bold 700 .9em ls .08em + 44px hit box */
+/* arrow blend on the black band is now base.css s10 (`.bg-band-black .read-more::after { mix-blend-mode: normal }`, global verifier round 2);
+   this section keeps its arrow colour choice: brand espresso glyph on the white hover disc (INFERRED) */
+#s-11-live .read-more::after { background-color: var(--colBrand); }
+/* focus ring: white on this band via tokens.css --colFocus (base.css reads it directly since the brand pass finish) */
+
+/* ==========================================================================
+   Phase 2 (OPTIONAL, default off) - data-zoom-splash="on" on #s-11-live
+   _strip_site.scss:376-441 verbatim; the pinned element is .live__stage
+   ========================================================================== */
+#s-11-live[data-zoom-splash="on"] .live__stage { transform: scaleZ(1); }   /* :377 (fixed-position containing block for the picture) */
+#s-11-live[data-zoom-splash="on"] .mosaic__centre .strip__image {
+    overflow: visible;
+    clip-path: inset(0px);                                 /* :407 */
+}
+#s-11-live[data-zoom-splash="on"] .mosaic__centre .strip__image > picture {
+    position: fixed;                                       /* :409 */
+    left: 0; top: 0;                                       /* :410-411 */
+    width: 100%; height: 100%;                             /* :412-413 */
+    z-index: 1;                                            /* :414 */
+}
+#s-11-live[data-zoom-splash="on"] .mosaic__centre .strip__image > picture::before {
+    content: "";                                           /* :419 */
+    position: absolute; inset: 0; z-index: 1;              /* @include abs-cover(1) :420 */
+    background: var(--colBrandDeep);                       /* :421 (was --colNero; the deep brand tone is the overlay colour of the kit) */
+    opacity: var(--screenOpacity, 0);                      /* :422 */
+}
+#s-11-live[data-zoom-splash="on"] .mosaic__centre .strip__image img {
+    width: 100%; height: 100%; object-fit: cover;          /* :425-427 */
+    transform: scale3d(.7, .7, 1);                         /* :428 */
+}
+#s-11-live[data-zoom-splash="on"] .live__caption {
+    position: absolute !important;                         /* :433 */
+    z-index: 2;                                            /* :434 */
+    width: 100vw;                                          /* :435 */
+    max-width: 56.25rem;                                   /* :436 ($contWidthNarrow 900px) */
+    transform: scale3d(1.2, 1.2, 1);                       /* :437 */
+    opacity: 0;                                            /* :438 */
+    color: var(--colOnBrand);
+    padding: 0 var(--vpad);                                /* INFERRED (text inset on narrow screens) */
+}
+#s-11-live[data-zoom-splash="on"] .live__quote-row { display: none; }   /* the caption replaces the Phase-1 quote row (INFERRED) */

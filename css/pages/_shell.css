@@ -1,0 +1,525 @@
+/* ==========================================================================
+   Latte with Lata - css/pages/_shell.css (SHELL lane, PAGES-SPEC 2 + 6)
+   The shared sub-page kit. Loaded by every generated sub-page AFTER tokens / base / the header, newsletter and footer sheets and BEFORE
+   css/pages/<page>.css. Brand tokens only (css/tokens.css) - no new colours, Creato Display only (inherited from body), motion 150-300 ms for
+   feedback, every animation gated behind prefers-reduced-motion. Markup examples for every class: verify/handoff-pages/shell.md.
+
+   Contents
+     1  kit tokens (light default, dark flip on the brand bands)      7  .info-list
+     2  sub-page base (anchors, .lead, main clip)                     8  .data-table
+     3  .page-hero                                                    9  .notice
+     4  .mark-row                                                    10  form kit: .form .form__row .field .input .select .textarea
+     5  .page-nav (anchor chips)                                          .checkbox .radio-chips .form__actions + button states
+     6  .card / .card-grid                                           11  small helpers (.stack, .cluster, .tag, .divider)
+
+   Page lanes: do NOT redefine these classes - scope overrides under body[data-page="<page>"] or your section ids in css/pages/<page>.css.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Kit tokens. Every component below reads these, so the light -> dark flip is one block.
+      Light = white band and the soft band (#f6efe7). Dark = .bg-band-brand / .bg-band-black / .bg-band-accent, or opt in with .kit-dark
+      (and back out with .kit-light for a white card sitting inside a brown band).
+      Contrast (WCAG 2.x, measured on the demo page): label / text on white 13.1 / 10.8, hint 5.4 (4.8 on soft), error 5.9 (5.2 on soft),
+      field border 5.4 (non-text needs 3); on brand: text 13.1, hint 10.7 (white .8), border white .55 = 5.1.
+   -------------------------------------------------------------------------- */
+html, .kit-light {
+    --kitSurface: var(--colBg);                        /* cards, inputs */
+    --kitSurfaceSoft: var(--colBrandSoft);             /* soft panels, notices, chips on hover */
+    --kitText: var(--colText);
+    --kitTitle: var(--colBrand);
+    --kitMuted: var(--colTextMuted);
+    --kitLine: var(--colBrandLine);                    /* decorative hairlines */
+    --kitFieldLine: var(--colTextMuted);               /* control boundaries: 5.4:1 on white, 4.8:1 on soft (WCAG 1.4.11 >= 3:1) */
+    --kitFieldLineStrong: var(--colBrand);             /* hover / focus / checked boundary */
+    --kitFieldBg: var(--colBg);
+    --kitError: var(--colError);
+    --kitOn: var(--colBrand);                          /* selected chip / checked box fill */
+    --kitOnText: var(--colOnBrand);
+    --kitChevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23502506' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");   /* stroke = --colBrand (a data URI cannot read a custom property) */
+}
+.bg-band-black, .bg-band-brand, .bg-band-accent, .kit-dark {
+    --kitSurface: rgb(var(--colOnBrand-rgb) / .06);
+    --kitSurfaceSoft: rgb(var(--colOnBrand-rgb) / .1);
+    --kitText: var(--colOnBrand);
+    --kitTitle: var(--colOnBrand);
+    --kitMuted: var(--colTextOnBrandMuted);
+    --kitLine: var(--colLineOnBrand);
+    --kitFieldLine: rgb(var(--colOnBrand-rgb) / .55);
+    --kitFieldLineStrong: var(--colOnBrand);
+    --kitFieldBg: transparent;
+    --kitError: var(--colOnBrand);                     /* --colError is 2.2:1 on brown: errors are white + the "!" glyph + a solid white boundary */
+    --kitOn: var(--colOnBrand);
+    --kitOnText: var(--colBrand);
+    --kitChevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+.kit-dark { background: var(--colBrand); color: var(--colOnBrand); --colFocus: var(--colOnBrand); --colTitle: var(--colOnBrand); --colStrong: var(--colOnBrand); --colHr: var(--colLineOnBrand); }
+.kit-light { background: var(--colBg); color: var(--colText); --colFocus: var(--colAccent); --colTitle: var(--colBrand); --colStrong: var(--colBrand); --colHr: var(--colBrandLine); --strip-text-color: var(--colText); }
+
+/* --------------------------------------------------------------------------
+   2. Sub-page base
+   -------------------------------------------------------------------------- */
+/* anchors never land under the fixed header: html already has scroll-padding-top = the measured header (base.css s2); sections that are
+   anchor targets get a little extra air */
+main [id] { scroll-margin-top: calc(var(--vpad) / 2); }
+/* main clips the 5vh reveals and the bleed rails (base.css: overflow hidden). `clip` clips the same way WITHOUT creating a scroll container,
+   which is what lets .page-nav--sticky stick; browsers without `clip` keep `hidden` (the chips simply do not stick there). */
+@supports (overflow: clip) { main { overflow: clip; } }
+/* BK lead role (BRAND.md s2) - the home page only had scoped copies */
+.lead { font-weight: var(--wLead); font-size: clamp(20px, 1.8vw, 26px); line-height: 1.25; letter-spacing: -.01em; text-wrap: pretty; }
+/* inline links inside copy are never colour-only: underlined in paragraphs, list values and table cells of the PAGE fragments (the shared
+   newsletter block keeps its own link styles) */
+main > [id^="p-"] :is(p, dd, td) > a:not([class]) { text-decoration: underline; text-underline-offset: .15em; text-decoration-thickness: 1px; }
+main > [id^="p-"] :is(.bg-band-brand, .bg-band-black, .bg-band-accent, .kit-dark) :is(p, dd, td) > a:not([class]),
+main > [id^="p-"]:is(.bg-band-brand, .bg-band-black, .bg-band-accent, .kit-dark) :is(p, dd, td) > a:not([class]) { color: var(--colOnBrand); }
+/* VERIFY 2026-09-17: a white .kit-light card INSIDE a brown band (contact form, booking card) must not inherit the white link colour above
+   (white on white). The extra :is() only lifts the specificity over the two band rules; the link takes the card's own text colour. */
+main > [id^="p-"] .kit-light :is(p, dd, td) > a:not([class]), main > [id^="p-"]:is(.bg-band-brand, .bg-band-black, .bg-band-accent, .kit-dark) .kit-light :is(p, dd, td) > a:not([class]) { color: inherit; }
+main > [id^="p-"] .kit-light :is(p, dd, td) > a:not([class]):hover, main > [id^="p-"]:is(.bg-band-brand, .bg-band-black, .bg-band-accent, .kit-dark) .kit-light :is(p, dd, td) > a:not([class]):hover { color: var(--colAccent); }
+
+/* --------------------------------------------------------------------------
+   3. .page-hero[data-banner] - PAGES-SPEC 2 "Page hero": 62vh (min 420px; 56vh below 48em), full-bleed photo, bottom-up --colBrandDeep
+      70% -> transparent gradient, copy on the container at the bottom-left, white text, NO logo. data-banner = the element the header's
+      plate / hide-show maths measure (00-header.js).
+      The spec's bottom-up gradient (70% --colBrandDeep at the bottom edge -> transparent) is built from three layers so the copy and the
+      white header bar read over ANY photo, however bright and however many lines the title takes:
+        hero::before    20% all-over tint + a bottom-up fade (30% -> 0 at half height) + a top-down fade behind the burger / "Book a table" row
+        content::before a 50% scrim tied to the COPY BOX (full-bleed, from 5rem above the eyebrow to the bottom edge, feathered at the top)
+      Behind any line of copy the stack is >= 60% deep brown (white text >= 4.5:1 even over a pure-white pixel); at the bottom edge it is ~72%.
+   -------------------------------------------------------------------------- */
+.page-hero {
+    position: relative;
+    z-index: var(--z-content);
+    display: flex;
+    align-items: flex-end;
+    min-height: max(62vh, 420px);
+    padding-top: calc(var(--hH, 78) * 1px + var(--vpad) / 2);      /* copy never slides under the fixed header on short viewports */
+    padding-bottom: var(--vpad);
+    background: var(--colBrand);                                   /* while the photo loads / if it fails */
+    color: var(--colOnBrand);
+    overflow: hidden;
+    --colFocus: var(--colOnBrand);
+    --colTitle: var(--colOnBrand);
+}
+@supports (min-height: 1svh) { .page-hero { min-height: max(62svh, 420px); } }
+@media (max-width: 47.99em) {
+    .page-hero { min-height: max(56vh, 420px); padding-bottom: calc(var(--vpad) * 1.25); }
+    @supports (min-height: 1svh) { .page-hero { min-height: max(56svh, 420px); } }
+}
+.page-hero__media { position: absolute; inset: -12% 0 -1px 0; z-index: 0; will-change: transform; }   /* 12% taller than the hero, overhanging at the TOP: js/page.js drifts it down ~11% on exit without ever uncovering the top edge */
+.page-hero__media img, .page-hero__media video, .page-hero__media picture {
+    position: absolute; inset: 0; width: 100%; height: 100%; max-width: none;
+    object-fit: cover;
+    object-position: var(--pinX, 50%) var(--pinY, 50%);           /* set --pinX / --pinY inline on the hero to keep a face or a cup in frame */
+}
+.page-hero::before {                                               /* the overlay: above the media, below the copy */
+    content: "";
+    position: absolute; inset: 0; z-index: 1;
+    background:
+        linear-gradient(to top, rgb(var(--colBrandDeep-rgb) / .3) 0%, rgb(var(--colBrandDeep-rgb) / 0) 50%),
+        linear-gradient(to bottom, rgb(var(--colBrandDeep-rgb) / .58) 0%, rgb(var(--colBrandDeep-rgb) / .4) 14%, rgb(var(--colBrandDeep-rgb) / 0) 34%),
+        rgb(var(--colBrandDeep-rgb) / .2);
+    pointer-events: none;
+}
+.page-hero__content { position: relative; z-index: 2; width: 100%; }
+.page-hero__content::before {                                      /* the copy-box scrim (own stacking context: behind the text, above the hero overlay) */
+    content: "";
+    position: absolute; z-index: -1;
+    top: -5rem; bottom: calc(var(--vpad) * -1.25 - 2px);
+    left: 50%; width: 100vw; transform: translateX(-50%);
+    background: linear-gradient(to top, rgb(var(--colBrandDeep-rgb) / .5) 0%, rgb(var(--colBrandDeep-rgb) / .5) calc(100% - 5rem), rgb(var(--colBrandDeep-rgb) / 0) 100%);
+    pointer-events: none;
+}
+.page-hero__eyebrow {                                              /* BK eyebrow: Medium 500, tracked, uppercase */
+    margin: 0 0 1.1em;
+    font-size: .8125rem; font-weight: var(--wLead); line-height: 1;
+    letter-spacing: var(--trackEyebrow); text-transform: uppercase;
+    color: var(--colOnBrand);
+    display: flex; align-items: center; gap: .9em;
+}
+.page-hero__eyebrow::before { content: ""; flex: 0 0 2.5em; height: 1px; background: currentColor; opacity: .7; }   /* a short rule: the hero has no logo, this anchors the line */
+.page-hero__title {
+    margin: 0;
+    max-width: 14ch;
+    font-weight: var(--wTitle);
+    font-size: clamp(40px, 7vw, 96px);
+    line-height: .95;
+    letter-spacing: var(--trackDisplay);
+    text-transform: uppercase;
+    text-wrap: balance;
+    color: var(--colOnBrand);
+}
+.page-hero__title--long { max-width: 18ch; font-size: clamp(36px, 5.6vw, 80px); }   /* opt-in for three-line titles */
+.page-hero__intro {
+    margin: 1.1em 0 0;
+    max-width: 46ch;
+    font-size: 1.125rem; font-weight: var(--wBody); line-height: 1.5;
+    color: var(--colOnBrand);
+    text-wrap: pretty;
+}
+.page-hero__actions { margin-top: calc(var(--vpad) / 2); display: flex; flex-wrap: wrap; gap: 1em; align-items: center; }
+.page-hero__actions .button { width: auto; }
+.page-hero__actions .button + .button { margin: 0; }
+.page-hero .button { --colFondoBottoni: var(--colOnBrand); --colTextBottoni: var(--colBrand); }
+.page-hero .button::after { background: var(--colAccent); opacity: 1; }
+.page-hero .button:hover { color: var(--colOnBrand); }
+.page-hero .button--outlined { --colFondoBottoni: transparent; --colTextBottoni: var(--colOnBrand); --colBordoBottoni: var(--colOnBrand); }
+/* entrance: CSS only (nothing is hidden if a script fails; base.css switches every animation off under reduced motion) */
+@media (prefers-reduced-motion: no-preference) {
+    .js-ok .page-hero__media img, .js-ok .page-hero__media video { animation: page-hero-settle 1.8s var(--easeOut) both; }
+    .js-ok .page-hero__eyebrow, .js-ok .page-hero__title, .js-ok .page-hero__intro, .js-ok .page-hero__actions { animation: page-hero-rise .9s var(--easeOut) both; }
+    .js-ok .page-hero__eyebrow { animation-delay: .15s; }
+    .js-ok .page-hero__title { animation-delay: .25s; }
+    .js-ok .page-hero__intro { animation-delay: .38s; }
+    .js-ok .page-hero__actions { animation-delay: .5s; }
+}
+@keyframes page-hero-settle { from { transform: scale(1.08); } to { transform: none; } }
+@keyframes page-hero-rise { from { opacity: 0; transform: translate3d(0, 28px, 0); } to { opacity: 1; transform: none; } }
+
+/* --------------------------------------------------------------------------
+   4. .mark-row - "just the logo": the brown cup mark, centred, 72px (56px below 48em), decorative (alt=""). Opens the first content strip
+      of every sub-page, directly after the hero - the same pattern as home section 02 (css/sections/02-intro.css carries the same values).
+      On a brand band use the white file (assets/brand/logo/latte-with-lata-mark-white.svg): the brown mark never sits on brown (LOGO-USAGE).
+   -------------------------------------------------------------------------- */
+.mark-row { display: flex; justify-content: center; margin: 0 0 calc(var(--vpad) / 2); }
+.mark-row__mark, .mark-row img { display: block; height: 56px; width: auto; max-width: none; }
+@media (min-width: 48em) { .mark-row__mark, .mark-row img { height: 72px; } }
+
+/* --------------------------------------------------------------------------
+   5. .page-nav - in-page anchor chips (menu categories, "Story / Space / Team", ...). A <nav aria-label> with a list of plain anchors;
+      js/page.js marks the chip of the section in view with aria-current="true". Scrolls sideways on phones (no page overflow).
+      .page-nav--sticky parks the row under the header while its page scrolls (needs the `overflow: clip` rule in s2).
+   -------------------------------------------------------------------------- */
+.page-nav { position: relative; z-index: 2; background: var(--bgStrip, var(--colBg)); }
+.page-nav__list {
+    list-style: none; margin: 0; padding: .75rem var(--container-pad, var(--vpad));
+    display: flex; gap: .5rem;
+    overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    max-width: calc(var(--container-maxWidth, 75rem) + var(--vpad) * 2); margin-inline: auto;
+}
+.page-nav__list::-webkit-scrollbar { display: none; }
+.page-nav--center .page-nav__list { justify-content: safe center; }
+.page-nav__list > li { flex: 0 0 auto; }
+.page-nav a, .chip {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: var(--tapMin); padding: 0 1.25em;
+    border: 1px solid var(--kitFieldLine); border-radius: 9999em;
+    background: transparent; color: var(--kitTitle);
+    font-size: .8125rem; font-weight: var(--wButton); letter-spacing: var(--trackButton); text-transform: uppercase; line-height: 1;
+    white-space: nowrap; text-decoration: none;
+    transition: background-color var(--aniUi) var(--easeInOutSine), color var(--aniUi) var(--easeInOutSine), border-color var(--aniUi) var(--easeInOutSine);
+}
+.page-nav a:hover, a.chip:hover { background: var(--kitSurfaceSoft); border-color: var(--kitFieldLineStrong); color: var(--kitTitle); }
+.page-nav a[aria-current], .chip[aria-current], .chip.is-active { background: var(--kitOn); border-color: var(--kitOn); color: var(--kitOnText); }
+.page-nav--sticky { position: sticky; top: 0; border-bottom: 1px solid var(--kitLine); transition: top var(--aniFast) var(--easeInOutSine); }
+body.opaque:not(.header-up) .page-nav--sticky { top: calc(var(--hH, 78) * 1px); }   /* header showing = the row sits under it; header hidden = the row takes the top */
+
+/* --------------------------------------------------------------------------
+   6. .card / .card-grid - squared editorial cards (photo on top optional). The whole card may be a link (a.card) or carry its own actions.
+   -------------------------------------------------------------------------- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr));
+    gap: calc(var(--vpad) / 2);
+    list-style: none; padding: 0;                                  /* no margin here: the .mt-* / .mb-* utilities of base.css must keep working on the grid */
+}
+.card-grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+@media (min-width: 60em) { .card-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .card-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.card-grid > li { display: flex; }
+.card-grid > li[hidden] { display: none; }            /* VERIFY: `display: flex` out-ranked the UA [hidden] rule (menu filter); base.css now also carries the global safety rule */
+.card {
+    position: relative;
+    display: flex; flex-direction: column;
+    width: 100%;
+    background: var(--kitSurface);
+    border: 1px solid var(--kitLine);
+    color: var(--kitText);
+    text-decoration: none;
+}
+.card--soft { background: var(--kitSurfaceSoft); border-color: transparent; }
+.card--brand, .kit-dark { --strip-text-color: var(--colOnBrand); --colLink: var(--colOnBrand); --colLinkHover: var(--colOnBrand); }   /* .read-more and plain links turn white (they read --strip-text-color / --colLink) */
+.card--brand { background: var(--colBrand); border-color: var(--colBrand); color: var(--colOnBrand); --kitTitle: var(--colOnBrand); --kitText: var(--colOnBrand); --kitMuted: var(--colTextOnBrandMuted); --kitLine: var(--colLineOnBrand); --kitSurfaceSoft: rgb(var(--colOnBrand-rgb) / .1); --colFocus: var(--colOnBrand); }
+/* .read-more on any dark surface: white label, white hover disc, BROWN arrow (base.css switches the blend mode off on the bands but leaves the
+   arrow white, which vanishes on the white disc; the home sections 09-12 fix it per section, the kit fixes it once for every sub-page) */
+.is-mouse .card--brand .read-more::after, .is-mouse .kit-dark .read-more::after,
+.is-mouse .bg-band-black .read-more::after, .is-mouse .bg-band-brand .read-more::after, .is-mouse .bg-band-accent .read-more::after { mix-blend-mode: normal; background-color: var(--colBrand); }
+.kit-light .read-more { --strip-text-color: var(--colBrand); }
+.is-mouse .kit-light .read-more::after { mix-blend-mode: difference; background-color: var(--colBianco); }
+.card__media { position: relative; overflow: hidden; aspect-ratio: 4 / 3; background: var(--kitSurfaceSoft); }
+.card__media--wide { aspect-ratio: 16 / 9; }
+.card__media--tall { aspect-ratio: 4 / 5; }
+.card__media img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; transition: transform var(--aniSlow) var(--easeInOutCubic); }
+.is-mouse a.card:hover .card__media img, .is-mouse .card--hover:hover .card__media img { transform: scale3d(1.04, 1.04, 1); }
+.card__body { display: flex; flex-direction: column; gap: .6em; flex: 1 1 auto; padding: calc(var(--vpad) / 2.4) calc(var(--vpad) / 2.4) calc(var(--vpad) / 2); }
+@media (max-width: 35.99em) { .card__body { padding: 1.25rem; } }
+.card__eyebrow { margin: 0; font-size: .75rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; line-height: 1.2; color: var(--kitMuted); }
+.card__title { margin: 0; font-weight: var(--wTitle); font-size: clamp(19px, 1.6vw, 24px); line-height: 1.05; letter-spacing: var(--trackTitle); text-transform: uppercase; color: var(--kitTitle); text-wrap: balance; }
+.card__title a { color: inherit; text-decoration: none; }
+.card__title a::after { content: ""; position: absolute; inset: 0; }               /* stretched link: the title's anchor makes the whole card clickable */
+.card__text { margin: 0; font-size: 1rem; line-height: 1.55; color: var(--kitText); }
+.card__meta { margin: 0; font-size: .875rem; line-height: 1.4; color: var(--kitMuted); display: flex; flex-wrap: wrap; gap: .25em 1em; }
+.card__price { font-weight: var(--wButton); color: var(--kitTitle); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.card__actions { margin-top: auto; padding-top: .75em; display: flex; flex-wrap: wrap; gap: .75em 1.5em; align-items: center; position: relative; z-index: 1; }
+a.card { transition: border-color var(--aniUi) var(--easeInOutSine); }
+a.card:hover, .card--hover:hover { border-color: var(--kitFieldLineStrong); color: var(--kitText); }
+
+/* --------------------------------------------------------------------------
+   7. .info-list - label / value rows with hairlines (hours, address, booking summary). Markup: dl > div.info-list__row > dt + dd
+   -------------------------------------------------------------------------- */
+.info-list { border-top: 1px solid var(--kitLine); }
+.info-list__row { display: grid; grid-template-columns: minmax(7.5rem, 38%) 1fr; gap: .25em 1.5em; padding: .85em 0; border-bottom: 1px solid var(--kitLine); align-items: baseline; }
+.info-list dt { margin: 0; font-size: .75rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; line-height: 1.4; color: var(--kitMuted); }
+.info-list dd { margin: 0; color: var(--kitText); line-height: 1.5; font-variant-numeric: tabular-nums; }
+.info-list dd strong { color: var(--kitTitle); }
+.info-list--stack .info-list__row { grid-template-columns: 1fr; }
+@media (max-width: 23.99em) { .info-list__row { grid-template-columns: 1fr; } }
+
+/* --------------------------------------------------------------------------
+   8. .data-table - hairline table (price lists, opening hours, session line-ups). Wrap it in .data-table__wrap so a wide table scrolls
+      inside its own box on phones instead of pushing the page sideways.
+   -------------------------------------------------------------------------- */
+.data-table__wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.data-table__wrap:focus-visible { outline-offset: -2px; }
+.data-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; color: var(--kitText); }
+.data-table caption { caption-side: top; text-align: left; padding-bottom: .75em; font-size: .875rem; color: var(--kitMuted); }
+.data-table th, .data-table td { padding: .85em 1em .85em 0; text-align: left; vertical-align: baseline; border-bottom: 1px solid var(--kitLine); line-height: 1.45; }
+.data-table th:last-child, .data-table td:last-child { padding-right: 0; }
+.data-table thead th { font-size: .75rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; color: var(--kitMuted); border-bottom-color: var(--kitFieldLine); white-space: nowrap; }
+.data-table tbody th { font-weight: var(--wButton); color: var(--kitTitle); }
+.data-table .is-num, .data-table .is-end { text-align: right; white-space: nowrap; }
+.data-table small { display: block; font-size: .875rem; color: var(--kitMuted); font-weight: var(--wBody); }
+.is-mouse .data-table--hover tbody tr:hover > * { background: var(--kitSurfaceSoft); }
+
+/* --------------------------------------------------------------------------
+   9. .notice - inline status (info / success / error). Never colour-only: a glyph disc leads every notice. Put role="status" (or
+      role="alert" for errors that need interrupting) on the element and keep it in the DOM, hidden, from the start so the change is announced.
+   -------------------------------------------------------------------------- */
+.notice {
+    display: flex; align-items: flex-start; gap: .8em;
+    padding: 1em 1.15em;
+    background: var(--kitSurfaceSoft);
+    border: 1px solid var(--kitLine);
+    border-left: 3px solid var(--kitTitle);
+    color: var(--kitText);
+    font-size: .9375rem; line-height: 1.5;
+    text-align: left;
+}
+.notice[hidden] { display: none; }
+.notice::before {
+    content: "i";
+    flex: 0 0 auto; display: grid; place-items: center;
+    width: 1.4em; height: 1.4em; margin-top: .05em;
+    border: 1.5px solid currentColor; border-radius: 50%;
+    font-size: .85em; font-weight: var(--wButton); line-height: 1; font-style: normal;
+    color: var(--kitTitle);
+}
+.notice__title { margin: 0 0 .15em; font-weight: var(--wButton); color: var(--kitTitle); }
+.notice p { margin: 0; }
+.notice p + p { margin-top: .35em; }
+.notice a { color: inherit; text-decoration: underline; text-underline-offset: .15em; overflow-wrap: anywhere; }
+.notice--success { border-left-color: var(--colAccent); }
+.notice--success::before {
+    content: ""; border: 0; background: var(--colAccent);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M12 1a11 11 0 100 22 11 11 0 000-22zm5.2 8.3l-6 6.4a1 1 0 01-1.45.02l-3-3.1 1.43-1.4 2.27 2.35 5.3-5.65z'/%3E%3C/svg%3E") no-repeat 50% 50% / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M12 1a11 11 0 100 22 11 11 0 000-22zm5.2 8.3l-6 6.4a1 1 0 01-1.45.02l-3-3.1 1.43-1.4 2.27 2.35 5.3-5.65z'/%3E%3C/svg%3E") no-repeat 50% 50% / contain;
+}
+.notice--error { border-left-color: var(--kitError); border-color: var(--kitError); color: var(--kitError); background: var(--colContrastoLeggero); }
+.notice--error::before { content: "!"; color: var(--kitError); }
+.notice--error .notice__title { color: var(--kitError); }
+.bg-band-black .notice, .bg-band-brand .notice, .bg-band-accent .notice, .kit-dark .notice { background: var(--kitSurfaceSoft); }
+.bg-band-black .notice--success, .bg-band-brand .notice--success, .kit-dark .notice--success { border-left-color: var(--colOnBrand); }
+.bg-band-black .notice--success::before, .bg-band-brand .notice--success::before, .bg-band-accent .notice--success::before, .kit-dark .notice--success::before { background: var(--colOnBrand); }
+.kit-light .notice { background: var(--colBrandSoft); }
+.kit-light .notice--error { background: var(--colContrastoLeggero); }
+
+/* --------------------------------------------------------------------------
+   10. FORM KIT (booking, events, contact). Light on white / soft bands, dark on the brand bands - same markup, the tokens of s1 flip.
+       Rules of the kit (PAGES-SPEC 6): a real <label for> on every control; autocomplete + inputmode in the markup; hint and error text
+       sit inside the .field, wired with aria-describedby; .field__error is ALWAYS in the DOM with aria-live="polite" (empty = hidden) so a
+       new message is announced; invalid = aria-invalid="true" on the control (+ .is-invalid on the .field for the label colour); controls
+       are >= 44px tall; focus = the site ring (2px --colFocus, offset 2px) plus a stronger boundary; submit is disabled + .is-loading
+       while sending (js/lib/api.js setBusy). Helpers for all of this live in js/lib/api.js (formData, showFieldErrors, clearFieldErrors,
+       setBusy, setNotice).
+   -------------------------------------------------------------------------- */
+.form { --formGap: 1.35rem; display: grid; gap: var(--formGap); color: var(--kitText); text-align: left; }
+.form__section { display: grid; gap: var(--formGap); min-width: 0; margin: 0; padding: 0; border: 0; }
+/* a <legend> is laid out on the fieldset's border unless it floats: floated, it becomes an ordinary grid / flex item, so the gap applies and the
+   section rule is drawn ABOVE the title instead of through it */
+.form legend { float: left; width: 100%; padding: 0; }
+@media (min-width: 48em) { .form { --formGap: 1.5rem; } }
+.form__section + .form__section { padding-top: var(--formGap); border-top: 1px solid var(--kitLine); }
+.form__title { margin: 0; font-weight: var(--wTitle); font-size: clamp(19px, 1.6vw, 24px); line-height: 1.05; letter-spacing: var(--trackTitle); text-transform: uppercase; color: var(--kitTitle); display: flex; align-items: baseline; gap: .6em; }
+.form__step { flex: 0 0 auto; font-size: .75rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); color: var(--kitMuted); }
+.form__row { display: grid; gap: var(--formGap, 1.35rem) 1.25rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 36em) {
+    .form__row--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .form__row--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .form__row--2-1 { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+}
+.form__hp { position: absolute !important; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }   /* honeypot row (input name="website"): off-screen, aria-hidden + tabindex -1 in the markup */
+
+/* ---- .field = label + control + hint + error ---- */
+.field { display: flex; flex-direction: column; gap: .45rem; min-width: 0; padding: 0; border: 0; }
+.field__label, .field > label, fieldset.field > legend {
+    display: block; padding: 0;
+    font-size: .8125rem; font-weight: var(--wButton); letter-spacing: .06em; text-transform: uppercase; line-height: 1.3;
+    color: var(--kitTitle);
+}
+.field__req { color: var(--kitMuted); font-weight: var(--wBody); letter-spacing: 0; text-transform: none; margin-left: .35em; }   /* "(required)" or "*" - pair "*" with a "* required" note near the top of the form */
+.field__optional { color: var(--kitMuted); font-weight: var(--wBody); letter-spacing: 0; text-transform: none; margin-left: .35em; }
+.field__hint { margin: 0; font-size: .875rem; line-height: 1.45; color: var(--kitMuted); }
+.field__error {
+    margin: 0; font-size: .875rem; line-height: 1.45; font-weight: var(--wLead);
+    color: var(--kitError);
+    display: flex; align-items: flex-start; gap: .5em;
+}
+.field__error:empty, .field__error[hidden] { display: none; }
+.field__error::before { content: "!"; flex: 0 0 auto; display: grid; place-items: center; width: 1.3em; height: 1.3em; margin-top: .08em; border: 1.5px solid currentColor; border-radius: 50%; font-size: .8em; font-weight: var(--wButton); line-height: 1; }
+.field.is-invalid > .field__label, .field.is-invalid > label, fieldset.field.is-invalid > legend { color: var(--kitError); }
+
+/* ---- controls ---- */
+.input, .select, .textarea {
+    display: block; width: 100%; min-width: 0;
+    min-height: 3rem;                                              /* 48px (>= 44px) */
+    padding: .7rem .9rem;
+    background-color: var(--kitFieldBg);
+    border: 1px solid var(--kitFieldLine);
+    border-radius: 0;                                              /* the site's squared controls (newsletter input, drawer CTA) */
+    color: var(--kitText);
+    font: inherit; font-size: 1rem; line-height: 1.4;              /* 16px: iOS never zooms the page on focus */
+    letter-spacing: 0;
+    -webkit-appearance: none; appearance: none;
+    transition: border-color var(--aniUi) var(--easeInOutSine), box-shadow var(--aniUi) var(--easeInOutSine), background-color var(--aniUi) var(--easeInOutSine);
+}
+.input::placeholder, .textarea::placeholder { color: var(--kitMuted); opacity: 1; }
+.input:hover, .select:hover, .textarea:hover { border-color: var(--kitFieldLineStrong); }
+.input:focus, .select:focus, .textarea:focus { border-color: var(--kitFieldLineStrong); box-shadow: inset 0 0 0 1px var(--kitFieldLineStrong); }   /* + the base :focus-visible ring */
+.input:disabled, .select:disabled, .textarea:disabled { opacity: .55; cursor: not-allowed; }
+.input[readonly] { background-color: var(--kitSurfaceSoft); }
+.input[aria-invalid="true"], .select[aria-invalid="true"], .textarea[aria-invalid="true"] { border-color: var(--kitError); box-shadow: inset 0 0 0 1px var(--kitError); }
+.input, .select { height: 3rem; }                                 /* one row height for text, date and select (the date control's inner parts would add 3px) */
+.textarea { min-height: 8.5rem; resize: vertical; line-height: 1.5; }
+.select { padding-right: 2.75rem; background-image: var(--kitChevron); background-repeat: no-repeat; background-position: right .85rem center; background-size: 1.1rem; cursor: pointer; text-overflow: ellipsis; }
+.select option { color: var(--colText); background: var(--colBg); }               /* the native list is always light */
+.input[type="date"], .input[type="time"] { min-width: 0; }
+.input[type="date"]::-webkit-calendar-picker-indicator, .input[type="time"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: .75; padding: .35rem; margin-right: -.35rem; }
+.bg-band-black .input[type="date"], .bg-band-brand .input[type="date"], .kit-dark .input[type="date"],
+.bg-band-black .input[type="time"], .bg-band-brand .input[type="time"], .kit-dark .input[type="time"] { color-scheme: dark; }
+.kit-light .input[type="date"], .kit-light .input[type="time"] { color-scheme: light; }
+.input:-webkit-autofill { -webkit-text-fill-color: var(--kitText); transition: background-color 9999s ease-out 0s; }   /* keeps the band colour under Chrome autofill */
+
+/* ---- .checkbox (also radios: .checkbox--radio) - native input restyled, so keyboard + forms behaviour is the browser's ---- */
+.checkbox { position: relative; display: grid; grid-template-columns: auto 1fr; column-gap: .8rem; align-items: start; }
+.checkbox > input {
+    -webkit-appearance: none; appearance: none;
+    grid-column: 1; grid-row: 1;
+    width: 1.5rem; height: 1.5rem; margin: .63rem 0 0;
+    border: 1px solid var(--kitFieldLine); border-radius: 2px;
+    background: var(--kitFieldBg) no-repeat 50% 50% / 0 0;
+    cursor: pointer;
+    transition: background-color var(--aniUi) var(--easeInOutSine), border-color var(--aniUi) var(--easeInOutSine);
+}
+.checkbox--radio > input { border-radius: 50%; }
+.checkbox > label { grid-column: 2; grid-row: 1; display: block; padding: .7rem 0; min-height: var(--tapMin); font-size: .9375rem; line-height: 1.45; color: var(--kitText); cursor: pointer; }   /* block, not flex: a flex label would swallow the space before an inline link */
+.form .checkbox + .checkbox { margin-top: calc(var(--formGap) * -1); }             /* stacked checkboxes sit 44px apart (the form gap is taken back) */
+.checkbox > label::before { content: ""; position: absolute; left: -.5rem; top: 0; width: 2.75rem; height: 2.75rem; }   /* 44px hit box over the 24px box */
+.checkbox > input:hover, .checkbox > input:hover + label { border-color: var(--kitFieldLineStrong); }
+.checkbox > input:checked { background-color: var(--kitOn); border-color: var(--kitOn); }
+.checkbox > input:checked::after {
+    content: ""; display: block; width: 100%; height: 100%;
+    background: var(--kitOnText);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.5 12.5l4.2 4.2L18.5 8'/%3E%3C/svg%3E") no-repeat 50% 50% / 78%;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.5 12.5l4.2 4.2L18.5 8'/%3E%3C/svg%3E") no-repeat 50% 50% / 78%;
+}
+.checkbox--radio > input:checked::after { -webkit-mask: none; mask: none; border-radius: 50%; transform: scale(.42); }
+.checkbox > input[aria-invalid="true"] { border-color: var(--kitError); box-shadow: inset 0 0 0 1px var(--kitError); }
+.checkbox > input:disabled, .checkbox > input:disabled + label { opacity: .55; cursor: not-allowed; }
+.checkbox > .field__hint, .checkbox > .field__error { grid-column: 2; }
+.checkbox a { color: inherit; text-decoration: underline; text-underline-offset: .15em; }
+
+/* ---- .radio-chips - segmented choices (party size, time slots, booking type). Two interchangeable markups:
+        (a) native radios:  <label class="radio-chip"><input type="radio" name="party" value="2"><span>2</span></label>
+        (b) toggle buttons: <button type="button" class="radio-chip" aria-pressed="false">6:30 pm</button>   (JS-rendered slots)
+        Both: 44px targets, selected = filled, unavailable = dashed boundary + muted label + a <small> reason (never colour-only), focus ring on the chip. ---- */
+.radio-chips { min-width: 0; }
+.radio-chips__list { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; margin: 0; padding: 0; }
+.radio-chips--grid .radio-chips__list { display: grid; grid-template-columns: repeat(auto-fill, minmax(5.75rem, 1fr)); }
+.radio-chips--fill .radio-chips__list > * { flex: 1 1 0; }
+.radio-chip { position: relative; display: inline-flex; margin: 0; padding: 0; background: none; border: 0; color: inherit; font: inherit; cursor: pointer; min-width: 0; }
+.radio-chip > input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.radio-chip > span, button.radio-chip {
+    display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: .15em;
+    width: 100%; min-width: var(--tapMin); min-height: var(--tapMin);
+    padding: .4rem 1rem;
+    background: var(--kitFieldBg);
+    border: 1px solid var(--kitFieldLine);
+    color: var(--kitTitle);
+    font-size: .9375rem; font-weight: var(--wButton); line-height: 1.15; letter-spacing: .02em; text-align: center;
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+    transition: background-color var(--aniUi) var(--easeInOutSine), color var(--aniUi) var(--easeInOutSine), border-color var(--aniUi) var(--easeInOutSine);
+}
+.radio-chip small { font-size: .6875rem; font-weight: var(--wLead); letter-spacing: .06em; text-transform: uppercase; }
+.is-mouse .radio-chip:hover > span, .is-mouse button.radio-chip:hover { border-color: var(--kitFieldLineStrong); background: var(--kitSurfaceSoft); }
+.radio-chip > input:checked + span, button.radio-chip[aria-pressed="true"], button.radio-chip[aria-checked="true"],
+.is-mouse .radio-chip:hover > input:checked + span, .is-mouse button.radio-chip[aria-pressed="true"]:hover, .is-mouse button.radio-chip[aria-checked="true"]:hover {
+    background: var(--kitOn); border-color: var(--kitOn); color: var(--kitOnText);
+}
+.radio-chip > input:focus-visible + span { outline: 2px solid var(--colFocus); outline-offset: var(--focusOffset); }
+.radio-chip > input:disabled + span, button.radio-chip:disabled, button.radio-chip[aria-disabled="true"] {
+    color: var(--kitMuted); border-style: dashed; background: transparent; cursor: not-allowed;   /* never colour-only: dashed boundary + give it a <small> reason ("Full", "Closed") */
+}
+.radio-chip > input:disabled { cursor: not-allowed; }
+/* SHARED POLISH 2026-09-17: an unavailable chip gives no hover feedback - the soft hover fill under the muted label dropped it to ~4:1 on the caramel
+   band, and a fill suggests the chip can be picked */
+.is-mouse .radio-chip:hover > input:disabled + span, .is-mouse button.radio-chip:disabled:hover, .is-mouse button.radio-chip[aria-disabled="true"]:hover { background: transparent; border-color: var(--kitFieldLine); }
+.radio-chips.is-invalid .radio-chip > span, .radio-chips.is-invalid button.radio-chip { border-color: var(--kitError); }
+
+/* ---- actions + button states (the base .button / .button--outlined / .read-more stay the site's CTAs) ---- */
+.form__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: .25rem; }
+.form__actions--end { justify-content: flex-end; }
+.form__actions--split { justify-content: space-between; }
+.form__actions .button + .button { margin: 0; }
+.form__note { margin: 0; font-size: .875rem; line-height: 1.45; color: var(--kitMuted); flex: 1 1 16rem; }
+.form .button, .form__actions .button { min-height: 3rem; border-radius: 0; }      /* squared like the controls; 48px */
+.bg-band-black .button:not(.button--outlined), .bg-band-brand .button:not(.button--outlined), .kit-dark .button:not(.button--outlined) { --colFondoBottoni: var(--colOnBrand); --colTextBottoni: var(--colBrand); }
+.bg-band-black .button:not(.button--outlined)::after, .bg-band-brand .button:not(.button--outlined)::after, .kit-dark .button:not(.button--outlined)::after { background: var(--colAccent); opacity: 1; }
+.bg-band-black .button:not(.button--outlined):hover, .bg-band-brand .button:not(.button--outlined):hover, .kit-dark .button:not(.button--outlined):hover { color: var(--colOnBrand); }
+/* SHARED POLISH 2026-09-17: the caramel band gets the same white button as the brown bands, with a BRAND sheet on hover (white 13.06:1; the accent
+   sheet would vanish into the band) - the pattern the episodes 05 / events 07 / book 05 lanes wrote per section, now once for every page */
+.bg-band-accent .button:not(.button--outlined) { --colFondoBottoni: var(--colOnBrand); --colTextBottoni: var(--colBrand); }
+.bg-band-accent .button:not(.button--outlined)::after { background: var(--colBrand); opacity: 1; }
+.bg-band-accent .button:not(.button--outlined):hover { color: var(--colOnBrand); }
+.kit-light .button:not(.button--outlined) { --colFondoBottoni: var(--colBrand); --colTextBottoni: var(--colOnBrand); }
+.kit-light .button:not(.button--outlined)::after { background: var(--colAccent); opacity: 1; }   /* was the 40% white veil (white label 3.9:1 hovered); accent sheet = 6.54:1 */
+.kit-light .button:not(.button--outlined):hover { color: var(--colOnBrand); }
+/* outlined buttons in <main>: base.css resolves their text to --colBianco (its `--colTextBottoni: inherit` falls through to the fallback), which
+   vanishes on a white band - the kit gives them the band's title colour; scoped to main so the drawer's white outlined CTA is untouched */
+main .button--outlined { --colTextBottoni: var(--kitTitle); --colBordoBottoni: var(--kitTitle); }
+main .button--outlined:hover { color: var(--kitTitle); }
+main .button--outlined::after { background: var(--kitTitle); opacity: .1; }
+.button:disabled, .button[aria-disabled="true"] { opacity: .5; cursor: not-allowed; pointer-events: none; }
+.button.is-loading { position: relative; pointer-events: none; cursor: progress; opacity: 1; }
+.button.is-loading::before {
+    content: ""; flex: 0 0 auto;
+    width: 1em; height: 1em; margin-right: .7em;
+    border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%;
+    animation: kit-spin .7s linear infinite;
+}
+@keyframes kit-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .button.is-loading::before { border-right-color: currentColor; opacity: .5; } }   /* no spin: a static ring, the label ("Sending...") carries the state */
+.button--link { background: none; border: 0; padding: 0; min-height: var(--tapMin); width: auto; color: var(--kitTitle); font-size: .9em; font-weight: var(--wButton); letter-spacing: var(--trackButton); text-transform: uppercase; text-decoration: underline; text-underline-offset: .25em; cursor: pointer; }
+.button--link:hover { color: var(--colLinkHover); }
+.bg-band-black .button--link:hover, .bg-band-brand .button--link:hover, .bg-band-accent .button--link:hover, .kit-dark .button--link:hover { color: var(--colOnBrand); opacity: .8; }   /* accent band added (SHARED POLISH): the accent hover was caramel on caramel */
+
+/* --------------------------------------------------------------------------
+   11. Small layout helpers
+   -------------------------------------------------------------------------- */
+.stack > * + * { margin-top: var(--stackGap, 1em); }
+.stack--lg { --stackGap: calc(var(--vpad) / 2); }
+.cluster { display: flex; flex-wrap: wrap; gap: var(--clusterGap, .75rem 1.5rem); align-items: center; }
+.tag { display: inline-flex; align-items: center; min-height: 1.75rem; padding: 0 .7em; border: 1px solid var(--kitLine); font-size: .6875rem; font-weight: var(--wLead); letter-spacing: var(--trackEyebrow); text-transform: uppercase; line-height: 1; color: var(--kitMuted); white-space: nowrap; }
+.tag--solid { background: var(--kitOn); border-color: var(--kitOn); color: var(--kitOnText); }
+.divider { border: 0; border-top: 1px solid var(--kitLine); margin: calc(var(--vpad) / 2) 0; }
+.panel { background: var(--kitSurfaceSoft); padding: calc(var(--vpad) / 2); }
+@media (min-width: 48em) { .panel { padding: calc(var(--vpad) / 1.5); } }
+.panel--line { background: var(--kitSurface); border: 1px solid var(--kitLine); }

@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<!-- no-js -> js-ok before first paint (PZ pattern: .no-js in inline-critical, rendered.html:1 <html class="js-ok ...">); the section CSS carries html:not(.js-ok) fallbacks -->
+<script>document.documentElement.classList.replace("no-js","js-ok")</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a Table | Latte with Lata</title>
+<meta name="description" content="Book a table at Latte with Lata in Harrowfield, or reserve a free seat at a Thursday recording night. It takes about a minute. No deposit, no account.">
+<meta name="theme-color" content="#502506">
+<link rel="canonical" href="https://addbp.github.io/lattewithlata/book.html">
+<meta property="og:url" content="https://addbp.github.io/lattewithlata/book.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Latte with Lata">
+<meta property="og:title" content="Book a Table | Latte with Lata">
+<meta property="og:description" content="Book a table at Latte with Lata in Harrowfield, or reserve a free seat at a Thursday recording night. It takes about a minute. No deposit, no account.">
+<meta property="og:image" content="https://addbp.github.io/lattewithlata/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Latte with Lata - Real Conversations. Built on Purpose.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Book a Table | Latte with Lata">
+<meta name="twitter:description" content="Book a table at Latte with Lata in Harrowfield, or reserve a free seat at a Thursday recording night. It takes about a minute. No deposit, no account.">
+<meta name="twitter:image" content="https://addbp.github.io/lattewithlata/assets/images/og-image.jpg">
+<link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/brand/fonts/creato_display/CreatoDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/brand/fonts/creato_display/CreatoDisplay-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="vendor/splide-core.min.css">
+<link rel="stylesheet" href="css/sections/00-header.css">
+<link rel="stylesheet" href="css/sections/13-newsletter.css">
+<link rel="stylesheet" href="css/sections/14-footer.css">
+<link rel="stylesheet" href="css/pages/_shell.css">
+<link rel="stylesheet" href="css/pages/book.css">
+</head>
+<body id="top" data-page="book" data-page-module="true">
+<a class="skip-main" href="#page-content">Skip to main content</a>
+
+<!-- ===== sections/00-header.html ===== -->
+<!-- 00-header: fixed header + off-canvas drawer + mobile Book-a-table pill. Shared by EVERY page (build-site.cjs inlines it on the home page and on all sub-pages).
+     Sits BEFORE <main>. Source skeleton: PZ/source/rendered.html #page-header (BUILD-SPEC 00 (b)); pill: Iceberg .home__about-button.
+     Copy: content/site.json -> brand.name (lockup wordmark + aria-label), nav[], bookingLabel, listenOn[], newsletter.eyebrow (side link).
+     Note: .header__container is NOT a .container (the source header is a full-width flex row, measured 1440x78 / 390x63).
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 1a + 3): the drawer keeps the white cup mark at 72px, now a link home. Every href is the PAGES-SPEC
+     navigation map: real pages, no same-page anchors, platform links stay "#" placeholders.
+     UPDATE-3 (2026-09-17, client request): the header row is burger LEFT + the logo lockup RIGHT again - the white cup mark (decorative img,
+     482x571 attrs = the viewBox box so nothing shifts on load; 44px, 56px at >= 60em) + the "LATTE WITH LATA" wordmark text (hidden below
+     36em: mark only), one link home. "Book a table" left the bar; it stays in the drawer, the mobile pill and every page CTA. -->
+<header id="page-header" class="header page__header">
+  <div class="header__container">
+    <button class="header__burger menu__switcher js-menu-switcher" type="button" aria-label="Menu" aria-haspopup="true" aria-controls="menu-container" aria-expanded="false"><span class="menu__burger"><u></u></span></button>
+
+    <a class="header__logo" href="index.html" aria-label="Latte with Lata, home">
+      <img class="header__mark" src="assets/brand/logo/latte-with-lata-mark-white.svg" alt="" width="482" height="571" decoding="async">
+      <span class="header__wordmark" aria-hidden="true">Latte with Lata</span>
+    </a>
+
+    <aside class="menu__screen js-menu-switcher" aria-hidden="true"></aside>
+
+    <div id="menu-container" class="menu__container drawer" aria-hidden="true">
+      <a class="menu__home" href="index.html" aria-label="Latte with Lata - home"><img class="menu__mark" src="assets/brand/logo/latte-with-lata-mark-white.svg" alt="" width="482" height="571" decoding="async"></a>
+      <div class="menu__row">
+        <nav id="menu-main" class="menu__main js-menu-main" aria-label="Main">
+          <ul>
+            <li><a href="index.html" data-nav="home"><div>Home</div><div aria-hidden="true">Home</div></a></li>
+            <li><a href="cafe.html" data-nav="cafe"><div>The Cafe</div><div aria-hidden="true">The Cafe</div></a></li>
+            <li><a href="menu.html" data-nav="menu"><div>Menu</div><div aria-hidden="true">Menu</div></a></li>
+            <li><a href="podcast.html" data-nav="podcast"><div>The Podcast</div><div aria-hidden="true">The Podcast</div></a></li>
+            <li><a href="episodes.html" data-nav="episodes"><div>Episodes</div><div aria-hidden="true">Episodes</div></a></li>
+            <li><a href="podcast.html#host"><div>The Host</div><div aria-hidden="true">The Host</div></a></li>
+            <li><a href="events.html" data-nav="events"><div>Events</div><div aria-hidden="true">Events</div></a></li>
+            <li><a href="contact.html" data-nav="contact"><div>Contact</div><div aria-hidden="true">Contact</div></a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="menu__mid">
+        <nav id="menu-side" class="menu__side" aria-label="Tools">
+          <ul>
+            <!-- side links: "Get directions" = the contact page's find-us block (navigation map); the newsletter block ships on every page, so its anchor stays same-page -->
+            <li><a href="contact.html#find-us"><div>Get directions</div><div aria-hidden="true">Get directions</div></a></li>
+            <li><a href="#s-13-newsletter"><div>Stay for the conversation</div><div aria-hidden="true">Stay for the conversation</div></a></li>
+          </ul>
+        </nav>
+        <a class="button button--outlined button--no-icon button--squared" href="book.html" data-nav="book"><strong>Book a table</strong></a>
+      </div>
+
+      <div class="menu__footer">
+        <span class="menu__footer__label" aria-hidden="true">Listen on</span>
+        <nav class="menu__listen" aria-label="Listen on">
+          <ul class="socials">
+            <li><a href="#" aria-label="Spotify"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-spotify"></use></svg><span class="visual-hide">Spotify</span></a></li>
+            <li><a href="#" aria-label="Apple Podcasts"><svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-apple"></use></svg><span class="visual-hide">Apple Podcasts</span></a></li>
+            <li><a href="#" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-youtube"></use></svg><span class="visual-hide">YouTube</span></a></li>
+            <li><a href="#" aria-label="RSS"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-rss"></use></svg><span class="visual-hide">RSS</span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Iceberg mobile pill (I11): wrapper = .home__about-button (fixed, full width, faded by GSAP), link = .vertical-button__link -->
+<div id="book-pill-wrap" class="book-pill__wrap">
+  <a id="book-pill" class="book-pill" href="book.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-cup"></use></svg><span>Book a table</span></a>
+</div>
+
+<main id="page-content" class="page__content">
+<!-- ===== pages/book/01-hero.html ===== -->
+<!-- book / 01-hero - short page hero (46vh via css/pages/book.css so the form sits near the fold). Copy: content/pages.json book.hero.
+     The photo is decorative here (the h1 says it all), so alt="". data-banner = what the header's plate / hide-show maths measure. -->
+<section id="p-book-01-hero" class="page-hero" data-banner aria-labelledby="p-book-title" style="--pinY: 58%">
+  <div class="page-hero__media"><img src="assets/images/page-book.jpg" alt="" width="2400" height="1350" fetchpriority="high" decoding="async"></div>
+  <div class="container page-hero__content">
+    <p class="page-hero__eyebrow">Bookings</p>
+    <h1 id="p-book-title" class="page-hero__title">Book a table</h1>
+    <p class="page-hero__intro">Pick a day, a time and a party size. It takes about a minute, and you get a booking reference straight away.</p>
+  </div>
+</section>
+
+<!-- ===== pages/book/02-booking.html ===== -->
+<!-- book / 02-booking - the booking flow. Copy: content/pages.json book.sections[booking]. Behaviour: js/pages/book.js (+ js/pages/book/*.js).
+     One page, six progressive steps (type -> day -> party -> time -> details -> confirm); every step stays editable once it is open.
+     Without JavaScript the native <input type="date"> is the date control and the <noscript> notice explains that booking is by phone / email.
+     With JavaScript but no API (static hosting) the whole widget is replaced by #bk-fallback - the form never pretends to book.
+     data-pill-away: the mobile "Book a table" pill parks while this block is in view. No inline event handlers (server CSP). -->
+<section id="p-book-02-booking" class="strip strip--normal pt-md pb-lg" data-pill-away>
+  <div class="container">
+    <div class="mark-row anima--bottom-in"><img class="mark-row__mark" src="assets/brand/logo/latte-with-lata-mark-brown.svg" alt="" width="482" height="571" decoding="async"></div>
+
+    <div id="booking" class="book-intro text-center anima--bottom-in">
+      <p class="eyebrow book-eyebrow">Book online</p>
+      <h2 class="strip__title1">A table or a seat</h2>
+      <p class="book-intro__text">No deposit and no account. Walk-ins are always welcome too; booking just means the table is waiting.</p>
+    </div>
+
+    <noscript>
+      <div class="notice notice--info book-noscript" role="status"><div><p class="notice__title">Online booking needs JavaScript</p><p>Call <a href="tel:+15550142024">(555) 014-2024</a> or email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a> and we will book you in by hand.</p></div></div>
+    </noscript>
+
+    <!-- static-hosting fallback (shared.apiFallbackTitle / apiFallback / apiFallbackLinks): shown by book.js when GET /api/health fails -->
+    <div class="notice notice--info book-fallback" id="bk-fallback" role="status" hidden>
+      <div>
+        <p class="notice__title">This form is not connected</p>
+        <p>Online booking and messages are switched off on this copy of the site. Call <a href="tel:+15550142024">(555) 014-2024</a> or email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a> and we will sort it out by hand.</p>
+      </div>
+    </div>
+
+    <div class="book" id="bk-app">
+      <div class="book__main">
+
+        <form class="form book-form" id="bk-form" novalidate aria-labelledby="bk-form-name">
+          <h3 class="a11y-only" id="bk-form-name">Booking form</h3>
+          <p class="a11y-only" id="bk-live" role="status" aria-live="polite"></p>
+
+          <!-- 01 TYPE -->
+          <fieldset class="form__section book-step radio-chips" id="bk-step-type" data-step="type">
+            <legend class="form__title"><span class="form__step">01</span>What would you like to book?</legend>
+            <div class="radio-chips__list book-types">
+              <label class="radio-chip book-type">
+                <input type="radio" name="type" value="table" checked>
+                <span><strong class="book-type__label">A table</strong><small class="book-type__hint">Breakfast, lunch, coffee or a Friday or Saturday evening. Up to 8 people.</small></span>
+              </label>
+              <label class="radio-chip book-type">
+                <input type="radio" name="type" value="recording">
+                <span><strong class="book-type__label">Thursday recording night</strong><small class="book-type__hint">A seat at the recording. Free. Doors at 6:30&nbsp;pm. Up to 4 seats.</small></span>
+              </label>
+            </div>
+            <p class="field__error" id="bk-type-error" aria-live="polite"></p>
+            <div class="notice notice--info book-explainer" id="bk-recording-note" hidden>
+              <div>
+                <p class="notice__title">About recording nights</p>
+                <p>Every Thursday we record the podcast live at the corner table. It is free: walk in, or reserve up to 4 seats and we will hold them until 6:50&nbsp;pm. Doors open at 6:30&nbsp;pm, the recording runs from 7:00&nbsp;pm to 8:15&nbsp;pm, and the kitchen serves plates until 8:30&nbsp;pm. <a href="events.html#upcoming">See who is on</a></p>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- 02 WHEN -->
+          <fieldset class="form__section book-step" id="bk-step-when" data-step="when">
+            <legend class="form__title"><span class="form__step">02</span>Pick a day</legend>
+            <div class="book-when">
+              <div class="field book-date" id="bk-date-field">
+                <label class="field__label" for="bk-date" id="bk-date-label">Date</label>
+                <input class="input" id="bk-date" name="date" type="date" required aria-describedby="bk-when-help bk-date-error">
+                <div class="cal" id="bk-cal" hidden></div>
+                <p class="field__error" id="bk-date-error" aria-live="polite"></p>
+              </div>
+              <div class="book-when__side">
+                <p class="field__hint" id="bk-when-help">We take bookings up to 60 days ahead. Days we are closed or full are greyed out.</p>
+                <div class="book-nights" id="bk-nights" hidden>
+                  <p class="book-nights__title" id="bk-nights-title">Coming up</p>
+                  <ul class="book-nights__list" aria-labelledby="bk-nights-title"></ul>
+                </div>
+                <p class="book-picked" id="bk-date-out" aria-live="polite"></p>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- 03 PARTY -->
+          <fieldset class="form__section book-step radio-chips" id="bk-step-party" data-step="party" hidden>
+            <legend class="form__title"><span class="form__step">03</span>How many of you?</legend>
+            <p class="field__hint" id="bk-party-help">Up to 8 online. For a bigger group, call or email and we will plan the tables.</p>
+            <div class="radio-chips__list book-party" id="bk-party-list">
+              <label class="radio-chip"><input type="radio" name="party" value="1" aria-describedby="bk-party-help"><span>1</span></label>
+              <label class="radio-chip"><input type="radio" name="party" value="2" aria-describedby="bk-party-help" checked><span>2</span></label>
+              <label class="radio-chip"><input type="radio" name="party" value="3" aria-describedby="bk-party-help"><span>3</span></label>
+              <label class="radio-chip"><input type="radio" name="party" value="4" aria-describedby="bk-party-help"><span>4</span></label>
+              <label class="radio-chip" data-table-only><input type="radio" name="party" value="5" aria-describedby="bk-party-help"><span>5</span></label>
+              <label class="radio-chip" data-table-only><input type="radio" name="party" value="6" aria-describedby="bk-party-help"><span>6</span></label>
+              <label class="radio-chip" data-table-only><input type="radio" name="party" value="7" aria-describedby="bk-party-help"><span>7</span></label>
+              <label class="radio-chip" data-table-only><input type="radio" name="party" value="8" aria-describedby="bk-party-help"><span>8</span></label>
+              <label class="radio-chip book-party__more"><input type="radio" name="party" value="more" aria-describedby="bk-party-help"><span><span aria-hidden="true" data-more-label>9+</span><span class="a11y-only" data-more-sr>More than 8 people</span></span></label>
+            </div>
+            <p class="field__error" id="bk-party-error" aria-live="polite"></p>
+            <div class="notice notice--info" id="bk-party-note" role="status" hidden>
+              <div>
+                <p class="notice__title">Planning something bigger?</p>
+                <p><span data-large-text>Online bookings go up to 8. For a bigger group,</span> call <a href="tel:+15550142024">(555) 014-2024</a> or email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a> and we will plan the tables.</p>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- 04 TIME -->
+          <fieldset class="form__section book-step radio-chips" id="bk-step-time" data-step="time" hidden>
+            <legend class="form__title"><span class="form__step">04</span>Pick a time</legend>
+            <p class="field__hint" id="bk-time-help">Times are shown in 30-minute steps. A sitting is 90 minutes. Greyed-out times are full.</p>
+            <div class="book-slots" id="bk-slots" aria-live="off"></div>
+            <p class="field__error" id="bk-time-error" aria-live="polite"></p>
+            <p class="notice" id="bk-time-note" role="status" hidden></p>
+            <p class="field__hint book-tz">All times are local cafe time.</p>
+          </fieldset>
+
+          <!-- 05 DETAILS -->
+          <fieldset class="form__section book-step" id="bk-step-details" data-step="details" hidden>
+            <legend class="form__title"><span class="form__step">05</span>Who is it for?</legend>
+            <p class="field__hint">We use these to hold the booking and to reach you if something changes. Nothing else.</p>
+            <div class="field">
+              <label class="field__label" for="bk-name">Name for the booking</label>
+              <input class="input" id="bk-name" name="name" type="text" autocomplete="name" autocapitalize="words" spellcheck="false" required minlength="2" maxlength="80" aria-describedby="bk-name-error">
+              <p class="field__error" id="bk-name-error" aria-live="polite"></p>
+            </div>
+            <div class="form__row form__row--2">
+              <div class="field">
+                <label class="field__label" for="bk-email">Email</label>
+                <input class="input" id="bk-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" required maxlength="254" aria-describedby="bk-email-hint bk-email-error">
+                <p class="field__hint" id="bk-email-hint">You need this, with your reference, to change or cancel.</p>
+                <p class="field__error" id="bk-email-error" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label class="field__label" for="bk-phone">Mobile number</label>
+                <input class="input" id="bk-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="20" aria-describedby="bk-phone-hint bk-phone-error">
+                <p class="field__hint" id="bk-phone-hint">Only used if something changes on the day.</p>
+                <p class="field__error" id="bk-phone-error" aria-live="polite"></p>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="bk-occasion">Occasion <span class="field__optional">(optional)</span></label>
+              <select class="select" id="bk-occasion" name="occasion" aria-describedby="bk-occasion-error">
+                <option value="none">No occasion</option>
+                <option value="birthday">Birthday</option>
+                <option value="meeting">Work meeting</option>
+                <option value="date">Date</option>
+                <option value="recording-guest">Here for the recording night</option>
+                <option value="other">Something else</option>
+              </select>
+              <p class="field__error" id="bk-occasion-error" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label class="field__label" for="bk-notes">Anything we should know? <span class="field__optional">(optional)</span></label>
+              <textarea class="textarea" id="bk-notes" name="notes" rows="4" maxlength="500" aria-describedby="bk-notes-hint bk-notes-count bk-notes-error"></textarea>
+              <div class="book-notes-meta">
+                <p class="field__hint" id="bk-notes-hint">Allergies, a high chair, step-free seating, a quiet corner.</p>
+                <p class="field__hint book-count" id="bk-notes-count"><span data-count>0</span> / 500<span class="a11y-only"> characters used</span></p>
+              </div>
+              <p class="a11y-only" id="bk-notes-live" role="status" aria-live="polite"></p>
+              <p class="field__error" id="bk-notes-error" aria-live="polite"></p>
+            </div>
+            <div class="checkbox">
+              <input id="bk-marketing" name="marketingOptIn" type="checkbox">
+              <label for="bk-marketing">Also send me the Thursday email: who is at the corner table next, and what the kitchen is doing. One email a week, unsubscribe any time.</label>
+            </div>
+            <div class="checkbox">
+              <input id="bk-consent" name="consent" type="checkbox" required aria-describedby="bk-consent-error">
+              <label for="bk-consent">I agree that Latte with Lata may store these details to manage my booking. I have read the <a href="contact.html#privacy">privacy summary</a>. <span class="field__req">(required)</span></label>
+              <p class="field__error" id="bk-consent-error" aria-live="polite"></p>
+            </div>
+            <div class="form__hp" aria-hidden="true"><label for="bk-website">Website</label><input id="bk-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+            <div class="form__actions book-step__actions" id="bk-review-actions">
+              <button class="button button--outlined" type="button" id="bk-review-btn">Review booking</button>
+            </div>
+          </fieldset>
+
+          <!-- 06 CONFIRM -->
+          <fieldset class="form__section book-step" id="bk-step-confirm" data-step="confirm" hidden>
+            <legend class="form__title" id="bk-confirm-title" tabindex="-1"><span class="form__step">06</span>Check and confirm</legend>
+            <p class="field__hint">Have a last look. You can cancel online up to 2 hours before.</p>
+
+            <!-- the review: an open panel on desktop; on phones the same block is the collapsible summary bar above the submit button -->
+            <div class="book-review" id="bk-review">
+              <h4 class="book-review__title">Your booking</h4>
+              <button type="button" class="book-review__toggle" id="bk-review-toggle" aria-expanded="true" aria-controls="bk-review-panel">
+                <span class="book-review__toggle-text"><span class="book-review__toggle-label">Your booking</span><span class="book-review__digest" data-sum="digest"></span></span>
+                <svg class="icon book-review__chev" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <div class="book-review__panel" id="bk-review-panel">
+                <dl class="info-list book-review__list">
+                  <div class="info-list__row"><dt>Booking</dt><dd><span data-sum="type"></span><button type="button" class="button--link book-change" data-edit="type">Change<span class="a11y-only"> what you are booking</span></button></dd></div>
+                  <div class="info-list__row"><dt>Date</dt><dd><span data-sum="date"></span><button type="button" class="button--link book-change" data-edit="when">Change<span class="a11y-only"> the date</span></button></dd></div>
+                  <div class="info-list__row"><dt>Time</dt><dd><span data-sum="time"></span><button type="button" class="button--link book-change" data-edit="time">Change<span class="a11y-only"> the time</span></button></dd></div>
+                  <div class="info-list__row"><dt>Party</dt><dd><span data-sum="party"></span><button type="button" class="button--link book-change" data-edit="party">Change<span class="a11y-only"> the party size</span></button></dd></div>
+                  <div class="info-list__row"><dt>Name</dt><dd><span data-sum="name"></span><button type="button" class="button--link book-change" data-edit="name">Change<span class="a11y-only"> the name</span></button></dd></div>
+                  <div class="info-list__row"><dt>Email</dt><dd><span data-sum="email"></span><button type="button" class="button--link book-change" data-edit="email">Change<span class="a11y-only"> the email</span></button></dd></div>
+                  <div class="info-list__row"><dt>Phone</dt><dd><span data-sum="phone"></span><button type="button" class="button--link book-change" data-edit="phone">Change<span class="a11y-only"> the phone number</span></button></dd></div>
+                  <div class="info-list__row" data-row="occasion"><dt>Occasion</dt><dd><span data-sum="occasion"></span><button type="button" class="button--link book-change" data-edit="occasion">Change<span class="a11y-only"> the occasion</span></button></dd></div>
+                  <div class="info-list__row" data-row="notes"><dt>Notes</dt><dd><span data-sum="notes"></span><button type="button" class="button--link book-change" data-edit="notes">Change<span class="a11y-only"> the notes</span></button></dd></div>
+                </dl>
+              </div>
+            </div>
+
+            <div class="notice" id="bk-status" role="alert" hidden></div>
+
+            <div class="form__actions">
+              <button class="button" type="submit" id="bk-submit">Confirm booking</button>
+              <p class="form__note">No deposit, no card. Free to cancel up to 2 hours before.</p>
+            </div>
+          </fieldset>
+        </form>
+
+        <!-- 07 SUCCESS - replaces the form (book.js fills it; the last confirmation is kept in sessionStorage so a refresh still shows it) -->
+        <div class="book-done" id="bk-done" role="region" aria-labelledby="bk-done-title" tabindex="-1" hidden>
+          <div class="book-done__head">
+            <span class="book-done__tick" aria-hidden="true"><svg class="icon" focusable="false" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <p class="eyebrow book-eyebrow" data-done-eyebrow>Booking confirmed</p>
+            <h3 class="strip__title2 book-done__title" id="bk-done-title" data-done-title>You are booked</h3>
+            <p class="book-done__text" data-done-text></p>
+          </div>
+          <div class="book-done__ref">
+            <p class="book-done__ref-label" id="bk-done-ref-label">Booking reference</p>
+            <p class="book-done__ref-code" id="bk-done-ref-code" data-done-ref></p>
+            <button type="button" class="button button--outlined book-done__copy" id="bk-done-copy"><span data-copy-label>Copy</span><span class="a11y-only"> the booking reference</span></button>
+            <p class="a11y-only" role="status" aria-live="polite" id="bk-done-copied"></p>
+          </div>
+          <dl class="info-list book-done__list">
+            <div class="info-list__row"><dt>Booking</dt><dd data-done="type"></dd></div>
+            <div class="info-list__row"><dt>Date</dt><dd data-done="date"></dd></div>
+            <div class="info-list__row"><dt data-done-time-label>Time</dt><dd data-done="time"></dd></div>
+            <div class="info-list__row"><dt>Party</dt><dd data-done="party"></dd></div>
+            <div class="info-list__row"><dt>Name</dt><dd data-done="name"></dd></div>
+            <div class="info-list__row"><dt>Status</dt><dd><span class="tag tag--solid" data-done="status"></span></dd></div>
+          </dl>
+          <div class="book-done__notes">
+            <p><strong>Keep this reference.</strong> You need it, with your email, to change or cancel the booking. We do not send a confirmation email, so copy it or add the booking to your calendar now.</p>
+            <p data-done-hold>We hold tables for 15 minutes. If you are running late, call <a href="tel:+15550142024">(555) 014-2024</a>.</p>
+          </div>
+          <div class="book-done__actions">
+            <button type="button" class="button" id="bk-done-ics">Add to calendar</button>
+            <a class="button button--outlined" href="#manage" id="bk-done-manage">Manage this booking</a>
+          </div>
+          <p class="book-done__more"><a class="read-more" href="menu.html">See the menu</a><button type="button" class="button--link" id="bk-done-again">Book another</button></p>
+        </div>
+      </div>
+
+      <!-- live summary: sticky card on desktop (>= 60em). On phones it is hidden and the review block of step 06 is the collapsible summary bar. -->
+      <aside class="book__aside" id="bk-aside" aria-labelledby="bk-summary-title">
+        <div class="book-summary">
+          <p class="eyebrow book-summary__eyebrow">Live summary</p>
+          <h3 class="book-summary__title" id="bk-summary-title">Your booking</h3>
+          <dl class="book-summary__list">
+            <div class="book-summary__row"><dt>Booking</dt><dd data-sum="type">A table</dd></div>
+            <div class="book-summary__row"><dt>Date</dt><dd data-sum="date"></dd></div>
+            <div class="book-summary__row"><dt>Time</dt><dd data-sum="time"></dd></div>
+            <div class="book-summary__row"><dt>Party</dt><dd data-sum="party"></dd></div>
+            <div class="book-summary__row"><dt>Name</dt><dd data-sum="name"></dd></div>
+          </dl>
+          <p class="book-summary__note">No deposit, no card. Free to cancel up to 2 hours before.</p>
+          <p class="book-summary__help">Rather talk to a person? <a href="tel:+15550142024">(555) 014-2024</a></p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/book/03-policy.html ===== -->
+<!-- book / 03-policy - the small print as an .info-list. Copy: content/pages.json book.sections[policy]. -->
+<section id="p-book-03-policy" class="strip strip--normal bg-band-cream2 pt-lg pb-lg">
+  <div class="container">
+    <div id="policy" class="book-policy">
+      <div class="book-policy__head anima--left-in">
+        <p class="eyebrow book-eyebrow">The small print</p>
+        <h2 class="strip__title2">How bookings work</h2>
+      </div>
+      <dl class="info-list book-policy__list anima--right-in">
+        <div class="info-list__row"><dt>We hold your table for 15 minutes</dt><dd>After that it goes back to the room. Call if you are running late and we will do what we can.</dd></div>
+        <div class="info-list__row"><dt>Sittings are 90 minutes</dt><dd>Long enough for breakfast and a second coffee. If nobody is waiting, stay as long as you like.</dd></div>
+        <div class="info-list__row"><dt>Parties over 8: call or email</dt><dd>We plan big tables by hand. Call <a href="tel:+15550142024">(555) 014-2024</a> or email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a> a few days ahead.</dd></div>
+        <div class="info-list__row"><dt>Cancel up to 2 hours before</dt><dd>Use <a href="#manage">Manage a booking</a> with your reference and email. Inside 2 hours, please call so the table can go to someone else.</dd></div>
+        <div class="info-list__row"><dt>No deposit, no card</dt><dd>Booking is free. Recording nights are free too.</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ===== pages/book/04-manage.html ===== -->
+<!-- book / 04-manage - look up a booking by reference + email, show it, cancel it (accessible <dialog> confirm). Copy: content/pages.json
+     book.sections[manage]. Behaviour: js/pages/book/manage.js. The anchor #manage is the navigation-map target "Manage a booking". -->
+<section id="p-book-04-manage" class="strip strip--narrow pt-lg pb-lg" data-pill-away>
+  <div class="container">
+    <div id="manage" class="book-manage">
+      <div class="book-manage__head text-center anima--bottom-in">
+        <p class="eyebrow book-eyebrow">Already booked?</p>
+        <h2 class="strip__title2">Manage a booking</h2>
+        <p class="book-manage__intro">Enter your booking reference and the email you booked with.</p>
+      </div>
+
+      <div class="notice notice--info" id="mg-fallback" role="status" hidden>
+        <div>
+          <p class="notice__title">This form is not connected</p>
+          <p>Online booking and messages are switched off on this copy of the site. Call <a href="tel:+15550142024">(555) 014-2024</a> or email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a> and we will sort it out by hand.</p>
+        </div>
+      </div>
+
+      <form class="form book-manage__form" id="mg-form" novalidate aria-label="Find a booking">
+        <div class="form__row form__row--2">
+          <div class="field">
+            <label class="field__label" for="mg-reference">Booking reference</label>
+            <input class="input book-ref-input" id="mg-reference" name="reference" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="LWL-XXXXXX" maxlength="12" required aria-describedby="mg-reference-hint mg-reference-error">
+            <p class="field__hint" id="mg-reference-hint">Six characters after LWL-. It was shown when you booked.</p>
+            <p class="field__error" id="mg-reference-error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label class="field__label" for="mg-email">Email</label>
+            <input class="input" id="mg-email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" maxlength="254" required aria-describedby="mg-email-error">
+            <p class="field__error" id="mg-email-error" aria-live="polite"></p>
+          </div>
+        </div>
+        <p class="notice" id="mg-status" role="status" hidden></p>
+        <div class="form__actions">
+          <button class="button" type="submit" id="mg-submit">Find my booking</button>
+        </div>
+      </form>
+
+      <div class="book-found" id="mg-result" role="region" aria-labelledby="mg-result-title" tabindex="-1" hidden>
+        <div class="book-found__head">
+          <h3 class="book-found__title" id="mg-result-title">Your booking</h3>
+          <p class="book-found__status"><span class="a11y-only">Status: </span><span class="tag" data-mg="status"></span></p>
+        </div>
+        <p class="book-found__text" data-mg="text"></p>
+        <dl class="info-list">
+          <div class="info-list__row"><dt>Reference</dt><dd data-mg="reference"></dd></div>
+          <div class="info-list__row"><dt>Booking</dt><dd data-mg="type"></dd></div>
+          <div class="info-list__row"><dt>Date</dt><dd data-mg="date"></dd></div>
+          <div class="info-list__row"><dt data-mg-time-label>Time</dt><dd data-mg="time"></dd></div>
+          <div class="info-list__row"><dt>Party</dt><dd data-mg="party"></dd></div>
+          <div class="info-list__row"><dt>Name</dt><dd data-mg="name"></dd></div>
+        </dl>
+        <p class="notice" id="mg-result-note" role="status" hidden></p>
+        <div class="form__actions book-found__actions">
+          <button type="button" class="button button--outlined" id="mg-cancel">Cancel this booking</button>
+          <p class="form__note">To change the day, time or party size, cancel this booking and make a new one, or call us and we will move it for you.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <dialog class="book-dialog" id="mg-dialog" aria-labelledby="mg-dialog-title" aria-describedby="mg-dialog-text">
+    <div class="book-dialog__body">
+      <h3 class="book-dialog__title" id="mg-dialog-title">Cancel this booking?</h3>
+      <p class="book-dialog__text" id="mg-dialog-text"></p>
+      <p class="notice" id="mg-dialog-note" role="alert" hidden></p>
+      <div class="book-dialog__actions">
+        <button type="button" class="button button--outlined" id="mg-dialog-no" autofocus>Keep my booking</button>
+        <button type="button" class="button" id="mg-dialog-yes">Yes, cancel it</button>
+      </div>
+    </div>
+  </dialog>
+</section>
+
+<!-- ===== pages/book/05-help.html ===== -->
+<!-- book / 05-help - call / write CTA + the large-party note. Copy: content/pages.json book.sections[help] + policy "large".
+     Accent (caramel) band on purpose: the newsletter band that follows on every page is espresso, two espresso bands would merge. -->
+<section id="p-book-05-help" class="strip strip--narrow bg-band-accent pt-lg pb-lg">
+  <div class="container">
+    <div id="help" class="book-help text-center">
+      <div class="anima--bottom-in">
+        <h2 class="strip__title2">Rather talk to a person?</h2>
+        <p class="book-help__text">Call <a href="tel:+15550142024">(555) 014-2024</a> during opening hours, or write to us and we will reply within 2 working days.</p>
+      </div>
+      <p class="book-help__actions anima--bottom-in">
+        <a class="button" href="tel:+15550142024">Call (555) 014-2024</a>
+        <a class="button button--outlined" href="contact.html?topic=booking">Write to us</a>
+      </p>
+      <p class="book-help__note anima--bottom-in"><strong>Parties over 8.</strong> We plan big tables by hand. Call or email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a> a few days ahead.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sections/13-newsletter.html ===== -->
+<!-- 13-newsletter - Black newsletter block: eyebrow, lead paragraph, floating-label email input, square accent submit with
+     the two-arrow swap, consent checkbox; right column big "Listen and follow" links
+     SOURCE skeleton: Iceberg div#join.footer-newsletter > .footer-newsletter__left (.__title, .__text, form.__form >
+       .form-group.__form-input (.form-input > label + input#email ; button.__form-input__button > span > svg x2)
+       + .form-group.__form-checkbox (.form-checkbox > input#subscribe + label > div + span)) ; .footer-newsletter__right
+       (.__title + ul > li > a)  (IC rendered.html line 29 block; CSS inline-scoped.beautified.css:2836-3300;
+       engine ZNMh4Fg5.beautified.js:909-935)
+     Copy: content/site.json newsletter.* verbatim (brand pass 2026-09-17: eyebrow "First to know", new paragraph). Right column = newsletter.follow[5] (DD Pick 12 "Change": platforms
+       + Instagram; copy.md maps follow[] to the right column). Hard-coded label (INFERRED): "Listen and follow" eyebrow.
+       "privacy policy" links to #privacy (copy.md). success/error strings ride on data-* so the JS shows visible text.
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 4): shared by every page; the form is wired to POST /api/subscribe through js/lib/api.js
+       ({ email, consent: true, source: "footer-newsletter", website }) - "website" is the hidden honeypot the server wants empty. When the API is
+       not there (static hosting: GET /api/health fails) the form does NOT pretend: it shows the .newsletter__notice line with the cafe's email.
+       The action attribute is the no-JS fallback only (the JS always intercepts the submit). -->
+<section id="s-13-newsletter" class="strip strip--normal bg-band-black newsletter-band" aria-labelledby="nl-eyebrow">
+  <div class="container newsletter">
+
+    <div class="newsletter__left">
+      <p id="nl-eyebrow" class="newsletter__eyebrow eyebrow">Stay for the conversation</p>
+      <p class="newsletter__text lead">The conversation doesn't end with the podcast. Follow along for meaningful moments, leadership insights, guest stories and upcoming conversations. One email a week, never more.</p>
+      <form class="newsletter__form" action="/api/subscribe" method="post" novalidate data-source="footer-newsletter"
+            data-success="You are on the list. See you Thursday."
+            data-error="That address did not go through. Check it and try once more.">
+        <div class="newsletter__row">
+          <div class="newsletter__field">
+            <label for="nl-email">Your email</label>
+            <input id="nl-email" class="newsletter__input" type="email" name="email" autocomplete="email" spellcheck="false" required aria-describedby="nl-msg-error">
+          </div>
+          <button class="newsletter__submit" type="submit" aria-label="Subscribe">
+            <span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+            <span aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+          </button>
+        </div>
+        <div class="newsletter__consent">
+          <input id="nl-consent" type="checkbox" name="consent" required>
+          <label for="nl-consent">
+            <span class="newsletter__box" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg></span>
+            <span>Yes, send me the Thursday email from Latte with Lata. I have read the <a href="contact.html#privacy">privacy policy</a>.</span>
+          </label>
+        </div>
+        <div class="newsletter__hp" aria-hidden="true"><label for="nl-website">Website</label><input id="nl-website" type="text" name="website" tabindex="-1" autocomplete="off"></div>
+        <p id="nl-msg-error" class="newsletter__error" role="alert" hidden></p>
+        <p class="newsletter__success" role="status" hidden></p>
+        <p class="newsletter__notice" role="status" hidden>Sign-ups are handled by our team right now - email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a></p>
+      </form>
+    </div>
+
+    <div class="newsletter__right">
+      <p class="newsletter__eyebrow eyebrow">Listen and follow</p>
+      <ul class="newsletter__links">
+        <li><a href="#">Spotify</a></li>
+        <li><a href="#">Apple Podcasts</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">RSS</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<!-- ===== sections/14-footer.html ===== -->
+<!-- 14-footer - Footer curtain (4 columns), stamp at the seam, back-to-top disc, cropped giant wordmark. Sits AFTER <main>.
+     SOURCE skeleton: PZ rendered.html:189-272  aside.strip.strip--stamp + footer#page-footer.page__footer > .footer__container >
+       .strip > .container > .footer__top > .footer__column--1 (h2.footer__logo + nav.footer__menu) / --2 (p, p.mt-md) /
+       --3 (nav.footer__shortcuts) / --4 (aside.footer__socials > h3.footer__title + ul.socials) ; .js-scroll-top-limit > .strip >
+       .container > .footer__mid (.footer__legal + aside.footer__credits) + .footer__bottom (awards - DROPPED) ; aside#back-to-top
+       .scroll-top > a. Wordmark row: IC rendered.html .footer-logo > .footer-logo__content > span (BEST-PARTS Pick 17).
+     Single-root contract (file contract: the footer fragment root is <footer id="page-footer">): the stamp aside and
+       #back-to-top live INSIDE the footer. The source's clip (.page__footer { overflow:hidden }) moved to the inner
+       .footer__curtain wrapper so the stamp can overhang 56px up into 13 (spec 14 (h)) and the fixed disc is neither
+       clipped nor inside the transformed .footer__container.
+     Copy: content/site.json footer.* verbatim (nav labels = footer.columns.sitemap = nav). Hard-coded labels (INFERRED,
+       spec 14 (b)): "Find us", "Explore", "Listen & follow", legal nav "Privacy" / "Photo credits". The photo-credit list
+       (closed <details>, id="credits") satisfies verify/handoff/assets.md ("not optional" for the CC BY / CC BY-SA files).
+     Brand mark (brand pass 2026-09-17, LOGO-USAGE.md): the kit's cup mark, brown variant, as an <img> 120px tall (--markFooter) with the
+       tagline brand.tagline under it (one saucer-height of clear space); footer.legal = copyright + the independence disclaimer.
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 3): shared by every page. The mark links home (index.html); the sitemap = the six pages + "Book a table"
+       (content/site.json footer.columns.sitemap; "The Host" lives in the drawer only); Privacy -> contact.html#privacy; Photo credits -> contact.html#credits. The photo-credit
+       <details> stays in the footer as id="footer-credits" (the id "credits" belongs to the contact page now - no duplicate ids on contact.html);
+       14-footer.js opens it whenever a #credits link is followed on a page that has no #credits block of its own. -->
+<footer id="page-footer" class="page__footer footer">
+  <!-- brand pass: stamp instance 4 is OFF (data-stamp="off", CSS hides the pseudo-element) - it straddled the brown 13 band (brown mark on brown,
+       LOGO-USAGE) and doubled the 120px footer mark one viewport later; the aside + its tween stay so data-stamp="on" restores it. -->
+  <aside class="strip strip--stamp footer__stamp" aria-hidden="true" data-stamp="off"></aside>
+
+  <div class="footer__curtain">
+    <div class="footer__container">
+
+      <div class="strip">
+        <div class="container">
+          <div class="footer__top">
+
+            <div class="footer__column footer__column--1">
+              <a class="footer__logo" href="index.html" aria-label="Latte with Lata - home">
+                <img class="footer__mark" src="assets/brand/logo/latte-with-lata-mark-brown.svg" alt="" width="482" height="571" loading="lazy" decoding="async">
+              </a>
+              <p class="footer__tagline">Real Conversations. Built on Purpose.</p>
+              <nav class="footer__menu" aria-label="Legal">
+                <ul>
+                  <li><a href="contact.html#privacy">Privacy</a></li>
+                  <li><a href="contact.html#credits">Photo credits</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="footer__column footer__column--2">
+              <h3 class="footer__title">Find us</h3>
+              <div class="footer__find">
+                <address class="footer__address">
+                  Latte with Lata<br>
+                  27 Bellwood Street<br>
+                  Corner of Fenwick Lane<br>
+                  Harrowfield<br>
+                  <a href="tel:+15550142024">(555) 014-2024</a><br>
+                  <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a>
+                </address>
+                <p class="mt-md footer__hours">
+                  Mon - Thu 7:00&nbsp;am - 6:00&nbsp;pm<br>
+                  Fri 7:00&nbsp;am - 10:00&nbsp;pm<br>
+                  Sat 8:00&nbsp;am - 10:00&nbsp;pm<br>
+                  Sun 8:00&nbsp;am - 3:00&nbsp;pm<br>
+                  Thursday recordings: doors 6:30&nbsp;pm
+                </p>
+              </div>
+            </div>
+
+            <div class="footer__column footer__column--3">
+              <h3 class="footer__title">Explore</h3>
+              <nav class="footer__shortcuts" aria-label="Sitemap">
+                <ul>
+                  <li><a href="cafe.html">The Cafe</a></li>
+                  <li><a href="menu.html">Menu</a></li>
+                  <li><a href="podcast.html">The Podcast</a></li>
+                  <li><a href="episodes.html">Episodes</a></li>
+                  <li><a href="events.html">Events</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="book.html">Book a table</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="footer__column footer__column--4">
+              <aside class="footer__socials">
+                <h3 class="footer__title">Follow us on our socials</h3>
+                <ul class="footer__listen">
+                  <li><a href="#">Spotify</a></li>
+                  <li><a href="#">Apple Podcasts</a></li>
+                  <li><a href="#">YouTube</a></li>
+                  <li><a href="#">RSS</a></li>
+                </ul>
+                <ul class="socials">
+                  <li><a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-instagram"></use></svg></a></li>
+                  <li><a href="#" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-youtube"></use></svg></a></li>
+                </ul>
+              </aside>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="js-scroll-top-limit">
+        <div class="strip">
+          <div class="container">
+            <div class="footer__mid">
+              <div class="footer__legal">
+                <p>Copyright 2026 Latte with Lata. All rights reserved.</p>
+                <details id="footer-credits" class="footer__photo-credits">
+                  <summary>Photo credits</summary>
+                  <ul>
+                    <li>“Latte art 0.jpg” by Angela CoffeeRank, <a href="https://creativecommons.org/licenses/by/2.0" rel="noopener" target="_blank">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Latte_art_0.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“A coffee cup featuring intricate latte art sits on a wooden table next to an open laptop.jpg” by Shixart1985, <a href="https://creativecommons.org/licenses/by/2.0" rel="noopener" target="_blank">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:A_coffee_cup_featuring_intricate_latte_art_sits_on_a_wooden_table_next_to_an_open_laptop.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“A cup of cappuccino.jpg” by Vee Satayamas, <a href="https://creativecommons.org/licenses/by/4.0" rel="noopener" target="_blank">CC BY 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:A_cup_of_cappuccino.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“BoulderCoffeeOpenMicNight2018.jpg” by DanielPenfield, <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener" target="_blank">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:BoulderCoffeeOpenMicNight2018.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> - this crop is a derivative shared under the same CC BY-SA licence.</li>
+                    <li>“Guerrilla on air – Fatti d’arte teaser” (video) by M. Capriglione, M. Rainò and R. Romita, <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener" target="_blank">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Guerrilla_on_air_%E2%80%93_Fatti_d%27arte_teaser.mpg" rel="noopener" target="_blank">Wikimedia Commons</a> - cut, slowed, colour-graded and looped; this edit is shared under the same CC BY-SA licence.</li>
+                    <li>All other photographs: CC0 (public domain dedication) via Wikimedia Commons - full register in the site's ASSETS.md.</li>
+                  </ul>
+                </details>
+                <p class="footer__disclaimer">Latte with Lata is a personal platform and is independent of any employer or institution.</p>
+              </div>
+              <aside class="footer__credits">Site by Agora Data Driven</aside>
+            </div>
+          </div>
+        </div>
+        <div class="footer-wordmark" aria-hidden="true"><span>LATTE WITH LATA</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <aside id="back-to-top" class="scroll-top"><a href="#top" aria-label="Back to top"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-up"></use></svg></a></aside>
+</footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/SplitText.min.js"></script>
+<script src="vendor/ScrollToPlugin.min.js"></script>
+<script src="vendor/splide.min.js"></script>
+<script type="module" src="js/page.js"></script>
+</body>
+</html>

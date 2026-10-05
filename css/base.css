@@ -1,0 +1,613 @@
+/* ==========================================================================
+   Latte with Lata - base stylesheet (foundation)
+   Ported from the Paszkowski teardown, re-expressed in the tokens of css/tokens.css.
+   Source keys:  PZ = teardowns/2026-09-14-caffepaszkowski-com/source
+                 DD = teardowns/BEST-PARTS-latte-with-lata.md
+   Every ported rule cites file:line. Invented values are marked INFERRED.
+   Builders: do NOT redefine these classes; scope overrides under your section id.
+   BRAND EDITION (2026-09-17, BK = the client's brand kit): only colour + typography roles changed here - families,
+   weights, tracking, line-heights, link/button/read-more colours, focus ring, hairlines, 44px touch targets.
+   Layout, grid, reveals, stamp geometry and carousel geometry are untouched. The former section 17 (scoped font
+   overrides for other lanes) was folded into the section files on 2026-09-17.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Reset - Paszkowski's shipped reset (PZ css/inline-critical.beautified.css:111-357,
+      the preflight subset the measured layout depends on) + its own _generic.scss rules
+   -------------------------------------------------------------------------- */
+*, ::before, ::after { box-sizing: border-box; border: 0 solid transparent; }   /* inline-critical:112-117 (border colour neutralised - INFERRED) */
+html {
+    line-height: 1.5;                                  /* inline-critical:124-126 */
+    -webkit-text-size-adjust: 100%;                    /* inline-critical:127 */
+    -webkit-tap-highlight-color: transparent;          /* inline-critical:134 */
+}
+body { margin: 0; line-height: inherit; }              /* inline-critical:137-140 */
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }   /* inline-critical:153-161 */
+blockquote, dd, dl, figure, h1, h2, h3, h4, h5, h6, hr, p, pre { margin: 0; }   /* inline-critical:275-289 */
+fieldset { margin: 0; padding: 0; } legend { padding: 0; }                    /* inline-critical:291-298 */
+menu, ol, ul { list-style: none; margin: 0; padding: 0; }                    /* inline-critical:300-306 */
+button, input, optgroup, select, textarea {                                  /* inline-critical:209-224 */
+    color: inherit; font-family: inherit; font-size: 100%; font-weight: inherit;
+    letter-spacing: inherit; line-height: inherit; margin: 0; padding: 0;
+}
+button, select { text-transform: none; }                                     /* inline-critical:226-229 */
+button, input:where([type=button]), input:where([type=reset]), input:where([type=submit]) {
+    -webkit-appearance: button; background-color: transparent; background-image: none;   /* inline-critical:231-238 */
+}
+[role=button], button { cursor: pointer; }                                   /* inline-critical:328-331 */
+:disabled { cursor: default; }                                               /* inline-critical:333-335 */
+audio, canvas, embed, iframe, img, object, svg, video { display: block; vertical-align: middle; }   /* inline-critical:337-347 */
+img, video { height: auto; max-width: 100%; }                                /* inline-critical:349-353 */
+[hidden]:where(:not([hidden=until-found])) { display: none; }               /* inline-critical:355-357 */
+[hidden]:not([hidden=until-found]) { display: none !important; }             /* VERIFY 2026-09-17 (requested by the book, contact, events and menu lanes): .button / .notice / .card-grid > li / flex rows set their own `display`, which beat the zero-specificity rule above, so a `hidden` element stayed visible. One site-wide safety rule replaces the per-page copies; a page may still out-rank it on purpose (book.css review panel). */
+textarea { resize: vertical; }                                               /* inline-critical:312-314 */
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }   /* inline-critical:187-193 */
+sub { bottom: -.25em; } sup { top: -.5em; }
+table { border-collapse: collapse; border-color: inherit; text-indent: 0; }  /* inline-critical:203-207 */
+
+/* Paszkowski's own generic rules - PZ css/scss-from-map/minimal/_generic.scss */
+hr { border-top-width: 1px; border-color: var(--colHr, var(--colBrandLine)); margin-top: calc(var(--vpad) / 2); margin-bottom: calc(var(--vpad) / 2); }   /* _generic.scss:12-16; BK hairline token */
+ul { list-style: disc; padding-left: 1.5em; }         /* _generic.scss:18-21 */
+ol { list-style: decimal; padding-left: 1.5em; }      /* _generic.scss:22-25 */
+u { text-decoration: none; }                          /* _generic.scss:26-28 */
+nav ol, nav ul { list-style: none; padding-left: 0; } /* _generic.scss:29-35 */
+figure img { display: block; width: 100%; max-width: 100%; height: auto; margin: 0 auto; }   /* _generic.scss:53-59 */
+::selection { background-color: var(--colPrimario); color: var(--colBianco); }               /* PZ main/_custom_site.scss:6-9 */
+
+/* --------------------------------------------------------------------------
+   2. html / body / page font-size
+   -------------------------------------------------------------------------- */
+html { scroll-padding-top: calc(var(--hH, 78) * 1px); }   /* anchor jumps + focus scrolling land below the fixed header plate (WIG "no content behind the fixed header", WCAG 2.4.11);
+                                                            --hH = the measured header height set by 00-header.js (78 / 63) - brand pass MUST-FIX 2, zero layout change */
+body {
+    background: var(--colBg);                          /* inline-critical:831 */
+    color: var(--colText);                             /* inline-critical:832 */
+    line-height: var(--lineHeight);                    /* inline-critical:833 */
+    -webkit-text-size-adjust: none;                    /* inline-critical:834 */
+    font-family: var(--fontBrand);                     /* BK: Creato Display only (css/fonts.css); was "Noto Sans" (inline-critical:499) */
+    font-weight: var(--wBody);                         /* BK body Regular 400 */
+    font-size: calc(var(--fontSize) * 1rem);           /* 16px; PZ scopes calc(var(--fontSize)*1em) on header/content/footer (inline-critical:961,1004) */
+    -webkit-font-smoothing: antialiased;               /* PZ applies only via %textWhite (_extend.scss:24-28); on body per brief - INFERRED */
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+}
+#page-header, main, #page-footer { font-size: calc(var(--fontSize) * 1em); }   /* inline-critical:959-961, 1002-1005 (.page__header/.page__content/.page__footer) */
+/* BK body 17px at >= 60em: applied to the plain copy paragraphs only (not the root em), so every em-based geometry
+   (rails, arrows, stamps, drawer, buttons) keeps its measured size; classed paragraphs (.lead, .eyebrow, captions,
+   taglines) and the footer's smaller columns keep their own scale. */
+@media (min-width: 60em) { main p:not([class]) { font-size: 1.0625rem; } }
+main { overflow: hidden; }                             /* .page__content{overflow:hidden} - PZ main.1.beautified.css:8584-8586 (clips 5vh reveals + bleed rails) */
+html.m-open body { overflow: hidden; }                 /* drawer scroll lock - PZ .m-open body (BUILD-SPEC G6 / DD Pick 3); adopted from 00-header.css by the global verifier (round 2) */
+
+/* --------------------------------------------------------------------------
+   3. Typography roles
+   -------------------------------------------------------------------------- */
+/* %fontTitoli (PZ main/_extend_site.scss:12-18) with the BK title role: Creato Display Bold 700 uppercase, ls -.01em, lh 1 */
+.strip__title1, .strip__title2, .strip__title3, .strip__title4, .strip__title5, .text-decorated, .font-display {
+    font-family: var(--fontBrand);                     /* BK (was Fraunces; replaces quiche-sans, _config.scss:33) */
+    font-weight: var(--wTitle);                        /* BK Bold 700 ($titWheight - PZ main/_config.scss:36 was 500) */
+    font-variation-settings: normal;                   /* static faces (the Fraunces opsz/SOFT axes are gone) */
+    line-height: var(--lhTitle);                       /* _extend_site.scss:14 (1) */
+    text-transform: uppercase;                         /* $titTransform - _config.scss:37 */
+    letter-spacing: var(--trackTitle);                 /* BK -.01em ($titLetterSpacing was unset - _extend_site.scss:5) */
+}
+/* titles() mixin - PZ main/modules/_typography.scss:3-30 */
+.strip__title1, .strip__title2, .strip__title3, .strip__title4, .strip__title5 {
+    font-size: var(--fontSize, 1em);                   /* _typography.scss:10 */
+    color: var(--colTitle, inherit);                   /* _typography.scss:11 */
+    margin-top: calc(var(--vpad) / 2);                 /* _typography.scss:13 */
+    margin-bottom: calc(var(--vpad) / 4);              /* _typography.scss:14 (measured 14.4px at 1440) */
+    text-wrap: balance;                                /* _typography.scss:15 (text-wrap-style) */
+}
+.strip__pretitle + .strip__title1, .strip__pretitle + .strip__title2, .strip__pretitle + .strip__title3,
+.strip__title1:first-child, .strip__title2:first-child, .strip__title3:first-child, .strip__title4:first-child, .strip__title5:first-child { margin-top: 0; }   /* _typography.scss:17-20 */
+.strip__title1:last-child, .strip__title2:last-child, .strip__title3:last-child, .strip__title4:last-child, .strip__title5:last-child { margin-bottom: 0; }   /* _typography.scss:21-23 */
+@media (max-width: 48em) {
+    .strip__title1, .strip__title2, .strip__title3 { word-wrap: break-word; hyphens: auto; }   /* _typography.scss:31-38 */
+}
+.strip__title1 { --fontSize: clamp(var(--titleSize) / 1.8, 6vw, var(--titleSize)); }        /* _typography.scss:40 = clamp(33.3px, 6vw, 60px) */
+.strip__title1 i, .strip__title1 em { font-style: inherit; }                                 /* _typography.scss:41-44 */
+.strip__title2 { --fontSize: clamp(var(--titleSize) / 2, 5.5vw, var(--titleSize) / 1.2); }   /* _typography.scss:66 = 30-50px */
+.strip__title3 { --fontSize: clamp(var(--titleSize) / 2.2, 3.6vw, var(--titleSize) / 1.5); } /* _typography.scss:69 */
+.strip__title4 { --fontSize: clamp(var(--titleSize) / 2.2, 2.4vw, var(--titleSize) / 1.8); } /* _typography.scss:72 */
+.strip__title5 { --fontSize: clamp(var(--titleSize) / 2.5, 2vw, var(--titleSize) / 2); }     /* _typography.scss:75 */
+.strip__pretitle { text-transform: uppercase; font-size: clamp(var(--titleSize) / 2.5, 2vw, var(--titleSize) / 2); }   /* _typography.scss:77-80 */
+.strip__subtitle { font-size: clamp(var(--titleSize) / 2.5, 2vw, var(--titleSize) / 2); font-weight: var(--fontBold); line-height: 1.2; margin-bottom: .5em; }   /* _typography.scss:81-86 */
+.strip__subtitle:first-child { margin-top: 0; } .strip__subtitle:last-child { margin-bottom: 0; }
+
+/* .text-decorated - PZ main/_common.scss:194-207 (clamp 37.5px-50px); BK manifesto / quote role: Medium 500, lh 1.15
+   (07 manifesto sentence, 11 live quote). The size clamp and the uppercase are unchanged (measured: sentence case re-wraps the
+   07 / 11 blocks ~100 px shorter, which the structure rule forbids). BK "sentence case allowed" = the opt-in modifier below. */
+.text-decorated {
+    font-size: clamp(var(--titleSize) / 1.6, 5.5vw, var(--titleSize) / 1.2);
+    font-weight: var(--wLead);
+    line-height: var(--lhLead);
+    letter-spacing: var(--trackTitle);
+}
+.text-decorated--sentence { text-transform: none; }    /* opt-in for the 07 / 11 owners (re-measure the section height when used) */
+.text-decorated:first-child { margin-top: 0; }
+.text-decorated:last-child { margin-bottom: 0; }
+.text-decorated + [class*="strip__title"] { margin-top: 0; }
+
+/* .eyebrow - Iceberg graft: DD s5 Sizes "eyebrow 12px 600 uppercase"; tracking + leading from the measured source rule
+   IC inline-scoped.beautified.css:2857-2866 (.footer-newsletter__title: 600, letter-spacing -.01em, line-height 100%, uppercase)
+   = BUILD-SPEC G2 row. Single page-wide role (08, 11, 13) decided by the global verifier (round 2); was lh 1.5 / ls .08em INFERRED. */
+.eyebrow { font-size: .75rem; font-weight: var(--wLead); text-transform: uppercase; letter-spacing: var(--trackEyebrow); line-height: 1; }   /* BK eyebrow: Medium 500, 12px, ls .14em (was 600 / -.01em) */
+
+.text-small { font-size: .85em; }                      /* _common.scss:169-171 */
+.text-big { font-size: 1.2em; }                        /* _common.scss:172-174 */
+/* BK caption / meta role: Regular 400 14px. `.caption` is a new opt-in hook for the section lanes (menu captions, live caption,
+   episode meta already carry their own 14px rules); figcaption takes it by default. */
+.caption, figcaption { font-size: .875rem; font-weight: var(--wBody); line-height: 1.5; }
+.caption--muted { color: var(--colTextMuted); }        /* only on white / --colBrandSoft (5.4:1 / 4.8:1); never on brand bands */
+
+/* links - PZ minimal/_generic.scss:37-47 (+ .3s animate, inline-critical:446-461) */
+a { color: var(--colLink); text-decoration: none; }
+a:hover { color: var(--colLinkHover); }
+label a { text-decoration: underline; }
+strong { font-weight: var(--fontBold); color: var(--colStrong); }   /* _generic.scss:48-51 ($fontStrong 400 -> 600 here, see tokens) */
+
+/* --------------------------------------------------------------------------
+   4. Container / strip / data / text / sizes / spacing utilities
+   -------------------------------------------------------------------------- */
+.container {                                           /* %container - PZ main/_extend.scss:83-92 (compiled inline-critical:489-496) */
+    display: var(--container-display, block);
+    width: 100%;
+    max-width: calc(var(--container-maxWidth) + var(--container-pad) * 2 + var(--container-width-adjust, 0px));
+    padding-left: var(--container-pad);
+    padding-right: var(--container-pad);
+    margin: 0 auto;
+}
+.strip {                                               /* PZ main/modules/_strip.7.5.scss:6-10 */
+    --hpad: var(--vpad);                               /* _strip_site.scss:7 */
+    background: var(--bgStrip, transparent);
+    background-image: var(--bgImage, none);
+    color: var(--strip-text-color, inherit);
+}
+:where(.strip) .strip {                                /* nested strips reset the band - _strip.7.5.scss:12-19 */
+    --bgStrip: unset; --column-bg-left: initial; --column-bg-right: initial; --strip-text-color: initial; --text-v-align: unset;
+    text-align: initial;
+}
+.strip .container { background: var(--bgCont, transparent); }   /* _strip.7.5.scss:113-115 */
+.strip__data { flex: 1 1 auto; color: var(--strip-text-color, inherit); }   /* _strip.7.5.scss:26-32 */
+.strip--wide { --container-maxWidth: 100%; --column-bg-left: 0; --column-bg-right: 0; }   /* _strip.7.5.scss:33-36 */
+.strip--wide .container { padding-left: 0; padding-right: 0; }                         /* _strip.7.5.scss:37-40 */
+.strip--xnarrow .container, .strip--narrow .container, .strip--large .container, .strip--normal .container {   /* _strip.7.5.scss:42-50 */
+    padding-left: var(--strip-expand-paddingLeft, var(--container-pad, var(--vpad)));
+    padding-right: var(--strip-expand-paddingRight, var(--container-pad, var(--vpad)));
+}
+.strip--large  { --container-maxWidth: 100%;     --strip-expand-maxWidth: 100%; }      /* _strip.7.5.scss:51-54 */
+.strip--normal { --container-maxWidth: 75rem;    --strip-expand-maxWidth: 75rem; }     /* _strip.7.5.scss:55-58 ($contWidth 1200px) */
+.strip--narrow { --container-maxWidth: 56.25rem; --strip-expand-maxWidth: 56.25rem; }  /* _strip.7.5.scss:59-62 ($contWidthNarrow 900px) */
+.strip--xnarrow{ --container-maxWidth: 37.5rem;  --strip-expand-maxWidth: 37.5rem; }   /* _strip.7.5.scss:63-66 (900/1.5 = 600px) */
+.strip--above { position: relative; z-index: 1; }     /* _strip.7.5.scss:94-97 */
+/* SHARED POLISH 2026-09-17: brown-meets-brown seam. 00-header.js (runs on every page) adds .seam-above to #s-13-newsletter when the band before it
+   has (nearly) the same background (contrast < 1.5:1 - brand after brand / deep; caramel after brand already reads as an edge at 2:1).
+   A 1px --colLineOnBrand hairline drawn as an inset shadow: no box, no layout shift, under the section's content. Lives here, not in
+   css/pages/_shell.css, because the home page does not load the kit. */
+.seam-above { box-shadow: inset 0 1px 0 var(--colLineOnBrand); }
+.strip--hidden { display: none; }                      /* _strip.7.5.scss:99-101 */
+.strip--full-height { min-height: calc(100vh - var(--header-height, 0) * 1px); display: flex; }   /* _strip.7.5.scss:103-105 */
+.strip--full-height .strip__text { height: auto; }
+.strip__text { position: relative; width: 100%; align-self: var(--text-v-align, unset); }   /* _strip.7.5.scss:127-130 (compiled main.1:4309-4313) */
+.v-center .strip__text { --text-v-align: center; }     /* _strip.7.5.scss:143-145 */
+.v-bottom .strip__text { --text-v-align: flex-end; }   /* _strip.7.5.scss:146-148 */
+.strip__text [href^="http"] { overflow-wrap: break-word; word-break: break-word; hyphens: auto; }   /* _strip.7.5.scss:175-180 */
+
+/* Spacing utilities - the only Tailwind classes Paszkowski uses, remapped onto --vpad
+   (PZ css/tailwind.beautified.css:957-975 mb, 1757-1775 mt, 3373-3391 pb, 4153-4171 pt) */
+.mt-lg { margin-top: calc(var(--vpad) * 2); }  .mt-md { margin-top: var(--vpad); }  .mt-sm { margin-top: calc(var(--vpad) / 2); }  .mt-xs { margin-top: calc(var(--vpad) / 4); }
+.mb-lg { margin-bottom: calc(var(--vpad) * 2); }  .mb-md { margin-bottom: var(--vpad); }  .mb-sm { margin-bottom: calc(var(--vpad) / 2); }  .mb-xs { margin-bottom: calc(var(--vpad) / 4); }
+.pt-lg { padding-top: calc(var(--vpad) * 2); }  .pt-md { padding-top: var(--vpad); }  .pt-sm { padding-top: calc(var(--vpad) / 2); }  .pt-xs { padding-top: calc(var(--vpad) / 4); }
+.pb-lg { padding-bottom: calc(var(--vpad) * 2); }  .pb-md { padding-bottom: var(--vpad); }  .pb-sm { padding-bottom: calc(var(--vpad) / 2); }  .pb-xs { padding-bottom: calc(var(--vpad) / 4); }
+.text-center { text-align: center; }                   /* tailwind.beautified.css:4177-4179 */
+.text-left { text-align: left; }  .text-right { text-align: right; }
+@media (min-width: 43.75em) {                          /* Tailwind "md" screen = 43.75em - tailwind.beautified.css:8355, 12508-12510 */
+    .md-text-center { text-align: center; }  .md-text-left { text-align: left; }  .md-text-right { text-align: right; }
+    .md-pt-md { padding-top: var(--vpad); }  .md-pb-md { padding-bottom: var(--vpad); }   /* build-analysis Rebuild Plan step 1 */
+}
+/* .text-* alignment hooks read by text-narrow / image margins - _common.scss:149-168 */
+.text-left   { --image-marginLeft: 0;    --strip-textNarrow-marginLeft: 0;    --strip-textNarrow-marginRight: auto; }
+.text-center { --image-marginLeft: auto; --strip-textNarrow-marginLeft: auto; --strip-textNarrow-marginRight: auto; }
+.text-right  { --image-marginLeft: auto; --image-marginRight: 0; --strip-textNarrow-marginLeft: auto; --strip-textNarrow-marginRight: 0; }
+
+/* --------------------------------------------------------------------------
+   5. Columns - 24-col grid 12/12 at >=50em (800px), gap --vpad via column margins
+      PZ main/modules/_strip.7.5.scss:255-277 (container), 304-320 (column), 361-366, 368-387, 444-482
+      Measured: col1 x120 w571.2, col2 x748.8 w571.2, gap 57.6 at 1440 (layout-manifest [164])
+   -------------------------------------------------------------------------- */
+.strip--columns { --span: off; }                       /* _strip.7.5.scss:256 */
+@media (max-width: 49.9em) {                           /* _strip.7.5.scss:257-260 */
+    .strip--columns { --strip-textNarrow-paddingLeft: var(--container-pad); --strip-textNarrow-paddingRight: var(--container-pad); }
+}
+.strip--columns .container {                           /* _strip.7.5.scss:265-270 */
+    display: flex; flex-direction: column; align-items: stretch;
+    row-gap: var(--hpad, var(--vpad));
+}
+@media (min-width: 50em) {
+    .strip--columns { --span: 12; --strip-col-bgPad: -2; }   /* _strip.7.5.scss:261-264 */
+    .strip--columns .container {                       /* _strip.7.5.scss:271-275 */
+        --strip-column-gap: var(--hpad, var(--vpad));
+        display: grid;
+        grid-template-columns: repeat(24, minmax(1em, 1fr));
+    }
+}
+.strip__column {                                       /* _strip.7.5.scss:304-319 */
+    display: flex; flex-flow: column nowrap; flex: 1 1 100%;
+    margin-right: calc(var(--strip-column-gap, 0px) / var(--strip-column-fraction, 2));
+    margin-left: calc(var(--strip-column-gap, 0px) / var(--strip-column-fraction, 2));
+}
+.strip__column:first-child { margin-left: 0; }
+.strip__column:last-child { margin-right: 0; }
+.strip__column.waiting .strip__image { transform: none; }   /* _strip.7.5.scss:321-325 */
+.strip__column.mobile-first { order: -1; }             /* _strip.7.5.scss:361-366 (compiled main.1:4576-4584) */
+@media (min-width: 50em) { .strip__column.mobile-first { order: unset; } }
+.strip__column__content { width: 100%; height: 100%; display: flex; }   /* _strip.7.5.scss:368-372 (compiled main.1:4586-4590) */
+.text-narrow .strip__column__content {                 /* _strip.7.5.scss:375-386 (compiled main.1:4592-4602) */
+    padding-left: var(--strip-textNarrow-paddingLeft, 0);
+    padding-right: var(--strip-textNarrow-paddingRight, 0);
+}
+@media (min-width: 50em) {
+    .text-narrow .strip__column__content {
+        max-width: calc(var(--strip-textNarrow-maxWidth, 37.5rem) + var(--vpad));   /* $contWidth/2 = 600px + vpad */
+        margin-left: var(--strip-textNarrow-marginLeft, 0);
+        margin-right: var(--strip-textNarrow-marginRight, 0);
+    }
+}
+@media (min-width: 50em) {
+    .strip__column--1 { --strip-textNarrow-marginLeft: auto;  grid-column: span var(--span, 24); }   /* _strip.7.5.scss:444-446 (span calc simplified: --w* polyfill not used - INFERRED) */
+    .strip__column--2 { --strip-textNarrow-marginRight: auto; grid-column: span var(--span, 24); }   /* _strip.7.5.scss:469-471 */
+    .strip__column--3 { --strip-textNarrow-marginRight: auto; grid-column: span var(--span, 24); }   /* _strip.7.5.scss:496-498 */
+}
+.strip--wide .strip__column--1 { --strip-textNarrow-paddingLeft: var(--container-pad); }    /* _strip.7.5.scss:451-453 */
+.strip--wide .strip__column--2 { --strip-textNarrow-paddingRight: var(--container-pad); }   /* _strip.7.5.scss:472-474 */
+/* column --image variant (image fills the column) - _strip.7.5.scss:410-434 */
+.strip__column--image .strip__text { height: 100%; position: relative; z-index: 1; }
+.strip__column--image .strip__image { height: 100%; }
+.strip__column--image .strip__image img { max-height: 40vh; }
+@media (min-width: 50em) { .strip__column--image .strip__image img { max-height: none; width: calc(100% + var(--hpad, var(--vpad)) / 2); } }
+.strip__column--image img { max-width: none; width: 100%; height: 100%; object-fit: cover; }
+
+/* --------------------------------------------------------------------------
+   6. Images: .strip__image, the --image row, the 65vh parallax window, .js-image-anime
+   -------------------------------------------------------------------------- */
+.strip__image {                                        /* _strip.7.5.scss:183-189 */
+    position: relative; display: grid; grid-template-areas: "main";
+    margin-left: auto; margin-right: auto;
+}
+.strip__image > picture, .strip__image > img, .strip__image > video, .strip__image .image__credits { grid-area: main; }   /* _strip.7.5.scss:225-228 */
+.js-image-anime .strip__image { overflow: hidden; }   /* _strip.7.5.scss:194-196 - the zoom-settle window */
+.strip__image--before { margin-bottom: calc(var(--vpad) / 2); }   /* _strip.7.5.scss:197-202 */
+.strip__image--before:last-child { margin-bottom: 0; }
+.strip__image--after { margin-top: calc(var(--vpad) / 2); }       /* _strip.7.5.scss:203-208 */
+.strip__image--after:first-child { margin-top: 0; }
+.strip__image figcaption { display: block; position: relative; z-index: 1; padding: .3em; text-align: center; font-size: .875rem; }   /* _strip.7.5.scss:238-244 (.85em -> BK caption 14px) */
+/* .strip--image row - _strip.7.5.scss:522-534, 558-568, 598-605 */
+.strip--image .strip__data {
+    display: grid; grid-template-columns: minmax(1em, 1fr); grid-template-rows: 1fr; grid-template-areas: "main";
+    justify-items: center; align-items: stretch; position: relative;
+}
+.strip--image .strip__image {
+    grid-area: main; position: relative; z-index: 0; overflow: hidden;
+    margin-bottom: calc(var(--vpad) / 2);
+    max-height: var(--strip-image-maxHeight, none);
+}
+.strip--image .strip__image:last-child { margin-bottom: 0; }
+.strip--image .strip__image--small { --strip-image-maxHeight: 50vh; }   /* _strip.7.5.scss:569-571 */
+.strip--image .strip__image--big   { --strip-image-maxHeight: 80vh; }   /* _strip.7.5.scss:572-574 */
+.strip--image .strip__image img, .strip--image .strip__image video { width: 100%; margin: 0 auto; object-fit: cover; }   /* _strip.7.5.scss:598-605 */
+/* wide image row + parallax window: 65vh box, 150% image - _strip.7.5.scss:622-636, 665-674
+   measured: figure 1440x585 (65vh of 900), img 1440x877.5 (layout-manifest [272]) */
+.strip--image.strip--wide .strip__image { display: block; width: 100%; }
+.strip--image.strip--wide .strip__image img { height: 100%; }
+.strip--image.strip--wide .parallax .strip__image { height: var(--strip-image-maxHeight, 65vh); }
+.strip--image .parallax .strip__image { overflow: hidden; }
+.strip--image .parallax .strip__image img { height: 150%; }
+.strip--image.strip--wide .strip__text {              /* _strip.7.5.scss:644-650 */
+    max-width: 56.25rem; padding-left: var(--container-pad); padding-right: var(--container-pad); margin-left: auto; margin-right: auto;
+}
+/* generic cover-image helper - %coverImage, PZ main/_extend.scss:67-81 (compiled inline-critical:470-487) */
+.image-container { position: relative; overflow: hidden; }
+.image-container img, .image-container picture, .image-container video {
+    position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover;
+    object-position: var(--pinX, 50%) var(--pinY, 50%);
+}
+
+/* --------------------------------------------------------------------------
+   7. Floating stamp - PZ main/modules/_strip_site.scss:70-105 (compiled main.1.beautified.css:7772-7803)
+      Needs: position relative on the element (set here); JS tweens --stamp-y (core.js initStamps).
+      Deviation: the mark is applied with mask-image + background-color so it renders in --colStamp
+      (background-image cannot take currentColor); geometry/motion unchanged.
+   -------------------------------------------------------------------------- */
+.strip--stamp { position: relative; }
+.strip--stamp::after {
+    content: "";
+    position: absolute;
+    z-index: var(--z-stamp);                           /* source 10 - _strip_site.scss:78; Z-INDEX PLAN stamp 10 */
+    top: -3.5em;                                       /* math.div($w, -2), $w 7em - _strip_site.scss:79 */
+    right: calc(var(--vpad) / 2);                      /* _strip_site.scss:80 */
+    width: 5em; height: 5em;                           /* $w - 2 - _strip_site.scss:81-82 */
+    font-size: .6em;                                   /* _strip_site.scss:86 */
+    background: var(--colStamp, var(--colAccent));     /* DD Pick 13: own mark in --colAccent (source: url(stamp.svg) no-repeat 50%/contain - _strip_site.scss:83-84) */
+    -webkit-mask: url("../assets/svg/mark.svg") no-repeat 50% 50% / contain;
+    mask: url("../assets/svg/mark.svg") no-repeat 50% 50% / contain;
+    transform: translate3d(0, var(--stamp-y, 0), 0);   /* _strip_site.scss:85 */
+    pointer-events: none;                              /* INFERRED (decorative) */
+}
+@media (min-width: 36em) {                             /* _strip_site.scss:87-92 */
+    .strip--stamp::after { right: var(--vpad); width: 7em; height: 7em; font-size: 1em; }
+}
+.strip--stamp.strip__column--1::after { right: auto; left: var(--vpad); }   /* _strip_site.scss:94-99 */
+.strip--stamp.waiting::after { opacity: 0; }                                 /* _strip_site.scss:100-104 */
+
+/* --------------------------------------------------------------------------
+   8. Reveals - class flip .waiting -> .animated (JS: core.js initReveals)
+      PZ main/modules/_animate.scss:1-79 (compiled main.1.beautified.css:5566-5717); measured 600ms, 45px = 5vh
+   -------------------------------------------------------------------------- */
+@media screen and (prefers-reduced-motion: no-preference) {
+    .animated .strip__blurb, .animated .strip__counter,
+    .animated.strip__column .strip__column__content,
+    .animated:not(.strip__column):not([class*="strip__blurb"]) {
+        transition: var(--aniTime, var(--aniSlow)) var(--easeInOutCubic);   /* animate2 - _extend.scss:40 (.6s cubic-bezier(.645,.045,.355,1)); main.1:5583 */
+        transition-property: var(--aniProp, all);      /* main.1:5584 (overrides the 1.2s opacity/transform rule at 5572-5573 in the cascade) */
+    }
+    /* child delay ladder i*.1s - _animate.scss:24-28 (compiled main.1:5599-5673) */
+    .animated:nth-child(1) { transition-delay: .1s; }  .animated:nth-child(2) { transition-delay: .2s; }  .animated:nth-child(3) { transition-delay: .3s; }
+    .animated:nth-child(4) { transition-delay: .4s; }  .animated:nth-child(5) { transition-delay: .5s; }  .animated:nth-child(6) { transition-delay: .6s; }
+    .animated:nth-child(7) { transition-delay: .7s; }  .animated:nth-child(8) { transition-delay: .8s; }  .animated:nth-child(9) { transition-delay: .9s; }
+    .animated:nth-child(10) { transition-delay: 1s; }  .animated:nth-child(11) { transition-delay: 1.1s; }  .animated:nth-child(12) { transition-delay: 1.2s; }
+    .animated:nth-child(13) { transition-delay: 1.3s; }  .animated:nth-child(14) { transition-delay: 1.4s; }  .animated:nth-child(15) { transition-delay: 1.5s; }
+    .animated:nth-child(16) { transition-delay: 1.6s; }  .animated:nth-child(17) { transition-delay: 1.7s; }  .animated:nth-child(18) { transition-delay: 1.8s; }
+    .animated:nth-child(19) { transition-delay: 1.9s; }
+    @media screen and (min-width: 36em) {              /* _animate.scss:16-23 */
+        .animated.strip__column--2 .strip__column__content { transition-delay: .5s !important; }
+        .animated.strip__column--3 .strip__column__content { transition-delay: 1s !important; }
+    }
+    .waiting { pointer-events: none; }                 /* _animate.scss:31 */
+    .waiting.anima--fade .strip__blurb, .waiting.anima--fade .strip__counter,
+    .waiting.anima--fade.strip__column .strip__column__content,
+    .waiting.anima--fade:not(.strip__column):not([class*="strip__blurb"]) { opacity: 0; }   /* _animate.scss:33-40 */
+    .waiting.anima--left-in .strip__blurb, .waiting.anima--left-in .strip__counter,
+    .waiting.anima--left-in.strip__column .strip__column__content,
+    .waiting.anima--left-in:not(.strip__column):not([class*="strip__blurb"]) { opacity: 0; transform: translate3d(-5vh, 0, 0); }   /* _animate.scss:41-49 */
+    .waiting.anima--right-in .strip__blurb, .waiting.anima--right-in .strip__counter,
+    .waiting.anima--right-in.strip__column .strip__column__content,
+    .waiting.anima--right-in:not(.strip__column):not([class*="strip__blurb"]) { opacity: 0; transform: translate3d(5vh, 0, 0); }    /* _animate.scss:50-58 */
+    .waiting.anima--top-in .strip__blurb, .waiting.anima--top-in .strip__counter,
+    .waiting.anima--top-in.strip__column .strip__column__content,
+    .waiting.anima--top-in:not(.strip__column):not([class*="strip__blurb"]) { opacity: 0; transform: translate3d(0, -5vh, 0); }     /* _animate.scss:59-67 */
+    .waiting.anima--bottom-in .strip__blurb, .waiting.anima--bottom-in .strip__counter,
+    .waiting.anima--bottom-in.strip__column .strip__column__content,
+    .waiting.anima--bottom-in:not(.strip__column):not([class*="strip__blurb"]) { opacity: 0; transform: translate3d(0, 5vh, 0); }   /* _animate.scss:68-76 */
+    /* gallery children under a waiting wrapper - main.1.beautified.css:5178-5181 (+ ladder 5134-5176, class .animate) */
+    .waiting .strip__gallery > * { opacity: 0; transform: translate3d(0, 50%, 0); }
+    .animate .strip__gallery > :nth-child(1n) { transition-delay: .08s; }  .animate .strip__gallery > :nth-child(2n) { transition-delay: .16s; }
+    .animate .strip__gallery > :nth-child(3n) { transition-delay: .24s; }  .animate .strip__gallery > :nth-child(4n) { transition-delay: .32s; }
+}
+/* sequence ladder i*.08s - PZ minimal/_generic.scss:135-141 (compiled inline-critical:661-735) */
+.animate__sequence > :nth-child(1) { transition-delay: .08s; }  .animate__sequence > :nth-child(2) { transition-delay: .16s; }
+.animate__sequence > :nth-child(3) { transition-delay: .24s; }  .animate__sequence > :nth-child(4) { transition-delay: .32s; }
+.animate__sequence > :nth-child(5) { transition-delay: .4s; }   .animate__sequence > :nth-child(6) { transition-delay: .48s; }
+.animate__sequence > :nth-child(7) { transition-delay: .56s; }  .animate__sequence > :nth-child(8) { transition-delay: .64s; }
+.animate__sequence > :nth-child(9) { transition-delay: .72s; }  .animate__sequence > :nth-child(10) { transition-delay: .8s; }
+.animate__sequence > :nth-child(11) { transition-delay: .88s; } .animate__sequence > :nth-child(12) { transition-delay: .96s; }
+.animate__sequence > :nth-child(13) { transition-delay: 1.04s; } .animate__sequence > :nth-child(14) { transition-delay: 1.12s; }
+.animate__sequence > :nth-child(15) { transition-delay: 1.2s; } .animate__sequence > :nth-child(16) { transition-delay: 1.28s; }
+.animate__sequence > :nth-child(17) { transition-delay: 1.36s; } .animate__sequence > :nth-child(18) { transition-delay: 1.44s; }
+.animate__sequence > :nth-child(19) { transition-delay: 1.52s; }
+
+/* --------------------------------------------------------------------------
+   9. Split titles - span.word-wrapper > span.word (JS: core.js initSplitTitles)
+      PZ main.1.beautified.css:8592-8600 (.word-wrapper), 5719-5722 ([data-word]), _animate.scss:80-99
+   -------------------------------------------------------------------------- */
+.word-wrapper { display: inline-flex; overflow: hidden; margin-top: -.15em; }   /* main.1:8592-8596 */
+.word-wrapper .word { display: inline-flex; padding-top: .15em; }              /* main.1:8598-8600 + [data-word]{inline-flex} 5719-5722 */
+.word-wrapper .word { transform-origin: 0 100%; }                              /* _animate.scss:93 */
+@media screen and (prefers-reduced-motion: reduce) {
+    .word-wrapper .word { transform: none !important; opacity: 1 !important; }  /* _animate.scss:94-97 */
+}
+
+/* --------------------------------------------------------------------------
+   10. .read-more - the only CTA style - PZ main/_common.scss:64-117
+       measured: 15.2px/22.8px uppercase 400, disc 30.4px (2em), arrow -15.2px -> 0, 600ms
+   -------------------------------------------------------------------------- */
+.read-more {
+    display: var(--display, inline-grid);              /* _common.scss:65 */
+    align-items: center; justify-items: center;        /* _common.scss:66-67 */
+    color: var(--colRead-more, var(--strip-text-color, var(--colBrand)));   /* _common.scss:68 (--colNero = --colBrand) */
+    text-transform: uppercase;                         /* _common.scss:69 */
+    font-weight: var(--wButton);                       /* BK Bold 700 ($fontStrong - _common.scss:70 was 400) */
+    font-size: .9em;                                   /* BK .9em (_common.scss:71 was .95em) */
+    letter-spacing: var(--trackButton);                /* BK .08em */
+    cursor: pointer;                                   /* _common.scss:73 */
+    /* 44px touch target with zero layout change: the padding grows the hit box, the equal negative margin keeps the
+       margin box (what the line box measures) exactly as before - INFERRED (WIG / WCAG 2.5.5) */
+    padding-block: .8em;
+    margin-block: -.8em;
+}
+.is-mouse .read-more {                                 /* _common.scss:75-78 */
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "text icon";
+    gap: .5em;
+}
+.is-mouse .read-more::before {                         /* _common.scss:79-89 */
+    content: ""; grid-area: icon;
+    width: 2em; height: 2em;
+    background: currentColor; opacity: 0; border-radius: 50%;
+    transition: var(--aniTime, var(--aniSlow)) var(--easeInOutCubic); transition-property: var(--aniProp, all);   /* %animate2 */
+}
+.is-mouse .read-more::after {                          /* _common.scss:90-102 (fontello arrow -> inline SVG mask, DD Pick 15 "Change") */
+    content: ""; grid-area: icon;
+    display: flex; align-items: center; margin: 0;
+    width: 1em; height: 1em;                           /* %fontIcons width 1em - _extend.scss:11 */
+    background-color: var(--colBianco);                /* color: var(--colBianco) - _common.scss:94 */
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") no-repeat 50% 50% / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") no-repeat 50% 50% / contain;
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);               /* _common.scss:100 */
+    mix-blend-mode: difference;                        /* _common.scss:101 (inverts the arrow against the disc on light bands) */
+    transition: var(--aniTime, var(--aniSlow)) var(--easeInOutCubic); transition-property: var(--aniProp, all);
+}
+/* dark bands: the source's `difference` blend inverts the arrow against the disc on LIGHT bands only; on .bg-band-black / .bg-band-accent it
+   would invert against the accent hover disc (spec.md Requests 1, foundation Known issues) - plain blend there. INFERRED safe rule adopted
+   from the 09/10/11/12 scoped overrides by the global verifier (round 2); sections still choose the arrow colour (11/12 use --colNero). */
+.is-mouse .bg-band-black .read-more::after, .is-mouse .bg-band-accent .read-more::after { mix-blend-mode: normal; }
+.read-more:hover, a:hover .read-more { color: var(--colRead-more, var(--strip-text-color, var(--colLinkHover))); }   /* _common.scss:104-106; BK: on white bands the label + disc turn accent (hover feedback, WIG), bands/sections keep their own colour */
+.is-mouse .read-more:hover::before, .is-mouse a:hover .read-more::before { opacity: 1; }                        /* _common.scss:108-110 */
+.is-mouse .read-more:hover::after,  .is-mouse a:hover .read-more::after  { opacity: 1; transform: none; }       /* _common.scss:111-114 */
+.read-more:focus-visible::before { opacity: 1; }  .read-more:focus-visible::after { opacity: 1; transform: none; }   /* keyboard parity - INFERRED (DD s7 Accessibility) */
+
+/* --------------------------------------------------------------------------
+   11. .button - PZ main/modules/_button.scss:1-72, 108-123, 138-149
+       measured: 13.6px, padding 10.2px 20.4px, lh 1.2, radius .5em (--squared 0)
+   -------------------------------------------------------------------------- */
+.button {
+    --p: .75em; --ph: .75em; --pr: 0px;                /* _button.scss:2-6 */
+    --aniX: var(--X, 0); --aniY: var(--Y, 1);          /* _button.scss:6-7 */
+    display: inline-flex; flex-flow: row nowrap; justify-content: center; align-items: center;   /* _button.scss:10-13 */
+    cursor: pointer;
+    padding: var(--p) calc(var(--p) + var(--ph) + var(--pr)) var(--p) calc(var(--p) + var(--ph));   /* _button.scss:16-17 (= .75em 1.5em) */
+    background: var(--colFondoBottoni, var(--colPrimario));   /* _button.scss:18 */
+    color: var(--colTextBottoni, var(--colBianco));    /* _button.scss:19 */
+    border: 1px solid var(--colBordoBottoni, transparent);   /* _button.scss:20 */
+    font-weight: var(--wButton); font-size: .9em; letter-spacing: var(--trackButton); text-transform: uppercase; line-height: 1.2; text-align: center;   /* _button.scss:21-25 (BK: Bold 700 .9em ls .08em; was 500 .85em) */
+    min-height: var(--tapMin);                         /* 44px touch target (WIG) - INFERRED; the padding box was 38.7px */
+    position: var(--buttonPosition, relative); z-index: var(--buttonZ, 1); overflow: hidden;   /* _button.scss:26-28 */
+    width: 100%;                                       /* _button.scss:29 */
+    border-radius: .5em;                               /* _button.scss:30 */
+    transform: var(--btTransform, scale3d(1, 1, 1));   /* _button.scss:31 */
+    text-decoration: none;
+}
+@media (min-width: 36em) { .button { width: auto; } } /* _button.scss:32-34 */
+.button + .button { margin-top: 1em; }                 /* _button.scss:35-36 */
+@media (min-width: 36em) { .button + .button:not(.button--wide) { margin-top: 0; margin-left: 1em; } }   /* _button.scss:37-40 */
+@media screen and (prefers-reduced-motion: no-preference) {
+    .button { transition: background-color var(--aniTime, var(--aniSlow)) var(--easeInOutCubic), color var(--aniTime, var(--aniSlow)) var(--easeInOutCubic), border-color var(--aniTime, var(--aniSlow)) var(--easeInOutCubic), transform var(--aniTime, var(--aniSlow)) var(--easeInOutCubic), opacity var(--aniTime, var(--aniSlow)) var(--easeInOutCubic); }   /* %animateBut - _extend.scss:44-48 (`all` -> the properties that change, WIG) */
+    .button::after { transition: var(--aniTime, var(--aniSlow)) var(--easeInOutCubic); transition-property: var(--aniProp, all); }   /* %animate2 */
+}
+.button::after {                                       /* _button.scss:47-59 - hover sheet sliding in from --X/--Y */
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    display: flex; justify-content: center; align-items: center;
+    /* SHARED POLISH 2026-09-17: the source's 40% white veil (background --colBianco, opacity .4) turned the brown button into #967c6a under a white
+       label = 3.7-3.9:1 while hovered. The sheet is now the single accent at full strength (white label 6.54:1, the sheet vs white page 6.54:1);
+       colour + opacity only, same slide. Variants / bands set --colSheetBottoni / --opSheetBottoni (verify/pages/shared-polish.md). */
+    background: var(--colSheetBottoni, var(--colContrasto)); opacity: var(--opSheetBottoni, 1);
+    transform: translate3d(calc(-100% * var(--aniX)), calc(-100% * var(--aniY)), 0);
+}
+.button strong { color: inherit; }                     /* _button.scss:60-62 */
+.button:hover, a:hover .button:not(.button--shy) { color: var(--colBianco); }   /* _button.scss:64-66 */
+.button:hover::after, a:hover .button:not(.button--shy)::after { transform: none; }   /* _button.scss:67-70 */
+.button--wide { display: flex; width: 100%; margin-left: 0; margin-right: 0; }   /* _button.scss:99-104 */
+.button--alternate { --colFondoBottoni: var(--colContrasto); --colSheetBottoni: var(--colContrastoScuro); }   /* _button.scss:105-107; hover sheet = accent -20% (white 8.81:1) so the accent button still visibly changes */
+.button--no-icon { --pr: 0em; font-family: var(--fontBrand); font-weight: var(--wButton); }   /* _button.scss:108-118 ($fontNormal -> BK button role, one face) */
+.button--no-icon strong { font-weight: var(--wButton); }
+.button--outlined { --colFondoBottoni: transparent; --colBordoBottoni: currentColor; --colTextBottoni: currentColor; }   /* _button.scss:119-123. SHARED POLISH: was `inherit`, which as a custom-property value inherits the (unset) parent PROPERTY, so the label fell back to --colBianco = white on white bands (1:1 at rest and on focus); `currentColor` in `color` = the band's text colour, as the source meant. Scoped --colTextBottoni rules still win. */
+.button--white { --colTextBottoni: var(--colBianco); }   /* _button.scss:124-126 */
+.button--icon { --aniTime: .3s; width: auto; padding: calc(var(--p) - .2em); }   /* _button.scss:138-146 (measured padding 10.47px at 19.04px) */
+.button--squared { border-radius: 0; }                 /* _button.scss:147-149 */
+.button--rounded { height: var(--buttonHeight, 4.5em); width: var(--buttonHeight, 4.5em); padding: var(--p); border-radius: 50%; }   /* _button.scss:150-155 */
+.button--disabled { --colTextBottoni: var(--colGrigioScuro); --colFondoBottoni: var(--colGrigio); opacity: .5; cursor: auto; pointer-events: none; }   /* _button.scss:156-162 */
+
+/* --------------------------------------------------------------------------
+   12. Carousel - bleed-right wrapper, slides, round hover-only arrows
+       PZ main/modules/_strip_site.scss:163-211 (compiled main.1.beautified.css:7841-7883, 5059-5113),
+       arrows PZ main.1.beautified.css:291-355 (plug-ins/_splide.scss)
+       measured: rail x120 w1320 (bleeds right), slides 389x450 pitch 405.5, arrows 42x42 at x1369.2 (layout-manifest #splide02)
+   -------------------------------------------------------------------------- */
+.strip__gallery { position: relative; text-align: center; }   /* main.1:5059-5066 (grid variant not used) */
+.strip__gallery.splide { display: block; }              /* main.1:5068-5072 */
+html:not(.js-ok) .splide { visibility: visible; }      /* JS-off fallback: splide-core hides .splide until .is-initialized - INFERRED (the source never ran without JS); adopted from 03/06 by the global verifier (round 2) */
+.strip--wide .strip__gallery.splide {                  /* _strip_site.scss:166-172 (compiled main.1:7845-7850) */
+    margin-left: auto; margin-right: 0;
+    width: calc(100vw - var(--vpad));
+    max-width: calc((100% + 75rem) / 2);
+}
+.strip--wide .strip__gallery .splide__track { padding-right: max(50vw - 37.5rem, var(--container-pad)) !important; }   /* _strip_site.scss:173-180 (compiled 7852-7854) */
+.strip__gallery__link { display: flex; overflow: hidden; }   /* main.1:5080-5082, 7856-7858 */
+.strip__gallery__link img { transition: var(--aniTime, var(--aniSlow)) var(--easeInOutCubic); transition-property: var(--aniProp, all); }   /* _strip_site.scss:184-186 (%animate2) */
+.strip__gallery__link:hover img { transform: scale3d(1.02, 1.02, 1); }   /* _strip_site.scss:187-191 (compiled 7860-7862) */
+.strip__gallery picture { display: grid; grid-template-areas: "main"; overflow: hidden; width: 100%; }   /* main.1:5084-5089 */
+.strip__gallery picture source { display: none; }      /* main.1:5091-5093 */
+.strip__gallery img { grid-area: main; height: 100%; width: 100%; object-fit: cover; }   /* main.1:5107-5113 */
+.strip__gallery--slider .strip__gallery__item { margin-right: 1em; }   /* _strip_site.scss:193-197 (= Splide gap "1em") */
+.strip__gallery--slider img { max-height: 70vh; object-fit: cover; }    /* _strip_site.scss:202-204 */
+@media (min-width: 50em) { .strip__gallery--slider img { max-width: 80vw; max-height: 50vh; } }   /* _strip_site.scss:205-208 */
+.strip__gallery .splide__slide { backface-visibility: hidden; }        /* splide core */
+.splide__arrows {                                      /* main.1:291-311 */
+    position: absolute;
+    z-index: var(--z-arrows);                          /* source 10 - main.1:298; Z-INDEX PLAN arrows 5 */
+    bottom: var(--vpad);
+    right: calc(var(--vpad) / 2);
+    display: grid; gap: 1rem;
+    font-size: .85em;
+}
+@media (min-width: 36em) { .splide__arrows { font-size: 1em; } }    /* main.1:301-305 */
+@media (min-width: 50em) { .splide__arrows { font-size: 1.4em; } }  /* main.1:307-311 (-> button 19.04px, 42x42) */
+.splide__arrow {                                       /* main.1:320-325 + .button.button--icon */
+    --colTextBottoni: var(--colBianco);
+    --colFondoBottoni: var(--colPrimario);
+    --colBordoBottoni: var(--colBianco);
+    border-radius: 50% !important;
+    width: calc(2.1em + 2px); height: calc(2.1em + 2px);   /* = 1em icon + 2 x .55em padding + 2 x 1px border (_button.scss:16-20,138-146) -> 41.98 @19.04px (measured 41.97, computed-styles [161]) and 26.28 @11.56px (manifest 26.2x26.3). Integrator edit 2026-09-16: was 2.2em (exact only at 19.04px; 25.4 on phones = -3.3%), requested by build-B.md + build-C.md */
+    min-width: var(--tapMin); min-height: var(--tapMin);   /* BK/WIG 44px touch target: 42 -> 44 on desktop, 26 -> 44 on phones; the grid stays anchored bottom-right so the arrows only grow inwards - INFERRED */
+    padding: 0;
+}
+.is-touch .splide__arrow svg { width: 1.4em; height: 1.4em; }   /* the 11.6px phone icon reads too small inside the 44px disc - INFERRED polish */
+.splide__arrow + .splide__arrow { margin: 0 !important; }   /* main.1:327-329 */
+.splide__arrow--prev { --X: -1; --Y: 0; }              /* main.1:331-334 (sheet slides in sideways) */
+.splide__arrow--next { --X: 1;  --Y: 0; }              /* main.1:336-339 */
+.splide__arrow::after { border-radius: 50%; }          /* main.1:341-343 */
+.splide__arrow svg { width: 1em; height: 1em; fill: none; stroke: currentColor; }   /* sprite icon replaces the hidden Splide path (main.1:353-355 display:none) */
+.is-mouse .splide__arrow { opacity: 0; }               /* main.1:345-347 */
+.is-mouse .splide:hover .splide__arrow:not([disabled]) { opacity: 1; }   /* main.1:200-202 */
+.splide__arrow:focus-visible { opacity: 1; }           /* keyboard parity - INFERRED (DD s7 Accessibility) */
+.is-touch .splide__arrow { opacity: 1; }               /* DD Pick 6 "Change": arrows always visible on is-touch */
+
+/* --------------------------------------------------------------------------
+   13. Icons (sprite assets/svg/icons.svg) - INFERRED sizing: 1em square, stroke currentColor
+   -------------------------------------------------------------------------- */
+.icon { display: inline-block; width: 1em; height: 1em; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; vertical-align: -.125em; }
+.icon--fill { fill: currentColor; stroke: none; }
+
+/* --------------------------------------------------------------------------
+   14. Accessibility helpers
+   -------------------------------------------------------------------------- */
+.visual-hide, .a11y-only {                             /* inline-critical:577-587 (sr-only) */
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+    clip: rect(0, 0, 0, 0); border-width: 0; white-space: nowrap;
+}
+a.skip-main {                                          /* PZ minimal/_generic.scss:145-164 (compiled inline-critical:737-760) */
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+    clip: rect(0, 0, 0, 0); border-width: 0; white-space: nowrap;
+}
+a.skip-main:focus, a.skip-main:active {
+    color: var(--colOnBrand); background-color: var(--colBrand);   /* BK (was #fff on #000) */
+    left: auto; top: auto; width: 30%; height: auto; overflow: auto;
+    margin: 10px 35%; padding: 5px; text-align: center; font-size: 1.2em;
+    z-index: 999; clip: auto;
+}
+:focus-visible { outline: 2px solid var(--colFocus); outline-offset: var(--focusOffset); }   /* BK: 2px --colFocus ring, offset 2px - accent on white / soft, WHITE on the brand + accent bands (tokens.css section 2 flips --colFocus; read here, not via --focusRing, so the flip reaches the ring); was 3px --colContrasto (%focus-visible - PZ main/_extend_site.scss:19-26) */
+:focus:not(:focus-visible) { outline: none; }          /* _generic.scss:1-5 ($notA11y) */
+
+/* --------------------------------------------------------------------------
+   15. Motion gates - PZ main/modules/_animate.scss:101-110; touch/mouse classes set by core.js (PZ _utils.beautified.js:116)
+   -------------------------------------------------------------------------- */
+@media screen and (prefers-reduced-motion: no-preference) {
+    a { transition: var(--aniTime, var(--aniFast)) var(--easeInOutSine); transition-property: var(--aniProp, all); }   /* inline-critical:446-461 */
+}
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }   /* _animate.scss:101-110 */
+}
+.reduce-motion *, .reduce-motion ::before, .reduce-motion ::after { animation: none !important; transition: none !important; }   /* class mirror of the media query - INFERRED */
+.is-touch .hover-only, .is-mouse .touch-only { display: none !important; }   /* helper hooks - INFERRED */
+
+/* --------------------------------------------------------------------------
+   16. Media defaults
+   -------------------------------------------------------------------------- */
+img { font-style: italic; }                            /* alt text styling - INFERRED */
+video { max-width: 100%; }
+/* NOTE: <picture> stays inline (UA default) on purpose - the parallax img{height:150%} resolves against the
+   65vh figure only when picture is not a block container (measured 877.5px = 1.5 x 585 at 1440x900). */
+
+/* (section 17 - the brand-pass scoped overrides for other lanes - was deleted on 2026-09-17: every rule now lives in its section file:
+   00-header.css, 01-hero.css, 08-podcast.css, 09-episodes.css, 12-visit-listen.css, 13-newsletter.css, 14-footer.css.) */

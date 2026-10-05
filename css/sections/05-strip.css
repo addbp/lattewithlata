@@ -1,0 +1,30 @@
+/* ==========================================================================
+   05-strip - full-bleed 65vh parallax window + floating stamp (section-scoped)
+   The window is entirely base.css s6/s7:
+     .strip--image.strip--wide .strip__image { display:block; width:100% }        - PZ main/modules/_strip.7.5.scss:630-636
+     .strip--image.strip--wide .parallax .strip__image { height: 65vh }           - _strip.7.5.scss:622-628 (measured 1440x585 @900, 390x548.6 @844)
+     .strip--image .parallax .strip__image { overflow:hidden } img { height:150% } - _strip.7.5.scss:665-673 (measured img 877.5 / 822.9)
+     .strip--image .strip__image img { width:100%; object-fit:cover }             - _strip.7.5.scss:598-605
+     .strip--stamp::after top:-3.5em right:var(--vpad) 7em (>=36em)               - _strip_site.scss:70-92
+   Motion: core.js initParallaxStrips (PZ _page-scroll.beautified.js:360-380, y 0 -> box.h - img.h = -292.5 @1440) and
+   initStamps (PZ _page-scroll.beautified.js:992-1006, --stamp-y -25% -> 25%, scrub .75).
+   ========================================================================== */
+
+/* the parallax img is a direct child of the figure (no <picture>): make the 150% height resolve against the 65vh box
+   in every engine and keep the layout box stable before decode - restates _strip.7.5.scss:665-673 / 598-605 at section
+   scope so a later stylesheet cannot re-introduce `height:auto` from the generic figure img rule (_generic.scss:53-59). */
+#s-05-strip .parallax .strip__image img {
+    display: block;
+    width: 100%;
+    height: 150%;                      /* _strip.7.5.scss:671 */
+    object-fit: cover;                 /* INFERRED - source relied on the intrinsic 3:2 ratio (spec 05 (i)) */
+    will-change: transform;            /* INFERRED - scrubbed y on a 1440x877 raster */
+}
+
+/* the section box never changes size; the image moves inside the clipped figure (spec 05 (h)) */
+#s-05-strip .strip__image { overflow: hidden; }   /* _strip.7.5.scss:665-668 (core.js also sets it inline, PS:366-367) */
+
+/* ---- Brand pass (BK, 2026-09-17) ----
+   Nothing to restyle: the section has no text, and the floating stamp is base.css .strip--stamp::after = assets/svg/mark.svg
+   (the kit's cup mark, currentColor via mask) in --colStamp = --colBrand on this white band (LOGO-USAGE.md "brown on white bands").
+   The stamp's lower half floats over the photo by design (PZ window + stamp); it is decorative (pointer-events none, no text). */

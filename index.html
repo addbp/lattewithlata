@@ -1,0 +1,1026 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<!-- no-js -> js-ok before first paint (PZ pattern: .no-js in inline-critical, rendered.html:1 <html class="js-ok ...">); the section CSS carries html:not(.js-ok) fallbacks -->
+<script>document.documentElement.classList.replace("no-js","js-ok")</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latte with Lata - Real Conversations. Built on Purpose.</title>
+<meta name="description" content="Real Conversations. Built on Purpose. A podcast cafe in Harrowfield: coffee all week and, Thursday nights, a candid conversation with a mission-driven leader.">
+<meta name="theme-color" content="#502506">
+<link rel="canonical" href="https://addbp.github.io/lattewithlata/">
+<meta property="og:url" content="https://addbp.github.io/lattewithlata/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Latte with Lata">
+<meta property="og:title" content="Latte with Lata - Real Conversations. Built on Purpose.">
+<meta property="og:description" content="Real Conversations. Built on Purpose. A podcast cafe in Harrowfield: coffee all week and, Thursday nights, a candid conversation with a mission-driven leader.">
+<meta property="og:image" content="https://addbp.github.io/lattewithlata/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Latte with Lata - Real Conversations. Built on Purpose.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Latte with Lata - Real Conversations. Built on Purpose.">
+<meta name="twitter:description" content="Real Conversations. Built on Purpose. A podcast cafe in Harrowfield: coffee all week and, Thursday nights, a candid conversation with a mission-driven leader.">
+<meta name="twitter:image" content="https://addbp.github.io/lattewithlata/assets/images/og-image.jpg">
+<link rel="icon" href="assets/svg/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/brand/fonts/creato_display/CreatoDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/brand/fonts/creato_display/CreatoDisplay-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="vendor/splide-core.min.css">
+<link rel="stylesheet" href="css/sections/00-header.css">
+<link rel="stylesheet" href="css/sections/01-hero.css">
+<link rel="stylesheet" href="css/sections/02-intro.css">
+<link rel="stylesheet" href="css/sections/03-gallery.css">
+<link rel="stylesheet" href="css/sections/04-story-a.css">
+<link rel="stylesheet" href="css/sections/05-strip.css">
+<link rel="stylesheet" href="css/sections/06-menu.css">
+<link rel="stylesheet" href="css/sections/07-manifesto.css">
+<link rel="stylesheet" href="css/sections/08-podcast.css">
+<link rel="stylesheet" href="css/sections/09-episodes.css">
+<link rel="stylesheet" href="css/sections/10-hosts.css">
+<link rel="stylesheet" href="css/sections/11-live.css">
+<link rel="stylesheet" href="css/sections/12-visit-listen.css">
+<link rel="stylesheet" href="css/sections/13-newsletter.css">
+<link rel="stylesheet" href="css/sections/14-footer.css">
+</head>
+<body id="top" data-page="home">
+<a class="skip-main" href="#page-content">Skip to main content</a>
+
+<!-- ===== sections/00-header.html ===== -->
+<!-- 00-header: fixed header + off-canvas drawer + mobile Book-a-table pill. Shared by EVERY page (build-site.cjs inlines it on the home page and on all sub-pages).
+     Sits BEFORE <main>. Source skeleton: PZ/source/rendered.html #page-header (BUILD-SPEC 00 (b)); pill: Iceberg .home__about-button.
+     Copy: content/site.json -> brand.name (lockup wordmark + aria-label), nav[], bookingLabel, listenOn[], newsletter.eyebrow (side link).
+     Note: .header__container is NOT a .container (the source header is a full-width flex row, measured 1440x78 / 390x63).
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 1a + 3): the drawer keeps the white cup mark at 72px, now a link home. Every href is the PAGES-SPEC
+     navigation map: real pages, no same-page anchors, platform links stay "#" placeholders.
+     UPDATE-3 (2026-09-17, client request): the header row is burger LEFT + the logo lockup RIGHT again - the white cup mark (decorative img,
+     482x571 attrs = the viewBox box so nothing shifts on load; 44px, 56px at >= 60em) + the "LATTE WITH LATA" wordmark text (hidden below
+     36em: mark only), one link home. "Book a table" left the bar; it stays in the drawer, the mobile pill and every page CTA. -->
+<header id="page-header" class="header page__header">
+  <div class="header__container">
+    <button class="header__burger menu__switcher js-menu-switcher" type="button" aria-label="Menu" aria-haspopup="true" aria-controls="menu-container" aria-expanded="false"><span class="menu__burger"><u></u></span></button>
+
+    <a class="header__logo" href="index.html" aria-label="Latte with Lata, home">
+      <img class="header__mark" src="assets/brand/logo/latte-with-lata-mark-white.svg" alt="" width="482" height="571" decoding="async">
+      <span class="header__wordmark" aria-hidden="true">Latte with Lata</span>
+    </a>
+
+    <aside class="menu__screen js-menu-switcher" aria-hidden="true"></aside>
+
+    <div id="menu-container" class="menu__container drawer" aria-hidden="true">
+      <a class="menu__home" href="index.html" aria-label="Latte with Lata - home"><img class="menu__mark" src="assets/brand/logo/latte-with-lata-mark-white.svg" alt="" width="482" height="571" decoding="async"></a>
+      <div class="menu__row">
+        <nav id="menu-main" class="menu__main js-menu-main" aria-label="Main">
+          <ul>
+            <li><a href="index.html" data-nav="home"><div>Home</div><div aria-hidden="true">Home</div></a></li>
+            <li><a href="cafe.html" data-nav="cafe"><div>The Cafe</div><div aria-hidden="true">The Cafe</div></a></li>
+            <li><a href="menu.html" data-nav="menu"><div>Menu</div><div aria-hidden="true">Menu</div></a></li>
+            <li><a href="podcast.html" data-nav="podcast"><div>The Podcast</div><div aria-hidden="true">The Podcast</div></a></li>
+            <li><a href="episodes.html" data-nav="episodes"><div>Episodes</div><div aria-hidden="true">Episodes</div></a></li>
+            <li><a href="podcast.html#host"><div>The Host</div><div aria-hidden="true">The Host</div></a></li>
+            <li><a href="events.html" data-nav="events"><div>Events</div><div aria-hidden="true">Events</div></a></li>
+            <li><a href="contact.html" data-nav="contact"><div>Contact</div><div aria-hidden="true">Contact</div></a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="menu__mid">
+        <nav id="menu-side" class="menu__side" aria-label="Tools">
+          <ul>
+            <!-- side links: "Get directions" = the contact page's find-us block (navigation map); the newsletter block ships on every page, so its anchor stays same-page -->
+            <li><a href="contact.html#find-us"><div>Get directions</div><div aria-hidden="true">Get directions</div></a></li>
+            <li><a href="#s-13-newsletter"><div>Stay for the conversation</div><div aria-hidden="true">Stay for the conversation</div></a></li>
+          </ul>
+        </nav>
+        <a class="button button--outlined button--no-icon button--squared" href="book.html" data-nav="book"><strong>Book a table</strong></a>
+      </div>
+
+      <div class="menu__footer">
+        <span class="menu__footer__label" aria-hidden="true">Listen on</span>
+        <nav class="menu__listen" aria-label="Listen on">
+          <ul class="socials">
+            <li><a href="#" aria-label="Spotify"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-spotify"></use></svg><span class="visual-hide">Spotify</span></a></li>
+            <li><a href="#" aria-label="Apple Podcasts"><svg class="icon icon--fill" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-apple"></use></svg><span class="visual-hide">Apple Podcasts</span></a></li>
+            <li><a href="#" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-youtube"></use></svg><span class="visual-hide">YouTube</span></a></li>
+            <li><a href="#" aria-label="RSS"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-rss"></use></svg><span class="visual-hide">RSS</span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Iceberg mobile pill (I11): wrapper = .home__about-button (fixed, full width, faded by GSAP), link = .vertical-button__link -->
+<div id="book-pill-wrap" class="book-pill__wrap">
+  <a id="book-pill" class="book-pill" href="book.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-cup"></use></svg><span>Book a table</span></a>
+</div>
+
+<main id="page-content" class="page__content">
+<!-- ===== sections/01-hero.html ===== -->
+<!-- 01-hero: 100vh colour video hero (Paszkowski banner container, P4) + Iceberg intro reveal (I6: clip-path slot, two-line char roll, tagline).
+     Skeleton: BUILD-SPEC 01 (b). Source: PZ/source/rendered.html:155-160 (div.banner > .banner__slider.parallax > video.banner__video)
+     + IC/source/rendered.html section.intro > video.intro__video / div.intro__logo > .intro__logo-inner x3 / svg.intro__sentence.
+     Copy: content/site.json brand.name, brand.wordmarkLines (one .hero__line per item, never re-split), hero.tagline, hero.sr, hero.poster, hero.video.
+     Poster: content/assets-manifest.json "assets/images/hero-poster.jpg" (1920x1080) = frame 0 of the loop.
+     UPDATE-3 (2026-09-17, lane L3): podcast highlight loop, 1920x1080 25 fps, 17.44 s, no audio - hero.webm (VP9) then hero.mp4 (H.264 fallback);
+     the edit ends on the frame before its first frame, so the native `loop` is seamless (no data-loop-end cut). Source + credit: ASSETS.md.
+     JS (js/sections/01-hero.js) builds three stacked .hero__row copies per line and splits them into .char (Iceberg rows); the HTML keeps
+     one copy of each line for no-JS. The wordmark is a <p>, not an h1: copy.md reserves the page's only h1 for intro.title (02) - INFERRED.
+     BRAND (2026-09-17): the kit's white cup mark sits ABOVE the live wordmark (72px / 96px, LOGO-USAGE.md) as a decorative <img> (the wordmark
+     carries the sr text) and fades in with the header at initial+=1.5 (01-hero.js reuses the header tween); the tagline is the kit's
+     "Real Conversations. Built on Purpose." (hero.tagline); the readability overlay is CSS (#s-01-hero::before) above the media, below the text. -->
+<section id="s-01-hero" class="strip strip--wide hero banner" aria-label="Latte with Lata" data-banner>
+  <div class="hero__media parallax" data-parallax="20">
+    <!-- data-parallax="20" = PZ _page-scroll.beautified.js:371 default (i.attr("data-parallax") || 20); the drift is ported in 01-hero.js (M5) -->
+    <video class="hero__video" muted playsinline loop autoplay preload="metadata" poster="assets/images/hero-poster.jpg" width="1920" height="1080"
+      aria-label="Latte with Lata. A short, silent loop from a recording booth: a studio microphone, a pop filter, headphones and handwritten notes in warm, low light.">
+      <source src="assets/video/hero.webm" type="video/webm">
+      <source src="assets/video/hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <img class="hero__mark" src="assets/brand/logo/latte-with-lata-mark-white.svg" alt="" width="482" height="571" decoding="async">
+  <p class="hero__wordmark">
+    <span class="visual-hide">Latte with Lata</span><span class="hero__line js-chars" aria-hidden="true">LATTE</span><span class="hero__line js-chars" aria-hidden="true">WITH LATA</span>
+  </p>
+  <p class="hero__tagline">Real Conversations. Built on Purpose.</p>
+  <!-- PAGES UPDATE (2026-09-17, PAGES-SPEC 1b): the play / pause disc was removed at the client's request - no visible video control. The autoplay rules
+       stay in 01-hero.js: under prefers-reduced-motion or Save-Data the video never starts and the poster shows; off-screen the loop is paused. -->
+</section>
+
+<!-- ===== sections/02-intro.html ===== -->
+<!-- 02-intro: title strip A CAFE WITH A MICROPHONE (word rise) + centred 600px intro paragraph + read-more "The cafe".
+     Source skeleton: PZ/source/rendered.html div[data-id="159"].strip.strip--xnarrow.mt-md.mb-md > .container > div[data-id="267"].strip__data.text-center
+     > .strip__text > h1.strip__title1  and  div[data-id="162"].strip.strip--xnarrow.mb-lg > .container > div[data-id="271"].strip__data.text-center.anima--bottom-in
+     > .strip__text > p ... p > a.read-more  (BUILD-SPEC 02 (b)). The root is a wrapper <section> holding the two sibling strips; it carries `strip`
+     for core's refresh-priority walk (foundation.md) - nested .strip rows reset the band (base.css), no visual effect on the cream page.
+     Row order title -> text (gallery follows as 03): deliberate re-ordering, per-row geometry unchanged (BUILD-SPEC 02 (h)).
+     Copy: content/site.json intro.title (the page's only h1 - copy.md), intro.paragraphs[2] (one <p> each), intro.cta.
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 1c): "just the logo" comes back right after the hero - .mark-row = the brown cup mark, centred above the
+     title, 72px (56px on phones), decorative (alt=""), no wordmark, no tagline; it rides the section's own .anima--bottom-in reveal. The same
+     .mark-row opens the first strip of every sub-page (css/pages/_shell.css). Read-more -> cafe.html (navigation map). -->
+<section id="s-02-intro" class="strip intro">
+  <div class="strip strip--xnarrow mt-md mb-md intro__title-strip">
+    <div class="container">
+      <div class="mark-row anima--bottom-in"><img class="mark-row__mark" src="assets/brand/logo/latte-with-lata-mark-brown.svg" alt="" width="482" height="571" decoding="async"></div>
+      <div class="strip__data text-center">
+        <div class="strip__text">
+          <h1 class="strip__title1 js-split">A CAFE WITH A MICROPHONE</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="strip strip--xnarrow mb-lg intro__text-strip">
+    <div class="container">
+      <div class="strip__data text-center anima--bottom-in">
+        <div class="strip__text intro__text">
+          <p>Thoughtful conversations with people building careers, organizations, and movements around purpose.</p>
+          <p>Pull up a chair and discover the stories behind mission-driven work.</p>
+          <p><a class="read-more" href="cafe.html">The cafe</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sections/03-gallery.html ===== -->
+<!-- 03-gallery - Bleed-right cafe gallery carousel (6 portraits). SOURCE: Paszkowski P2 carousel 1
+     (PZ source/rendered.html div[data-id="161"] > .container > div[data-id="270"].strip__data.anima--fade > #splide02.strip__gallery.splide).
+     Arrows are injected by carousel.js (initCarousel); no lightbox link (Fancybox dropped, DD Pick 6 "Change") so the
+     hover-zoom hook .strip__gallery__link is a <figure>. Copy/alt: content/site.json gallery[] + content/assets-manifest.json (alt wins). -->
+<section id="s-03-gallery" class="strip strip__gallery--slider js-splide-arrows carousel strip--wide mb-md gallery">
+  <div class="container">
+    <div class="strip__data anima--fade">
+      <div class="strip__gallery splide" data-splide-sizes='{"all":2,"576":3,"800":3}' aria-label="Cafe gallery">
+        <div class="splide__track">
+          <ul class="splide__list">
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link">
+                <img src="assets/images/gallery-01.jpg" width="1200" height="1800" alt="Cafe interior with a dark leather banquette, wooden tables and a copper pendant lamp" loading="eager" decoding="async">
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link">
+                <img src="assets/images/gallery-02.jpg" width="1200" height="1800" alt="Barista pouring steamed milk into a cup to form latte art" loading="eager" decoding="async">
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link">
+                <img src="assets/images/gallery-03.jpg" width="1200" height="1800" alt="Croissants and pastries on a marble board in a bakery display case" loading="eager" decoding="async">
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link">
+                <img src="assets/images/gallery-04.jpg" width="1200" height="1800" alt="Condenser microphone on a desk with guitars hanging on the wall behind" loading="lazy" decoding="async">
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link">
+                <img src="assets/images/gallery-05.jpg" width="1200" height="1800" alt="Cup of coffee with rosetta latte art on a wooden table" loading="lazy" decoding="async">
+              </figure>
+            </li>
+            <li class="splide__slide strip__gallery__item">
+              <figure class="strip__gallery__link">
+                <img src="assets/images/gallery-06.jpg" width="1200" height="1800" alt="Cafe bar counter with a large lampshade and staff working behind it" loading="lazy" decoding="async">
+              </figure>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sections/04-story-a.html ===== -->
+<!-- 04-story-a - Two-column editorial story row FROM FIRST POUR TO LAST WORD. SOURCE: Paszkowski P8 section 07
+     (PZ source/rendered.html div[data-id="164"].strip.strip--normal.strip--columns.mb-lg > .container >
+      [273].strip__data.strip__column.strip__column--1.strip--stamp.anima--left-in.js-image-anime (figure --before) +
+      [274].strip__data.strip__column.strip__column--2.anima--right-in.js-image-anime.mobile-first (h2, p..., p > a.read-more, figure --after)).
+     The source's <p>&nbsp;</p> spacer lines are replaced by a margin rule in css/sections/04-story-a.css (INFERRED).
+     Copy: content/site.json storyA.* (brand pass 2026-09-17: paragraphs verbatim from the rewritten site.json; title + CTA unchanged);
+     alt/size: content/assets-manifest.json (manifest alt wins). Images eager: core initImageAnime strips loading anyway (PZ _page-scroll.beautified.js:143-145). -->
+<section id="s-04-story-a" class="strip strip--normal strip--columns mb-lg story story--a">
+  <div class="container">
+    <div class="strip__data strip__column strip__column--1 strip--stamp anima--left-in js-image-anime">
+      <div class="strip__column__content">
+        <div class="strip__text">
+          <figure class="strip__image strip__image--before">
+            <img src="assets/images/story-a-1.jpg" width="1200" height="1800" alt="Barista in a flat cap and apron working at an espresso machine" loading="eager" decoding="async">
+          </figure>
+        </div>
+      </div>
+    </div>
+    <div class="strip__data strip__column strip__column--2 anima--right-in js-image-anime mobile-first">
+      <div class="strip__column__content">
+        <div class="strip__text">
+          <h2 class="strip__title1 js-split">FROM FIRST POUR TO LAST WORD</h2>
+          <p>The cafe opened in the spring of 2024 with a second-hand espresso machine, a borrowed oven and one rule: the music stays quiet enough to talk over.</p>
+          <p>The talking turned out to be the point. By autumn there were microphones on the corner table, and leaders from clinics, councils and charities were coming in to say what they could not say at a podium.</p>
+          <p>The machine has since been replaced. The rule has not.</p>
+          <p><a class="read-more" href="cafe.html#story">Discover the story</a></p>
+          <figure class="strip__image strip__image--after">
+            <img src="assets/images/story-a-2.jpg" width="1200" height="1800" alt="Three friends toasting with coffee cups above a wooden cafe table" loading="eager" decoding="async">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sections/05-strip.html ===== -->
+<!-- 05-strip - Full-bleed 65vh parallax image window with floating stamp. SOURCE: Paszkowski P9 section 163 + P7 stamp
+     (PZ source/rendered.html div[data-id="163"].strip.strip--image.strip--wide.mb-lg > .container >
+      div[data-id="272"].strip__data.strip--stamp.parallax > figure.strip__image > picture > img).
+     No <picture> (single JPEG); base.css sizes the window (65vh, img 150%) and core initParallaxStrips drives y.
+     Image eager: the img must be laid out for y() = box.h - img.h before the first refresh. Alt/size: content/assets-manifest.json. -->
+<section id="s-05-strip" class="strip strip--image strip--wide mb-lg strip-window">
+  <div class="container">
+    <div class="strip__data strip--stamp parallax">
+      <figure class="strip__image">
+        <img src="assets/images/strip-wide.jpg" width="2400" height="1600" alt="Orange bistro chairs and a small table outside a cafe on a brick pavement" loading="eager" decoding="async">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sections/06-menu.html ===== -->
+<!-- 06-menu - Cream-2 band ON THE MENU: spacer row (stamp, OFF by default), h2 word rise, 600px paragraph, food carousel (6),
+     closing read-mores. SOURCE: Paszkowski P14 band + sections 221/166/167/168 (PZ source/rendered.html:
+       [221].strip.strip--normal.bg-np-grey > [347].strip__data.pt-md.strip--stamp > .strip__text (empty)
+       [166].strip.strip--xnarrow.bg-np-grey > [276].strip__data.md:text-center.pb-md.anima--bottom-in > h2 + p (+ read-more, moved to the ctas row)
+       [167].strip.strip__gallery--slider.js-splide-arrows.carousel.bg-np-grey.strip--wide > [277].strip__data.pb-md.anima--bottom-in > #splide03
+       [168].strip.bg-np-grey.strip--xnarrow.mb-md > [278].strip__data.pb-md.text-center.anima--bottom-in > p > a.read-more).
+     Root is NOT a .strip on purpose: base.css resets --bgStrip on nested strips (_strip.7.5.scss:12-19); the four inner strips carry the band.
+     Stamp: spec 06 (h) keeps it off (4-instance rule, DD Pick 13) - flip data-stamp="on" to show it.
+     Copy: content/site.json menu.* (brand pass 2026-09-17: paragraph verbatim from the rewritten site.json; title, names, prices, CTA labels/hrefs
+     unchanged); alt/size: content/assets-manifest.json (manifest alt wins; food-01..06 are 1:1, caption = name + price per copy.md).
+     Brand pass: the closing CTA row keeps its two anchors and hrefs but renders them as base.css .button (G6 shared): "Book a table" = filled
+     brand primary, "See the menu" = outlined secondary (lane brief). Verifier hook `.menu__ctas .read-more` -> `.menu__ctas .menu__cta`. -->
+<section id="s-06-menu" class="menu-band bg-band-cream2">
+  <div class="strip strip--normal bg-band-cream2 menu__spacer">
+    <div class="container">
+      <div class="strip__data pt-md strip--stamp" data-stamp="off">
+        <div class="strip__text"></div>
+      </div>
+    </div>
+  </div>
+  <div class="strip strip--xnarrow bg-band-cream2 menu__intro">
+    <div class="container">
+      <div class="strip__data md-text-center pb-md anima--bottom-in">
+        <div class="strip__text">
+          <h2 class="strip__title1 js-split">ON THE MENU</h2>
+          <p>Espresso from a roaster two streets over, croissants baked at six, and brunch until the kitchen runs out. The prices are for a cup at the counter; a seat by the window, or at the corner table, costs the same.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="strip strip__gallery--slider js-splide-arrows carousel bg-band-cream2 strip--wide menu__carousel">
+    <div class="container">
+      <div class="strip__data pb-md anima--bottom-in">
+        <div class="strip__gallery splide" data-splide-sizes='{"all":2,"576":3,"800":3}' aria-label="Menu highlights">
+          <div class="splide__track">
+            <ul class="splide__list">
+              <li class="splide__slide strip__gallery__item">
+                <figure class="strip__gallery__link menu__item">
+                  <div class="menu__item-media"><img src="assets/images/food-01.jpg" width="1200" height="1200" alt="Espresso pouring into a cup from an espresso machine" loading="lazy" decoding="async"></div>
+                  <figcaption class="menu__caption"><span class="menu__name">Espresso</span><span class="menu__price">$4.00</span></figcaption>
+                </figure>
+              </li>
+              <li class="splide__slide strip__gallery__item">
+                <figure class="strip__gallery__link menu__item">
+                  <div class="menu__item-media"><img src="assets/images/food-02.jpg" width="1200" height="1200" alt="Cappuccino with rosetta latte art in a white cup" loading="lazy" decoding="async"></div>
+                  <figcaption class="menu__caption"><span class="menu__name">Cappuccino</span><span class="menu__price">$5.50</span></figcaption>
+                </figure>
+              </li>
+              <li class="splide__slide strip__gallery__item">
+                <figure class="strip__gallery__link menu__item">
+                  <div class="menu__item-media"><img src="assets/images/food-03.jpg" width="1200" height="1200" alt="Chocolate-drizzled croissant on a slate board beside a tall latte" loading="lazy" decoding="async"></div>
+                  <figcaption class="menu__caption"><span class="menu__name">Butter croissant</span><span class="menu__price">$5.00</span></figcaption>
+                </figure>
+              </li>
+              <li class="splide__slide strip__gallery__item">
+                <figure class="strip__gallery__link menu__item">
+                  <div class="menu__item-media"><img src="assets/images/food-04.jpg" width="1200" height="1200" alt="Slice of coffee cake on a plate next to a flat white" loading="lazy" decoding="async"></div>
+                  <figcaption class="menu__caption"><span class="menu__name">Cardamom cake</span><span class="menu__price">$7.50</span></figcaption>
+                </figure>
+              </li>
+              <li class="splide__slide strip__gallery__item">
+                <figure class="strip__gallery__link menu__item">
+                  <div class="menu__item-media"><img src="assets/images/food-05.jpg" width="1200" height="1200" alt="Brunch plate of French toast with berries on a blue plate" loading="lazy" decoding="async"></div>
+                  <figcaption class="menu__caption"><span class="menu__name">Eggs, greens, sourdough</span><span class="menu__price">$18.00</span></figcaption>
+                </figure>
+              </li>
+              <li class="splide__slide strip__gallery__item">
+                <figure class="strip__gallery__link menu__item">
+                  <div class="menu__item-media"><img src="assets/images/food-06.jpg" width="1200" height="1200" alt="Tall glass of iced coffee with milk swirling through it" loading="lazy" decoding="async"></div>
+                  <figcaption class="menu__caption"><span class="menu__name">Cold brew</span><span class="menu__price">$6.50</span></figcaption>
+                </figure>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="strip bg-band-cream2 strip--xnarrow mb-md menu__ctas">
+    <div class="container">
+      <div class="strip__data pb-md text-center anima--bottom-in">
+        <div class="strip__text">
+          <p class="menu__cta-row"><a class="button button--outlined menu__cta menu__cta--secondary" href="menu.html">See the menu</a><a class="button menu__cta menu__cta--primary" href="book.html">Book a table</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sections/07-manifesto.html ===== -->
+<!-- 07-manifesto - Full-bleed accent interlude with the colour-scrub sentence
+     Source skeleton: Iceberg div.home-sentence > div.home-sentence__content > (SplitText words > chars) [+ svg ellipse: DROPPED, DD Pick 11]
+     Copy: content/site.json manifesto.sentence (verbatim). Band: .bg-band-accent (tokens.css) = --colAccent #81532e with --colOnBrand text.
+     BRAND (2026-09-17, lane C): sentence case via the base.css opt-in `.text-decorated--sentence` (BK: Medium 500, sentence case allowed
+     for the manifesto; size clamp unchanged). No overflow:hidden on the root (08's stamp overhangs 56px up). -->
+<section id="s-07-manifesto" class="strip strip--narrow bg-band-accent manifesto">
+  <div class="container">
+    <div class="strip__data text-center">
+      <div class="strip__text">
+        <p class="manifesto__content text-decorated text-decorated--sentence">Behind every organization, movement and meaningful career are difficult decisions, unexpected lessons, doubts and defining moments &ndash; we bring those stories to the table.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sections/08-podcast.html ===== -->
+<!-- 08-podcast - Brand-brown band opener: spacer row + stamp, blurred glow marquee ticker, left-column paragraph + "Hosted by" line
+     Source skeletons: PZ div[data-id="221"] spacer (.strip.strip--normal.bg-np-grey > .container > .strip__data.pt-md.strip--stamp) - band opener pattern;
+                       IC section.home-blur > div.blur-sentence > div.blur-sentence__sentence x2 (marquee copies, .is-animated while in view; texture/svg DROPPED);
+                       IC section.home-podcast-top > div.home-podcast-top__text (paragraph) re-expressed as the PZ 24-col column 1.
+     Copy: content/site.json podcast.ticker / podcast.eyebrow / podcast.paragraph (verbatim; " - " appended to each ticker copy per copy.md);
+           hosts.name / hosts.role for the "Hosted by" line (BRAND 2026-09-17, lane C: inside the existing text block, links to #s-10-hosts;
+           avatar = assets/images/founder-avatar.jpg, a 320x320 crop of hosts.images[0] assets/brand/lata-singh-podcast.jpg, decorative - the link text names her).
+     Root is a band wrapper (not a .strip): the three rows are the strips (nested strips would reset the band, base.css s4). The brown band continues into 09. -->
+<section id="s-08-podcast" class="podcast bg-band-black">
+
+  <!-- spacer row = PZ [221]/[347]: 57.6 tall (.pt-md) with an empty .strip__text; carries stamp instance 3 of 4 (DD Pick 13) - white cup mark on the 07/08 seam -->
+  <div class="strip strip--normal bg-band-black podcast__spacer">
+    <div class="container">
+      <div class="strip__data pt-md strip--stamp">
+        <div class="strip__text"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- marquee row = IC .home-blur__sentence (two copies, horizontalLoop + glow chars) -->
+  <div class="strip strip--wide bg-band-black podcast__ticker">
+    <div class="container">
+      <p class="visual-hide">LATTE WITH LATA - NEW EPISODE EVERY THURSDAY</p>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__copy">LATTE WITH LATA - NEW EPISODE EVERY THURSDAY -</div>
+        <div class="marquee__copy">LATTE WITH LATA - NEW EPISODE EVERY THURSDAY -</div>
+      </div>
+      <!-- UPDATE-3 (2026-09-17, client decision): no pause / play control. 08-podcast.js runs the loop only while this row is on screen; static under reduced motion / no JS -->
+    </div>
+  </div>
+
+  <!-- paragraph row = IC .home-podcast-top__text in PZ column 1 of the 24-col grid (column 2 stays empty by design, hidden below 50em) -->
+  <div class="strip strip--normal strip--columns bg-band-black podcast__about">
+    <div class="container">
+      <div class="strip__data strip__column strip__column--1 pt-md pb-md anima--bottom-in">
+        <div class="strip__column__content">
+          <div class="strip__text">
+            <p class="eyebrow podcast__eyebrow">There's more behind every mission</p>
+            <p class="podcast__lead lead">Join Latte with Lata for candid, unhurried conversations with mission-driven leaders about the decisions and experiences that shaped their work. Recorded at the corner table on Thursday nights, every episode moves through the same four parts: The Origin Story, The Hard Trade-off, What No One Tells You and The Coffee Break.</p>
+            <p class="podcast__hosted">
+              <a class="podcast__host" href="podcast.html#host">
+                <img class="podcast__avatar" src="assets/images/founder-avatar.jpg" width="320" height="320" alt="" loading="lazy" decoding="async">
+                <span class="podcast__host-text"><span class="podcast__host-by">Hosted by</span> <span class="podcast__host-name">Lata Singh</span></span>
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="strip__data strip__column strip__column--2 podcast__empty" aria-hidden="true"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===== sections/09-episodes.html ===== -->
+<!-- 09-episodes - Episodes carousel: 6 Iceberg project-card-anatomy cards inside the Paszkowski bleed-right carousel + "All episodes"
+     Source skeletons: PZ div[data-id="161"].strip.strip__gallery--slider.js-splide-arrows.carousel.strip--wide > .container > .strip__data(.anima--*) > .strip__gallery.splide (#splide02)
+                       IC a.project-card > div.project-card__image > img ; div.project-card__content > __top (__title, __impact > .line x3) + __bottom (__scope, __location, __year)
+                       PZ div[data-id="168"] closing read-more row (.strip.strip--xnarrow > .strip__data.pb-md.text-center.anima--bottom-in > p > a.read-more)
+     Copy: content/site.json episodes[0..5] (newest first; date ISO -> "10 Sep 2026"; guest meta = "guest, role" and may wrap to two lines), episodesCta.
+           Alt/width/height: content/assets-manifest.json. Covers 1-3 (the first page of the rail) load eager, 4-6 lazy.
+     BRAND 2026-09-17 (lane C): copy re-hard-coded verbatim from the brand site.json (scratch gen-09.cjs); markup skeleton unchanged.
+     Root is a band wrapper (not a .strip): the two rows are the strips. The brown band continues from 08 (no margins, paddings only). -->
+<section id="s-09-episodes" class="episodes bg-band-black">
+
+  <div class="strip strip__gallery--slider js-splide-arrows carousel bg-band-black strip--wide episodes__carousel">
+    <div class="container">
+      <div class="strip__data pt-md pb-md anima--bottom-in">
+        <h2 class="visual-hide">Latest episodes</h2>
+        <div class="strip__gallery" data-splide-sizes='{"all":1,"576":2,"800":3}' aria-label="Latest episodes">
+          <div class="splide__track">
+            <ul class="splide__list">
+
+              <li class="splide__slide strip__gallery__item">
+                <article class="episode-card">
+                  <a class="episode-card__cover strip__gallery__link" href="episodes.html#ep-88" aria-label="Episode 88: The grant we turned down, show notes">
+                    <img src="assets/images/episode-01.jpg" width="1600" height="1067" alt="Hand writing in a notebook next to a cup of coffee, glasses and a laptop" loading="eager" decoding="async">
+                    <span class="episode-card__play" aria-hidden="true"><svg class="icon" focusable="false"><use href="assets/svg/icons.svg#i-play"></use></svg></span>
+                  </a>
+                  <div class="episode-card__panel">
+                    <div class="episode-card__top">
+                      <h3 class="episode-card__title"><a href="episodes.html#ep-88">The grant we turned down</a></h3>
+                      <p class="episode-card__blurb">Marisol said no to the biggest cheque in her nonprofit's history. On strings, dignity, and the board meeting that followed.</p>
+                    </div>
+                    <dl class="episode-card__meta">
+                      <div class="episode-card__guest"><dt class="visual-hide">Guest</dt><dd>Marisol Vega, Executive director, Harrowfield Food Bank</dd></div>
+                      <div class="episode-card__duration"><dt class="visual-hide">Length</dt><dd>44&nbsp;min</dd></div>
+                      <div class="episode-card__date"><dt class="visual-hide">Date</dt><dd><time datetime="2026-09-10">Thu 10 Sep 2026</time></dd></div>
+                    </dl>
+                  </div>
+                </article>
+              </li>
+
+              <li class="splide__slide strip__gallery__item">
+                <article class="episode-card">
+                  <a class="episode-card__cover strip__gallery__link" href="episodes.html#ep-87" aria-label="Episode 87: What no one tells you about a waiting room, show notes">
+                    <img src="assets/images/episode-02.jpg" width="1600" height="1067" alt="Kettle pouring water into a pour-over coffee brewer" loading="eager" decoding="async">
+                    <span class="episode-card__play" aria-hidden="true"><svg class="icon" focusable="false"><use href="assets/svg/icons.svg#i-play"></use></svg></span>
+                  </a>
+                  <div class="episode-card__panel">
+                    <div class="episode-card__top">
+                      <h3 class="episode-card__title"><a href="episodes.html#ep-87">What no one tells you about a waiting room</a></h3>
+                      <p class="episode-card__blurb">Kwame runs a clinic where nobody is turned away. On the maths of a Tuesday morning, and the lesson no residency teaches.</p>
+                    </div>
+                    <dl class="episode-card__meta">
+                      <div class="episode-card__guest"><dt class="visual-hide">Guest</dt><dd>Dr Kwame Boateng, Medical director, Eastgate Community Clinic</dd></div>
+                      <div class="episode-card__duration"><dt class="visual-hide">Length</dt><dd>47&nbsp;min</dd></div>
+                      <div class="episode-card__date"><dt class="visual-hide">Date</dt><dd><time datetime="2026-09-03">Thu 3 Sep 2026</time></dd></div>
+                    </dl>
+                  </div>
+                </article>
+              </li>
+
+              <li class="splide__slide strip__gallery__item">
+                <article class="episode-card">
+                  <a class="episode-card__cover strip__gallery__link" href="episodes.html#ep-86" aria-label="Episode 86: Fixing a form nobody could finish, show notes">
+                    <img src="assets/images/episode-03.jpg" width="1600" height="1067" alt="People sitting at a cafe window bar looking out at a city skyline" loading="eager" decoding="async">
+                    <span class="episode-card__play" aria-hidden="true"><svg class="icon" focusable="false"><use href="assets/svg/icons.svg#i-play"></use></svg></span>
+                  </a>
+                  <div class="episode-card__panel">
+                    <div class="episode-card__top">
+                      <h3 class="episode-card__title"><a href="episodes.html#ep-86">Fixing a form nobody could finish</a></h3>
+                      <p class="episode-card__blurb">Hannah rebuilt a benefits form that failed half the people who started it. On slow change inside government, and who decides it worked.</p>
+                    </div>
+                    <dl class="episode-card__meta">
+                      <div class="episode-card__guest"><dt class="visual-hide">Guest</dt><dd>Hannah Lindgren, Chief innovation officer, City of Harrowfield</dd></div>
+                      <div class="episode-card__duration"><dt class="visual-hide">Length</dt><dd>39&nbsp;min</dd></div>
+                      <div class="episode-card__date"><dt class="visual-hide">Date</dt><dd><time datetime="2026-08-27">Thu 27 Aug 2026</time></dd></div>
+                    </dl>
+                  </div>
+                </article>
+              </li>
+
+              <li class="splide__slide strip__gallery__item">
+                <article class="episode-card">
+                  <a class="episode-card__cover strip__gallery__link" href="episodes.html#ep-85" aria-label="Episode 85: The origin story is not the pitch, show notes">
+                    <img src="assets/images/episode-04.jpg" width="1600" height="1067" alt="Person sitting alone at a long table in a cafe, backlit by large windows" loading="lazy" decoding="async">
+                    <span class="episode-card__play" aria-hidden="true"><svg class="icon" focusable="false"><use href="assets/svg/icons.svg#i-play"></use></svg></span>
+                  </a>
+                  <div class="episode-card__panel">
+                    <div class="episode-card__top">
+                      <h3 class="episode-card__title"><a href="episodes.html#ep-85">The origin story is not the pitch</a></h3>
+                      <p class="episode-card__blurb">Elias hires people on the day they leave prison. On the phone call that started it, a first year of losses, and keeping the door open.</p>
+                    </div>
+                    <dl class="episode-card__meta">
+                      <div class="episode-card__guest"><dt class="visual-hide">Guest</dt><dd>Elias Okonkwo, Founder, Second Shift social enterprise</dd></div>
+                      <div class="episode-card__duration"><dt class="visual-hide">Length</dt><dd>42&nbsp;min</dd></div>
+                      <div class="episode-card__date"><dt class="visual-hide">Date</dt><dd><time datetime="2026-08-20">Thu 20 Aug 2026</time></dd></div>
+                    </dl>
+                  </div>
+                </article>
+              </li>
+
+              <li class="splide__slide strip__gallery__item">
+                <article class="episode-card">
+                  <a class="episode-card__cover strip__gallery__link" href="episodes.html#ep-84" aria-label="Episode 84: Showing up is the whole strategy, show notes">
+                    <img src="assets/images/episode-05.jpg" width="1600" height="1067" alt="Notebooks, a pen and a latte on a weathered wooden table" loading="lazy" decoding="async">
+                    <span class="episode-card__play" aria-hidden="true"><svg class="icon" focusable="false"><use href="assets/svg/icons.svg#i-play"></use></svg></span>
+                  </a>
+                  <div class="episode-card__panel">
+                    <div class="episode-card__top">
+                      <h3 class="episode-card__title"><a href="episodes.html#ep-84">Showing up is the whole strategy</a></h3>
+                      <p class="episode-card__blurb">Rosa has knocked on more doors than she can count. On patience, small wins, and what a street knows that a strategy deck does not.</p>
+                    </div>
+                    <dl class="episode-card__meta">
+                      <div class="episode-card__guest"><dt class="visual-hide">Guest</dt><dd>Rosa Delgado, Community organiser, Fenwick Tenants' Union</dd></div>
+                      <div class="episode-card__duration"><dt class="visual-hide">Length</dt><dd>36&nbsp;min</dd></div>
+                      <div class="episode-card__date"><dt class="visual-hide">Date</dt><dd><time datetime="2026-08-13">Thu 13 Aug 2026</time></dd></div>
+                    </dl>
+                  </div>
+                </article>
+              </li>
+
+              <li class="splide__slide strip__gallery__item">
+                <article class="episode-card">
+                  <a class="episode-card__cover strip__gallery__link" href="episodes.html#ep-83" aria-label="Episode 83: Who stays when everyone is leaving, show notes">
+                    <img src="assets/images/episode-06.jpg" width="1600" height="1067" alt="Barista pouring espresso into two glass jars of milk at a cafe bar" loading="lazy" decoding="async">
+                    <span class="episode-card__play" aria-hidden="true"><svg class="icon" focusable="false"><use href="assets/svg/icons.svg#i-play"></use></svg></span>
+                  </a>
+                  <div class="episode-card__panel">
+                    <div class="episode-card__top">
+                      <h3 class="episode-card__title"><a href="episodes.html#ep-83">Who stays when everyone is leaving</a></h3>
+                      <p class="episode-card__blurb">Grace kept a hospice team together through the hardest three years in nursing. On staying, and the coffee break that saved a shift.</p>
+                    </div>
+                    <dl class="episode-card__meta">
+                      <div class="episode-card__guest"><dt class="visual-hide">Guest</dt><dd>Grace Mbeki, Director of nursing, St Oswin's Hospice</dd></div>
+                      <div class="episode-card__duration"><dt class="visual-hide">Length</dt><dd>51&nbsp;min</dd></div>
+                      <div class="episode-card__date"><dt class="visual-hide">Date</dt><dd><time datetime="2026-08-06">Thu 6 Aug 2026</time></dd></div>
+                    </dl>
+                  </div>
+                </article>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- closing CTA row = PZ [168]/[278] (88 tall @1440: read-more 30.4 + pb-md 57.6) -->
+  <div class="strip bg-band-black strip--xnarrow episodes__ctas">
+    <div class="container">
+      <div class="strip__data pb-md text-center anima--bottom-in">
+        <div class="strip__text">
+          <p><a class="read-more" href="episodes.html">All episodes</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===== sections/10-hosts.html ===== -->
+<!-- 10-hosts - Inverted (brand-brown, bleeding left) two-column story row MEET LATA. SOURCE: Paszkowski P8 section 13
+     (PZ source/rendered.html div[data-id="170"].strip.strip--columns.bg-np-black.strip--wide > .container >
+      [280].strip__data.strip__column.strip__column--1.pt-md.md:pb-md.strip--stamp.js-image-anime.anima--left-in (figure --after) +
+      [281].strip__data.strip__column.strip__column--2.pt-md.md:pb-md.text-narrow.js-image-anime.anima--right-in (h2, p x6 incl. &nbsp; spacers, p > a.read-more, figure --after)).
+     No .mobile-first (source): the portrait column stays first on phones. The <p>&nbsp;</p> spacer lines become margins in css/sections/10-hosts.css (INFERRED, as 04).
+     Stamp: the source column 1 carries .strip--stamp; the class is kept but the mark is switched OFF in the CSS (DD Pick 13: 4 instances = 05, 04, 08, 14).
+     Copy: content/site.json hosts.* (title, name, role, paragraphs[0..2], cta, images[0..1].alt). Images eager (initImageAnime strips loading="lazy" anyway, PZ _page-scroll.beautified.js:143-145).
+
+     UPDATE-3 2026-09-17 (lane L2 HOST PHOTO) - the client's own podcast photograph replaces the office portrait and the drawn podcast props:
+     - Photo: assets/images/founder-podcast.jpg = 1200x1500 (4:5) crop of assets/brand/lata-singh-podcast.jpg (1024x1536), box x 0-1024, y 60-1340,
+       Lanczos resample only (never retouched): whole head with 17.6% headroom, both shoulders, both hands, the real microphone and the real latte.
+       It is the drop-in slot file: data-podcast-photo points at it and the <img> already uses it, so the probe in js/sections/10-hosts.js hits the
+       memory cache (one request) and a no-JS visit shows the same photo.
+     - Broadcast frame, every layer aria-hidden + pointer-events none, none over her face, hands, the real mic or the real latte (a real-photo safe
+       map lives in the CSS header):
+         .hosts__onair   "ON AIR" tab straddling the TOP-LEFT edge of the photo (half on the band, half on the photo, above the chalkboard lettering)
+         .hosts__lower   lower third: 7-bar level meter + "LATA SINGH" / "HOST" on a solid brand plate with a caramel rule, straddling the
+                         BOTTOM-RIGHT edge (below the mic base; the photo's own latte owns the bottom-left corner)
+     - Removed: the drawn studio microphone (the photo has a real one) and the cup hanging over the photo corner. No photo corner is free for the
+       illustrated branded cup (bottom-left = the real latte, bottom-right = mic base + lower third, top-right = the neon sign, top-left = the tab),
+       so it is SMALLER (110px, the kit mark on it = 32.3px, the LOGO-USAGE minimum) and OFF the photo: it heads the byline, beside "Lata Singh / Host".
+     - Copy: L4 CONTENT requests R3 ("pursuing doctoral study") and R4 (the personal-platform paragraph replaces the invented "opened a cafe" line) applied.
+     - id="host" on the h2: deep-link target (index.html#host); the site-wide "The Host" link points at podcast.html#host (PAGES-SPEC s3). -->
+<section id="s-10-hosts" class="strip strip--columns bg-band-black strip--wide story story--inverted hosts">
+  <div class="container">
+    <div class="strip__data strip__column strip__column--1 pt-md md-pb-md strip--stamp js-image-anime anima--left-in">
+      <div class="strip__column__content">
+        <div class="strip__text">
+          <figure class="hosts__stage" data-podcast-photo="assets/images/founder-podcast.jpg" data-podcast-focus="">
+            <div class="strip__image strip__image--after hosts__portrait">
+              <img class="hosts__photo" src="assets/images/founder-podcast.jpg" width="1200" height="1500" alt="Lata Singh, host of Latte with Lata, at a cafe table with a podcast microphone and a latte" loading="eager" decoding="async">
+            </div>
+            <div class="hosts__onair" aria-hidden="true"><span class="hosts__onair-dot"></span><span class="hosts__onair-label">On air</span></div>
+            <div class="hosts__lower" aria-hidden="true">
+              <span class="hosts__meter"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="hosts__lower-text"><span class="hosts__lower-name">Lata Singh</span><span class="hosts__lower-role">Host</span></span>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </div>
+    <div class="strip__data strip__column strip__column--2 pt-md md-pb-md text-narrow js-image-anime anima--right-in">
+      <div class="strip__column__content">
+        <div class="strip__text">
+          <h2 id="host" class="strip__title1 js-split">MEET LATA</h2>
+          <p class="hosts__byline"><span class="hosts__cup" aria-hidden="true"><svg class="hosts__steam" viewBox="0 0 60 80" focusable="false"><path pathLength="100" d="M22 78c-10-12 8-20 0-34s8-22 2-40"/><path pathLength="100" d="M40 78c8-12-8-22 0-36s-6-20 0-34"/></svg><img class="hosts__cup-art" src="assets/svg/cup-branded.svg" width="320" height="290" alt="" decoding="async"></span><span class="hosts__byline-text"><span class="hosts__name">Lata Singh</span> <span class="hosts__role">Host</span></span></p>
+          <p>Lata Singh is the host. By day she is a senior operating leader in one of the country's largest safety-net healthcare networks, responsible for operations, quality, workforce and finance at a scale where every decision has a waiting room attached.</p>
+          <p>She is also pursuing doctoral study in leadership and innovation, which is why the questions here go one layer deeper than the highlight reel: what did it cost, who disagreed, and what would you do differently.</p>
+          <p>Latte with Lata is her personal platform, separate from her day job: unguarded conversations with the people building mission-driven organizations, because real leadership lessons come out over coffee, not in a boardroom.</p>
+          <p><a class="read-more" href="podcast.html">Join the conversation</a></p>
+          <figure class="strip__image strip__image--after">
+            <img src="assets/images/host-corner.jpg" width="1200" height="1800" alt="The recording corner: two microphones on boom arms, a small mixer and a lamp on a wooden table." loading="eager" decoding="async">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sections/11-live.html ===== -->
+<!-- 11-live - Live sessions: static 5-photo mosaic (Phase 1) + quote row + What's on
+     SOURCE skeleton: PZ rendered.html div[data-id="169"].strip.bg-np-black.strip--wide.strip--full-height.js-zoom-splash
+       > .container > [279].strip__data.md:pt-md.md:pb-md > .strip__text (flex)
+         > [171].strip.strip--columns.strip--wide (cols [282] 2:3 | [283] 2:3 + 3:2)
+         > [172].strip.strip--image.strip--wide > [284].strip__data.text-inbox.v-center.text-center > figure + .strip__text caption
+         > [173].strip.strip--columns.strip--wide (cols [285] 2:3 + 3:2 | [286] 2:3)
+     Rebuild: the measured 100vh box is .live__stage (BUILD-SPEC 11 (b)); the Phase-1 quote row sits after it inside the
+     section root (spec (h): "the quote row adds .pt-md/.pb-md below it"). Phase 2 = data-zoom-splash="on" on the root.
+     Copy: content/site.json live.* (verbatim, brand pass 2026-09-17). Alt/dimensions: content/assets-manifest.json (manifest wins).
+     Image mapping (spec (g)): left col1 = mosaic-01 (2:3 crop), left col2 = mosaic-02 (2:3) + mosaic-01 (3:2 native),
+       centre = mosaic-03 (4:3, live.images[2]), right col1 = mosaic-04 (2:3) + mosaic-05 (3:2), right col2 = mosaic-05 (2:3). -->
+<section id="s-11-live" class="strip bg-band-black strip--wide live mosaic" aria-labelledby="live-eyebrow">
+  <div class="live__stage js-zoom-splash">
+    <div class="container">
+      <div class="strip__data md-pt-md md-pb-md">
+        <div class="strip__text mosaic__flex">
+
+          <div class="strip strip--columns strip--wide mosaic__row mosaic__row--left">
+            <div class="container">
+              <div class="strip__data strip__column strip__column--1 v-center">
+                <div class="strip__column__content">
+                  <div class="strip__text">
+                    <figure class="strip__image strip__image--after mosaic__tile mosaic__tile--portrait">
+                      <picture><img src="assets/images/mosaic-01.jpg" width="1600" height="1067" alt="Guests at tables in a glass-walled cafe at dusk" loading="lazy" decoding="async"></picture>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+              <div class="strip__data strip__column strip__column--2 v-center">
+                <div class="strip__column__content">
+                  <div class="strip__text">
+                    <figure class="strip__image strip__image--after mosaic__tile mosaic__tile--portrait">
+                      <picture><img src="assets/images/mosaic-02.jpg" width="1600" height="1067" alt="Audience watching a small stage lit with coloured lights" loading="lazy" decoding="async"></picture>
+                    </figure>
+                    <figure class="strip__image strip__image--after mosaic__tile mosaic__tile--landscape">
+                      <picture><img src="assets/images/mosaic-01.jpg" width="1600" height="1067" alt="Guests at tables in a glass-walled cafe at dusk" loading="lazy" decoding="async"></picture>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="strip strip--image strip--wide mosaic__centre">
+            <div class="container">
+              <div class="strip__data text-inbox v-center text-center">
+                <figure class="strip__image mosaic__tile mosaic__tile--centre">
+                  <picture><img src="assets/images/mosaic-03.jpg" width="1600" height="1200" alt="Open-mic night in a coffee house with a performer on a small stage and people at tables" loading="lazy" decoding="async"></picture>
+                </figure>
+                <!-- Phase 2 caption only (un-hidden by js/sections/11-live.js when data-zoom-splash="on") -->
+                <div class="strip__text live__caption" hidden>
+                  <p class="text-decorated">Coffee. Leadership. Purpose. Real&nbsp;conversation. Thursday nights from 6:30&nbsp;pm the chairs turn to face the corner table, and there is one for you.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="strip strip--columns strip--wide mosaic__row mosaic__row--right">
+            <div class="container">
+              <div class="strip__data strip__column strip__column--1 v-center">
+                <div class="strip__column__content">
+                  <div class="strip__text">
+                    <figure class="strip__image strip__image--after mosaic__tile mosaic__tile--portrait">
+                      <picture><img src="assets/images/mosaic-04.jpg" width="1600" height="1067" alt="Microphone on a stand with a blurred crowd behind it" loading="lazy" decoding="async"></picture>
+                    </figure>
+                    <figure class="strip__image strip__image--after mosaic__tile mosaic__tile--landscape">
+                      <picture><img src="assets/images/mosaic-05.jpg" width="1600" height="1067" alt="Violinist playing into a microphone, motion blurred" loading="lazy" decoding="async"></picture>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+              <div class="strip__data strip__column strip__column--2 v-center">
+                <div class="strip__column__content">
+                  <div class="strip__text">
+                    <figure class="strip__image strip__image--after mosaic__tile mosaic__tile--portrait">
+                      <picture><img src="assets/images/mosaic-05.jpg" width="1600" height="1067" alt="Violinist playing into a microphone, motion blurred" loading="lazy" decoding="async"></picture>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- eyebrow (live.eyebrow): absolute inside the bottom padding band of the stage - brand pass moved it from the top band, where the
+         fixed header plate (same brown) covered it whenever the header was visible (WIG "no content behind the fixed header") -->
+    <p id="live-eyebrow" class="eyebrow live__eyebrow">Pull up a chair</p>
+  </div>
+
+  <!-- Phase 1 quote row (INFERRED placement, BUILD-SPEC 11 (b)/(i)): .strip--narrow, pt-md/pb-md, anima--fade -->
+  <div class="strip strip--narrow live__quote-row">
+    <div class="container">
+      <div class="strip__data pt-md pb-md text-center anima--fade">
+        <div class="strip__text">
+          <p class="text-decorated text-decorated--sentence live__quote">Coffee. Leadership. Purpose. Real&nbsp;conversation. Thursday nights from 6:30&nbsp;pm the chairs turn to face the corner table, and there is one for you.</p>
+          <p class="live__cta"><a class="read-more" href="events.html">What's on</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sections/12-visit-listen.html ===== -->
+<!-- 12-visit-listen - Twin cards (solid accent VISIT + frosted LISTEN) over a slowly translating room photo
+     SOURCE: Iceberg section.home-podcast-bottom > .home-podcast-bottom__bg > img ; .__card.--orange ; .__card.--blur
+       (IC rendered.html; CSS inline-scoped.beautified.css:2491-2660; engine D51_WxQ5.beautified.js:1345-1370)
+     Texture image (.home-podcast-bottom__texture) DROPPED (BUILD-SPEC 12 (a)).
+     Copy: content/site.json visit.* / listen.* / bookingLabel (verbatim, brand pass 2026-09-17). Hard-coded labels (copy.md / spec (g)):
+       "Get directions", "Latest episode". Alt/dimensions: content/assets-manifest.json (bg is decorative: alt="").
+     Net-new (spec (i) INFERRED): hours <table> markup, card inner layout. -->
+<section id="s-12-visit-listen" class="strip bg-band-black strip--wide twin-cards visit-listen" aria-labelledby="visit-title">
+  <div class="twin-cards__bg" aria-hidden="true">
+    <img src="assets/images/visit-bg.jpg" width="1920" height="1080" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="container twin-cards__row">
+
+    <article class="twin-card twin-card--visit">
+      <h2 id="visit-title" class="twin-card__title">VISIT</h2>
+      <div class="twin-card__content">
+        <table class="hours twin-card__hours">
+          <tbody>
+            <tr><th scope="row">Mon - Thu</th><td>7:00&nbsp;am - 6:00&nbsp;pm</td></tr>
+            <tr><th scope="row">Fri</th><td>7:00&nbsp;am - 10:00&nbsp;pm</td></tr>
+            <tr><th scope="row">Sat</th><td>8:00&nbsp;am - 10:00&nbsp;pm</td></tr>
+            <tr><th scope="row">Sun</th><td>8:00&nbsp;am - 3:00&nbsp;pm</td></tr>
+          </tbody>
+        </table>
+        <p class="twin-card__note">Thursdays we reopen at 6:30&nbsp;pm for the recording. Free, first come first seated, and the guest stays for a coffee afterwards.</p>
+        <address class="twin-card__address">27 Bellwood Street<br>Corner of Fenwick Lane<br>Harrowfield<br><a href="tel:+15550142024">(555) 014-2024</a></address>
+        <p class="twin-card__links">
+          <a class="read-more" href="book.html">Book a table</a>
+          <a class="twin-card__link" href="contact.html#find-us">Get directions</a>
+        </p>
+      </div>
+    </article>
+
+    <article class="twin-card twin-card--listen" aria-labelledby="listen-title">
+      <h2 id="listen-title" class="twin-card__title">LISTEN</h2>
+      <div class="twin-card__content">
+        <ul class="platforms twin-card__platforms">
+          <li><a href="#"><svg class="icon" aria-hidden="true"><use href="assets/svg/icons.svg#i-spotify"></use></svg>Spotify</a></li>
+          <li><a href="#"><svg class="icon" aria-hidden="true"><use href="assets/svg/icons.svg#i-apple"></use></svg>Apple Podcasts</a></li>
+          <li><a href="#"><svg class="icon" aria-hidden="true"><use href="assets/svg/icons.svg#i-youtube"></use></svg>YouTube</a></li>
+          <li><a href="#"><svg class="icon" aria-hidden="true"><use href="assets/svg/icons.svg#i-rss"></use></svg>RSS</a></li>
+        </ul>
+        <p class="twin-card__text">For leaders, aspiring leaders, professionals, and anyone searching for more meaning in the work they do. A new conversation every Thursday, wherever you already listen.</p>
+        <p class="twin-card__latest lead">The grant we turned down <small class="twin-card__duration">44&nbsp;min</small></p>
+        <p class="twin-card__links"><a class="read-more" href="episodes.html">Latest episode</a></p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===== sections/13-newsletter.html ===== -->
+<!-- 13-newsletter - Black newsletter block: eyebrow, lead paragraph, floating-label email input, square accent submit with
+     the two-arrow swap, consent checkbox; right column big "Listen and follow" links
+     SOURCE skeleton: Iceberg div#join.footer-newsletter > .footer-newsletter__left (.__title, .__text, form.__form >
+       .form-group.__form-input (.form-input > label + input#email ; button.__form-input__button > span > svg x2)
+       + .form-group.__form-checkbox (.form-checkbox > input#subscribe + label > div + span)) ; .footer-newsletter__right
+       (.__title + ul > li > a)  (IC rendered.html line 29 block; CSS inline-scoped.beautified.css:2836-3300;
+       engine ZNMh4Fg5.beautified.js:909-935)
+     Copy: content/site.json newsletter.* verbatim (brand pass 2026-09-17: eyebrow "First to know", new paragraph). Right column = newsletter.follow[5] (DD Pick 12 "Change": platforms
+       + Instagram; copy.md maps follow[] to the right column). Hard-coded label (INFERRED): "Listen and follow" eyebrow.
+       "privacy policy" links to #privacy (copy.md). success/error strings ride on data-* so the JS shows visible text.
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 4): shared by every page; the form is wired to POST /api/subscribe through js/lib/api.js
+       ({ email, consent: true, source: "footer-newsletter", website }) - "website" is the hidden honeypot the server wants empty. When the API is
+       not there (static hosting: GET /api/health fails) the form does NOT pretend: it shows the .newsletter__notice line with the cafe's email.
+       The action attribute is the no-JS fallback only (the JS always intercepts the submit). -->
+<section id="s-13-newsletter" class="strip strip--normal bg-band-black newsletter-band" aria-labelledby="nl-eyebrow">
+  <div class="container newsletter">
+
+    <div class="newsletter__left">
+      <p id="nl-eyebrow" class="newsletter__eyebrow eyebrow">Stay for the conversation</p>
+      <p class="newsletter__text lead">The conversation doesn't end with the podcast. Follow along for meaningful moments, leadership insights, guest stories and upcoming conversations. One email a week, never more.</p>
+      <form class="newsletter__form" action="/api/subscribe" method="post" novalidate data-source="footer-newsletter"
+            data-success="You are on the list. See you Thursday."
+            data-error="That address did not go through. Check it and try once more.">
+        <div class="newsletter__row">
+          <div class="newsletter__field">
+            <label for="nl-email">Your email</label>
+            <input id="nl-email" class="newsletter__input" type="email" name="email" autocomplete="email" spellcheck="false" required aria-describedby="nl-msg-error">
+          </div>
+          <button class="newsletter__submit" type="submit" aria-label="Subscribe">
+            <span><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+            <span aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-right"></use></svg></span>
+          </button>
+        </div>
+        <div class="newsletter__consent">
+          <input id="nl-consent" type="checkbox" name="consent" required>
+          <label for="nl-consent">
+            <span class="newsletter__box" aria-hidden="true"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-check"></use></svg></span>
+            <span>Yes, send me the Thursday email from Latte with Lata. I have read the <a href="contact.html#privacy">privacy policy</a>.</span>
+          </label>
+        </div>
+        <div class="newsletter__hp" aria-hidden="true"><label for="nl-website">Website</label><input id="nl-website" type="text" name="website" tabindex="-1" autocomplete="off"></div>
+        <p id="nl-msg-error" class="newsletter__error" role="alert" hidden></p>
+        <p class="newsletter__success" role="status" hidden></p>
+        <p class="newsletter__notice" role="status" hidden>Sign-ups are handled by our team right now - email <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a></p>
+      </form>
+    </div>
+
+    <div class="newsletter__right">
+      <p class="newsletter__eyebrow eyebrow">Listen and follow</p>
+      <ul class="newsletter__links">
+        <li><a href="#">Spotify</a></li>
+        <li><a href="#">Apple Podcasts</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">RSS</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<!-- ===== sections/14-footer.html ===== -->
+<!-- 14-footer - Footer curtain (4 columns), stamp at the seam, back-to-top disc, cropped giant wordmark. Sits AFTER <main>.
+     SOURCE skeleton: PZ rendered.html:189-272  aside.strip.strip--stamp + footer#page-footer.page__footer > .footer__container >
+       .strip > .container > .footer__top > .footer__column--1 (h2.footer__logo + nav.footer__menu) / --2 (p, p.mt-md) /
+       --3 (nav.footer__shortcuts) / --4 (aside.footer__socials > h3.footer__title + ul.socials) ; .js-scroll-top-limit > .strip >
+       .container > .footer__mid (.footer__legal + aside.footer__credits) + .footer__bottom (awards - DROPPED) ; aside#back-to-top
+       .scroll-top > a. Wordmark row: IC rendered.html .footer-logo > .footer-logo__content > span (BEST-PARTS Pick 17).
+     Single-root contract (file contract: the footer fragment root is <footer id="page-footer">): the stamp aside and
+       #back-to-top live INSIDE the footer. The source's clip (.page__footer { overflow:hidden }) moved to the inner
+       .footer__curtain wrapper so the stamp can overhang 56px up into 13 (spec 14 (h)) and the fixed disc is neither
+       clipped nor inside the transformed .footer__container.
+     Copy: content/site.json footer.* verbatim (nav labels = footer.columns.sitemap = nav). Hard-coded labels (INFERRED,
+       spec 14 (b)): "Find us", "Explore", "Listen & follow", legal nav "Privacy" / "Photo credits". The photo-credit list
+       (closed <details>, id="credits") satisfies verify/handoff/assets.md ("not optional" for the CC BY / CC BY-SA files).
+     Brand mark (brand pass 2026-09-17, LOGO-USAGE.md): the kit's cup mark, brown variant, as an <img> 120px tall (--markFooter) with the
+       tagline brand.tagline under it (one saucer-height of clear space); footer.legal = copyright + the independence disclaimer.
+     PAGES UPDATE (2026-09-17, PAGES-SPEC 3): shared by every page. The mark links home (index.html); the sitemap = the six pages + "Book a table"
+       (content/site.json footer.columns.sitemap; "The Host" lives in the drawer only); Privacy -> contact.html#privacy; Photo credits -> contact.html#credits. The photo-credit
+       <details> stays in the footer as id="footer-credits" (the id "credits" belongs to the contact page now - no duplicate ids on contact.html);
+       14-footer.js opens it whenever a #credits link is followed on a page that has no #credits block of its own. -->
+<footer id="page-footer" class="page__footer footer">
+  <!-- brand pass: stamp instance 4 is OFF (data-stamp="off", CSS hides the pseudo-element) - it straddled the brown 13 band (brown mark on brown,
+       LOGO-USAGE) and doubled the 120px footer mark one viewport later; the aside + its tween stay so data-stamp="on" restores it. -->
+  <aside class="strip strip--stamp footer__stamp" aria-hidden="true" data-stamp="off"></aside>
+
+  <div class="footer__curtain">
+    <div class="footer__container">
+
+      <div class="strip">
+        <div class="container">
+          <div class="footer__top">
+
+            <div class="footer__column footer__column--1">
+              <a class="footer__logo" href="index.html" aria-label="Latte with Lata - home">
+                <img class="footer__mark" src="assets/brand/logo/latte-with-lata-mark-brown.svg" alt="" width="482" height="571" loading="lazy" decoding="async">
+              </a>
+              <p class="footer__tagline">Real Conversations. Built on Purpose.</p>
+              <nav class="footer__menu" aria-label="Legal">
+                <ul>
+                  <li><a href="contact.html#privacy">Privacy</a></li>
+                  <li><a href="contact.html#credits">Photo credits</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="footer__column footer__column--2">
+              <h3 class="footer__title">Find us</h3>
+              <div class="footer__find">
+                <address class="footer__address">
+                  Latte with Lata<br>
+                  27 Bellwood Street<br>
+                  Corner of Fenwick Lane<br>
+                  Harrowfield<br>
+                  <a href="tel:+15550142024">(555) 014-2024</a><br>
+                  <a href="mailto:hello@lattewithlata.example">hello@lattewithlata.example</a>
+                </address>
+                <p class="mt-md footer__hours">
+                  Mon - Thu 7:00&nbsp;am - 6:00&nbsp;pm<br>
+                  Fri 7:00&nbsp;am - 10:00&nbsp;pm<br>
+                  Sat 8:00&nbsp;am - 10:00&nbsp;pm<br>
+                  Sun 8:00&nbsp;am - 3:00&nbsp;pm<br>
+                  Thursday recordings: doors 6:30&nbsp;pm
+                </p>
+              </div>
+            </div>
+
+            <div class="footer__column footer__column--3">
+              <h3 class="footer__title">Explore</h3>
+              <nav class="footer__shortcuts" aria-label="Sitemap">
+                <ul>
+                  <li><a href="cafe.html">The Cafe</a></li>
+                  <li><a href="menu.html">Menu</a></li>
+                  <li><a href="podcast.html">The Podcast</a></li>
+                  <li><a href="episodes.html">Episodes</a></li>
+                  <li><a href="events.html">Events</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="book.html">Book a table</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="footer__column footer__column--4">
+              <aside class="footer__socials">
+                <h3 class="footer__title">Follow us on our socials</h3>
+                <ul class="footer__listen">
+                  <li><a href="#">Spotify</a></li>
+                  <li><a href="#">Apple Podcasts</a></li>
+                  <li><a href="#">YouTube</a></li>
+                  <li><a href="#">RSS</a></li>
+                </ul>
+                <ul class="socials">
+                  <li><a href="#" aria-label="Instagram"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-instagram"></use></svg></a></li>
+                  <li><a href="#" aria-label="YouTube"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-youtube"></use></svg></a></li>
+                </ul>
+              </aside>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="js-scroll-top-limit">
+        <div class="strip">
+          <div class="container">
+            <div class="footer__mid">
+              <div class="footer__legal">
+                <p>Copyright 2026 Latte with Lata. All rights reserved.</p>
+                <details id="footer-credits" class="footer__photo-credits">
+                  <summary>Photo credits</summary>
+                  <ul>
+                    <li>“Latte art 0.jpg” by Angela CoffeeRank, <a href="https://creativecommons.org/licenses/by/2.0" rel="noopener" target="_blank">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Latte_art_0.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“A coffee cup featuring intricate latte art sits on a wooden table next to an open laptop.jpg” by Shixart1985, <a href="https://creativecommons.org/licenses/by/2.0" rel="noopener" target="_blank">CC BY 2.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:A_coffee_cup_featuring_intricate_latte_art_sits_on_a_wooden_table_next_to_an_open_laptop.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“A cup of cappuccino.jpg” by Vee Satayamas, <a href="https://creativecommons.org/licenses/by/4.0" rel="noopener" target="_blank">CC BY 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:A_cup_of_cappuccino.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> (cropped).</li>
+                    <li>“BoulderCoffeeOpenMicNight2018.jpg” by DanielPenfield, <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener" target="_blank">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:BoulderCoffeeOpenMicNight2018.jpg" rel="noopener" target="_blank">Wikimedia Commons</a> - this crop is a derivative shared under the same CC BY-SA licence.</li>
+                    <li>“Guerrilla on air – Fatti d’arte teaser” (video) by M. Capriglione, M. Rainò and R. Romita, <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener" target="_blank">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Guerrilla_on_air_%E2%80%93_Fatti_d%27arte_teaser.mpg" rel="noopener" target="_blank">Wikimedia Commons</a> - cut, slowed, colour-graded and looped; this edit is shared under the same CC BY-SA licence.</li>
+                    <li>All other photographs: CC0 (public domain dedication) via Wikimedia Commons - full register in the site's ASSETS.md.</li>
+                  </ul>
+                </details>
+                <p class="footer__disclaimer">Latte with Lata is a personal platform and is independent of any employer or institution.</p>
+              </div>
+              <aside class="footer__credits">Site by Agora Data Driven</aside>
+            </div>
+          </div>
+        </div>
+        <div class="footer-wordmark" aria-hidden="true"><span>LATTE WITH LATA</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <aside id="back-to-top" class="scroll-top"><a href="#top" aria-label="Back to top"><svg class="icon" aria-hidden="true" focusable="false"><use href="assets/svg/icons.svg#i-arrow-up"></use></svg></a></aside>
+</footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/SplitText.min.js"></script>
+<script src="vendor/ScrollToPlugin.min.js"></script>
+<script src="vendor/splide.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
